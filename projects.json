@@ -7,7 +7,7 @@
         "description": "Ristrutturazione di un appartamento al centro città.",
         "images": [
           {
-            "src": "https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/projects/architettura/residenziale/casa-di-gigi/image1.jpg",
+            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/residenziale/casa-di-gigi/image1.jpg",
             "description": "Ingresso"
           }
         ]
@@ -22,7 +22,7 @@
       "description": "Cesto di design.",
       "images": [
         {
-          "src": "https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/projects/design/cesto/image1.jpg",
+          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/cesto/image1.jpg",
           "description": ""
         }
       ]
@@ -33,15 +33,15 @@
       "description": "Un simpatico contenitore azzurro.",
       "images": [
         {
-          "src": "https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/projects/design/contenitore/image1.jpg",
+          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/contenitore/image1.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/projects/design/contenitore/image2.jpg",
+          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/contenitore/image2.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/projects/design/contenitore/image3.jpg",
+          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/contenitore/image3.jpg",
           "description": ""
         }
       ]
@@ -52,7 +52,7 @@
       "description": "Sistema di illuminazione in stile Industrial.",
       "images": [
         {
-          "src": "https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/projects/design/lamps/image1.jfif",
+          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/lamps/image1.jfif",
           "description": "Lampade a bulbo."
         }
       ]
@@ -63,7 +63,7 @@
       "description": "Un tavolino di design.",
       "images": [
         {
-          "src": "https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/projects/design/tavolino/image1.jpg",
+          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/tavolino/image1.jpg",
           "description": "Vista di tre quarti."
         }
       ]
