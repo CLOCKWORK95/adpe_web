@@ -1,23 +1,35 @@
 {
   "architettura": {
-    "residenziale": [
-      {
-        "id": 1,
-        "title": "Casa Di Gigi",
-        "description": "Ristrutturazione di un appartamento al centro città.",
-        "images": [
-          {
-            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/residenziale/casa-di-gigi/image1.jpg",
-            "description": "Ingresso"
-          }
-        ]
-      }
-    ],
-    "pubblico": []
-  },
-  "design": [
-    {
+    "pubblica": {
+      "id": 1,
+      "title": "Pubblica",
+      "description": "Progetto pubblico al centro di Roma.",
+      "images": [
+        {
+          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/pubblica/edificio/image1.jpg",
+          "description": "Vista frontale"
+        },
+        {
+          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/pubblica/edificio/image2.jpg",
+          "description": "Corridoio interno con vista."
+        }
+      ]
+    },
+    "residenziale": {
       "id": 2,
+      "title": "Residenziale",
+      "description": "Ristrutturazione di un appartamento al centro città.",
+      "images": [
+        {
+          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/residenziale/casa-di-gigi/image1.jpg",
+          "description": "Ingresso"
+        }
+      ]
+    }
+  },
+  "design": {
+    "cesto": {
+      "id": 3,
       "title": "Cesto",
       "description": "Cesto di design.",
       "images": [
@@ -27,8 +39,8 @@
         }
       ]
     },
-    {
-      "id": 3,
+    "contenitore": {
+      "id": 4,
       "title": "Contenitore",
       "description": "Un simpatico contenitore azzurro.",
       "images": [
@@ -46,8 +58,8 @@
         }
       ]
     },
-    {
-      "id": 4,
+    "lamps": {
+      "id": 5,
       "title": "Lamps",
       "description": "Sistema di illuminazione in stile Industrial.",
       "images": [
@@ -57,8 +69,8 @@
         }
       ]
     },
-    {
-      "id": 5,
+    "tavolino": {
+      "id": 6,
       "title": "Tavolino",
       "description": "Un tavolino di design.",
       "images": [
@@ -68,5 +80,5 @@
         }
       ]
     }
-  ]
+  }
 }
