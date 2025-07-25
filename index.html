@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="pageTitle">Studio Architettura & Design</title>
+    <!-- Favicon per la barra del browser -->
+    <link rel="icon" href="images/adpelogo.jpg" type="image/jpeg">
+    <!-- Google Font: Roboto Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Variabili CSS per il tema chiaro */
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --accent-blue: #4a90e2; /* Colore dal logo: blu */
+            --accent-orange: #d4693a; /* Colore dal logo: arancio */
+            --accent-brown: #8b4513; /* Colore dal logo: marrone */
+            --accent-green: #7fb069; /* Colore dal logo: verde */
+            --accent-gold: #efb34b;
+            --border-color: #e1e5e9;
+            --shadow-light: 0 4px 20px rgba(0,0,0,0.05);
+            --shadow-medium: 0 8px 30px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transizione più rapida per eleganza */
+        }
+
+        /* Variabili CSS per il tema scuro */
+        body.dark-theme {
+            --primary-color: #1a1a1a; /* Sfondo scuro principale */
+            --secondary-color: #2c2c2c; /* Sfondo scuro per elementi secondari/card */
+            --text-color: #f0f0f0; /* Testo chiaro */
+            --border-color: #444; /* Bordo scuro */
+            --shadow-light: 0 4px 20px rgba(0,0,0,0.3);
+            --shadow-medium: 0 8px 30px rgba(0,0,0,0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto Mono', monospace; /* Nuovo font applicato: Roboto Mono */
+            background: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative; /* Necessario per posizionare gli elementi pseudo-fixed */
+            padding-top: 80px; /* Spazio per l'header fisso */
+            padding-bottom: 60px; /* Spazio per il footer fisso */
+            transition: background var(--transition), color var(--transition); /* Transizione per il cambio tema */
+        }
+
+        /* Background Geometric Elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 5%;
+            left: 5%;
+            width: 400px;
+            height: 400px;
+            background-color: var(--accent-brown); /* Colore solido dal logo */
+            border-radius: 50%; /* Forma circolare */
+            opacity: 0.2; /* Leggera opacità per un effetto sottile */
+            z-index: -1;
+            pointer-events: none;
+            animation: floatCircle 85s ease-in-out infinite;
+            transition: opacity var(--transition);
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 40%;
+            right: 10%;
+            width: 300px;
+            height: 400px;
+            background-color: var(--accent-blue); /* Colore solido dal logo */
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Forma triangolare */
+            opacity: 0.2;
+            z-index: -1;
+            pointer-events: none;
+            animation: floatTriangle 250s ease-in-out infinite;
+            transition: opacity var(--transition);
+        }
+
+        .geometric-square-background {
+            position: fixed;
+            top: 10%;
+            left: 80%;
+            width: 305px;
+            height: 305px;
+            background: var(--accent-green);
+            opacity: 0.19;
+            z-index: -1;
+            pointer-events: none;
+            animation: floatGeometry 250s ease-in-out infinite reverse;
+            border-radius: 2%;
+            transition: opacity var(--transition);
+        }
+        
+        .background-rectangle {
+            position: fixed;
+            bottom: 10%;
+            left: 25%;
+            width: 305px;
+            height: 305px;
+            background: var(--accent-gold);
+            opacity: 0.19;
+            z-index: -1;
+            pointer-events: none;
+            animation: floatRectangle 250s ease-in-out infinite reverse;
+            border-radius: 2%;
+            transition: opacity var(--transition);
+        }
+
+        /* Regolazioni opacità elementi geometrici per tema scuro */
+        body.dark-theme::before,
+        body.dark-theme::after,
+        body.dark-theme .geometric-square-background,
+        body.dark-theme .background-rectangle {
+            opacity: 0.1;
+        }
+
+        /* Keyframes per le animazioni individuali */
+        @keyframes floatTriangle { 0%, 100% { transform: rotate(0deg) translateY(0px); } 33% { transform: rotate(120deg) translateY(-20px); } 66% { transform: rotate(240deg) translateY(10px); } }
+        @keyframes floatCircle { 0%, 100% { transform: translate(0px, 0px) scale(1); } 40% { transform: translate(-30px, 50px) scale(1.02); } 70% { transform: translate(20px, -40px) scale(0.98); } }
+        @keyframes floatGeometry { 0%, 100% { transform: rotate(0deg) translateX(20px); } 33% { transform: rotate(120deg) translateY(-20px); } 66% { transform: rotate(240deg) translateY(10px); } }
+        @keyframes floatRectangle { 0%, 100% { transform: rotate(0deg) translateX(-100px); } 33% { transform: rotate(120deg) translateY(-20px); } 66% { transform: rotate(240deg) translateY(10px); } }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header - Modificato per rimuovere l'ombra e rendere trasparente */
+        header {
+            background: transparent; /* Sfondo completamente trasparente */
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: none; /* Rimuovi il bordo inferiore */
+            box-shadow: none; /* Rimuovi l'ombra di default */
+            backdrop-filter: none; /* Rimuovi il blur di default */
+            transition: background 0.3s ease; /* Transizione più semplice */
+        }
+
+        /* Stili per l'header quando si scorre (tema chiaro) */
+        header.scrolled {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), transparent); /* Gradiente leggero */
+            /* box-shadow: var(--shadow-light); Rimosso come richiesto */
+            backdrop-filter: none; /* Rimosso come richiesto */
+        }
+
+        /* Stili per l'header nel tema scuro (non scorrevole) */
+        body.dark-theme header {
+            background: transparent;
+            border-bottom: none;
+            backdrop-filter: none;
+        }
+
+        /* Stili per l'header nel tema scuro quando si scorre */
+        body.dark-theme header.scrolled {
+            background: linear-gradient(to bottom, rgba(26, 26, 26, 0.9), transparent); /* Gradiente scuro */
+            /* box-shadow: var(--shadow-light); Rimosso come richiesto */
+            backdrop-filter: none; /* Rimosso come richiesto */
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between; /* Mantiene logo a sinistra e icone a destra */
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo-small {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .header-logo-small:hover {
+            transform: scale(1.1);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: var(--text-color);
+            text-decoration: none;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex-grow: 1; /* Permette al menu di occupare lo spazio disponibile */
+            justify-content: center; /* Centra le voci del menu all'interno del suo spazio */
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 400; /* Leggermente più spesso */
+            font-size: 1.3rem; /* Aumentato significativamente il font */
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+            letter-spacing: 1px;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-blue);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-blue);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-color);
+            margin: 3px 0;
+            transition: var(--transition);
+        }
+
+        .header-right-icons {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem; /* Ridotto il gap, ora che i social non ci sono */
+        }
+
+        .language-group,
+        .theme-group { /* Rimosso .social-group da qui */
+            display: flex;
+            align-items: center;
+        }
+
+        .language-group {
+            gap: 0.8rem; /* Leggermente aumentato il gap all'interno del gruppo lingua */
+            margin-right: 0.5rem; /* Aggiunto un piccolo margine a destra per separare dal toggle tema */
+        }
+        /* Rimosso .social-group styles da qui */
+
+        .header-social-link,
+        .language-selector-item {
+            color: var(--text-color);
+            font-size: 1.3rem;
+            transition: var(--transition);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .header-social-link:hover,
+        .language-selector-item:hover {
+            color: var(--accent-blue);
+            transform: scale(1.2);
+        }
+
+        #themeToggle i {
+            font-size: 1.3rem;
+            color: var(--text-color);
+            transition: color var(--transition);
+        }
+
+        body.dark-theme #themeToggle i {
+            color: var(--accent-gold);
+        }
+
+        .language-selector-item {
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .language-selector-item.active {
+            color: var(--accent-blue);
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        main {}
+
+        /* Hero Section */
+        .hero {
+            min-height: calc(50vh - 80px); /* Altezza minima per la sezione hero */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 4rem; /* Aggiunto padding per spazio dall'header */
+            padding-bottom: 2rem; /* Aggiunto padding per spazio dalla sezione successiva */
+            scroll-margin-top: 85px; /* Spazio per l'header fisso */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 6rem; /* Aumentato il font */
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: 8px;
+            color: var(--text-color);
+        }
+
+        .studio-logo {
+            width: 130px; /* Ridotto leggermente il logo */
+            height: 130px; /* Ridotto leggermente il logo */
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 8rem auto;
+            box-shadow: var(--shadow-medium);
+            border: 3px solid var(--accent-blue);
+            animation: logoFloat 6s ease-in-out infinite;
+            overflow: hidden;
+            transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+        }
+
+        body.dark-theme .studio-logo {
+            background: rgba(44, 44, 44, 0.9);
+            border: 3px solid var(--accent-gold);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .studio-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* Rimosso .hero .subtitle */
+        /* Rimosso .scroll-indicator */
+
+        @keyframes logoFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
+
+        /* Home Projects Section */
+        .home-projects {
+            padding: 4rem 0;
+            background: linear-gradient(180deg, rgba(248, 249, 250, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+            transition: background var(--transition);
+            scroll-margin-top: 85px; /* Spazio per l'header fisso */
+        }
+
+        body.dark-theme .home-projects {
+            background: linear-gradient(180deg, rgba(44, 44, 44, 0.3) 0%, rgba(26, 26, 26, 0.1) 100%);
+        }
+
+        .home-projects h2 {
+            text-align: center;
+            font-size: 3rem; /* Aumentato il font */
+            font-weight: 200;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+            letter-spacing: 2px;
+        }
+        
+        /* Modificato: Griglia per i progetti in mosaico */
+        .projects-grid {
+            column-count: 3; /* Numero di colonne desiderato su desktop */
+            column-gap: 1.5rem; /* Spazio tra le colonne */
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px; /* Aggiunto padding per i bordi */
+        }
+
+        @media (max-width: 1024px) {
+            .projects-grid {
+                column-count: 2; /* 2 colonne per tablet */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                column-count: 1; /* 1 colonna per mobile */
+            }
+        }
+
+        /* MODIFICATO: Card del progetto per il mosaico e per la home */
+        .project-card {
+            background: var(--secondary-color);
+            border-radius: 0px; /* Bordi non stondati */
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            cursor: pointer;
+            margin-bottom: 1.5rem; /* Spazio tra le card nella stessa colonna */
+            display: inline-block; /* Necessario per il layout a colonne */
+            width: 100%;
+            animation: fadeInUp 0.6s ease-out forwards;
+            /* Rimosso flex-direction e justify-content */
+            /* Rimosso height: 100% */
+        }
+
+        body.dark-theme .project-card {
+            background: rgba(44, 44, 44, 0.9);
+            box-shadow: var(--shadow-light);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        /* Rimosso .project-image e .category-image styles */
+        /* L'immagine ora è direttamente nel .project-card */
+        .project-card img {
+            width: 100%;
+            height: auto; /* Mantiene le proporzioni originali! */
+            display: block;
+            border-bottom: none; /* Rimosso il bordo inferiore */
+            transition: transform 0.3s ease;
+            /* Rimosso object-fit, display, align-items, justify-content */
+        }
+        
+        .project-card:hover img {
+            transform: scale(1.05);
+            /* Rimosso scaleX */
+        }
+
+        /* Rimosso .project-content e .category-content styles */
+        /* Il testo descrittivo non è più visibile nella preview */
+
+        /* Rimosso .project-category e .category-label styles */
+        /* Rimosso .project-title e .category-title styles */
+        /* Rimosso .project-description styles */
+
+        /* NUOVO: Stili per i bottoni del filtro */
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.8rem 1.5rem; /* Aumentato il padding */
+            margin: 0.5rem; /* Aumentato il margine */
+            border-radius: 25px; /* Bordi più arrotondati per i bottoni */
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500; /* Reso più audace */
+            font-size: 1.1rem; /* Aumentato il font */
+        }
+
+        .filter-btn:hover {
+            background: var(--accent-blue);
+            color: var(--primary-color);
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: var(--accent-blue);
+            color: var(--primary-color);
+            border-color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+
+        /* Stile per il titolo della sezione quando si mostra l'elenco dei progetti */
+        .projects-section .section-title {
+            text-align: center;
+            font-size: 3rem; /* Aumentato il font */
+            font-weight: 200;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            letter-spacing: 1px;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+
+        /* Project Detail Page */
+        .project-detail {
+            padding: 4rem 0;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .project-detail-title {
+            font-size: 3.5rem; /* Aumentato il font */
+            font-weight: 200;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            letter-spacing: 1px;
+        }
+
+        .project-detail-category {
+            color: var(--accent-blue);
+            font-size: 1.1rem; /* Aumentato il font */
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        .project-detail-description {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-size: 1.2rem; /* Aumentato il font */
+            line-height: 1.8;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        .project-gallery {
+            display: flex;
+            flex-direction: column;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .gallery-item {
+            background: transparent;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: none;
+            transition: var(--transition);
+            height: auto;
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .gallery-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.01);
+        }
+
+        .gallery-item:nth-child(odd) {
+            flex-direction: row;
+            margin-right: auto;
+            text-align: left;
+        }
+
+        .gallery-item:nth-child(even) {
+            flex-direction: row-reverse;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .gallery-item img {
+            max-height: 70vh;
+            width: auto;
+            max-width: 55%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            flex-shrink: 0;
+            padding: 0.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-light);
+            cursor: pointer;
+        }
+
+        .gallery-description {
+            flex-grow: 1;
+            padding: 1rem 2rem;
+            margin: 0;
+            max-width: 45%;
+            line-height: 1.7;
+            font-size: 1.15rem; /* Aumentato il font */
+            text-align: inherit;
+            color: var(--text-color);
+            opacity: 0.9;
+            font-style: normal;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            transition: background var(--transition), border-color var(--transition);
+        }
+
+        body.dark-theme .breadcrumb {
+            background: rgba(26, 26, 26, 0.5);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem; /* Aumentato il font */
+        }
+
+        .breadcrumb-item {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .breadcrumb-item:hover {
+            color: var(--accent-blue);
+            transform: scale(1.05);
+        }
+
+        /* Sezioni "Chi Siamo" e "Contatti" */
+        .projects-section, .about-section, .contact-section { /* Modificato per includere projects-section */
+            padding: 4rem 0;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            scroll-margin-top: 85px; /* Spazio per l'header fisso */
+        }
+
+        .about-content, .contact-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .about-title, .contact-title {
+            font-size: 3.5rem; /* Aumentato il font */
+            font-weight: 200;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            letter-spacing: 1px;
+        }
+
+        .about-text {
+            font-size: 1.3rem; /* Aumentato il font */
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .about-image {
+            max-width: 40%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            margin: 2rem auto 3rem auto;
+            display: block;
+        }
+
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .highlight-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        body.dark-theme .highlight-card {
+            background: rgba(44, 44, 44, 0.8);
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .highlight-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            color: var(--accent-orange);
+        }
+
+        .highlight-title {
+            font-size: 1.6rem; /* Aumentato il font */
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            letter-spacing: 0.5px;
+        }
+
+        .highlight-description {
+            font-size: 1.05rem; /* Aumentato il font */
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        body.dark-theme .contact-card {
+            background: rgba(44, 44, 44, 0.8);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-blue);
+        }
+
+        .contact-label {
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            color: var(--text-color);
+            font-size: 1.3rem; /* Aumentato il font */
+            letter-spacing: 0.5px;
+        }
+
+        .contact-value {
+            opacity: 0.9;
+            line-height: 1.6;
+            font-size: 1.1rem; /* Aumentato il font */
+            word-wrap: break-word;
+        }
+
+        .contact-value a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-value a:hover {
+            color: var(--accent-blue);
+            text-decoration: underline;
+        }
+
+        .map-widget {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .map-widget iframe {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .map-overlay-link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .map-widget:hover .map-overlay-link {
+            opacity: 1;
+        }
+
+        .map-text-overlay {
+            padding: 10px 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Modal per immagine a schermo intero */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .image-modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: var(--shadow-medium);
+            transition: transform 0.3s ease;
+        }
+
+        .image-modal-content:hover {
+            transform: scale(1.01);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 10000;
+        }
+
+        .modal-close:hover,
+        .modal-close:focus {
+            color: var(--accent-blue);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-prev, .modal-next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 10000;
+        }
+
+        .modal-next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .modal-prev {
+            left: 0;
+        }
+
+        .modal-prev:hover, .modal-next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        /* Footer Styles */
+        footer {
+            background: transparent; /* Sfondo trasparente */
+            padding: 1rem 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 999; /* Appena sotto l'header */
+            border-top: none; /* Rimuovi il bordo superiore */
+            box-shadow: none; /* Rimuovi l'ombra di default */
+            backdrop-filter: none; /* Rimuovi il blur di default */
+            transition: background 0.3s ease;
+            display: flex;
+            justify-content: center; /* Centra il contenuto del footer */
+            align-items: center;
+        }
+
+        /* Stili per il footer quando si scorre (tema chiaro) - opzionale, ma per coerenza */
+        footer.scrolled {
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent); /* Gradiente leggero */
+        }
+
+        /* Stili per il footer nel tema scuro (non scorrevole) */
+        body.dark-theme footer {
+            background: transparent;
+            border-top: none;
+            backdrop-filter: none;
+        }
+
+        /* Stili per il footer nel tema scuro quando si scorre */
+        body.dark-theme footer.scrolled {
+            background: linear-gradient(to top, rgba(26, 26, 26, 0.9), transparent); /* Gradiente scuro */
+        }
+
+        .footer-social-group {
+            display: flex;
+            gap: 1.5rem; /* Spazio tra le icone social nel footer */
+            padding: 0 20px; /* Padding per non attaccarsi ai bordi su schermi piccoli */
+        }
+
+        .footer-social-link {
+            color: var(--text-color);
+            font-size: 1.5rem; /* Dimensione maggiore per le icone nel footer */
+            transition: var(--transition);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .footer-social-link:hover {
+            color: var(--accent-blue);
+            transform: scale(1.2);
+        }
+
+
+        /* Animazioni */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeInUp 0.6s ease-out forwards; }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 3rem;
+                transition: var(--transition);
+            }
+
+            body.dark-theme .nav-menu {
+                background: rgba(26, 26, 26, 0.98);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+            .hero h1 {
+                font-size: 3rem; /* Adattato per mobile */
+            }
+
+            /* Rimosso .hero .subtitle per mobile */
+            .nav-link {
+                font-size: 1.1rem; /* Adattato per mobile */
+            }
+
+            .project-description {
+                font-size: 1rem; /* Adattato per mobile */
+            }
+
+            .about-highlights,
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .project-detail-title { font-size: 2.5rem; }
+            .project-detail-description { font-size: 1.1rem; } /* Adattato per mobile */
+            /* Rimosso .scroll-indicator per mobile */
+
+            .header-right-icons {
+                flex-wrap: wrap;
+                justify-content: flex-end;
+                gap: 1rem;
+            }
+
+            .gallery-item {
+                flex-direction: column !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                text-align: center !important;
+                min-height: auto;
+                padding: 0.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .gallery-item img {
+                max-width: 90%;
+                max-height: 50vh;
+                margin-bottom: 1rem;
+                padding: 0;
+            }
+
+            .gallery-description {
+                max-width: 90%;
+                padding: 0.5rem 1rem;
+                font-size: 1.05rem; /* Adattato per mobile */
+            }
+
+            .modal-close { font-size: 30px; top: 15px; right: 20px; }
+            .modal-prev, .modal-next { padding: 10px; font-size: 16px; margin-top: -30px; }
+
+            .home-projects h2,
+            .projects-section .section-title,
+            .about-title,
+            .contact-title {
+                font-size: 2.5rem; /* Adattato per mobile */
+            }
+
+            .highlight-title {
+                font-size: 1.4rem; /* Adattato per mobile */
+            }
+
+            .highlight-description {
+                font-size: 1rem; /* Adattato per mobile */
+            }
+
+            .contact-label {
+                font-size: 1.1rem; /* Adattato per mobile */
+            }
+
+            .contact-value {
+                font-size: 1.05rem; /* Adattato per mobile */
+            }
+
+            .footer-social-group {
+                gap: 1rem; /* Ridotto il gap per mobile nel footer */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 0 15px; }
+            .hero h1 { font-size: 2.5rem; } /* Ulteriore riduzione per schermi molto piccoli */
+            .projects-grid { padding: 0 1rem; }
+            .project-detail-title { font-size: 2rem; }
+            .about-title, .contact-title { font-size: 2rem; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="geometric-square-background"></div>
+    <div class="background-rectangle"></div>
+    <header>
+        <nav class="container">
+            <div class="header-left">
+                <img src="images/adpelogo.jpg" alt="ADPE Logo" class="header-logo-small">
+                <a href="#" class="logo" onclick="showHome()">ADPE</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link" data-lang-key="homeLink" onclick="showHome()">Home</a></li>
+                <!-- MODIFICATO: Onclick per la nuova sezione progetti -->
+                <li><a href="#" class="nav-link" data-lang-key="projectsLink" onclick="showProjectsSection()">Progetti</a></li>
+                <li><a href="#" class="nav-link" data-lang-key="aboutLink" onclick="showAbout()">Chi Siamo</a></li>
+                <li><a href="#" class="nav-link" data-lang-key="contactLink" onclick="showContact()">Contatti</a></li>
+            </ul>
+            <div class="header-right-icons">
+                <div class="language-group">
+                    <a href="#" class="language-selector-item active" data-lang="it">IT</a>
+                    <a href="#" class="language-selector-item" data-lang="en">EN</a>
+                    <a href="#" class="language-selector-item" data-lang="fr">FR</a>
+                </div>
+                <div class="theme-group">
+                    <a href="#" class="header-social-link" id="themeToggle" aria-label="Toggle dark/light theme">
+                        <i class="fas fa-lightbulb"></i>
+                    </a>
+                </div>
+                <!-- Rimosso il gruppo social dalla navigazione principale -->
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="hero">
+            <div class="hero-content">
+                <div class="studio-logo">
+                    <img src="images/adpelogo.jpg" alt="Studio Logo">
+                </div>
+                <!-- Rimosso il sottotitolo come richiesto -->
+            </div>
+            <!-- Rimosso il pulsante "Scopri i Progetti" come richiesto -->
+        </section>
+
+        <section class="home-projects" id="homeProjects">
+            <div class="container">
+                <div class="projects-grid" id="homeProjectsGrid">
+                    <!-- Progetti generati dinamicamente -->
+                </div>
+            </div>
+        </section>
+
+        <section class="breadcrumb" id="breadcrumb" style="display: none;">
+            <div class="container">
+                <nav class="breadcrumb-nav" id="breadcrumbNav">
+                    <!-- Breadcrumb dinamico generato da JavaScript -->
+                </nav>
+            </div>
+        </section>
+
+        <section class="container projects-section" id="projectsSection" style="display: none;">
+            <!-- NUOVO: Contenitore per i filtri -->
+            <div class="project-filters" id="projectFilters" style="text-align: center; margin-bottom: 2.5rem;">
+                <!-- I bottoni del filtro saranno generati da JS -->
+            </div>
+            
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Progetti generati dinamicamente da JavaScript -->
+            </div>
+
+            <div class="project-detail" id="singleProjectDetail" style="display: none;">
+                <!-- Dettaglio singolo progetto generato dinamicamente -->
+            </div>
+        </section>
+
+        <section class="about-section" id="aboutSection" style="display: none;">
+            <div class="container about-content">
+                <h2 class="about-title" data-lang-key="aboutTitle">Chi Siamo</h2>
+                <img src="images/studioadpe.jpg" alt="Immagine dello Studio" class="about-image">
+                <p class="about-text" data-lang-key="aboutText">
+                    Lo Studio ADPE, fondato dall'architetto Adriano Pernazza, è una realtà dinamica e innovativa nel panorama dell'architettura e del design. Da anni, ci dedichiamo alla progettazione di spazi che combinano estetica, funzionalità e sostenibilità. La nostra filosofia si basa sull'ascolto attento delle esigenze del cliente, trasformando le idee in realtà tangibili e uniche.
+                </p>
+                <div class="about-highlights">
+                    <div class="highlight-card">
+                        <i class="fas fa-lightbulb highlight-icon"></i>
+                        <h3 class="highlight-title" data-lang-key="creativityTitle">Creatività e Innovazione</h3>
+                        <p class="highlight-description" data-lang-key="creativityDesc">Approccio originale e soluzioni all'avanguardia per ogni progetto.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fas fa-handshake highlight-icon"></i>
+                        <h3 class="highlight-title" data-lang-key="collaborationTitle">Collaborazione Clienti</h3>
+                        <p class="highlight-description" data-lang-key="collaborationDesc">Un processo di progettazione partecipato e trasparente.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fas fa-seedling highlight-icon"></i>
+                        <h3 class="highlight-title" data-lang-key="sustainabilityTitle">Sostenibilità</h3>
+                        <p class="highlight-description" data-lang-key="sustainabilityDesc">Progettazione attenta all'ambiente e all'efficienza energetica.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fas fa-award highlight-icon"></i>
+                        <h3 class="highlight-title" data-lang-key="qualityTitle">Qualità e Dettaglio</h3>
+                        <p class="highlight-description" data-lang-key="qualityDesc">Cura maniacale per ogni aspetto, dal concept alla realizzazione.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-section" id="contactSection" style="display: none;">
+            <div class="container contact-content">
+                <h2 class="contact-title" data-lang-key="contactTitle">Contatti</h2>
+                <p class="contact-text" data-lang-key="contactText">
+                    Siamo a vostra disposizione per qualsiasi informazione o per discutere del vostro prossimo progetto. Non esitate a contattarci.
+                </p>
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                        <h3 class="contact-label" data-lang-key="addressLabel">Indirizzo</h3>
+                        <div class="map-widget">
+                            <iframe
+                                src="https://maps.google.com/maps?q=Via%20di%20Monte%20Savello%2029A,%2000186%20Roma%20(RM),%20Italia&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                width="100%"
+                                height="200"
+                                style="border:0; border-radius: 8px;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=Via%20di%20Monte%20Savello%2029A,%2000186%20Roma%20(RM),%20Italia"
+                               target="_blank" class="map-overlay-link" aria-label="Ottieni indicazioni su Google Maps">
+                               <span class="map-text-overlay" data-lang-key="mapDirections">Clicca per indicazioni</span>
+                            </a>
+                        </div>
+                        <p class="contact-value">Via di Monte Savello 29A, 00186 Roma (RM), Italia</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-phone contact-icon"></i>
+                        <h3 class="contact-label" data-lang-key="phoneLabel">Telefono</h3>
+                        <p class="contact-value"><a href="tel:+390612345678">+39 3285725667</a></p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-envelope contact-icon"></i>
+                        <h3 class="contact-label" data-lang-key="emailLabel">Email</h3>
+                        <p class="contact-value"><a href="mailto:info@adpe.it">info@adpe.it</a></p>
+                        <p class="contact-value"><a href="mailto:adpe.progetti@gmail.com">adpe.progetti@gmail.com</a></p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-clock contact-icon"></i>
+                        <h3 class="contact-label" data-lang-key="hoursLabel">Orari</h3>
+                        <p class="contact-value" data-lang-key="hoursValue">Lun-Ven: 9:00 - 18:00</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal per visualizzazione immagine a schermo intero -->
+    <div id="imageModal" class="image-modal" onclick="closeImageModal(event)">
+        <span class="modal-close" onclick="closeImageModal(event)">&times;</span>
+        <span class="modal-prev" onclick="showPrevImage(event)">&lt;</span>
+        <span class="modal-next" onclick="showNextImage(event)">&gt;</span>
+        <img class="image-modal-content" id="modalImage">
+    </div>
+
+    <!-- Nuovo Footer per i pulsanti social -->
+    <footer>
+        <div class="footer-social-group">
+            <a href="https://www.instagram.com/adpe_studiodiarchitettura/" target="_blank" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/AdpeStudioDiArchitettura" target="_blank" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/adpe-studio/" target="_blank" class="footer-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Struttura dati per i progetti
+        let projects = {};
+
+        // Variabili per la navigazione delle immagini nel modal
+        let currentProjectImages = [];
+        let currentImageIndex = 0;
+
+        // Oggetto per le traduzioni
+        const translations = {
+            it: {
+                pageTitle: "Studio Architettura & Design",
+                homeLink: "Home",
+                projectsLink: "Progetti",
+                aboutLink: "Chi Siamo",
+                contactLink: "Contatti",
+                heroTitle: "ADPE",
+                heroSubtitle: "Architettura e Design by Adriano Pernazza",
+                scrollIndicator: "↓ Scopri i Progetti",
+                portfolioTitle: "Portfolio",
+                projectCategoryArchRes: "Architettura Residenziale",
+                projectCategoryArchPub: "Architettura Pubblica",
+                projectCategoryDesign: "Design",
+                unknownCategory: "Categoria Sconosciuta",
+                aboutTitle: "Chi Siamo",
+                aboutText: "Lo Studio ADPE, fondato dall'architetto Adriano Pernazza, è una realtà dinamica e innovativa nel panorama dell'architettura e del design. Da anni, ci dedichiamo alla progettazione di spazi che combinano estetica, funzionalità e sostenibilità. La nostra filosofia si basa sull'ascolto attento delle esigenze del cliente, trasformando le idee in realtà tangibili e uniche.",
+                creativityTitle: "Creatività e Innovazione",
+                creativityDesc: "Approccio originale e soluzioni all'avanguardia per ogni progetto.",
+                collaborationTitle: "Collaborazione Clienti",
+                collaborationDesc: "Un processo di progettazione partecipato e trasparente.",
+                sustainabilityTitle: "Sostenibilità",
+                sustainabilityDesc: "Progettazione attenta all'ambiente e all'efficienza energetica.",
+                qualityTitle: "Qualità e Dettaglio",
+                qualityDesc: "Cura maniacale per ogni aspetto, dal concept alla realizzazione.",
+                contactTitle: "Contatti",
+                contactText: "Siamo a vostra disposizione per qualsiasi informazione o per discutere del vostro prossimo progetto. Non esitate a contattarci.",
+                addressLabel: "Indirizzo",
+                mapDirections: "Clicca per indicazioni",
+                phoneLabel: "Telefono",
+                emailLabel: "Email",
+                hoursLabel: "Orari",
+                hoursValue: "Lun-Ven: 9:00 - 18:00",
+                breadcrumbHome: "Home",
+                breadcrumbProjects: "Progetti",
+                filterAll: "Tutti",
+                filterArchitecture: "Architettura",
+                filterResidential: "Residenziale",
+                filterPublic: "Pubblico",
+                filterDesign: "Design"
+            },
+            en: {
+                pageTitle: "Architecture & Design Studio",
+                homeLink: "Home",
+                projectsLink: "Projects",
+                aboutLink: "About Us",
+                contactLink: "Contact",
+                heroTitle: "ADPE",
+                heroSubtitle: "Architecture and Design by Adriano Pernazza",
+                scrollIndicator: "↓ Discover Projects",
+                portfolioTitle: "Portfolio",
+                projectCategoryArchRes: "Residential Architecture",
+                projectCategoryArchPub: "Public Architecture",
+                projectCategoryDesign: "Design",
+                unknownCategory: "Unknown Category",
+                aboutTitle: "About Us",
+                aboutText: "ADPE Studio, founded by architect Adriano Pernazza, is a dynamic and innovative reality in the field of architecture and design. For years, we have been dedicated to designing spaces that combine aesthetics, functionality, and sustainability. Our philosophy is based on carefully listening to client needs, transforming ideas into tangible and unique realities.",
+                creativityTitle: "Creativity & Innovation",
+                creativityDesc: "Original approach and cutting-edge solutions for every project.",
+                collaborationTitle: "Client Collaboration",
+                collaborationDesc: "A participatory and transparent design process.",
+                sustainabilityTitle: "Sustainability",
+                sustainabilityDesc: "Environmentally conscious and energy-efficient design.",
+                qualityTitle: "Quality & Detail",
+                qualityDesc: "Meticulous attention to every aspect, from concept to realization.",
+                contactTitle: "Contact",
+                contactText: "We are at your disposal for any information or to discuss your next project. Do not hesitate to contact us.",
+                addressLabel: "Address",
+                mapDirections: "Click for directions",
+                phoneLabel: "Phone",
+                emailLabel: "Email",
+                hoursLabel: "Hours",
+                hoursValue: "Mon-Fri: 9:00 AM - 6:00 PM",
+                breadcrumbHome: "Home",
+                breadcrumbProjects: "Projects",
+                filterAll: "All",
+                filterArchitecture: "Architecture",
+                filterResidential: "Residential",
+                filterPublic: "Public",
+                filterDesign: "Design"
+            },
+            fr: {
+                pageTitle: "Studio Architecture & Design",
+                homeLink: "Accueil",
+                projectsLink: "Projets",
+                aboutLink: "À Propos",
+                contactLink: "Contact",
+                heroTitle: "ADPE",
+                heroSubtitle: "Architecture et Design par Adriano Pernazza",
+                scrollIndicator: "↓ Découvrir les Projets",
+                portfolioTitle: "Portfolio",
+                projectCategoryArchRes: "Architecture Résidentielle",
+                projectCategoryArchPub: "Architecture Publique",
+                projectCategoryDesign: "Design",
+                unknownCategory: "Catégorie Inconnue",
+                aboutTitle: "À Propos de Nous",
+                aboutText: "Le Studio ADPE, fondé par l'architecte Adriano Pernazza, est une réalité dynamique et innovante dans le domaine de l'architecture et du design. Depuis des années, nous nous consacrons à la conception d'espace qui allient esthétique, fonctionnalité et durabilité. Notre philosophie repose sur une écoute attentive des besoins du client, transformant les idées en réalités tangibles et uniques.",
+                creativityTitle: "Créatività et Innovation",
+                creativityDesc: "Approche originale et solutions de pointe pour chaque projet.",
+                collaborationTitle: "Collaborazione Client",
+                collaborationDesc: "Un processus de conception participatif et transparent.",
+                sustainabilityTitle: "Durabilité",
+                sustainabilityDesc: "Conception soucieuse de l'environnement et de l'efficience énergétique.",
+                qualityTitle: "Qualità et Détail",
+                qualityDesc: "Attention méticuleuse à chaque aspect, du concept à la réalisation.",
+                contactTitle: "Contact",
+                contactText: "Nous sommes à votre disposition pour qualsiasi information ou pour discuter de votre prossimo progetto. N'hésitez pas à nous contacter.",
+                addressLabel: "Adresse",
+                mapDirections: "Cliquer pour les directions",
+                phoneLabel: "Téléphone",
+                emailLabel: "Email",
+                hoursLabel: "Horaires",
+                hoursValue: "Lun-Ven: 9h00 - 18h00",
+                breadcrumbHome: "Accueil",
+                breadcrumbProjects: "Projets",
+                filterAll: "Tous",
+                filterArchitecture: "Architecture",
+                filterResidential: "Résidentiel",
+                filterPublic: "Public",
+                filterDesign: "Design"
+            }
+        };
+
+        let currentLang = localStorage.getItem('lang') || 'it';
+        
+        // Carica i progetti dal file JSON
+        fetch('projects.json')
+            .then(response => response.json())
+            .then(data => {
+                projects = data;
+                updateAllProjectIds();
+                generateHomeProjects();
+            })
+            .catch(error => console.error('Errore nel caricamento dei progetti:', error));
+
+        // Stato dell'applicazione
+        let currentPath = [];
+        let currentView = 'home';
+
+        // Inizializzazione
+        document.addEventListener('DOMContentLoaded', function() {
+            setupMobileMenu();
+            showHome();
+
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const body = document.body;
+
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    body.classList.add('dark-theme');
+                } else {
+                    body.classList.remove('dark-theme');
+                }
+            }
+
+            const savedTheme = localStorage.getItem('theme');
+            applyTheme(savedTheme || 'light');
+
+            themeToggleBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const newTheme = body.classList.contains('dark-theme') ? 'light' : 'dark';
+                applyTheme(newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+
+            document.querySelectorAll('.language-selector-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    setLanguage(this.dataset.lang);
+                });
+            });
+
+            setLanguage(currentLang);
+        });
+
+        // Funzione per impostare la lingua
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.dataset.langKey;
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            document.querySelectorAll('.language-selector-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.lang === lang);
+            });
+
+            updateBreadcrumb();
+            if (currentView === 'projects') {
+                generateFilters();
+                const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
+                filterProjects(activeFilter);
+            }
+        }
+
+        // Mobile menu
+        function setupMobileMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+        }
+
+        // Mostra sezione generica nascondendo le altre
+        function showSection(sectionId) {
+            ['hero', 'homeProjects', 'breadcrumb', 'projectsSection', 'aboutSection', 'contactSection'].forEach(id => {
+                const section = document.getElementById(id);
+                if (section) section.style.display = 'none';
+            });
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) targetSection.style.display = 'block';
+        }
+
+        // Mostra home
+        function showHome() {
+            currentView = 'home';
+            currentPath = [];
+            showSection('hero');
+            document.getElementById('homeProjects').style.display = 'block';
+            document.getElementById('singleProjectDetail').style.display = 'none';
+            document.getElementById('projectsGrid').innerHTML = '';
+
+            const projectsSection = document.getElementById('projectsSection');
+            const existingTitle = projectsSection.querySelector('.section-title');
+            if (existingTitle) existingTitle.remove();
+
+            generateHomeProjects();
+            updateBreadcrumb();
+        }
+
+        // Genera progetti nella home
+        function generateHomeProjects() {
+            const grid = document.getElementById('homeProjectsGrid');
+            // BUG FIX 2: Rimosso .slice(0, 3) per mostrare tutti i progetti
+            const allProjects = getAllProjects(); 
+
+            grid.innerHTML = allProjects.map(project => `
+                <div class="project-card fade-in" onclick="showProject(${project.id})">
+                    <img src="${project.images[0].src}" alt="${project.title}" loading="lazy">
+                    <!-- Rimosso il div project-content con testo descrittivo -->
+                </div>
+            `).join('');
+            observeNewElements();
+        }
+
+        // Ottieni tutti i progetti in un unico array
+        function getAllProjects() {
+            let all = [];
+            if (projects.architettura?.residenziale) all = all.concat(projects.architettura.residenziale);
+            if (projects.architettura?.pubblico) all = all.concat(projects.architettura.pubblico);
+            if (projects.design) all = all.concat(projects.design);
+            return all;
+        }
+
+        // Aggiorna gli ID di tutti i progetti per essere unici e progressivi
+        function updateAllProjectIds() {
+            let currentId = 1;
+            getAllProjects().forEach(p => p.id = currentId++);
+        }
+
+        // Determina la categoria di un progetto
+        function getProjectCategoryLabel(projectId) {
+            const categoryKey = findProjectCategory(projectId);
+            if (categoryKey === 'architettura.residenziale') return translations[currentLang].projectCategoryArchRes;
+            if (categoryKey === 'architettura.pubblico') return translations[currentLang].projectCategoryArchPub;
+            if (categoryKey === 'design') return translations[currentLang].projectCategoryDesign;
+            return translations[currentLang].unknownCategory;
+        }
+
+        // Scroll verso i progetti nella home - Questa funzione non è più necessaria per il pulsante rimosso, ma la lascio per coerenza o futuri usi.
+        function scrollToProjects() {
+            document.getElementById('homeProjects').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // MODIFICATO: Logica per la sezione Progetti
+        function showProjectsSection() {
+            currentView = 'projects';
+            currentPath = ['progetti'];
+            
+            showSection('projectsSection');
+            document.getElementById('breadcrumb').style.display = 'block';
+            document.getElementById('singleProjectDetail').style.display = 'none';
+            
+            // BUG FIX 1: Assicura che filtri e griglia siano visibili
+            document.getElementById('projectFilters').style.display = 'block';
+            document.getElementById('projectsGrid').style.display = 'block';
+            
+            const projectsSection = document.getElementById('projectsSection');
+            
+            const existingTitle = projectsSection.querySelector('.section-title');
+            if (existingTitle) existingTitle.remove();
+
+            const sectionTitleElement = document.createElement('h2');
+            sectionTitleElement.className = 'section-title';
+            sectionTitleElement.setAttribute('data-lang-key', 'breadcrumbProjects');
+            sectionTitleElement.textContent = translations[currentLang].breadcrumbProjects;
+            projectsSection.prepend(sectionTitleElement);
+
+            generateFilters();
+            filterProjects('all');
+
+            updateBreadcrumb();
+            
+            // Utilizzo di requestAnimationFrame per uno scroll più fluido e affidabile
+            requestAnimationFrame(() => {
+                projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+
+        function generateFilters() {
+            const filtersContainer = document.getElementById('projectFilters');
+            const filters = {
+                'all': 'filterAll',
+                'architettura': 'filterArchitecture',
+                'architettura.residenziale': 'filterResidential',
+                'architettura.pubblico': 'filterPublic',
+                'design': 'filterDesign'
+            };
+
+            let filtersHtml = '';
+            for (const key in filters) {
+                const langKey = filters[key];
+                const label = translations[currentLang][langKey];
+                let btnClass = "filter-btn";
+                if (key.includes('.')) btnClass += " sub-filter"; // Per eventuale stile rientrato
+                filtersHtml += `<button class="${btnClass}" data-filter="${key}" data-lang-key="${langKey}" onclick="filterProjects('${key}')">${label}</button>`;
+            }
+            filtersContainer.innerHTML = filtersHtml;
+        }
+
+        function filterProjects(filter) {
+            const projectsGrid = document.getElementById('projectsGrid');
+            projectsGrid.innerHTML = '';
+            const allProjects = getAllProjects();
+
+            let filteredProjects = (filter === 'all')
+                ? allProjects
+                : allProjects.filter(project => findProjectCategory(project.id)?.startsWith(filter));
+
+            filteredProjects.forEach(project => {
+                const projectCardHtml = `
+                    <div class="project-card fade-in" onclick="showProject(${project.id})">
+                        <img src="${project.images[0].src}" alt="${project.title}" loading="lazy">
+                        <!-- Rimosso il div project-content con testo descrittivo -->
+                    </div>
+                `;
+                projectsGrid.insertAdjacentHTML('beforeend', projectCardHtml);
+            });
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === filter);
+            });
+            
+            observeNewElements();
+        }
+
+        function findProjectCategory(projectId) {
+            if (projects.architettura?.residenziale?.some(p => p.id === projectId)) return 'architettura.residenziale';
+            if (projects.architettura?.pubblico?.some(p => p.id === projectId)) return 'architettura.pubblico';
+            if (projects.design?.some(p => p.id === projectId)) return 'design';
+            return null;
+        }
+
+        // Aggiorna breadcrumb
+        function updateBreadcrumb() {
+            const breadcrumb = document.getElementById('breadcrumbNav');
+            let breadcrumbHtml = `<a class="breadcrumb-item" data-lang-key="breadcrumbHome" onclick="showHome()">${translations[currentLang].breadcrumbHome}</a>`;
+
+            if (currentPath.length > 0 && currentPath[0] !== 'chi-siamo' && currentPath[0] !== 'contatti') {
+                 breadcrumbHtml += ` <span class="breadcrumb-separator">›</span> <a class="breadcrumb-item" data-lang-key="breadcrumbProjects" onclick="showProjectsSection()">${translations[currentLang].breadcrumbProjects}</a>`;
+            }
+            if (currentView === 'projectDetail') {
+                 const project = findProjectById(parseInt(currentPath[currentPath.length - 1]));
+                 if(project) {
+                    breadcrumbHtml += ` <span class="breadcrumb-separator">›</span> <span class="breadcrumb-item">${project.title}</span>`;
+                 }
+            }
+
+
+            breadcrumb.innerHTML = breadcrumbHtml;
+        }
+
+        // Mostra i dettagli di un singolo progetto
+        function showProject(projectId) {
+            const project = findProjectById(projectId);
+            if (!project) return;
+
+            currentView = 'projectDetail';
+            currentPath = ['progetti', projectId.toString()];
+            updateBreadcrumb();
+
+            showSection('projectsSection');
+            document.getElementById('breadcrumb').style.display = 'block';
+            document.getElementById('projectFilters').style.display = 'none';
+            document.getElementById('projectsGrid').style.display = 'none';
+
+            const singleProjectDetail = document.getElementById('singleProjectDetail');
+            singleProjectDetail.style.display = 'block';
+            
+            let galleryHtml = project.images.map(image => `
+                <div class="gallery-item">
+                    <img src="${image.src}" alt="${image.description}" onclick="openImageModal(${project.id}, '${image.src}')">
+                    <p class="gallery-description">${image.description}</p>
+                </div>
+            `).join('');
+
+            singleProjectDetail.innerHTML = `
+                <h2 class="project-detail-title">${project.title}</h2>
+                <p class="project-detail-category">${getProjectCategoryLabel(projectId)}</p>
+                <p class="project-detail-description">${project.description}</p>
+                <div class="project-gallery">
+                    ${galleryHtml}
+                </div>
+            `;
+
+            setTimeout(() => {
+                singleProjectDetail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+
+        // Trova progetto per ID
+        function findProjectById(id) {
+            return getAllProjects().find(p => p.id === id);
+        }
+
+        // Mostra sezione "Chi Siamo"
+        function showAbout() {
+            currentView = 'about';
+            currentPath = ['chi-siamo'];
+            showSection('aboutSection');
+            document.getElementById('breadcrumb').style.display = 'block';
+            updateBreadcrumb();
+            // Utilizzo di requestAnimationFrame per uno scroll più fluido e affidabile
+            requestAnimationFrame(() => {
+                document.getElementById('aboutSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+
+        // Mostra sezione "Contatti"
+        function showContact() {
+            currentView = 'contact';
+            currentPath = ['contatti'];
+            showSection('contactSection');
+            document.getElementById('breadcrumb').style.display = 'block';
+            updateBreadcrumb();
+            // Utilizzo di requestAnimationFrame per uno scroll più fluido e affidabile
+            requestAnimationFrame(() => {
+                document.getElementById('contactSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+
+        // Funzioni per il modal delle immagini
+        function openImageModal(projectId, imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            
+            const project = findProjectById(projectId);
+            if (!project) return;
+
+            currentProjectImages = project.images;
+            currentImageIndex = currentProjectImages.findIndex(img => img.src === imageSrc);
+
+            modalImage.src = currentProjectImages[currentImageIndex].src;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal(event) {
+            if (event && (event.target.id === 'modalImage' || event.target.classList.contains('modal-prev') || event.target.classList.contains('modal-next'))) {
+                return;
+            }
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function showNextImage(event) {
+            if (event) event.stopPropagation();
+            if (currentProjectImages.length === 0) return;
+            currentImageIndex = (currentImageIndex + 1) % currentProjectImages.length;
+            document.getElementById('modalImage').src = currentProjectImages[currentImageIndex].src;
+        }
+
+        function showPrevImage(event) {
+            if (event) event.stopPropagation();
+            if (currentProjectImages.length === 0) return;
+            currentImageIndex = (currentImageIndex - 1 + currentProjectImages.length) % currentProjectImages.length;
+            document.getElementById('modalImage').src = currentProjectImages[currentImageIndex].src;
+        }
+
+
+        // Gestione eventi keyboard
+        document.addEventListener('keydown', function(e) {
+            const imageModal = document.getElementById('imageModal');
+            if (e.key === 'Escape') {
+                if (imageModal.style.display === 'flex') {
+                    closeImageModal();
+                } else if (currentView === 'projectDetail') {
+                    showProjectsSection();
+                }
+            } else if (imageModal.style.display === 'flex') {
+                if (e.key === 'ArrowLeft') showPrevImage();
+                if (e.key === 'ArrowRight') showNextImage();
+            }
+        });
+
+        // Intersection Observer per animazioni
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        function observeNewElements() {
+            document.querySelectorAll('.project-card:not(.fade-in), .highlight-card:not(.fade-in), .contact-card:not(.fade-in)').forEach(card => {
+                observer.observe(card);
+            });
+        }
+
+        // Effetto header e footer allo scroll
+        window.addEventListener('scroll', function() {
+            document.querySelector('header').classList.toggle('scrolled', window.pageYOffset > 50);
+            // Aggiungi la classe 'scrolled' anche al footer se vuoi un effetto simile
+            document.querySelector('footer').classList.toggle('scrolled', window.pageYOffset > 50);
+        });
+
+    </script>
+</body>
+</html>
