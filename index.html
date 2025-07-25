@@ -1122,7 +1122,8 @@
     <header>
         <nav class="container">
             <div class="header-left">
-                <img src="images/adpelogo.jpg" alt="ADPE Logo" class="header-logo-small">
+                <!-- Aggiornato src per puntare a S3 -->
+                <img src="https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/static/adpelogo.jpg" alt="ADPE Logo" class="header-logo-small">
                 <a href="#" class="logo" onclick="showHome()">ADPE</a>
             </div>
             <ul class="nav-menu">
@@ -1157,7 +1158,8 @@
         <section class="hero" id="hero">
             <div class="hero-content">
                 <div class="studio-logo">
-                    <img src="images/adpelogo.jpg" alt="Studio Logo">
+                    <!-- Aggiornato src per puntare a S3 -->
+                    <img src="https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/static/adpelogo.jpg" alt="Studio Logo">
                 </div>
                 <!-- Rimosso il sottotitolo come richiesto -->
             </div>
@@ -1166,6 +1168,7 @@
 
         <section class="home-projects" id="homeProjects">
             <div class="container">
+                <h2 data-lang-key="portfolioTitle">Portfolio</h2>
                 <div class="projects-grid" id="homeProjectsGrid">
                     <!-- Progetti generati dinamicamente -->
                 </div>
@@ -1198,7 +1201,8 @@
         <section class="about-section" id="aboutSection" style="display: none;">
             <div class="container about-content">
                 <h2 class="about-title" data-lang-key="aboutTitle">Chi Siamo</h2>
-                <img src="images/studioadpe.jpg" alt="Immagine dello Studio" class="about-image">
+                <!-- Aggiornato src per puntare a S3 -->
+                <img src="https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/static/studioadpe.jpg" alt="Immagine dello Studio" class="about-image">
                 <p class="about-text" data-lang-key="aboutText">
                     Lo Studio ADPE, fondato dall'architetto Adriano Pernazza, è una realtà dinamica e innovativa nel panorama dell'architettura e del design. Da anni, ci dedichiamo alla progettazione di spazi che combinano estetica, funzionalità e sostenibilità. La nostra filosofia si basa sull'ascolto attento delle esigenze del cliente, trasformando le idee in realtà tangibili e uniche.
                 </p>
@@ -1300,6 +1304,10 @@
         // Variabili per la navigazione delle immagini nel modal
         let currentProjectImages = [];
         let currentImageIndex = 0;
+
+        // URL base del bucket S3 per le immagini statiche
+        // Assicurati che S3_BUCKET_NAME e S3_REGION siano le stesse usate nella Lambda
+        const S3_STATIC_BASE_URL = `https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/static/`;
 
         // Oggetto per le traduzioni
         const translations = {
@@ -1408,7 +1416,7 @@
                 qualityTitle: "Qualità et Détail",
                 qualityDesc: "Attention méticuleuse à chaque aspect, du concept à la réalisation.",
                 contactTitle: "Contact",
-                contactText: "Nous sommes à votre disposition pour qualsiasi information ou pour discuter de votre prossimo progetto. N'hésitez pas à nous contacter.",
+                contactText: "Nous siamo a votre disposition pour qualsiasi information ou pour discuter de votre prossimo progetto. N'hésitez pas à nous contacter.",
                 addressLabel: "Adresse",
                 mapDirections: "Cliquer pour les directions",
                 phoneLabel: "Téléphone",
