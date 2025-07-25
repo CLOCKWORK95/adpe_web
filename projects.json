@@ -1,54 +1,67 @@
 {
-    "architettura": {
-        "residenziale": [
-            {
-                "id": 1,
-                "title": "Casa di Gigi",
-                "description": "Una residenza elegante e funzionale.",
-                "images": [
-                    { "src": "images/esempio7.jpg", "description": "Ingresso" }
-                ]
-            }
-        ],
-        "pubblico": [
-            {
-                "id": 2,
-                "title": "Centro Culturale",
-                "description": "Un centro culturale moderno e accogliente.",
-                "images": [
-                    { "src": "images/esempio8.jpg", "description": "Facciata principale" },
-                    { "src": "images/esempio6.jpg", "description": "Secondo Piano corridoio" }
-                ]
-            }
+  "architettura": {
+    "residenziale": [
+      {
+        "id": 1,
+        "title": "",
+        "description": "",
+        "images": [
+          {
+            "src": "https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/projects/architettura/residenziale/casa-di-gigi/image1.jpg",
+            "description": "Ingresso"
+          }
         ]
-    },
-    "design": [
+      }
+    ],
+    "pubblico": []
+  },
+  "design": [
+    {
+      "id": 2,
+      "title": "",
+      "description": "",
+      "images": [
         {
-            "id": 3,
-            "title": "Mobili",
-            "description": "Tavolino.",
-            "images": [
-                { "src": "images/tabledesign.jpg", "description": "Tavolino di Design" }
-            ]
-        },
-        {
-            "id": 4,
-            "title": "Cesto",
-            "description": "Sistema di illuminazione architettonica.",
-            "images": [
-                
-                { "src": "images/esempio4.jpg", "description": "Cesto riflettente" }
-            ]
-        },
-        {
-            "id": 5,
-            "title": "Contenitore",
-            "description": "Sistema di illuminazione architettonica.",
-            "images": [
-                { "src": "images/esempio5.jpg", "description": "Contenitore" },
-                { "src": "images/esempio9.jpg", "description": "Contenitore" },
-                { "src": "images/esempio10.jpg", "description": "Contenitore" }
-            ]
+          "src": "https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/projects/design/cesto/image1.jpg",
+          "description": ""
         }
-    ]
+      ]
+    },
+    {
+      "id": 3,
+      "title": "",
+      "description": "",
+      "images": [
+        {
+          "src": "https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/projects/design/contenitore/image1.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/projects/design/contenitore/image2.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/projects/design/contenitore/image3.jpg",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "",
+      "description": "",
+      "images": []
+    },
+    {
+      "id": 5,
+      "title": "",
+      "description": "",
+      "images": [
+        {
+          "src": "https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/projects/design/tavolino/image1.jpg",
+          "description": "Vista di tre quarti."
+        }
+      ]
+    }
+  ]
 }
