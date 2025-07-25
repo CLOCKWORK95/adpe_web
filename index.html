@@ -622,39 +622,8 @@
             font-style: normal;
         }
 
-        /* Breadcrumb */
-        .breadcrumb {
-            padding: 1rem 0;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
-            transition: background var(--transition), border-color var(--transition);
-        }
-
-        body.dark-theme .breadcrumb {
-            background: rgba(26, 26, 26, 0.5);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .breadcrumb-nav {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1rem; /* Aumentato il font */
-        }
-
-        .breadcrumb-item {
-            color: var(--text-color);
-            text-decoration: none;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .breadcrumb-item:hover {
-            color: var(--accent-blue);
-            transform: scale(1.05);
-        }
+        /* Breadcrumb - Rimosso */
+        /* .breadcrumb { ... } */
 
         /* Sezioni "Chi Siamo" e "Contatti" */
         .projects-section, .about-section, .contact-section { /* Modificato per includere projects-section */
@@ -679,6 +648,8 @@
             margin-bottom: 2rem;
             color: var(--text-color);
             letter-spacing: 1px;
+            /* Aggiunto per coerenza con projects-section .section-title */
+            animation: fadeInUp 0.6s ease-out forwards; 
         }
 
         .about-text {
@@ -1113,6 +1084,26 @@
             .project-detail-title { font-size: 2rem; }
             .about-title, .contact-title { font-size: 2rem; }
         }
+
+        /* Stili per il pulsante "Torna ai Progetti" */
+        .back-to-projects-btn {
+            background: var(--accent-blue);
+            color: var(--primary-color);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            margin-bottom: 2rem; /* Spazio sotto il pulsante */
+        }
+
+        .back-to-projects-btn:hover {
+            background: var(--text-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-light);
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -1174,13 +1165,13 @@
             </div>
         </section>
 
-        <section class="breadcrumb" id="breadcrumb" style="display: none;">
+        <!-- Breadcrumb rimosso come richiesto -->
+        <!-- <section class="breadcrumb" id="breadcrumb" style="display: none;">
             <div class="container">
                 <nav class="breadcrumb-nav" id="breadcrumbNav">
-                    <!-- Breadcrumb dinamico generato da JavaScript -->
                 </nav>
             </div>
-        </section>
+        </section> -->
 
         <section class="container projects-section" id="projectsSection" style="display: none;">
             <!-- NUOVO: Contenitore per i filtri -->
@@ -1194,6 +1185,7 @@
 
             <div class="project-detail" id="singleProjectDetail" style="display: none;">
                 <!-- Dettaglio singolo progetto generato dinamicamente -->
+                <!-- Il pulsante "Torna ai Progetti" verrà inserito qui da JS -->
             </div>
         </section>
 
@@ -1303,10 +1295,10 @@
         // Variabili per la navigazione delle immagini nel modal
         let currentProjectImages = [];
         let currentImageIndex = 0;
+        let lastActiveFilter = 'all'; // Nuovo: per mantenere il filtro attivo
 
         // URL base del bucket S3 per le immagini statiche
-        // Assicurati che S3_BUCKET_NAME e S3_REGION siano le stesse usate nella Lambda
-        const S3_STATIC_BASE_URL = `https://adpe-web-galleries.s3.eu-central-1.amazonaws.com/static/`;
+        const S3_STATIC_BASE_URL = `https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/`;
 
         // Oggetto per le traduzioni
         const translations = {
@@ -1318,11 +1310,13 @@
                 contactLink: "Contatti",
                 heroTitle: "ADPE",
                 heroSubtitle: "Architettura e Design by Adriano Pernazza",
-                scrollIndicator: "↓ Scopri i Progetti",
-                portfolioTitle: "Portfolio",
-                projectCategoryArchRes: "Architettura Residenziale",
-                projectCategoryArchPub: "Architettura Pubblica",
-                projectCategoryDesign: "Design",
+                portfolioTitle: "Progetti",
+                // Traduzioni per le categorie dinamiche
+                category_architettura: "Architettura",
+                category_design: "Design",
+                category_residenziale: "Residenziale",
+                category_pubblica: "Pubblica", // Aggiornato da 'pubblico' a 'pubblica'
+                // Fine traduzioni categorie dinamiche
                 unknownCategory: "Categoria Sconosciuta",
                 aboutTitle: "Chi Siamo",
                 aboutText: "Lo Studio ADPE, fondato dall'architetto Adriano Pernazza, è una realtà dinamica e innovativa nel panorama dell'architettura e del design. Da anni, ci dedichiamo alla progettazione di spazi che combinano estetica, funzionalità e sostenibilità. La nostra filosofia si basa sull'ascolto attento delle esigenze del cliente, trasformando le idee in realtà tangibili e uniche.",
@@ -1342,13 +1336,14 @@
                 emailLabel: "Email",
                 hoursLabel: "Orari",
                 hoursValue: "Lun-Ven: 9:00 - 18:00",
-                breadcrumbHome: "Home",
-                breadcrumbProjects: "Progetti",
+                breadcrumbHome: "Home", // Mantenuto per coerenza, ma non usato
+                breadcrumbProjects: "Progetti", // Mantenuto per coerenza, ma non usato
                 filterAll: "Tutti",
-                filterArchitecture: "Architettura",
-                filterResidential: "Residenziale",
-                filterPublic: "Pubblico",
-                filterDesign: "Design"
+                filterArchitecture: "Architettura", // Mantenuto per filtri
+                filterResidential: "Residenziale", // Mantenuto per filtri
+                filterPublic: "Pubblica", // Mantenuto per filtri
+                filterDesign: "Design", // Mantenuto per filtri
+                backToProjects: "← Torna ai Progetti" // Nuovo: testo per il pulsante indietro
             },
             en: {
                 pageTitle: "Architecture & Design Studio",
@@ -1358,11 +1353,11 @@
                 contactLink: "Contact",
                 heroTitle: "ADPE",
                 heroSubtitle: "Architecture and Design by Adriano Pernazza",
-                scrollIndicator: "↓ Discover Projects",
-                portfolioTitle: "Portfolio",
-                projectCategoryArchRes: "Residential Architecture",
-                projectCategoryArchPub: "Public Architecture",
-                projectCategoryDesign: "Design",
+                portfolioTitle: "Projects",
+                category_architettura: "Architecture",
+                category_design: "Design",
+                category_residenziale: "Residential",
+                category_pubblica: "Public",
                 unknownCategory: "Unknown Category",
                 aboutTitle: "About Us",
                 aboutText: "ADPE Studio, founded by architect Adriano Pernazza, is a dynamic and innovative reality in the field of architecture and design. For years, we have been dedicated to designing spaces that combine aesthetics, functionality, and sustainability. Our philosophy is based on carefully listening to client needs, transforming ideas into tangible and unique realities.",
@@ -1388,7 +1383,8 @@
                 filterArchitecture: "Architecture",
                 filterResidential: "Residential",
                 filterPublic: "Public",
-                filterDesign: "Design"
+                filterDesign: "Design",
+                backToProjects: "← Back to Projects"
             },
             fr: {
                 pageTitle: "Studio Architecture & Design",
@@ -1398,11 +1394,11 @@
                 contactLink: "Contact",
                 heroTitle: "ADPE",
                 heroSubtitle: "Architecture et Design par Adriano Pernazza",
-                scrollIndicator: "↓ Découvrir les Projets",
-                portfolioTitle: "Portfolio",
-                projectCategoryArchRes: "Architecture Résidentielle",
-                projectCategoryArchPub: "Architecture Publique",
-                projectCategoryDesign: "Design",
+                portfolioTitle: "Projets",
+                category_architettura: "Architecture",
+                category_design: "Design",
+                category_residenziale: "Résidentiel",
+                category_pubblica: "Publique",
                 unknownCategory: "Catégorie Inconnue",
                 aboutTitle: "À Propos de Nous",
                 aboutText: "Le Studio ADPE, fondé par l'architecte Adriano Pernazza, est une réalité dynamique et innovante dans le domaine de l'architecture et du design. Depuis des années, nous nous consacrons à la conception d'espace qui allient esthétique, fonctionnalité et durabilité. Notre philosophie repose sur une écoute attentive des besoins du client, transformant les idées en réalités tangibles et uniques.",
@@ -1427,8 +1423,9 @@
                 filterAll: "Tous",
                 filterArchitecture: "Architecture",
                 filterResidential: "Résidentiel",
-                filterPublic: "Public",
-                filterDesign: "Design"
+                filterPublic: "Publique",
+                filterDesign: "Design",
+                backToProjects: "← Retour aux Projets"
             }
         };
 
@@ -1439,19 +1436,24 @@
             .then(response => response.json())
             .then(data => {
                 projects = data;
-                updateAllProjectIds();
+                updateAllProjectIds(); // Assegna ID unici a tutti i progetti
                 generateHomeProjects();
+                // Inizializza i filtri e mostra la sezione progetti se l'URL lo richiede
+                if (currentView === 'projects') {
+                    showProjectsSection();
+                }
             })
             .catch(error => console.error('Errore nel caricamento dei progetti:', error));
 
         // Stato dell'applicazione
-        let currentPath = [];
         let currentView = 'home';
+        let allProjectsFlattened = []; // Nuovo: array per tutti i progetti appiattiti
 
         // Inizializzazione
         document.addEventListener('DOMContentLoaded', function() {
             setupMobileMenu();
-            showHome();
+            // showHome() non chiamato qui, verrà chiamato dopo il caricamento dei progetti
+            // o in base allo stato dell'URL
 
             const themeToggleBtn = document.getElementById('themeToggle');
             const body = document.body;
@@ -1500,11 +1502,17 @@
                 item.classList.toggle('active', item.dataset.lang === lang);
             });
 
-            updateBreadcrumb();
+            // Rigenera i filtri e riapplica il filtro corrente dopo il cambio lingua
             if (currentView === 'projects') {
                 generateFilters();
-                const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter || 'all';
-                filterProjects(activeFilter);
+                filterProjects(lastActiveFilter);
+            }
+            // Rigenera i progetti nella home per aggiornare i titoli se necessario
+            generateHomeProjects();
+            // Se siamo in un dettaglio progetto, ricarica per aggiornare categoria/descrizione
+            if (currentView === 'projectDetail') {
+                const projectId = parseInt(document.getElementById('singleProjectDetail').dataset.projectId);
+                if (projectId) showProject(projectId);
             }
         }
 
@@ -1528,9 +1536,14 @@
 
         // Mostra sezione generica nascondendo le altre
         function showSection(sectionId) {
-            ['hero', 'homeProjects', 'breadcrumb', 'projectsSection', 'aboutSection', 'contactSection'].forEach(id => {
+            ['hero', 'homeProjects', 'projectsSection', 'aboutSection', 'contactSection'].forEach(id => {
                 const section = document.getElementById(id);
-                if (section) section.style.display = 'none';
+                if (section) {
+                    section.style.display = 'none';
+                    // Rimuovi la classe fade-in per permettere l'animazione alla prossima visualizzazione
+                    const titles = section.querySelectorAll('.section-title, .about-title, .contact-title');
+                    titles.forEach(title => title.classList.remove('fade-in'));
+                }
             });
             const targetSection = document.getElementById(sectionId);
             if (targetSection) targetSection.style.display = 'block';
@@ -1539,42 +1552,55 @@
         // Mostra home
         function showHome() {
             currentView = 'home';
-            currentPath = [];
             showSection('hero');
             document.getElementById('homeProjects').style.display = 'block';
             document.getElementById('singleProjectDetail').style.display = 'none';
-            document.getElementById('projectsGrid').innerHTML = '';
-
+            document.getElementById('projectsGrid').innerHTML = ''; // Pulisce la griglia progetti
+            
+            // Rimuovi il titolo della sezione progetti se presente
             const projectsSection = document.getElementById('projectsSection');
             const existingTitle = projectsSection.querySelector('.section-title');
             if (existingTitle) existingTitle.remove();
 
             generateHomeProjects();
-            updateBreadcrumb();
         }
 
         // Genera progetti nella home
         function generateHomeProjects() {
             const grid = document.getElementById('homeProjectsGrid');
-            // BUG FIX 2: Rimosso .slice(0, 3) per mostrare tutti i progetti
             const allProjects = getAllProjects(); 
 
             grid.innerHTML = allProjects.map(project => `
                 <div class="project-card fade-in" onclick="showProject(${project.id})">
                     <img src="${project.images[0].src}" alt="${project.title}" loading="lazy">
-                    <!-- Rimosso il div project-content con testo descrittivo -->
                 </div>
             `).join('');
             observeNewElements();
         }
 
-        // Ottieni tutti i progetti in un unico array
+        // NUOVO: Funzione ricorsiva per appiattire la struttura dei progetti
+        function flattenProjects(obj, path = '') {
+            let flattened = [];
+            for (const key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    const currentPath = path ? `${path}.${key}` : key;
+                    if (obj[key].id !== undefined && obj[key].title !== undefined) {
+                        // È un progetto
+                        flattened.push({ ...obj[key], categoryPath: currentPath });
+                    } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+                        // È una categoria o sottocategoria
+                        flattened = flattened.concat(flattenProjects(obj[key], currentPath));
+                    }
+                }
+            }
+            return flattened;
+        }
+
+        // Ottieni tutti i progetti in un unico array appiattito
         function getAllProjects() {
-            let all = [];
-            if (projects.architettura?.residenziale) all = all.concat(projects.architettura.residenziale);
-            if (projects.architettura?.pubblico) all = all.concat(projects.architettura.pubblico);
-            if (projects.design) all = all.concat(projects.design);
-            return all;
+            if (Object.keys(projects).length === 0) return []; // Se projects è vuoto
+            allProjectsFlattened = flattenProjects(projects);
+            return allProjectsFlattened;
         }
 
         // Aggiorna gli ID di tutti i progetti per essere unici e progressivi
@@ -1583,30 +1609,37 @@
             getAllProjects().forEach(p => p.id = currentId++);
         }
 
-        // Determina la categoria di un progetto
-        function getProjectCategoryLabel(projectId) {
-            const categoryKey = findProjectCategory(projectId);
-            if (categoryKey === 'architettura.residenziale') return translations[currentLang].projectCategoryArchRes;
-            if (categoryKey === 'architettura.pubblico') return translations[currentLang].projectCategoryArchPub;
-            if (categoryKey === 'design') return translations[currentLang].projectCategoryDesign;
-            return translations[currentLang].unknownCategory;
+        // Determina la categoria leggibile di un progetto (usando categoryPath)
+        function getProjectCategoryLabel(project) {
+            if (!project || !project.categoryPath) return translations[currentLang].unknownCategory;
+            
+            const pathParts = project.categoryPath.split('.');
+            // L'ultima parte è il nome della cartella del progetto, le precedenti sono categorie/sottocategorie
+            // Es: architettura.residenziale.casa-di-gigi -> vogliamo "Architettura Residenziale"
+            
+            let categoryLabels = [];
+            for (let i = 0; i < pathParts.length - 1; i++) { // Esclude il nome del progetto
+                const part = pathParts[i];
+                const translatedPart = translations[currentLang][`category_${part}`] || formatFolderNameForDisplay(part);
+                categoryLabels.push(translatedPart);
+            }
+            return categoryLabels.join(' ');
         }
 
-        // Scroll verso i progetti nella home - Questa funzione non è più necessaria per il pulsante rimosso, ma la lascio per coerenza o futuri usi.
-        function scrollToProjects() {
-            document.getElementById('homeProjects').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Funzione helper per formattare i nomi delle cartelle per la visualizzazione
+        function formatFolderNameForDisplay(name) {
+            return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
         }
 
-        // MODIFICATO: Logica per la sezione Progetti
+
+        // Logica per la sezione Progetti
         function showProjectsSection() {
             currentView = 'projects';
-            currentPath = ['progetti'];
             
             showSection('projectsSection');
-            document.getElementById('breadcrumb').style.display = 'block';
             document.getElementById('singleProjectDetail').style.display = 'none';
             
-            // BUG FIX 1: Assicura che filtri e griglia siano visibili
+            // Assicura che filtri e griglia siano visibili
             document.getElementById('projectFilters').style.display = 'block';
             document.getElementById('projectsGrid').style.display = 'block';
             
@@ -1617,56 +1650,71 @@
 
             const sectionTitleElement = document.createElement('h2');
             sectionTitleElement.className = 'section-title';
-            sectionTitleElement.setAttribute('data-lang-key', 'breadcrumbProjects');
-            sectionTitleElement.textContent = translations[currentLang].breadcrumbProjects;
+            sectionTitleElement.setAttribute('data-lang-key', 'portfolioTitle'); // Usa il titolo "Portfolio"
+            sectionTitleElement.textContent = translations[currentLang].portfolioTitle;
             projectsSection.prepend(sectionTitleElement);
 
             generateFilters();
-            filterProjects('all');
-
-            updateBreadcrumb();
+            filterProjects(lastActiveFilter); // Applica l'ultimo filtro attivo
             
-            // Utilizzo di requestAnimationFrame per uno scroll più fluido e affidabile
             requestAnimationFrame(() => {
                 projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         }
 
+        // NUOVO: Generazione dinamica dei filtri
         function generateFilters() {
             const filtersContainer = document.getElementById('projectFilters');
-            const filters = {
-                'all': 'filterAll',
-                'architettura': 'filterArchitecture',
-                'architettura.residenziale': 'filterResidential',
-                'architettura.pubblico': 'filterPublic',
-                'design': 'filterDesign'
-            };
+            let uniqueCategories = new Set();
+            getAllProjects().forEach(project => {
+                // Estrai le parti della categoria fino al livello del progetto
+                const pathParts = project.categoryPath.split('.');
+                // Aggiungi le categorie principali e sottocategorie come filtri
+                if (pathParts.length > 1) { // Se è almeno "categoria.progetto"
+                    uniqueCategories.add(pathParts[0]); // Es: "architettura"
+                    if (pathParts.length > 2) { // Se è "categoria.sottocategoria.progetto"
+                        uniqueCategories.add(`${pathParts[0]}.${pathParts[1]}`); // Es: "architettura.residenziale"
+                    }
+                } else { // Se è solo "progetto" direttamente sotto una categoria di primo livello (es. design.cesto)
+                    uniqueCategories.add(pathParts[0]); // Es: "design"
+                }
+            });
 
-            let filtersHtml = '';
-            for (const key in filters) {
-                const langKey = filters[key];
-                const label = translations[currentLang][langKey];
-                let btnClass = "filter-btn";
-                if (key.includes('.')) btnClass += " sub-filter"; // Per eventuale stile rientrato
-                filtersHtml += `<button class="${btnClass}" data-filter="${key}" data-lang-key="${langKey}" onclick="filterProjects('${key}')">${label}</button>`;
-            }
+            let filtersHtml = `<button class="filter-btn" data-filter="all" data-lang-key="filterAll" onclick="filterProjects('all')">${translations[currentLang].filterAll}</button>`;
+            
+            // Ordina le categorie per visualizzazione coerente
+            const sortedCategories = Array.from(uniqueCategories).sort();
+
+            sortedCategories.forEach(categoryKey => {
+                let label = '';
+                const parts = categoryKey.split('.');
+                if (parts.length === 1) { // Top-level category (e.g., "architettura", "design")
+                    label = translations[currentLang][`category_${categoryKey}`] || formatFolderNameForDisplay(categoryKey);
+                } else if (parts.length === 2) { // Sub-category (e.g., "architettura.residenziale")
+                    const mainCat = translations[currentLang][`category_${parts[0]}`] || formatFolderNameForDisplay(parts[0]);
+                    const subCat = translations[currentLang][`category_${parts[1]}`] || formatFolderNameForDisplay(parts[1]);
+                    label = `${mainCat} ${subCat}`; // "Architettura Residenziale" (spazio invece di trattino)
+                }
+                
+                filtersHtml += `<button class="filter-btn" data-filter="${categoryKey}" onclick="filterProjects('${categoryKey}')">${label}</button>`;
+            });
             filtersContainer.innerHTML = filtersHtml;
         }
 
         function filterProjects(filter) {
+            lastActiveFilter = filter; // Salva il filtro attivo
             const projectsGrid = document.getElementById('projectsGrid');
             projectsGrid.innerHTML = '';
             const allProjects = getAllProjects();
 
             let filteredProjects = (filter === 'all')
                 ? allProjects
-                : allProjects.filter(project => findProjectCategory(project.id)?.startsWith(filter));
+                : allProjects.filter(project => project.categoryPath.startsWith(filter));
 
             filteredProjects.forEach(project => {
                 const projectCardHtml = `
                     <div class="project-card fade-in" onclick="showProject(${project.id})">
                         <img src="${project.images[0].src}" alt="${project.title}" loading="lazy">
-                        <!-- Rimosso il div project-content con testo descrittivo -->
                     </div>
                 `;
                 projectsGrid.insertAdjacentHTML('beforeend', projectCardHtml);
@@ -1679,48 +1727,23 @@
             observeNewElements();
         }
 
-        function findProjectCategory(projectId) {
-            if (projects.architettura?.residenziale?.some(p => p.id === projectId)) return 'architettura.residenziale';
-            if (projects.architettura?.pubblico?.some(p => p.id === projectId)) return 'architettura.pubblico';
-            if (projects.design?.some(p => p.id === projectId)) return 'design';
-            return null;
-        }
-
-        // Aggiorna breadcrumb
-        function updateBreadcrumb() {
-            const breadcrumb = document.getElementById('breadcrumbNav');
-            let breadcrumbHtml = `<a class="breadcrumb-item" data-lang-key="breadcrumbHome" onclick="showHome()">${translations[currentLang].breadcrumbHome}</a>`;
-
-            if (currentPath.length > 0 && currentPath[0] !== 'chi-siamo' && currentPath[0] !== 'contatti') {
-                 breadcrumbHtml += ` <span class="breadcrumb-separator">›</span> <a class="breadcrumb-item" data-lang-key="breadcrumbProjects" onclick="showProjectsSection()">${translations[currentLang].breadcrumbProjects}</a>`;
-            }
-            if (currentView === 'projectDetail') {
-                 const project = findProjectById(parseInt(currentPath[currentPath.length - 1]));
-                 if(project) {
-                    breadcrumbHtml += ` <span class="breadcrumb-separator">›</span> <span class="breadcrumb-item">${project.title}</span>`;
-                 }
-            }
-
-
-            breadcrumb.innerHTML = breadcrumbHtml;
-        }
-
         // Mostra i dettagli di un singolo progetto
         function showProject(projectId) {
             const project = findProjectById(projectId);
             if (!project) return;
 
             currentView = 'projectDetail';
-            currentPath = ['progetti', projectId.toString()];
-            updateBreadcrumb();
-
+            
             showSection('projectsSection');
-            document.getElementById('breadcrumb').style.display = 'block';
             document.getElementById('projectFilters').style.display = 'none';
             document.getElementById('projectsGrid').style.display = 'none';
 
             const singleProjectDetail = document.getElementById('singleProjectDetail');
             singleProjectDetail.style.display = 'block';
+            singleProjectDetail.dataset.projectId = projectId; // Salva l'ID del progetto per il ritorno
+
+            // Pulsante "Torna ai Progetti"
+            const backButtonHtml = `<button class="back-to-projects-btn" onclick="goBackToProjects()">${translations[currentLang].backToProjects}</button>`;
             
             let galleryHtml = project.images.map(image => `
                 <div class="gallery-item">
@@ -1730,8 +1753,9 @@
             `).join('');
 
             singleProjectDetail.innerHTML = `
+                ${backButtonHtml}
                 <h2 class="project-detail-title">${project.title}</h2>
-                <p class="project-detail-category">${getProjectCategoryLabel(projectId)}</p>
+                <p class="project-detail-category">${getProjectCategoryLabel(project)}</p>
                 <p class="project-detail-description">${project.description}</p>
                 <div class="project-gallery">
                     ${galleryHtml}
@@ -1743,19 +1767,22 @@
             }, 100);
         }
 
-        // Trova progetto per ID
+        // NUOVO: Funzione per tornare alla sezione progetti
+        function goBackToProjects() {
+            showProjectsSection(); // Torna alla sezione progetti con l'ultimo filtro attivo
+        }
+
+        // Trova progetto per ID (ora usa l'array appiattito)
         function findProjectById(id) {
-            return getAllProjects().find(p => p.id === id);
+            return allProjectsFlattened.find(p => p.id === id);
         }
 
         // Mostra sezione "Chi Siamo"
         function showAbout() {
             currentView = 'about';
-            currentPath = ['chi-siamo'];
             showSection('aboutSection');
-            document.getElementById('breadcrumb').style.display = 'block';
-            updateBreadcrumb();
-            // Utilizzo di requestAnimationFrame per uno scroll più fluido e affidabile
+            // Aggiungi l'animazione al titolo della sezione
+            document.querySelector('#aboutSection .about-title').classList.add('fade-in');
             requestAnimationFrame(() => {
                 document.getElementById('aboutSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
@@ -1764,11 +1791,9 @@
         // Mostra sezione "Contatti"
         function showContact() {
             currentView = 'contact';
-            currentPath = ['contatti'];
             showSection('contactSection');
-            document.getElementById('breadcrumb').style.display = 'block';
-            updateBreadcrumb();
-            // Utilizzo di requestAnimationFrame per uno scroll più fluido e affidabile
+            // Aggiungi l'animazione al titolo della sezione
+            document.querySelector('#contactSection .contact-title').classList.add('fade-in');
             requestAnimationFrame(() => {
                 document.getElementById('contactSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
@@ -1821,7 +1846,7 @@
                 if (imageModal.style.display === 'flex') {
                     closeImageModal();
                 } else if (currentView === 'projectDetail') {
-                    showProjectsSection();
+                    goBackToProjects(); // Usa la nuova funzione per tornare indietro
                 }
             } else if (imageModal.style.display === 'flex') {
                 if (e.key === 'ArrowLeft') showPrevImage();
