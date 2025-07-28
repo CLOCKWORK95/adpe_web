@@ -150,25 +150,30 @@
         body.dark-theme .home-projects { background: linear-gradient(180deg, rgba(44, 44, 44, 0.3) 0%, rgba(26, 26, 26, 0.1) 100%); }
         .home-projects h2 { text-align: center; font-size: 3rem; font-weight: 200; margin-bottom: 3rem; color: var(--text-color); letter-spacing: 2px; }
         
-        /* Griglia Masonry con column-count */
-        .projects-grid {
-            column-count: 3; /* Numero di colonne su desktop */
-            column-gap: 1.5rem;
+        /* ✅ NUOVA GRIGLIA PER LA HOME */
+        .home-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        @media (max-width: 1024px) {
-            .projects-grid {
-                column-count: 2; /* 2 colonne per tablet */
-            }
+        /* ✅ MANTENUTA LA GRIGLIA MASONRY PER PROGETTI */
+        .projects-grid {
+            column-count: 2;
+            column-gap: 3.0rem;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
+        @media (max-width: 1024px) {
+            .projects-grid { column-count: 2; }
+        }
         @media (max-width: 768px) {
-            .projects-grid {
-                column-count: 1; /* 1 colonna per mobile */
-            }
+            .projects-grid { column-count: 1; }
         }
 
         /* Card per il layout Masonry */
@@ -830,6 +835,7 @@
                 <div class="project-overlay">${project.description || ''}</div>
                 </div>
             `).join('');
+            distributeMasonry(grid);
         }
 
         function filterProjects(filter) {
@@ -840,17 +846,26 @@
                 ? allProjectsFlattened
                 : allProjectsFlattened.filter(p => p.categoryPath.startsWith(filter));
 
-            projectsGrid.innerHTML = filteredProjects.map(project => `
+            // Creiamo i progetti come stringa
+            const cardsHTML = filteredProjects.map(project => `
                 <div class="project-card fade-in" onclick="showProject(${project.id})">
                 <img src="${project.images[0].src}" alt="${project.title}" loading="lazy">
                 <div class="project-overlay">${project.description || ''}</div>
                 </div>
             `).join('');
 
+            // Inseriamo tutte le card temporaneamente
+            projectsGrid.innerHTML = cardsHTML;
+
+            // Distribuiamo le card in colonne
+            distributeMasonry(projectsGrid);
+
+            // Aggiorniamo lo stato dei bottoni
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.filter === filter);
             });
         }
+
 
         // Aggiungiamo lo stesso comportamento per le anteprime nella sezione "Progetti"
         document.addEventListener('DOMContentLoaded', () => {
@@ -953,6 +968,28 @@
             event.stopPropagation();
             currentImageIndex = (currentImageIndex - 1 + currentProjectImages.length) % currentProjectImages.length;
             document.getElementById('modalImage').src = currentProjectImages[currentImageIndex].src;
+        }
+
+        function distributeMasonry(grid) {
+            const cards = Array.from(grid.querySelectorAll('.project-card'));
+            if (cards.length === 0) return;
+
+            // Svuoto la griglia
+            grid.innerHTML = '';
+
+            // Creo 3 colonne
+            const columns = [[], [], []];
+            cards.forEach((card, i) => {
+                columns[i % 3].push(card);
+            });
+
+            // Popolo le colonne e le aggiungo al container
+            columns.forEach(colCards => {
+                const colDiv = document.createElement('div');
+                colDiv.className = 'projects-column';
+                colCards.forEach(card => colDiv.appendChild(card));
+                grid.appendChild(colDiv);
+            });
         }
 
         // Header e Footer allo scroll
