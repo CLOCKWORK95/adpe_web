@@ -367,6 +367,30 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-light);
         }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 0.8rem;
+            text-align: center;
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -802,10 +826,46 @@
             if (!grid) return;
             grid.innerHTML = allProjectsFlattened.map(project => `
                 <div class="project-card fade-in" onclick="showProject(${project.id})">
-                    <img src="${project.images[0].src}" alt="${project.title}" loading="lazy">
+                <img src="${project.images[0].src}" alt="${project.title}" loading="lazy">
+                <div class="project-overlay">${project.description || ''}</div>
                 </div>
             `).join('');
         }
+
+        function filterProjects(filter) {
+            lastActiveFilter = filter;
+            const projectsGrid = document.getElementById('projectsGrid');
+
+            const filteredProjects = (filter === 'all')
+                ? allProjectsFlattened
+                : allProjectsFlattened.filter(p => p.categoryPath.startsWith(filter));
+
+            projectsGrid.innerHTML = filteredProjects.map(project => `
+                <div class="project-card fade-in" onclick="showProject(${project.id})">
+                <img src="${project.images[0].src}" alt="${project.title}" loading="lazy">
+                <div class="project-overlay">${project.description || ''}</div>
+                </div>
+            `).join('');
+
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === filter);
+            });
+        }
+
+        // Aggiungiamo lo stesso comportamento per le anteprime nella sezione "Progetti"
+        document.addEventListener('DOMContentLoaded', () => {
+            const projectsGrid = document.getElementById('projectsGrid');
+            projectsGrid.addEventListener('mouseover', e => {
+                if (e.target.closest('.project-card')) {
+                e.target.closest('.project-card').querySelector('.project-overlay').style.opacity = '1';
+                }
+            });
+            projectsGrid.addEventListener('mouseout', e => {
+                if (e.target.closest('.project-card')) {
+                e.target.closest('.project-card').querySelector('.project-overlay').style.opacity = '0';
+                }
+            });
+        });
         
         // MODIFICATO: Logica di generazione filtri per escludere i progetti "foglia"
         function collectCategoryPaths(node, path, pathsSet) {
@@ -840,24 +900,7 @@
             filtersContainer.innerHTML = filtersHtml;
         }
 
-        function filterProjects(filter) {
-            lastActiveFilter = filter;
-            const projectsGrid = document.getElementById('projectsGrid');
-            
-            const filteredProjects = (filter === 'all')
-                ? allProjectsFlattened
-                : allProjectsFlattened.filter(p => p.categoryPath.startsWith(filter));
 
-            projectsGrid.innerHTML = filteredProjects.map(project => `
-                <div class="project-card fade-in" onclick="showProject(${project.id})">
-                    <img src="${project.images[0].src}" alt="${project.title}" loading="lazy">
-                </div>
-            `).join('');
-            
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.filter === filter);
-            });
-        }
 
         // --- Funzioni di Utilità e UI ---
 
