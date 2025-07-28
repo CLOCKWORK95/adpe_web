@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -13,13 +14,14 @@
         :root {
             --primary-color: #ffffff;
             --secondary-color: #f8f9fa;
-            --text-color: #2c3e50;
-            --accent-blue: #4a90e2; /* Colore dal logo: blu */
+            --text-color: rgb(8, 43, 46);
+            --autumn-blue: #4a90e2; /* Colore dal logo: blu */
+            --autumn-blue: #2da6c4; /* Colore autunnale: blu */
             --accent-orange: #d4693a; /* Colore dal logo: arancio */
             --accent-brown: #8b4513; /* Colore dal logo: marrone */
             --accent-green: #7fb069; /* Colore dal logo: verde */
             --accent-gold: #efb34b;
-            --border-color: #e1e5e9;
+            --border-color: rgb(45, 166, 196);
             --shadow-light: 0 4px 20px rgba(0,0,0,0.05);
             --shadow-medium: 0 8px 30px rgba(0,0,0,0.1);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -62,7 +64,7 @@
             transition: opacity var(--transition);
         }
         body::before { top: 5%; left: 5%; width: 400px; height: 400px; background-color: var(--accent-brown); border-radius: 50%; opacity: 0.2; animation: floatCircle 85s ease-in-out infinite; }
-        body::after { top: 40%; right: 10%; width: 300px; height: 400px; background-color: var(--accent-blue); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); opacity: 0.2; animation: floatTriangle 250s ease-in-out infinite; }
+        body::after { top: 40%; right: 10%; width: 300px; height: 400px; background-color: var(--autumn-blue); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); opacity: 0.2; animation: floatTriangle 250s ease-in-out infinite; }
         .geometric-square-background { top: 10%; left: 80%; width: 305px; height: 305px; background: var(--accent-green); opacity: 0.19; animation: floatGeometry 250s ease-in-out infinite reverse; border-radius: 2%; }
         .background-rectangle { bottom: 10%; left: 25%; width: 305px; height: 305px; background: var(--accent-gold); opacity: 0.19; animation: floatRectangle 250s ease-in-out infinite reverse; border-radius: 2%; }
 
@@ -77,7 +79,7 @@
         @keyframes floatRectangle { 0%, 100% { transform: rotate(0deg) translateX(-100px); } 33% { transform: rotate(120deg) translateY(-20px); } 66% { transform: rotate(240deg) translateY(10px); } }
 
         .container {
-            max-width: 1400px;
+            max-width: 1800px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -117,9 +119,9 @@
         .logo:hover { transform: scale(1.05); }
 
         .nav-menu { display: flex; gap: 2rem; list-style: none; flex-grow: 1; justify-content: center; }
-        .nav-link { color: var(--text-color); text-decoration: none; font-weight: 400; font-size: 1.3rem; transition: var(--transition); position: relative; cursor: pointer; letter-spacing: 1px; }
-        .nav-link:hover { color: var(--accent-blue); transform: translateY(-2px) scale(1.02); }
-        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--accent-blue); transition: var(--transition); }
+        .nav-link { color: var(--text-color); text-decoration: none; font-weight: 400; font-size: 1.7rem; transition: var(--transition); position: relative; cursor: pointer; letter-spacing: 1px; }
+        .nav-link:hover { color: var(--autumn-blue); transform: translateY(-2px) scale(1.02); }
+        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--autumn-blue); transition: var(--transition); }
         .nav-link:hover::after { width: 100%; }
 
         .hamburger { display: none; flex-direction: column; cursor: pointer; transition: var(--transition); }
@@ -130,17 +132,17 @@
         .language-group { gap: 0.8rem; margin-right: 0.5rem; }
 
         .header-social-link, .language-selector-item { color: var(--text-color); font-size: 1.3rem; transition: var(--transition); text-decoration: none; cursor: pointer; }
-        .header-social-link:hover, .language-selector-item:hover { color: var(--accent-blue); transform: scale(1.2); }
+        .header-social-link:hover, .language-selector-item:hover { color: var(--autumn-blue); transform: scale(1.2); }
         #themeToggle i { font-size: 1.3rem; color: var(--text-color); transition: color var(--transition); }
         body.dark-theme #themeToggle i { color: var(--accent-gold); }
         .language-selector-item { font-size: 0.9rem; font-weight: bold; text-transform: uppercase; }
-        .language-selector-item.active { color: var(--accent-blue); text-decoration: underline; }
+        .language-selector-item.active { color: var(--autumn-blue); text-decoration: underline; }
 
         /* Hero Section */
         .hero { min-height: calc(50vh - 80px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; padding-top: 4rem; padding-bottom: 2rem; scroll-margin-top: 85px; }
         .hero-content { position: relative; z-index: 1; animation: fadeInUp 0.6s ease-out; }
         .hero h1 { font-size: 6rem; font-weight: 300; margin-bottom: 2rem; letter-spacing: 8px; color: var(--text-color); }
-        .studio-logo { width: 130px; height: 130px; background: rgba(255, 255, 255, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 4rem; margin: 8rem auto; box-shadow: var(--shadow-medium); border: 3px solid var(--accent-blue); animation: logoFloat 6s ease-in-out infinite; overflow: hidden; transition: background var(--transition), border-color var(--transition), box-shadow var(--transition); }
+        .studio-logo { width: 130px; height: 130px; background: rgba(255, 255, 255, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 4rem; margin: 8rem auto; box-shadow: var(--shadow-medium); border: 3px solid var(--autumn-blue); animation: logoFloat 6s ease-in-out infinite; overflow: hidden; transition: background var(--transition), border-color var(--transition), box-shadow var(--transition); }
         body.dark-theme .studio-logo { background: rgba(44, 44, 44, 0.9); border: 3px solid var(--accent-gold); box-shadow: var(--shadow-medium); }
         .studio-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
         @keyframes logoFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
@@ -154,19 +156,27 @@
         .home-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            max-width: 1400px;
+            gap: 6.0rem;
+            max-width: 1800px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
         /* ✅ MANTENUTA LA GRIGLIA MASONRY PER PROGETTI */
         .projects-grid {
-            column-count: 2;
-            column-gap: 3.0rem;
+            column-count: 3;
+            column-gap: 6.0rem;
             max-width: 1300px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        .container,
+        .home-grid,
+        .projects-grid {
+            max-width: 92vw;     /* Occupa il 95% della larghezza viewport */
+            margin: 0 auto;      /* Mantiene centrato */
+            padding: 0 10px;     /* Riduce il padding laterale */
         }
 
         @media (max-width: 1024px) {
@@ -184,7 +194,7 @@
             box-shadow: var(--shadow-light);
             transition: var(--transition);
             cursor: pointer;
-            margin-bottom: 1.5rem; /* Spazio tra le card nella stessa colonna */
+            margin-bottom: 6.0rem; /* Spazio tra le card nella stessa colonna */
             display: inline-block; /* Necessario per il layout a colonne */
             width: 100%;
             animation: fadeInUp 0.6s ease-out forwards;
@@ -226,16 +236,16 @@
         }
 
         .filter-btn:hover {
-            background: var(--accent-blue);
+            background: var(--autumn-blue);
             color: var(--primary-color);
-            border-color: var(--accent-blue);
+            border-color: var(--autumn-blue);
             transform: translateY(-2px);
         }
 
         .filter-btn.active {
-            background: var(--accent-blue);
+            background: var(--autumn-blue);
             color: var(--primary-color);
-            border-color: var(--accent-blue);
+            border-color: var(--autumn-blue);
             font-weight: bold;
         }
 
@@ -252,7 +262,7 @@
         /* Project Detail Page */
         .project-detail { padding: 4rem 0; min-height: calc(100vh - 80px); display: flex; flex-direction: column; align-items: center; text-align: center; }
         .project-detail-title { font-size: 3.5rem; font-weight: 200; margin-bottom: 1rem; color: var(--text-color); letter-spacing: 1px; }
-        .project-detail-category { color: var(--accent-blue); font-size: 1.1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2rem; }
+        .project-detail-category { color: var(--autumn-blue); font-size: 1.1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2rem; }
         .project-detail-description { max-width: 800px; margin: 0 auto 3rem; font-size: 1.2rem; line-height: 1.8; text-align: center; opacity: 0.9; }
         .project-gallery { display: flex; flex-direction: column; max-width: 1200px; margin: 0 auto; width: 100%; padding: 0 20px; }
         .gallery-item { background: transparent; border-radius: 12px; overflow: hidden; box-shadow: none; transition: var(--transition); height: auto; min-height: 75vh; display: flex; align-items: center; padding: 1rem; margin-bottom: 2.5rem; }
@@ -280,11 +290,11 @@
         .contact-card { background: rgba(255, 255, 255, 0.8); padding: 2.5rem; border-radius: 12px; box-shadow: var(--shadow-light); transition: var(--transition); text-align: center; }
         body.dark-theme .contact-card { background: rgba(44, 44, 44, 0.8); }
         .contact-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow-medium); }
-        .contact-icon { font-size: 3rem; margin-bottom: 1.5rem; color: var(--accent-blue); }
+        .contact-icon { font-size: 3rem; margin-bottom: 1.5rem; color: var(--autumn-blue); }
         .contact-label { font-weight: 500; margin-bottom: 0.8rem; color: var(--text-color); font-size: 1.3rem; letter-spacing: 0.5px; }
         .contact-value { opacity: 0.9; line-height: 1.6; font-size: 1.1rem; word-wrap: break-word; }
         .contact-value a { color: var(--text-color); text-decoration: none; transition: var(--transition); }
-        .contact-value a:hover { color: var(--accent-blue); text-decoration: underline; }
+        .contact-value a:hover { color: var(--autumn-blue); text-decoration: underline; }
         .map-widget { position: relative; width: 100%; height: 200px; border-radius: 8px; overflow: hidden; margin-top: 1rem; margin-bottom: 1rem; }
         .map-widget iframe { width: 100%; height: 100%; display: block; }
         .map-overlay-link { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; font-size: 1.1rem; font-weight: bold; opacity: 0; transition: opacity 0.3s ease; z-index: 10; border-radius: 8px; cursor: pointer; }
@@ -296,7 +306,7 @@
         .image-modal-content { margin: auto; display: block; max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; box-shadow: var(--shadow-medium); transition: transform 0.3s ease; }
         .image-modal-content:hover { transform: scale(1.01); }
         .modal-close { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; z-index: 10000; }
-        .modal-close:hover, .modal-close:focus { color: var(--accent-blue); text-decoration: none; cursor: pointer; }
+        .modal-close:hover, .modal-close:focus { color: var(--autumn-blue); text-decoration: none; cursor: pointer; }
         .modal-prev, .modal-next { cursor: pointer; position: absolute; top: 50%; width: auto; padding: 16px; margin-top: -50px; color: white; font-weight: bold; font-size: 20px; transition: 0.6s ease; border-radius: 0 3px 3px 0; user-select: none; -webkit-user-select: none; background-color: rgba(0,0,0,0.5); z-index: 10000; }
         .modal-next { right: 0; border-radius: 3px 0 0 3px; }
         .modal-prev { left: 0; }
@@ -309,7 +319,7 @@
         body.dark-theme footer.scrolled { background: linear-gradient(to top, rgba(26, 26, 26, 0.9), transparent); }
         .footer-social-group { display: flex; gap: 1.5rem; padding: 0 20px; }
         .footer-social-link { color: var(--text-color); font-size: 1.5rem; transition: var(--transition); text-decoration: none; cursor: pointer; }
-        .footer-social-link:hover { color: var(--accent-blue); transform: scale(1.2); }
+        .footer-social-link:hover { color: var(--autumn-blue); transform: scale(1.2); }
 
         /* Animazioni */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -355,7 +365,7 @@
 
         /* Stili per il pulsante "Torna ai Progetti" */
         .back-to-projects-btn {
-            background: var(--accent-blue);
+            background: var(--autumn-blue);
             color: var(--primary-color);
             padding: 0.8rem 1.5rem;
             border: none;
