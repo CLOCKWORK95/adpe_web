@@ -1,30 +1,34 @@
 {
   "architettura": {
     "pubblica": {
-      "id": 1,
-      "title": "Pubblica",
-      "description": "Progetto pubblico al centro di Roma.",
-      "images": [
-        {
-          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/pubblica/edificio/image1.jpg",
-          "description": "Vista frontale"
-        },
-        {
-          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/pubblica/edificio/image2.jpg",
-          "description": "Corridoio interno con vista."
-        }
-      ]
+      "edificio": {
+        "id": 1,
+        "title": "Edificio",
+        "description": "Progetto pubblico al centro di Roma.",
+        "images": [
+          {
+            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/pubblica/edificio/image1.jpg",
+            "description": "Vista frontale"
+          },
+          {
+            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/pubblica/edificio/image2.jpg",
+            "description": "Corridoio interno con vista."
+          }
+        ]
+      }
     },
     "residenziale": {
-      "id": 2,
-      "title": "Residenziale",
-      "description": "Ristrutturazione di un appartamento al centro città.",
-      "images": [
-        {
-          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/residenziale/casa-di-gigi/image1.jpg",
-          "description": "Ingresso"
-        }
-      ]
+      "casa-di-gigi": {
+        "id": 2,
+        "title": "Casa Di Gigi",
+        "description": "Ristrutturazione di un appartamento al centro città.",
+        "images": [
+          {
+            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/residenziale/casa-di-gigi/image1.jpg",
+            "description": "Ingresso"
+          }
+        ]
+      }
     }
   },
   "design": {
