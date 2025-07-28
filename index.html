@@ -113,13 +113,13 @@
         }
 
         .header-left { display: flex; align-items: center; gap: 10px; }
-        .header-logo-small { height: 30px; width: 30px; border-radius: 50%; object-fit: cover; transition: var(--transition); }
+        .header-logo-small { height: 35px; width: 35px; border-radius: 50%; object-fit: cover; transition: var(--transition); }
         .header-logo-small:hover { transform: scale(1.1); }
-        .logo { font-size: 1.4rem; font-weight: 300; color: var(--text-color); text-decoration: none; letter-spacing: 2px; transition: var(--transition); }
+        .logo { font-size: 1.6rem; font-weight: 300; color: var(--text-color); text-decoration: none; letter-spacing: 2px; transition: var(--transition); }
         .logo:hover { transform: scale(1.05); }
 
-        .nav-menu { display: flex; gap: 2rem; list-style: none; flex-grow: 1; justify-content: center; }
-        .nav-link { color: var(--text-color); text-decoration: none; font-weight: 400; font-size: 1.7rem; transition: var(--transition); position: relative; cursor: pointer; letter-spacing: 1px; }
+        .nav-menu { display: flex; gap: 6rem; list-style: none; flex-grow: 1; justify-content: center; }
+        .nav-link { color: var(--text-color); text-decoration: none; font-weight: 400; font-size: 1.5rem; transition: var(--transition); position: relative; cursor: pointer; letter-spacing: 1px; }
         .nav-link:hover { color: var(--autumn-blue); transform: translateY(-2px) scale(1.02); }
         .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--autumn-blue); transition: var(--transition); }
         .nav-link:hover::after { width: 100%; }
@@ -133,17 +133,17 @@
 
         .header-social-link, .language-selector-item { color: var(--text-color); font-size: 1.3rem; transition: var(--transition); text-decoration: none; cursor: pointer; }
         .header-social-link:hover, .language-selector-item:hover { color: var(--autumn-blue); transform: scale(1.2); }
-        #themeToggle i { font-size: 1.3rem; color: var(--text-color); transition: color var(--transition); }
+        #themeToggle i { font-size: 1.4rem; color: var(--text-color); transition: color var(--transition); }
         body.dark-theme #themeToggle i { color: var(--accent-gold); }
-        .language-selector-item { font-size: 0.9rem; font-weight: bold; text-transform: uppercase; }
+        .language-selector-item { font-size: 1.0rem; font-weight: bold; text-transform: uppercase; }
         .language-selector-item.active { color: var(--autumn-blue); text-decoration: underline; }
 
         /* Hero Section */
         .hero { min-height: calc(50vh - 80px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; padding-top: 4rem; padding-bottom: 2rem; scroll-margin-top: 85px; }
         .hero-content { position: relative; z-index: 1; animation: fadeInUp 0.6s ease-out; }
         .hero h1 { font-size: 6rem; font-weight: 300; margin-bottom: 2rem; letter-spacing: 8px; color: var(--text-color); }
-        .studio-logo { width: 130px; height: 130px; background: rgba(255, 255, 255, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 4rem; margin: 8rem auto; box-shadow: var(--shadow-medium); border: 3px solid var(--autumn-blue); animation: logoFloat 6s ease-in-out infinite; overflow: hidden; transition: background var(--transition), border-color var(--transition), box-shadow var(--transition); }
-        body.dark-theme .studio-logo { background: rgba(44, 44, 44, 0.9); border: 3px solid var(--accent-gold); box-shadow: var(--shadow-medium); }
+        .studio-logo { width: 135px; height: 135px; background: rgba(255, 255, 255, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 4rem; margin: 8rem auto; box-shadow: var(--shadow-medium); border: 0px solid var(--autumn-blue); animation: logoFloat 6s ease-in-out infinite; overflow: hidden; transition: background var(--transition), border-color var(--transition), box-shadow var(--transition); }
+        body.dark-theme .studio-logo { background: rgba(44, 44, 44, 0.9); border: 0px solid var(--accent-gold); box-shadow: var(--shadow-medium); }
         .studio-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
         @keyframes logoFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
 
