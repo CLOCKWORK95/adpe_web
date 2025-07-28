@@ -406,6 +406,11 @@
             opacity: 1;
         }
         
+        /* Nuovo stile per allineare il pulsante "Torna ai Progetti" */
+        .project-detail .back-to-projects-btn {
+            margin-top: 6rem; /* Aggiunge un margine superiore per allinearlo visivamente */
+        }
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -675,6 +680,30 @@
                 if (e.key === 'ArrowLeft') showPrevImage(e);
                 if (e.key === 'ArrowRight') showNextImage(e);
             });
+
+            // Eventi Touch per Modal (Swipe)
+            const imageModal = document.getElementById('imageModal');
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            imageModal.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+            });
+
+            imageModal.addEventListener('touchmove', (e) => {
+                touchEndX = e.touches[0].clientX;
+            });
+
+            imageModal.addEventListener('touchend', () => {
+                if (touchStartX - touchEndX > 50) { // Swipe left
+                    showNextImage(event);
+                }
+                if (touchStartX - touchEndX < -50) { // Swipe right
+                    showPrevImage(event);
+                }
+                touchStartX = 0;
+                touchEndX = 0;
+            });
         }
 
         function setLanguage(lang, isInitialLoad = false) {
@@ -778,6 +807,13 @@
             document.getElementById('projectFilters').style.display = 'none';
             document.getElementById('projectsGrid').style.display = 'none';
 
+            // Nascondi il titolo "Progetti" quando si visualizza il dettaglio del progetto
+            const projectsSection = document.getElementById('projectsSection');
+            const sectionTitleElement = projectsSection.querySelector('.section-title');
+            if (sectionTitleElement) {
+                sectionTitleElement.style.display = 'none';
+            }
+
             const detailContainer = document.getElementById('singleProjectDetail');
             detailContainer.style.display = 'block';
             detailContainer.dataset.projectId = projectId;
@@ -797,6 +833,12 @@
                 <p class="project-detail-description">${project.description}</p>
                 <div class="project-gallery">${galleryHtml}</div>
             `;
+            
+            if (shouldScroll) {
+                setTimeout(() => {
+                    detailContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
         }
         
         function goBackToProjects() {
