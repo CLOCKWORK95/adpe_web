@@ -22,15 +22,15 @@
             --border-color: #e1e5e9;
             --shadow-light: 0 4px 20px rgba(0,0,0,0.05);
             --shadow-medium: 0 8px 30px rgba(0,0,0,0.1);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transizione più rapida per eleganza */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* Variabili CSS per il tema scuro */
         body.dark-theme {
-            --primary-color: #1a1a1a; /* Sfondo scuro principale */
-            --secondary-color: #2c2c2c; /* Sfondo scuro per elementi secondari/card */
-            --text-color: #f0f0f0; /* Testo chiaro */
-            --border-color: #444; /* Bordo scuro */
+            --primary-color: #1a1a1a;
+            --secondary-color: #2c2c2c;
+            --text-color: #f0f0f0;
+            --border-color: #444;
             --shadow-light: 0 4px 20px rgba(0,0,0,0.3);
             --shadow-medium: 0 8px 30px rgba(0,0,0,0.5);
         }
@@ -42,89 +42,35 @@
         }
 
         body {
-            font-family: 'Roboto Mono', monospace; /* Nuovo font applicato: Roboto Mono */
+            font-family: 'Roboto Mono', monospace;
             background: var(--primary-color);
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative; /* Necessario per posizionare gli elementi pseudo-fixed */
-            padding-top: 80px; /* Spazio per l'header fisso */
-            padding-bottom: 60px; /* Spazio per il footer fisso */
-            transition: background var(--transition), color var(--transition); /* Transizione per il cambio tema */
+            position: relative;
+            padding-top: 80px;
+            padding-bottom: 60px;
+            transition: background var(--transition), color var(--transition);
         }
 
         /* Background Geometric Elements */
-        body::before {
+        body::before, body::after, .geometric-square-background, .background-rectangle {
             content: '';
             position: fixed;
-            top: 5%;
-            left: 5%;
-            width: 400px;
-            height: 400px;
-            background-color: var(--accent-brown); /* Colore solido dal logo */
-            border-radius: 50%; /* Forma circolare */
-            opacity: 0.2; /* Leggera opacità per un effetto sottile */
             z-index: -1;
             pointer-events: none;
-            animation: floatCircle 85s ease-in-out infinite;
             transition: opacity var(--transition);
         }
+        body::before { top: 5%; left: 5%; width: 400px; height: 400px; background-color: var(--accent-brown); border-radius: 50%; opacity: 0.2; animation: floatCircle 85s ease-in-out infinite; }
+        body::after { top: 40%; right: 10%; width: 300px; height: 400px; background-color: var(--accent-blue); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); opacity: 0.2; animation: floatTriangle 250s ease-in-out infinite; }
+        .geometric-square-background { top: 10%; left: 80%; width: 305px; height: 305px; background: var(--accent-green); opacity: 0.19; animation: floatGeometry 250s ease-in-out infinite reverse; border-radius: 2%; }
+        .background-rectangle { bottom: 10%; left: 25%; width: 305px; height: 305px; background: var(--accent-gold); opacity: 0.19; animation: floatRectangle 250s ease-in-out infinite reverse; border-radius: 2%; }
 
-        body::after {
-            content: '';
-            position: fixed;
-            top: 40%;
-            right: 10%;
-            width: 300px;
-            height: 400px;
-            background-color: var(--accent-blue); /* Colore solido dal logo */
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Forma triangolare */
-            opacity: 0.2;
-            z-index: -1;
-            pointer-events: none;
-            animation: floatTriangle 250s ease-in-out infinite;
-            transition: opacity var(--transition);
-        }
-
-        .geometric-square-background {
-            position: fixed;
-            top: 10%;
-            left: 80%;
-            width: 305px;
-            height: 305px;
-            background: var(--accent-green);
-            opacity: 0.19;
-            z-index: -1;
-            pointer-events: none;
-            animation: floatGeometry 250s ease-in-out infinite reverse;
-            border-radius: 2%;
-            transition: opacity var(--transition);
-        }
-        
-        .background-rectangle {
-            position: fixed;
-            bottom: 10%;
-            left: 25%;
-            width: 305px;
-            height: 305px;
-            background: var(--accent-gold);
-            opacity: 0.19;
-            z-index: -1;
-            pointer-events: none;
-            animation: floatRectangle 250s ease-in-out infinite reverse;
-            border-radius: 2%;
-            transition: opacity var(--transition);
-        }
-
-        /* Regolazioni opacità elementi geometrici per tema scuro */
-        body.dark-theme::before,
-        body.dark-theme::after,
-        body.dark-theme .geometric-square-background,
-        body.dark-theme .background-rectangle {
+        body.dark-theme::before, body.dark-theme::after, body.dark-theme .geometric-square-background, body.dark-theme .background-rectangle {
             opacity: 0.1;
         }
 
-        /* Keyframes per le animazioni individuali */
+        /* Keyframes per le animazioni */
         @keyframes floatTriangle { 0%, 100% { transform: rotate(0deg) translateY(0px); } 33% { transform: rotate(120deg) translateY(-20px); } 66% { transform: rotate(240deg) translateY(10px); } }
         @keyframes floatCircle { 0%, 100% { transform: translate(0px, 0px) scale(1); } 40% { transform: translate(-30px, 50px) scale(1.02); } 70% { transform: translate(20px, -40px) scale(0.98); } }
         @keyframes floatGeometry { 0%, 100% { transform: rotate(0deg) translateX(20px); } 33% { transform: rotate(120deg) translateY(-20px); } 66% { transform: rotate(240deg) translateY(10px); } }
@@ -136,282 +82,81 @@
             padding: 0 20px;
         }
 
-        /* Header - Modificato per rimuovere l'ombra e rendere trasparente */
+        /* Header */
         header {
-            background: transparent; /* Sfondo completamente trasparente */
+            background: transparent;
             padding: 1rem 0;
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            border-bottom: none; /* Rimuovi il bordo inferiore */
-            box-shadow: none; /* Rimuovi l'ombra di default */
-            backdrop-filter: none; /* Rimuovi il blur di default */
-            transition: background 0.3s ease; /* Transizione più semplice */
-        }
-
-        /* Stili per l'header quando si scorre (tema chiaro) */
-        header.scrolled {
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), transparent); /* Gradiente leggero */
-            /* box-shadow: var(--shadow-light); Rimosso come richiesto */
-            backdrop-filter: none; /* Rimosso come richiesto */
-        }
-
-        /* Stili per l'header nel tema scuro (non scorrevole) */
-        body.dark-theme header {
-            background: transparent;
             border-bottom: none;
+            box-shadow: none;
             backdrop-filter: none;
+            transition: background 0.3s ease;
         }
 
-        /* Stili per l'header nel tema scuro quando si scorre */
+        header.scrolled {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), transparent);
+        }
+
         body.dark-theme header.scrolled {
-            background: linear-gradient(to bottom, rgba(26, 26, 26, 0.9), transparent); /* Gradiente scuro */
-            /* box-shadow: var(--shadow-light); Rimosso come richiesto */
-            backdrop-filter: none; /* Rimosso come richiesto */
+            background: linear-gradient(to bottom, rgba(26, 26, 26, 0.9), transparent);
         }
 
         nav {
             display: flex;
-            justify-content: space-between; /* Mantiene logo a sinistra e icone a destra */
+            justify-content: space-between;
             align-items: center;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .header-left { display: flex; align-items: center; gap: 10px; }
+        .header-logo-small { height: 30px; width: 30px; border-radius: 50%; object-fit: cover; transition: var(--transition); }
+        .header-logo-small:hover { transform: scale(1.1); }
+        .logo { font-size: 1.4rem; font-weight: 300; color: var(--text-color); text-decoration: none; letter-spacing: 2px; transition: var(--transition); }
+        .logo:hover { transform: scale(1.05); }
 
-        .header-logo-small {
-            height: 30px;
-            width: 30px;
-            border-radius: 50%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
+        .nav-menu { display: flex; gap: 2rem; list-style: none; flex-grow: 1; justify-content: center; }
+        .nav-link { color: var(--text-color); text-decoration: none; font-weight: 400; font-size: 1.3rem; transition: var(--transition); position: relative; cursor: pointer; letter-spacing: 1px; }
+        .nav-link:hover { color: var(--accent-blue); transform: translateY(-2px) scale(1.02); }
+        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--accent-blue); transition: var(--transition); }
+        .nav-link:hover::after { width: 100%; }
 
-        .header-logo-small:hover {
-            transform: scale(1.1);
-        }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; transition: var(--transition); }
+        .hamburger span { width: 25px; height: 2px; background: var(--text-color); margin: 3px 0; transition: var(--transition); }
 
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 300;
-            color: var(--text-color);
-            text-decoration: none;
-            letter-spacing: 2px;
-            transition: var(--transition);
-        }
+        .header-right-icons { display: flex; align-items: center; gap: 1.5rem; }
+        .language-group, .theme-group { display: flex; align-items: center; }
+        .language-group { gap: 0.8rem; margin-right: 0.5rem; }
 
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            flex-grow: 1; /* Permette al menu di occupare lo spazio disponibile */
-            justify-content: center; /* Centra le voci del menu all'interno del suo spazio */
-        }
-
-        .nav-link {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 400; /* Leggermente più spesso */
-            font-size: 1.3rem; /* Aumentato significativamente il font */
-            transition: var(--transition);
-            position: relative;
-            cursor: pointer;
-            letter-spacing: 1px;
-        }
-
-        .nav-link:hover {
-            color: var(--accent-blue);
-            transform: translateY(-2px) scale(1.02);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-blue);
-            transition: var(--transition);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 2px;
-            background: var(--text-color);
-            margin: 3px 0;
-            transition: var(--transition);
-        }
-
-        .header-right-icons {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem; /* Ridotto il gap, ora che i social non ci sono */
-        }
-
-        .language-group,
-        .theme-group { /* Rimosso .social-group da qui */
-            display: flex;
-            align-items: center;
-        }
-
-        .language-group {
-            gap: 0.8rem; /* Leggermente aumentato il gap all'interno del gruppo lingua */
-            margin-right: 0.5rem; /* Aggiunto un piccolo margine a destra per separare dal toggle tema */
-        }
-        /* Rimosso .social-group styles da qui */
-
-        .header-social-link,
-        .language-selector-item {
-            color: var(--text-color);
-            font-size: 1.3rem;
-            transition: var(--transition);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .header-social-link:hover,
-        .language-selector-item:hover {
-            color: var(--accent-blue);
-            transform: scale(1.2);
-        }
-
-        #themeToggle i {
-            font-size: 1.3rem;
-            color: var(--text-color);
-            transition: color var(--transition);
-        }
-
-        body.dark-theme #themeToggle i {
-            color: var(--accent-gold);
-        }
-
-        .language-selector-item {
-            font-size: 0.9rem;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .language-selector-item.active {
-            color: var(--accent-blue);
-            text-decoration: underline;
-        }
-
-        /* Main Content */
-        main {}
+        .header-social-link, .language-selector-item { color: var(--text-color); font-size: 1.3rem; transition: var(--transition); text-decoration: none; cursor: pointer; }
+        .header-social-link:hover, .language-selector-item:hover { color: var(--accent-blue); transform: scale(1.2); }
+        #themeToggle i { font-size: 1.3rem; color: var(--text-color); transition: color var(--transition); }
+        body.dark-theme #themeToggle i { color: var(--accent-gold); }
+        .language-selector-item { font-size: 0.9rem; font-weight: bold; text-transform: uppercase; }
+        .language-selector-item.active { color: var(--accent-blue); text-decoration: underline; }
 
         /* Hero Section */
-        .hero {
-            min-height: calc(50vh - 80px); /* Altezza minima per la sezione hero */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 4rem; /* Aggiunto padding per spazio dall'header */
-            padding-bottom: 2rem; /* Aggiunto padding per spazio dalla sezione successiva */
-            scroll-margin-top: 85px; /* Spazio per l'header fisso */
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        .hero h1 {
-            font-size: 6rem; /* Aumentato il font */
-            font-weight: 300;
-            margin-bottom: 2rem;
-            letter-spacing: 8px;
-            color: var(--text-color);
-        }
-
-        .studio-logo {
-            width: 130px; /* Ridotto leggermente il logo */
-            height: 130px; /* Ridotto leggermente il logo */
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            margin: 8rem auto;
-            box-shadow: var(--shadow-medium);
-            border: 3px solid var(--accent-blue);
-            animation: logoFloat 6s ease-in-out infinite;
-            overflow: hidden;
-            transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
-        }
-
-        body.dark-theme .studio-logo {
-            background: rgba(44, 44, 44, 0.9);
-            border: 3px solid var(--accent-gold);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .studio-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        /* Rimosso .hero .subtitle */
-        /* Rimosso .scroll-indicator */
-
+        .hero { min-height: calc(50vh - 80px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; padding-top: 4rem; padding-bottom: 2rem; scroll-margin-top: 85px; }
+        .hero-content { position: relative; z-index: 1; animation: fadeInUp 0.6s ease-out; }
+        .hero h1 { font-size: 6rem; font-weight: 300; margin-bottom: 2rem; letter-spacing: 8px; color: var(--text-color); }
+        .studio-logo { width: 130px; height: 130px; background: rgba(255, 255, 255, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 4rem; margin: 8rem auto; box-shadow: var(--shadow-medium); border: 3px solid var(--accent-blue); animation: logoFloat 6s ease-in-out infinite; overflow: hidden; transition: background var(--transition), border-color var(--transition), box-shadow var(--transition); }
+        body.dark-theme .studio-logo { background: rgba(44, 44, 44, 0.9); border: 3px solid var(--accent-gold); box-shadow: var(--shadow-medium); }
+        .studio-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
         @keyframes logoFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
 
         /* Home Projects Section */
-        .home-projects {
-            padding: 4rem 0;
-            background: linear-gradient(180deg, rgba(248, 249, 250, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
-            transition: background var(--transition);
-            scroll-margin-top: 85px; /* Spazio per l'header fisso */
-        }
-
-        body.dark-theme .home-projects {
-            background: linear-gradient(180deg, rgba(44, 44, 44, 0.3) 0%, rgba(26, 26, 26, 0.1) 100%);
-        }
-
-        .home-projects h2 {
-            text-align: center;
-            font-size: 3rem; /* Aumentato il font */
-            font-weight: 200;
-            margin-bottom: 3rem;
-            color: var(--text-color);
-            letter-spacing: 2px;
-        }
+        .home-projects { padding: 4rem 0; background: linear-gradient(180deg, rgba(248, 249, 250, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%); transition: background var(--transition); scroll-margin-top: 85px; }
+        body.dark-theme .home-projects { background: linear-gradient(180deg, rgba(44, 44, 44, 0.3) 0%, rgba(26, 26, 26, 0.1) 100%); }
+        .home-projects h2 { text-align: center; font-size: 3rem; font-weight: 200; margin-bottom: 3rem; color: var(--text-color); letter-spacing: 2px; }
         
-        /* Modificato: Griglia per i progetti in mosaico */
+        /* Griglia Masonry con column-count */
         .projects-grid {
-            column-count: 3; /* Numero di colonne desiderato su desktop */
-            column-gap: 1.5rem; /* Spazio tra le colonne */
+            column-count: 3; /* Numero di colonne su desktop */
+            column-gap: 1.5rem;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px; /* Aggiunto padding per i bordi */
+            padding: 0 20px;
         }
 
         @media (max-width: 1024px) {
@@ -426,10 +171,10 @@
             }
         }
 
-        /* MODIFICATO: Card del progetto per il mosaico e per la home */
+        /* Card per il layout Masonry */
         .project-card {
             background: var(--secondary-color);
-            border-radius: 0px; /* Bordi non stondati */
+            border-radius: 0px;
             overflow: hidden;
             box-shadow: var(--shadow-light);
             transition: var(--transition);
@@ -438,8 +183,6 @@
             display: inline-block; /* Necessario per il layout a colonne */
             width: 100%;
             animation: fadeInUp 0.6s ease-out forwards;
-            /* Rimosso flex-direction e justify-content */
-            /* Rimosso height: 100% */
         }
 
         body.dark-theme .project-card {
@@ -452,41 +195,29 @@
             box-shadow: var(--shadow-medium);
         }
         
-        /* Rimosso .project-image e .category-image styles */
-        /* L'immagine ora è direttamente nel .project-card */
         .project-card img {
             width: 100%;
-            height: auto; /* Mantiene le proporzioni originali! */
+            height: auto; /* Mantiene le proporzioni originali */
             display: block;
-            border-bottom: none; /* Rimosso il bordo inferiore */
             transition: transform 0.3s ease;
-            /* Rimosso object-fit, display, align-items, justify-content */
         }
         
         .project-card:hover img {
             transform: scale(1.05);
-            /* Rimosso scaleX */
         }
 
-        /* Rimosso .project-content e .category-content styles */
-        /* Il testo descrittivo non è più visibile nella preview */
-
-        /* Rimosso .project-category e .category-label styles */
-        /* Rimosso .project-title e .category-title styles */
-        /* Rimosso .project-description styles */
-
-        /* NUOVO: Stili per i bottoni del filtro */
+        /* Stili per i bottoni del filtro */
         .filter-btn {
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-color);
-            padding: 0.8rem 1.5rem; /* Aumentato il padding */
-            margin: 0.5rem; /* Aumentato il margine */
-            border-radius: 25px; /* Bordi più arrotondati per i bottoni */
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem;
+            border-radius: 25px;
             cursor: pointer;
             transition: var(--transition);
-            font-weight: 500; /* Reso più audace */
-            font-size: 1.1rem; /* Aumentato il font */
+            font-weight: 500;
+            font-size: 1.1rem;
         }
 
         .filter-btn:hover {
@@ -503,11 +234,9 @@
             font-weight: bold;
         }
 
-
-        /* Stile per il titolo della sezione quando si mostra l'elenco dei progetti */
         .projects-section .section-title {
             text-align: center;
-            font-size: 3rem; /* Aumentato il font */
+            font-size: 3rem;
             font-weight: 200;
             margin-bottom: 2rem;
             color: var(--text-color);
@@ -515,446 +244,67 @@
             animation: fadeInUp 0.6s ease-out forwards;
         }
 
-
         /* Project Detail Page */
-        .project-detail {
-            padding: 4rem 0;
-            min-height: calc(100vh - 80px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .project-detail-title {
-            font-size: 3.5rem; /* Aumentato il font */
-            font-weight: 200;
-            margin-bottom: 1rem;
-            color: var(--text-color);
-            letter-spacing: 1px;
-        }
-
-        .project-detail-category {
-            color: var(--accent-blue);
-            font-size: 1.1rem; /* Aumentato il font */
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 2rem;
-        }
-
-        .project-detail-description {
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            font-size: 1.2rem; /* Aumentato il font */
-            line-height: 1.8;
-            text-align: center;
-            opacity: 0.9;
-        }
-
-        .project-gallery {
-            display: flex;
-            flex-direction: column;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-            padding: 0 20px;
-        }
-
-        .gallery-item {
-            background: transparent;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: none;
-            transition: var(--transition);
-            height: auto;
-            min-height: 75vh;
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .gallery-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-5px) scale(1.01);
-        }
-
-        .gallery-item:nth-child(odd) {
-            flex-direction: row;
-            margin-right: auto;
-            text-align: left;
-        }
-
-        .gallery-item:nth-child(even) {
-            flex-direction: row-reverse;
-            margin-left: auto;
-            text-align: right;
-        }
-
-        .gallery-item img {
-            max-height: 70vh;
-            width: auto;
-            max-width: 55%;
-            height: auto;
-            object-fit: contain;
-            display: block;
-            flex-shrink: 0;
-            padding: 0.5rem;
-            border-radius: 8px;
-            box-shadow: var(--shadow-light);
-            cursor: pointer;
-        }
-
-        .gallery-description {
-            flex-grow: 1;
-            padding: 1rem 2rem;
-            margin: 0;
-            max-width: 45%;
-            line-height: 1.7;
-            font-size: 1.15rem; /* Aumentato il font */
-            text-align: inherit;
-            color: var(--text-color);
-            opacity: 0.9;
-            font-style: normal;
-        }
-
-        /* Breadcrumb - Rimosso */
-        /* .breadcrumb { ... } */
+        .project-detail { padding: 4rem 0; min-height: calc(100vh - 80px); display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .project-detail-title { font-size: 3.5rem; font-weight: 200; margin-bottom: 1rem; color: var(--text-color); letter-spacing: 1px; }
+        .project-detail-category { color: var(--accent-blue); font-size: 1.1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2rem; }
+        .project-detail-description { max-width: 800px; margin: 0 auto 3rem; font-size: 1.2rem; line-height: 1.8; text-align: center; opacity: 0.9; }
+        .project-gallery { display: flex; flex-direction: column; max-width: 1200px; margin: 0 auto; width: 100%; padding: 0 20px; }
+        .gallery-item { background: transparent; border-radius: 12px; overflow: hidden; box-shadow: none; transition: var(--transition); height: auto; min-height: 75vh; display: flex; align-items: center; padding: 1rem; margin-bottom: 2.5rem; }
+        .gallery-item:last-child { margin-bottom: 0; }
+        .gallery-item:hover { transform: translateY(-5px) scale(1.01); }
+        .gallery-item:nth-child(odd) { flex-direction: row; margin-right: auto; text-align: left; }
+        .gallery-item:nth-child(even) { flex-direction: row-reverse; margin-left: auto; text-align: right; }
+        .gallery-item img { max-height: 70vh; width: auto; max-width: 55%; height: auto; object-fit: contain; display: block; flex-shrink: 0; padding: 0.5rem; border-radius: 8px; box-shadow: var(--shadow-light); cursor: pointer; }
+        .gallery-description { flex-grow: 1; padding: 1rem 2rem; margin: 0; max-width: 45%; line-height: 1.7; font-size: 1.15rem; text-align: inherit; color: var(--text-color); opacity: 0.9; font-style: normal; }
 
         /* Sezioni "Chi Siamo" e "Contatti" */
-        .projects-section, .about-section, .contact-section { /* Modificato per includere projects-section */
-            padding: 4rem 0;
-            min-height: calc(100vh - 80px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            scroll-margin-top: 85px; /* Spazio per l'header fisso */
-        }
-
-        .about-content, .contact-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .about-title, .contact-title {
-            font-size: 3.5rem; /* Aumentato il font */
-            font-weight: 200;
-            margin-bottom: 2rem;
-            color: var(--text-color);
-            letter-spacing: 1px;
-            /* Aggiunto per coerenza con projects-section .section-title */
-            animation: fadeInUp 0.6s ease-out forwards; 
-        }
-
-        .about-text {
-            font-size: 1.3rem; /* Aumentato il font */
-            line-height: 1.8;
-            margin-bottom: 3rem;
-            opacity: 0.9;
-        }
-
-        .about-image {
-            max-width: 40%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: var(--shadow-medium);
-            margin: 2rem auto 3rem auto;
-            display: block;
-        }
-
-
-        .about-highlights {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .highlight-card {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-            transition: var(--transition);
-            text-align: center;
-        }
-
-        body.dark-theme .highlight-card {
-            background: rgba(44, 44, 44, 0.8);
-        }
-
-        .highlight-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .highlight-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            display: block;
-            color: var(--accent-orange);
-        }
-
-        .highlight-title {
-            font-size: 1.6rem; /* Aumentato il font */
-            font-weight: 500;
-            margin-bottom: 1rem;
-            color: var(--text-color);
-            letter-spacing: 0.5px;
-        }
-
-        .highlight-description {
-            font-size: 1.05rem; /* Aumentato il font */
-            color: var(--text-color);
-            opacity: 0.8;
-        }
-
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .contact-card {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-            transition: var(--transition);
-            text-align: center;
-        }
-
-        body.dark-theme .contact-card {
-            background: rgba(44, 44, 44, 0.8);
-        }
-
-        .contact-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .contact-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent-blue);
-        }
-
-        .contact-label {
-            font-weight: 500;
-            margin-bottom: 0.8rem;
-            color: var(--text-color);
-            font-size: 1.3rem; /* Aumentato il font */
-            letter-spacing: 0.5px;
-        }
-
-        .contact-value {
-            opacity: 0.9;
-            line-height: 1.6;
-            font-size: 1.1rem; /* Aumentato il font */
-            word-wrap: break-word;
-        }
-
-        .contact-value a {
-            color: var(--text-color);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .contact-value a:hover {
-            color: var(--accent-blue);
-            text-decoration: underline;
-        }
-
-        .map-widget {
-            position: relative;
-            width: 100%;
-            height: 200px;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .map-widget iframe {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        .map-overlay-link {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 10;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .map-widget:hover .map-overlay-link {
-            opacity: 1;
-        }
-
-        .map-text-overlay {
-            padding: 10px 20px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
+        .projects-section, .about-section, .contact-section { padding: 4rem 0; min-height: calc(100vh - 80px); display: flex; flex-direction: column; align-items: center; text-align: center; scroll-margin-top: 85px; }
+        .about-content, .contact-content { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .about-title, .contact-title { font-size: 3.5rem; font-weight: 200; margin-bottom: 2rem; color: var(--text-color); letter-spacing: 1px; animation: fadeInUp 0.6s ease-out forwards; }
+        .about-text { font-size: 1.3rem; line-height: 1.8; margin-bottom: 3rem; opacity: 0.9; }
+        .about-image { max-width: 40%; height: auto; border-radius: 12px; box-shadow: var(--shadow-medium); margin: 2rem auto 3rem auto; display: block; }
+        .about-highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .highlight-card { background: rgba(255, 255, 255, 0.8); padding: 2.5rem; border-radius: 12px; box-shadow: var(--shadow-light); transition: var(--transition); text-align: center; }
+        body.dark-theme .highlight-card { background: rgba(44, 44, 44, 0.8); }
+        .highlight-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow-medium); }
+        .highlight-icon { font-size: 3.5rem; margin-bottom: 1.5rem; display: block; color: var(--accent-orange); }
+        .highlight-title { font-size: 1.6rem; font-weight: 500; margin-bottom: 1rem; color: var(--text-color); letter-spacing: 0.5px; }
+        .highlight-description { font-size: 1.05rem; color: var(--text-color); opacity: 0.8; }
+        .contact-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .contact-card { background: rgba(255, 255, 255, 0.8); padding: 2.5rem; border-radius: 12px; box-shadow: var(--shadow-light); transition: var(--transition); text-align: center; }
+        body.dark-theme .contact-card { background: rgba(44, 44, 44, 0.8); }
+        .contact-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow-medium); }
+        .contact-icon { font-size: 3rem; margin-bottom: 1.5rem; color: var(--accent-blue); }
+        .contact-label { font-weight: 500; margin-bottom: 0.8rem; color: var(--text-color); font-size: 1.3rem; letter-spacing: 0.5px; }
+        .contact-value { opacity: 0.9; line-height: 1.6; font-size: 1.1rem; word-wrap: break-word; }
+        .contact-value a { color: var(--text-color); text-decoration: none; transition: var(--transition); }
+        .contact-value a:hover { color: var(--accent-blue); text-decoration: underline; }
+        .map-widget { position: relative; width: 100%; height: 200px; border-radius: 8px; overflow: hidden; margin-top: 1rem; margin-bottom: 1rem; }
+        .map-widget iframe { width: 100%; height: 100%; display: block; }
+        .map-overlay-link { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; font-size: 1.1rem; font-weight: bold; opacity: 0; transition: opacity 0.3s ease; z-index: 10; border-radius: 8px; cursor: pointer; }
+        .map-widget:hover .map-overlay-link { opacity: 1; }
+        .map-text-overlay { padding: 10px 20px; background: rgba(0, 0, 0, 0.7); border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 
         /* Modal per immagine a schermo intero */
-        .image-modal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            align-items: center;
-            justify-content: center;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .image-modal-content {
-            margin: auto;
-            display: block;
-            max-width: 90vw;
-            max-height: 90vh;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: var(--shadow-medium);
-            transition: transform 0.3s ease;
-        }
-
-        .image-modal-content:hover {
-            transform: scale(1.01);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-            z-index: 10000;
-        }
-
-        .modal-close:hover,
-        .modal-close:focus {
-            color: var(--accent-blue);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .modal-prev, .modal-next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            padding: 16px;
-            margin-top: -50px;
-            color: white;
-            font-weight: bold;
-            font-size: 20px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
-            user-select: none;
-            -webkit-user-select: none;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 10000;
-        }
-
-        .modal-next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
-
-        .modal-prev {
-            left: 0;
-        }
-
-        .modal-prev:hover, .modal-next:hover {
-            background-color: rgba(0,0,0,0.8);
-        }
+        .image-modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); align-items: center; justify-content: center; animation: fadeIn 0.3s ease-out; }
+        .image-modal-content { margin: auto; display: block; max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; box-shadow: var(--shadow-medium); transition: transform 0.3s ease; }
+        .image-modal-content:hover { transform: scale(1.01); }
+        .modal-close { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; z-index: 10000; }
+        .modal-close:hover, .modal-close:focus { color: var(--accent-blue); text-decoration: none; cursor: pointer; }
+        .modal-prev, .modal-next { cursor: pointer; position: absolute; top: 50%; width: auto; padding: 16px; margin-top: -50px; color: white; font-weight: bold; font-size: 20px; transition: 0.6s ease; border-radius: 0 3px 3px 0; user-select: none; -webkit-user-select: none; background-color: rgba(0,0,0,0.5); z-index: 10000; }
+        .modal-next { right: 0; border-radius: 3px 0 0 3px; }
+        .modal-prev { left: 0; }
+        .modal-prev:hover, .modal-next:hover { background-color: rgba(0,0,0,0.8); }
 
         /* Footer Styles */
-        footer {
-            background: transparent; /* Sfondo trasparente */
-            padding: 1rem 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            z-index: 999; /* Appena sotto l'header */
-            border-top: none; /* Rimuovi il bordo superiore */
-            box-shadow: none; /* Rimuovi l'ombra di default */
-            backdrop-filter: none; /* Rimuovi il blur di default */
-            transition: background 0.3s ease;
-            display: flex;
-            justify-content: center; /* Centra il contenuto del footer */
-            align-items: center;
-        }
-
-        /* Stili per il footer quando si scorre (tema chiaro) - opzionale, ma per coerenza */
-        footer.scrolled {
-            background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent); /* Gradiente leggero */
-        }
-
-        /* Stili per il footer nel tema scuro (non scorrevole) */
-        body.dark-theme footer {
-            background: transparent;
-            border-top: none;
-            backdrop-filter: none;
-        }
-
-        /* Stili per il footer nel tema scuro quando si scorre */
-        body.dark-theme footer.scrolled {
-            background: linear-gradient(to top, rgba(26, 26, 26, 0.9), transparent); /* Gradiente scuro */
-        }
-
-        .footer-social-group {
-            display: flex;
-            gap: 1.5rem; /* Spazio tra le icone social nel footer */
-            padding: 0 20px; /* Padding per non attaccarsi ai bordi su schermi piccoli */
-        }
-
-        .footer-social-link {
-            color: var(--text-color);
-            font-size: 1.5rem; /* Dimensione maggiore per le icone nel footer */
-            transition: var(--transition);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .footer-social-link:hover {
-            color: var(--accent-blue);
-            transform: scale(1.2);
-        }
-
+        footer { background: transparent; padding: 1rem 0; position: fixed; bottom: 0; width: 100%; z-index: 999; border-top: none; box-shadow: none; backdrop-filter: none; transition: background 0.3s ease; display: flex; justify-content: center; align-items: center; }
+        footer.scrolled { background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent); }
+        body.dark-theme footer { background: transparent; border-top: none; backdrop-filter: none; }
+        body.dark-theme footer.scrolled { background: linear-gradient(to top, rgba(26, 26, 26, 0.9), transparent); }
+        .footer-social-group { display: flex; gap: 1.5rem; padding: 0 20px; }
+        .footer-social-link { color: var(--text-color); font-size: 1.5rem; transition: var(--transition); text-decoration: none; cursor: pointer; }
+        .footer-social-link:hover { color: var(--accent-blue); transform: scale(1.2); }
 
         /* Animazioni */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -963,123 +313,36 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-menu {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                padding-top: 3rem;
-                transition: var(--transition);
-            }
-
-            body.dark-theme .nav-menu {
-                background: rgba(26, 26, 26, 0.98);
-            }
-
-            .nav-menu.active {
-                left: 0;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
+            .nav-menu { position: fixed; top: 80px; left: -100%; width: 100%; height: calc(100vh - 80px); background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 3rem; transition: var(--transition); }
+            body.dark-theme .nav-menu { background: rgba(26, 26, 26, 0.98); }
+            .nav-menu.active { left: 0; }
+            .hamburger { display: flex; }
             .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
             .hamburger.active span:nth-child(2) { opacity: 0; }
             .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
-
-            .hero h1 {
-                font-size: 3rem; /* Adattato per mobile */
-            }
-
-            /* Rimosso .hero .subtitle per mobile */
-            .nav-link {
-                font-size: 1.1rem; /* Adattato per mobile */
-            }
-
-            .project-description {
-                font-size: 1rem; /* Adattato per mobile */
-            }
-
-            .about-highlights,
-            .contact-info {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
+            .hero h1 { font-size: 3rem; }
+            .nav-link { font-size: 1.1rem; }
+            .project-description { font-size: 1rem; }
+            .about-highlights, .contact-info { grid-template-columns: 1fr; gap: 1.5rem; }
             .project-detail-title { font-size: 2.5rem; }
-            .project-detail-description { font-size: 1.1rem; } /* Adattato per mobile */
-            /* Rimosso .scroll-indicator per mobile */
-
-            .header-right-icons {
-                flex-wrap: wrap;
-                justify-content: flex-end;
-                gap: 1rem;
-            }
-
-            .gallery-item {
-                flex-direction: column !important;
-                margin-left: auto !important;
-                margin-right: auto !important;
-                text-align: center !important;
-                min-height: auto;
-                padding: 0.5rem;
-                margin-bottom: 2rem;
-            }
-
-            .gallery-item img {
-                max-width: 90%;
-                max-height: 50vh;
-                margin-bottom: 1rem;
-                padding: 0;
-            }
-
-            .gallery-description {
-                max-width: 90%;
-                padding: 0.5rem 1rem;
-                font-size: 1.05rem; /* Adattato per mobile */
-            }
-
+            .project-detail-description { font-size: 1.1rem; }
+            .header-right-icons { flex-wrap: wrap; justify-content: flex-end; gap: 1rem; }
+            .gallery-item { flex-direction: column !important; margin-left: auto !important; margin-right: auto !important; text-align: center !important; min-height: auto; padding: 0.5rem; margin-bottom: 2rem; }
+            .gallery-item img { max-width: 90%; max-height: 50vh; margin-bottom: 1rem; padding: 0; }
+            .gallery-description { max-width: 90%; padding: 0.5rem 1rem; font-size: 1.05rem; }
             .modal-close { font-size: 30px; top: 15px; right: 20px; }
             .modal-prev, .modal-next { padding: 10px; font-size: 16px; margin-top: -30px; }
-
-            .home-projects h2,
-            .projects-section .section-title,
-            .about-title,
-            .contact-title {
-                font-size: 2.5rem; /* Adattato per mobile */
-            }
-
-            .highlight-title {
-                font-size: 1.4rem; /* Adattato per mobile */
-            }
-
-            .highlight-description {
-                font-size: 1rem; /* Adattato per mobile */
-            }
-
-            .contact-label {
-                font-size: 1.1rem; /* Adattato per mobile */
-            }
-
-            .contact-value {
-                font-size: 1.05rem; /* Adattato per mobile */
-            }
-
-            .footer-social-group {
-                gap: 1rem; /* Ridotto il gap per mobile nel footer */
-            }
+            .home-projects h2, .projects-section .section-title, .about-title, .contact-title { font-size: 2.5rem; }
+            .highlight-title { font-size: 1.4rem; }
+            .highlight-description { font-size: 1rem; }
+            .contact-label { font-size: 1.1rem; }
+            .contact-value { font-size: 1.05rem; }
+            .footer-social-group { gap: 1rem; }
         }
 
         @media (max-width: 480px) {
             .container { padding: 0 15px; }
-            .hero h1 { font-size: 2.5rem; } /* Ulteriore riduzione per schermi molto piccoli */
+            .hero h1 { font-size: 2.5rem; }
             .projects-grid { padding: 0 1rem; }
             .project-detail-title { font-size: 2rem; }
             .about-title, .contact-title { font-size: 2rem; }
@@ -1096,7 +359,7 @@
             font-weight: 500;
             font-size: 1.1rem;
             transition: var(--transition);
-            margin-bottom: 2rem; /* Spazio sotto il pulsante */
+            margin-bottom: 2rem;
         }
 
         .back-to-projects-btn:hover {
@@ -1113,13 +376,11 @@
     <header>
         <nav class="container">
             <div class="header-left">
-                <!-- Aggiornato src per puntare a S3 -->
                 <img src="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="ADPE Logo" class="header-logo-small">
                 <a href="#" class="logo" onclick="showHome()">ADPE</a>
             </div>
             <ul class="nav-menu">
                 <li><a href="#" class="nav-link" data-lang-key="homeLink" onclick="showHome()">Home</a></li>
-                <!-- MODIFICATO: Onclick per la nuova sezione progetti -->
                 <li><a href="#" class="nav-link" data-lang-key="projectsLink" onclick="showProjectsSection()">Progetti</a></li>
                 <li><a href="#" class="nav-link" data-lang-key="aboutLink" onclick="showAbout()">Chi Siamo</a></li>
                 <li><a href="#" class="nav-link" data-lang-key="contactLink" onclick="showContact()">Contatti</a></li>
@@ -1135,7 +396,6 @@
                         <i class="fas fa-lightbulb"></i>
                     </a>
                 </div>
-                <!-- Rimosso il gruppo social dalla navigazione principale -->
             </div>
             <div class="hamburger">
                 <span></span>
@@ -1149,12 +409,9 @@
         <section class="hero" id="hero">
             <div class="hero-content">
                 <div class="studio-logo">
-                    <!-- Aggiornato src per puntare a S3 -->
                     <img src="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="Studio Logo">
                 </div>
-                <!-- Rimosso il sottotitolo come richiesto -->
             </div>
-            <!-- Rimosso il pulsante "Scopri i Progetti" come richiesto -->
         </section>
 
         <section class="home-projects" id="homeProjects">
@@ -1165,16 +422,7 @@
             </div>
         </section>
 
-        <!-- Breadcrumb rimosso come richiesto -->
-        <!-- <section class="breadcrumb" id="breadcrumb" style="display: none;">
-            <div class="container">
-                <nav class="breadcrumb-nav" id="breadcrumbNav">
-                </nav>
-            </div>
-        </section> -->
-
         <section class="container projects-section" id="projectsSection" style="display: none;">
-            <!-- NUOVO: Contenitore per i filtri -->
             <div class="project-filters" id="projectFilters" style="text-align: center; margin-bottom: 2.5rem;">
                 <!-- I bottoni del filtro saranno generati da JS -->
             </div>
@@ -1185,14 +433,12 @@
 
             <div class="project-detail" id="singleProjectDetail" style="display: none;">
                 <!-- Dettaglio singolo progetto generato dinamicamente -->
-                <!-- Il pulsante "Torna ai Progetti" verrà inserito qui da JS -->
             </div>
         </section>
 
         <section class="about-section" id="aboutSection" style="display: none;">
             <div class="container about-content">
                 <h2 class="about-title" data-lang-key="aboutTitle">Chi Siamo</h2>
-                <!-- Aggiornato src per puntare a S3 -->
                 <img src="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/studioadpe.jpg" alt="Immagine dello Studio" class="about-image">
                 <p class="about-text" data-lang-key="aboutText">
                     Lo Studio ADPE, fondato dall'architetto Adriano Pernazza, è una realtà dinamica e innovativa nel panorama dell'architettura e del design. Da anni, ci dedichiamo alla progettazione di spazi che combinano estetica, funzionalità e sostenibilità. La nostra filosofia si basa sull'ascolto attento delle esigenze del cliente, trasformando le idee in realtà tangibili e uniche.
@@ -1279,7 +525,6 @@
         <img class="image-modal-content" id="modalImage">
     </div>
 
-    <!-- Nuovo Footer per i pulsanti social -->
     <footer>
         <div class="footer-social-group">
             <a href="https://www.instagram.com/adpe_studiodiarchitettura/" target="_blank" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -1292,190 +537,90 @@
         // Struttura dati per i progetti
         let projects = {};
 
-        // Variabili per la navigazione delle immagini nel modal
+        // Variabili globali
         let currentProjectImages = [];
         let currentImageIndex = 0;
-        let lastActiveFilter = 'all'; // Nuovo: per mantenere il filtro attivo
-
-        // URL base del bucket S3 per le immagini statiche
-        const S3_STATIC_BASE_URL = `https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/`;
+        let lastActiveFilter = 'all'; 
+        let currentView = 'home';
+        let allProjectsFlattened = [];
+        let currentLang = localStorage.getItem('lang') || 'it';
 
         // Oggetto per le traduzioni
         const translations = {
             it: {
-                pageTitle: "Studio Architettura & Design",
-                homeLink: "Home",
-                projectsLink: "Progetti",
-                aboutLink: "Chi Siamo",
-                contactLink: "Contatti",
-                heroTitle: "ADPE",
-                heroSubtitle: "Architettura e Design by Adriano Pernazza",
-                portfolioTitle: "Progetti",
-                // Traduzioni per le categorie dinamiche
-                category_architettura: "Architettura",
-                category_design: "Design",
-                category_residenziale: "Residenziale",
-                category_pubblica: "Pubblica", // Aggiornato da 'pubblico' a 'pubblica'
-                // Fine traduzioni categorie dinamiche
-                unknownCategory: "Categoria Sconosciuta",
-                aboutTitle: "Chi Siamo",
+                pageTitle: "Studio Architettura & Design", homeLink: "Home", projectsLink: "Progetti", aboutLink: "Chi Siamo", contactLink: "Contatti",
+                heroTitle: "ADPE", heroSubtitle: "Architettura e Design by Adriano Pernazza", portfolioTitle: "Progetti",
+                category_architettura: "Architettura", category_design: "Design", category_residenziale: "Residenziale", category_pubblica: "Pubblica",
+                unknownCategory: "Categoria Sconosciuta", aboutTitle: "Chi Siamo",
                 aboutText: "Lo Studio ADPE, fondato dall'architetto Adriano Pernazza, è una realtà dinamica e innovativa nel panorama dell'architettura e del design. Da anni, ci dedichiamo alla progettazione di spazi che combinano estetica, funzionalità e sostenibilità. La nostra filosofia si basa sull'ascolto attento delle esigenze del cliente, trasformando le idee in realtà tangibili e uniche.",
-                creativityTitle: "Creatività e Innovazione",
-                creativityDesc: "Approccio originale e soluzioni all'avanguardia per ogni progetto.",
-                collaborationTitle: "Collaborazione Clienti",
-                collaborationDesc: "Un processo di progettazione partecipato e trasparente.",
-                sustainabilityTitle: "Sostenibilità",
-                sustainabilityDesc: "Progettazione attenta all'ambiente e all'efficienza energetica.",
-                qualityTitle: "Qualità e Dettaglio",
-                qualityDesc: "Cura maniacale per ogni aspetto, dal concept alla realizzazione.",
-                contactTitle: "Contatti",
-                contactText: "Siamo a vostra disposizione per qualsiasi informazione o per discutere del vostro prossimo progetto. Non esitate a contattarci.",
-                addressLabel: "Indirizzo",
-                mapDirections: "Clicca per indicazioni",
-                phoneLabel: "Telefono",
-                emailLabel: "Email",
-                hoursLabel: "Orari",
-                hoursValue: "Lun-Ven: 9:00 - 18:00",
-                breadcrumbHome: "Home", // Mantenuto per coerenza, ma non usato
-                breadcrumbProjects: "Progetti", // Mantenuto per coerenza, ma non usato
-                filterAll: "Tutti",
-                filterArchitecture: "Architettura", // Mantenuto per filtri
-                filterResidential: "Residenziale", // Mantenuto per filtri
-                filterPublic: "Pubblica", // Mantenuto per filtri
-                filterDesign: "Design", // Mantenuto per filtri
-                backToProjects: "← Torna ai Progetti" // Nuovo: testo per il pulsante indietro
+                creativityTitle: "Creatività e Innovazione", creativityDesc: "Approccio originale e soluzioni all'avanguardia per ogni progetto.",
+                collaborationTitle: "Collaborazione Clienti", collaborationDesc: "Un processo di progettazione partecipato e trasparente.",
+                sustainabilityTitle: "Sostenibilità", sustainabilityDesc: "Progettazione attenta all'ambiente e all'efficienza energetica.",
+                qualityTitle: "Qualità e Dettaglio", qualityDesc: "Cura maniacale per ogni aspetto, dal concept alla realizzazione.",
+                contactTitle: "Contatti", contactText: "Siamo a vostra disposizione per qualsiasi informazione o per discutere del vostro prossimo progetto. Non esitate a contattarci.",
+                addressLabel: "Indirizzo", mapDirections: "Clicca per indicazioni", phoneLabel: "Telefono", emailLabel: "Email", hoursLabel: "Orari", hoursValue: "Lun-Ven: 9:00 - 18:00",
+                filterAll: "Tutti", backToProjects: "← Torna ai Progetti"
             },
             en: {
-                pageTitle: "Architecture & Design Studio",
-                homeLink: "Home",
-                projectsLink: "Projects",
-                aboutLink: "About Us",
-                contactLink: "Contact",
-                heroTitle: "ADPE",
-                heroSubtitle: "Architecture and Design by Adriano Pernazza",
-                portfolioTitle: "Projects",
-                category_architettura: "Architecture",
-                category_design: "Design",
-                category_residenziale: "Residential",
-                category_pubblica: "Public",
-                unknownCategory: "Unknown Category",
-                aboutTitle: "About Us",
+                pageTitle: "Architecture & Design Studio", homeLink: "Home", projectsLink: "Projects", aboutLink: "About Us", contactLink: "Contact",
+                heroTitle: "ADPE", heroSubtitle: "Architecture and Design by Adriano Pernazza", portfolioTitle: "Projects",
+                category_architettura: "Architecture", category_design: "Design", category_residenziale: "Residential", category_pubblica: "Public",
+                unknownCategory: "Unknown Category", aboutTitle: "About Us",
                 aboutText: "ADPE Studio, founded by architect Adriano Pernazza, is a dynamic and innovative reality in the field of architecture and design. For years, we have been dedicated to designing spaces that combine aesthetics, functionality, and sustainability. Our philosophy is based on carefully listening to client needs, transforming ideas into tangible and unique realities.",
-                creativityTitle: "Creativity & Innovation",
-                creativityDesc: "Original approach and cutting-edge solutions for every project.",
-                collaborationTitle: "Client Collaboration",
-                collaborationDesc: "A participatory and transparent design process.",
-                sustainabilityTitle: "Sustainability",
-                sustainabilityDesc: "Environmentally conscious and energy-efficient design.",
-                qualityTitle: "Quality & Detail",
-                qualityDesc: "Meticulous attention to every aspect, from concept to realization.",
-                contactTitle: "Contact",
-                contactText: "We are at your disposal for any information or to discuss your next project. Do not hesitate to contact us.",
-                addressLabel: "Address",
-                mapDirections: "Click for directions",
-                phoneLabel: "Phone",
-                emailLabel: "Email",
-                hoursLabel: "Hours",
-                hoursValue: "Mon-Fri: 9:00 AM - 6:00 PM",
-                breadcrumbHome: "Home",
-                breadcrumbProjects: "Projects",
-                filterAll: "All",
-                filterArchitecture: "Architecture",
-                filterResidential: "Residential",
-                filterPublic: "Public",
-                filterDesign: "Design",
-                backToProjects: "← Back to Projects"
+                creativityTitle: "Creativity & Innovation", creativityDesc: "Original approach and cutting-edge solutions for every project.",
+                collaborationTitle: "Client Collaboration", collaborationDesc: "A participatory and transparent design process.",
+                sustainabilityTitle: "Sustainability", sustainabilityDesc: "Environmentally conscious and energy-efficient design.",
+                qualityTitle: "Quality & Detail", qualityDesc: "Meticulous attention to every aspect, from concept to realization.",
+                contactTitle: "Contact", contactText: "We are at your disposal for any information or to discuss your next project. Do not hesitate to contact us.",
+                addressLabel: "Address", mapDirections: "Click for directions", phoneLabel: "Phone", emailLabel: "Email", hoursLabel: "Hours", hoursValue: "Mon-Fri: 9:00 AM - 6:00 PM",
+                filterAll: "All", backToProjects: "← Back to Projects"
             },
             fr: {
-                pageTitle: "Studio Architecture & Design",
-                homeLink: "Accueil",
-                projectsLink: "Projets",
-                aboutLink: "À Propos",
-                contactLink: "Contact",
-                heroTitle: "ADPE",
-                heroSubtitle: "Architecture et Design par Adriano Pernazza",
-                portfolioTitle: "Projets",
-                category_architettura: "Architecture",
-                category_design: "Design",
-                category_residenziale: "Résidentiel",
-                category_pubblica: "Publique",
-                unknownCategory: "Catégorie Inconnue",
-                aboutTitle: "À Propos de Nous",
+                pageTitle: "Studio Architecture & Design", homeLink: "Accueil", projectsLink: "Projets", aboutLink: "À Propos", contactLink: "Contact",
+                heroTitle: "ADPE", heroSubtitle: "Architecture et Design par Adriano Pernazza", portfolioTitle: "Projets",
+                category_architettura: "Architecture", category_design: "Design", category_residenziale: "Résidentiel", category_pubblica: "Publique",
+                unknownCategory: "Catégorie Inconnue", aboutTitle: "À Propos de Nous",
                 aboutText: "Le Studio ADPE, fondé par l'architecte Adriano Pernazza, est une réalité dynamique et innovante dans le domaine de l'architecture et du design. Depuis des années, nous nous consacrons à la conception d'espace qui allient esthétique, fonctionnalité et durabilité. Notre philosophie repose sur une écoute attentive des besoins du client, transformant les idées en réalités tangibles et uniques.",
-                creativityTitle: "Créatività et Innovation",
-                creativityDesc: "Approche originale et solutions de pointe pour chaque projet.",
-                collaborationTitle: "Collaborazione Client",
-                collaborationDesc: "Un processus de conception participatif et transparent.",
-                sustainabilityTitle: "Durabilité",
-                sustainabilityDesc: "Conception soucieuse de l'environnement et de l'efficience énergétique.",
-                qualityTitle: "Qualità et Détail",
-                qualityDesc: "Attention méticuleuse à chaque aspect, du concept à la réalisation.",
-                contactTitle: "Contact",
-                contactText: "Nous siamo a votre disposition pour qualsiasi information ou pour discuter de votre prossimo progetto. N'hésitez pas à nous contacter.",
-                addressLabel: "Adresse",
-                mapDirections: "Cliquer pour les directions",
-                phoneLabel: "Téléphone",
-                emailLabel: "Email",
-                hoursLabel: "Horaires",
-                hoursValue: "Lun-Ven: 9h00 - 18h00",
-                breadcrumbHome: "Accueil",
-                breadcrumbProjects: "Projets",
-                filterAll: "Tous",
-                filterArchitecture: "Architecture",
-                filterResidential: "Résidentiel",
-                filterPublic: "Publique",
-                filterDesign: "Design",
-                backToProjects: "← Retour aux Projets"
+                creativityTitle: "Créatività et Innovation", creativityDesc: "Approche originale et solutions de pointe pour chaque projet.",
+                collaborationTitle: "Collaborazione Client", collaborationDesc: "Un processo de conception participatif et transparent.",
+                sustainabilityTitle: "Durabilité", sustainabilityDesc: "Conception soucieuse de l'environnement et de l'efficience énergétique.",
+                qualityTitle: "Qualità et Détail", qualityDesc: "Attention méticuleuse à chaque aspect, du concept à la réalisation.",
+                contactTitle: "Contact", contactText: "Nous siamo a votre disposition pour qualsiasi information ou pour discuter de votre prossimo progetto. N'hésitez pas à nous contacter.",
+                addressLabel: "Adresse", mapDirections: "Cliquer pour les directions", phoneLabel: "Téléphone", emailLabel: "Email", hoursLabel: "Horaires", hoursValue: "Lun-Ven: 9h00 - 18h00",
+                filterAll: "Tous", backToProjects: "← Retour aux Projets"
             }
         };
-
-        let currentLang = localStorage.getItem('lang') || 'it';
         
-        // Carica i progetti dal file JSON
-        fetch('projects.json')
-            .then(response => response.json())
-            .then(data => {
-                projects = data;
-                updateAllProjectIds(); // Assegna ID unici a tutti i progetti
-                generateHomeProjects();
-                // Inizializza i filtri e mostra la sezione progetti se l'URL lo richiede
-                if (currentView === 'projects') {
-                    showProjectsSection();
-                }
-            })
-            .catch(error => console.error('Errore nel caricamento dei progetti:', error));
-
-        // Stato dell'applicazione
-        let currentView = 'home';
-        let allProjectsFlattened = []; // Nuovo: array per tutti i progetti appiattiti
-
-        // Inizializzazione
+        // Inizializzazione al caricamento del DOM
         document.addEventListener('DOMContentLoaded', function() {
+            // Carica i progetti e avvia l'applicazione
+            fetch('projects.json')
+                .then(response => {
+                    if (!response.ok) { throw new Error("Network response was not ok"); }
+                    return response.json();
+                })
+                .then(data => {
+                    projects = data;
+                    allProjectsFlattened = flattenProjects(projects);
+                    updateAllProjectIds();
+                    
+                    setupEventListeners();
+                    setLanguage(currentLang, true); // true for initial load
+                })
+                .catch(error => console.error('Errore nel caricamento dei progetti:', error));
+        });
+
+        function setupEventListeners() {
             setupMobileMenu();
-            // showHome() non chiamato qui, verrà chiamato dopo il caricamento dei progetti
-            // o in base allo stato dell'URL
 
-            const themeToggleBtn = document.getElementById('themeToggle');
-            const body = document.body;
-
-            function applyTheme(theme) {
-                if (theme === 'dark') {
-                    body.classList.add('dark-theme');
-                } else {
-                    body.classList.remove('dark-theme');
-                }
-            }
-
-            const savedTheme = localStorage.getItem('theme');
-            applyTheme(savedTheme || 'light');
-
-            themeToggleBtn.addEventListener('click', (e) => {
+            // Toggle Tema
+            document.getElementById('themeToggle').addEventListener('click', (e) => {
                 e.preventDefault();
-                const newTheme = body.classList.contains('dark-theme') ? 'light' : 'dark';
-                applyTheme(newTheme);
+                const newTheme = document.body.classList.toggle('dark-theme') ? 'dark' : 'light';
                 localStorage.setItem('theme', newTheme);
             });
 
+            // Selettore Lingua
             document.querySelectorAll('.language-selector-item').forEach(item => {
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -1483,49 +628,250 @@
                 });
             });
 
-            setLanguage(currentLang);
-        });
+            // Eventi Keyboard per Modal
+            document.addEventListener('keydown', function(e) {
+                const imageModal = document.getElementById('imageModal');
+                if (imageModal.style.display !== 'flex') return;
+                if (e.key === 'Escape') closeImageModal();
+                if (e.key === 'ArrowLeft') showPrevImage(e);
+                if (e.key === 'ArrowRight') showNextImage(e);
+            });
+        }
 
-        // Funzione per impostare la lingua
-        function setLanguage(lang) {
+        function setLanguage(lang, isInitialLoad = false) {
             currentLang = lang;
             localStorage.setItem('lang', lang);
 
+            // Applica traduzioni
             document.querySelectorAll('[data-lang-key]').forEach(element => {
                 const key = element.dataset.langKey;
-                if (translations[lang] && translations[lang][key]) {
+                if (translations[lang]?.[key]) {
                     element.textContent = translations[lang][key];
                 }
             });
 
+            // Aggiorna selettore lingua attivo
             document.querySelectorAll('.language-selector-item').forEach(item => {
                 item.classList.toggle('active', item.dataset.lang === lang);
             });
 
-            // Rigenera i filtri e riapplica il filtro corrente dopo il cambio lingua
-            if (currentView === 'projects') {
-                generateFilters();
-                filterProjects(lastActiveFilter);
-            }
-            // Rigenera i progetti nella home per aggiornare i titoli se necessario
-            generateHomeProjects();
-            // Se siamo in un dettaglio progetto, ricarica per aggiornare categoria/descrizione
-            if (currentView === 'projectDetail') {
-                const projectId = parseInt(document.getElementById('singleProjectDetail').dataset.projectId);
-                if (projectId) showProject(projectId);
+            // Se è il caricamento iniziale, mostra la home
+            if (isInitialLoad) {
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                if (savedTheme === 'dark') document.body.classList.add('dark-theme');
+                showHome();
+            } else {
+                // Altrimenti, ricarica la vista corrente per aggiornare i testi
+                switch (currentView) {
+                    case 'home': showHome(); break;
+                    case 'projects': showProjectsSection(false); break; // false = non scrollare
+                    case 'projectDetail':
+                        const projectId = document.getElementById('singleProjectDetail').dataset.projectId;
+                        if (projectId) showProject(parseInt(projectId), false);
+                        break;
+                    case 'about': showAbout(false); break;
+                    case 'contact': showContact(false); break;
+                }
             }
         }
 
-        // Mobile menu
+        // --- Logica di Navigazione e Visualizzazione Sezioni ---
+
+        function showSection(sectionId, shouldScroll = true) {
+            ['hero', 'homeProjects', 'projectsSection', 'aboutSection', 'contactSection'].forEach(id => {
+                document.getElementById(id).style.display = 'none';
+            });
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+                if (shouldScroll) {
+                    requestAnimationFrame(() => {
+                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    });
+                }
+            }
+        }
+
+        function showHome() {
+            currentView = 'home';
+            showSection('hero', false); // Non scrollare all'hero
+            document.getElementById('homeProjects').style.display = 'block';
+            document.getElementById('singleProjectDetail').style.display = 'none';
+            generateHomeProjects();
+        }
+        
+        function showProjectsSection(shouldScroll = true) {
+            currentView = 'projects';
+            showSection('projectsSection', shouldScroll);
+            document.getElementById('singleProjectDetail').style.display = 'none';
+            document.getElementById('projectFilters').style.display = 'block';
+            document.getElementById('projectsGrid').style.display = 'block';
+
+            const projectsSection = document.getElementById('projectsSection');
+            if (!projectsSection.querySelector('.section-title')) {
+                const sectionTitleElement = document.createElement('h2');
+                sectionTitleElement.className = 'section-title';
+                sectionTitleElement.setAttribute('data-lang-key', 'portfolioTitle');
+                sectionTitleElement.textContent = translations[currentLang].portfolioTitle;
+                projectsSection.prepend(sectionTitleElement);
+            }
+            
+            generateFilters();
+            filterProjects(lastActiveFilter);
+        }
+
+        function showAbout(shouldScroll = true) {
+            currentView = 'about';
+            showSection('aboutSection', shouldScroll);
+        }
+
+        function showContact(shouldScroll = true) {
+            currentView = 'contact';
+            showSection('contactSection', shouldScroll);
+        }
+        
+        function showProject(projectId, shouldScroll = true) {
+            const project = findProjectById(projectId);
+            if (!project) return;
+
+            currentView = 'projectDetail';
+            showSection('projectsSection', shouldScroll);
+            document.getElementById('projectFilters').style.display = 'none';
+            document.getElementById('projectsGrid').style.display = 'none';
+
+            const detailContainer = document.getElementById('singleProjectDetail');
+            detailContainer.style.display = 'block';
+            detailContainer.dataset.projectId = projectId;
+
+            const backButtonHtml = `<button class="back-to-projects-btn" onclick="goBackToProjects()">${translations[currentLang].backToProjects}</button>`;
+            const galleryHtml = project.images.map(image => `
+                <div class="gallery-item">
+                    <img src="${image.src}" alt="${image.description}" onclick="openImageModal(${project.id}, '${image.src}')" loading="lazy">
+                    <p class="gallery-description">${image.description || ''}</p>
+                </div>
+            `).join('');
+
+            detailContainer.innerHTML = `
+                ${backButtonHtml}
+                <h2 class="project-detail-title">${project.title}</h2>
+                <p class="project-detail-category">${getProjectCategoryLabel(project)}</p>
+                <p class="project-detail-description">${project.description}</p>
+                <div class="project-gallery">${galleryHtml}</div>
+            `;
+        }
+        
+        function goBackToProjects() {
+            showProjectsSection();
+        }
+
+        // --- Logica di Gestione Progetti e Filtri ---
+
+        function flattenProjects(node, path = '', projects = []) {
+            for (const key in node) {
+                if (Object.prototype.hasOwnProperty.call(node, key)) {
+                    const childNode = node[key];
+                    const currentPath = path ? `${path}.${key}` : key;
+                    if (typeof childNode === 'object' && childNode !== null) {
+                        if (Array.isArray(childNode.images)) {
+                            projects.push({ ...childNode, categoryPath: currentPath });
+                        } else {
+                            flattenProjects(childNode, currentPath, projects);
+                        }
+                    }
+                }
+            }
+            return projects;
+        }
+
+        function updateAllProjectIds() {
+            allProjectsFlattened.forEach((p, index) => p.id = index + 1);
+        }
+
+        function findProjectById(id) {
+            return allProjectsFlattened.find(p => p.id === id);
+        }
+
+        function getProjectCategoryLabel(project) {
+            if (!project?.categoryPath) return translations[currentLang].unknownCategory;
+            const pathParts = project.categoryPath.split('.').slice(0, -1);
+            return pathParts.map(part => translations[currentLang][`category_${part}`] || formatFolderNameForDisplay(part)).join(' ') || translations[currentLang].unknownCategory;
+        }
+        
+        function generateHomeProjects() {
+            const grid = document.getElementById('homeProjectsGrid');
+            if (!grid) return;
+            grid.innerHTML = allProjectsFlattened.map(project => `
+                <div class="project-card fade-in" onclick="showProject(${project.id})">
+                    <img src="${project.images[0].src}" alt="${project.title}" loading="lazy">
+                </div>
+            `).join('');
+        }
+        
+        // MODIFICATO: Logica di generazione filtri per escludere i progetti "foglia"
+        function collectCategoryPaths(node, path, pathsSet) {
+            for (const key in node) {
+                if (Object.prototype.hasOwnProperty.call(node, key)) {
+                    const childNode = node[key];
+                    // Un nodo è una "categoria" se è un oggetto e NON ha una proprietà "images".
+                    // La proprietà "images" identifica un nodo come un progetto finale (foglia).
+                    if (typeof childNode === 'object' && childNode !== null && !Array.isArray(childNode.images)) {
+                        const currentPath = path ? `${path}.${key}` : key;
+                        pathsSet.add(currentPath);
+                        // Continua la ricorsione all'interno di questa categoria.
+                        collectCategoryPaths(childNode, currentPath, pathsSet);
+                    }
+                }
+            }
+        }
+
+        function generateFilters() {
+            const filtersContainer = document.getElementById('projectFilters');
+            const categoryPaths = new Set();
+            collectCategoryPaths(projects, '', categoryPaths);
+
+            let filtersHtml = `<button class="filter-btn" data-filter="all" onclick="filterProjects('all')">${translations[currentLang].filterAll}</button>`;
+            
+            const sortedCategories = Array.from(categoryPaths).sort((a, b) => a.localeCompare(b));
+
+            sortedCategories.forEach(path => {
+                const label = path.split('.').map(part => translations[currentLang][`category_${part}`] || formatFolderNameForDisplay(part)).join(' ');
+                filtersHtml += `<button class="filter-btn" data-filter="${path}" onclick="filterProjects('${path}')">${label}</button>`;
+            });
+            filtersContainer.innerHTML = filtersHtml;
+        }
+
+        function filterProjects(filter) {
+            lastActiveFilter = filter;
+            const projectsGrid = document.getElementById('projectsGrid');
+            
+            const filteredProjects = (filter === 'all')
+                ? allProjectsFlattened
+                : allProjectsFlattened.filter(p => p.categoryPath.startsWith(filter));
+
+            projectsGrid.innerHTML = filteredProjects.map(project => `
+                <div class="project-card fade-in" onclick="showProject(${project.id})">
+                    <img src="${project.images[0].src}" alt="${project.title}" loading="lazy">
+                </div>
+            `).join('');
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === filter);
+            });
+        }
+
+        // --- Funzioni di Utilità e UI ---
+
+        function formatFolderNameForDisplay(name) {
+            return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+        }
+
         function setupMobileMenu() {
             const hamburger = document.querySelector('.hamburger');
             const navMenu = document.querySelector('.nav-menu');
-
-            hamburger.addEventListener('click', function() {
+            hamburger.addEventListener('click', () => {
                 hamburger.classList.toggle('active');
                 navMenu.classList.toggle('active');
             });
-
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', () => {
                     hamburger.classList.remove('active');
@@ -1534,348 +880,44 @@
             });
         }
 
-        // Mostra sezione generica nascondendo le altre
-        function showSection(sectionId) {
-            ['hero', 'homeProjects', 'projectsSection', 'aboutSection', 'contactSection'].forEach(id => {
-                const section = document.getElementById(id);
-                if (section) {
-                    section.style.display = 'none';
-                    // Rimuovi la classe fade-in per permettere l'animazione alla prossima visualizzazione
-                    const titles = section.querySelectorAll('.section-title, .about-title, .contact-title');
-                    titles.forEach(title => title.classList.remove('fade-in'));
-                }
-            });
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) targetSection.style.display = 'block';
-        }
-
-        // Mostra home
-        function showHome() {
-            currentView = 'home';
-            showSection('hero');
-            document.getElementById('homeProjects').style.display = 'block';
-            document.getElementById('singleProjectDetail').style.display = 'none';
-            document.getElementById('projectsGrid').innerHTML = ''; // Pulisce la griglia progetti
-            
-            // Rimuovi il titolo della sezione progetti se presente
-            const projectsSection = document.getElementById('projectsSection');
-            const existingTitle = projectsSection.querySelector('.section-title');
-            if (existingTitle) existingTitle.remove();
-
-            generateHomeProjects();
-        }
-
-        // Genera progetti nella home
-        function generateHomeProjects() {
-            const grid = document.getElementById('homeProjectsGrid');
-            const allProjects = getAllProjects(); 
-
-            grid.innerHTML = allProjects.map(project => `
-                <div class="project-card fade-in" onclick="showProject(${project.id})">
-                    <img src="${project.images[0].src}" alt="${project.title}" loading="lazy">
-                </div>
-            `).join('');
-            observeNewElements();
-        }
-
-        // NUOVO: Funzione ricorsiva per appiattire la struttura dei progetti
-        function flattenProjects(obj, path = '') {
-            let flattened = [];
-            for (const key in obj) {
-                if (obj.hasOwnProperty(key)) {
-                    const currentPath = path ? `${path}.${key}` : key;
-                    if (obj[key].id !== undefined && obj[key].title !== undefined) {
-                        // È un progetto
-                        flattened.push({ ...obj[key], categoryPath: currentPath });
-                    } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-                        // È una categoria o sottocategoria
-                        flattened = flattened.concat(flattenProjects(obj[key], currentPath));
-                    }
-                }
-            }
-            return flattened;
-        }
-
-        // Ottieni tutti i progetti in un unico array appiattito
-        function getAllProjects() {
-            if (Object.keys(projects).length === 0) return []; // Se projects è vuoto
-            allProjectsFlattened = flattenProjects(projects);
-            return allProjectsFlattened;
-        }
-
-        // Aggiorna gli ID di tutti i progetti per essere unici e progressivi
-        function updateAllProjectIds() {
-            let currentId = 1;
-            getAllProjects().forEach(p => p.id = currentId++);
-        }
-
-        // Determina la categoria leggibile di un progetto (usando categoryPath)
-        function getProjectCategoryLabel(project) {
-            if (!project || !project.categoryPath) return translations[currentLang].unknownCategory;
-            
-            const pathParts = project.categoryPath.split('.');
-            // L'ultima parte è il nome della cartella del progetto, le precedenti sono categorie/sottocategorie
-            // Es: architettura.residenziale.casa-di-gigi -> vogliamo "Architettura Residenziale"
-            
-            let categoryLabels = [];
-            for (let i = 0; i < pathParts.length - 1; i++) { // Esclude il nome del progetto
-                const part = pathParts[i];
-                const translatedPart = translations[currentLang][`category_${part}`] || formatFolderNameForDisplay(part);
-                categoryLabels.push(translatedPart);
-            }
-            return categoryLabels.join(' ');
-        }
-
-        // Funzione helper per formattare i nomi delle cartelle per la visualizzazione
-        function formatFolderNameForDisplay(name) {
-            return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-        }
-
-
-        // Logica per la sezione Progetti
-        function showProjectsSection() {
-            currentView = 'projects';
-            
-            showSection('projectsSection');
-            document.getElementById('singleProjectDetail').style.display = 'none';
-            
-            // Assicura che filtri e griglia siano visibili
-            document.getElementById('projectFilters').style.display = 'block';
-            document.getElementById('projectsGrid').style.display = 'block';
-            
-            const projectsSection = document.getElementById('projectsSection');
-            
-            const existingTitle = projectsSection.querySelector('.section-title');
-            if (existingTitle) existingTitle.remove();
-
-            const sectionTitleElement = document.createElement('h2');
-            sectionTitleElement.className = 'section-title';
-            sectionTitleElement.setAttribute('data-lang-key', 'portfolioTitle'); // Usa il titolo "Portfolio"
-            sectionTitleElement.textContent = translations[currentLang].portfolioTitle;
-            projectsSection.prepend(sectionTitleElement);
-
-            generateFilters();
-            filterProjects(lastActiveFilter); // Applica l'ultimo filtro attivo
-            
-            requestAnimationFrame(() => {
-                projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        }
-
-        // NUOVO: Generazione dinamica dei filtri
-        function generateFilters() {
-            const filtersContainer = document.getElementById('projectFilters');
-            let uniqueCategories = new Set();
-            getAllProjects().forEach(project => {
-                // Estrai le parti della categoria fino al livello del progetto
-                const pathParts = project.categoryPath.split('.');
-                // Aggiungi le categorie principali e sottocategorie come filtri
-                if (pathParts.length > 1) { // Se è almeno "categoria.progetto"
-                    uniqueCategories.add(pathParts[0]); // Es: "architettura"
-                    if (pathParts.length > 2) { // Se è "categoria.sottocategoria.progetto"
-                        uniqueCategories.add(`${pathParts[0]}.${pathParts[1]}`); // Es: "architettura.residenziale"
-                    }
-                } else { // Se è solo "progetto" direttamente sotto una categoria di primo livello (es. design.cesto)
-                    uniqueCategories.add(pathParts[0]); // Es: "design"
-                }
-            });
-
-            let filtersHtml = `<button class="filter-btn" data-filter="all" data-lang-key="filterAll" onclick="filterProjects('all')">${translations[currentLang].filterAll}</button>`;
-            
-            // Ordina le categorie per visualizzazione coerente
-            const sortedCategories = Array.from(uniqueCategories).sort();
-
-            sortedCategories.forEach(categoryKey => {
-                let label = '';
-                const parts = categoryKey.split('.');
-                if (parts.length === 1) { // Top-level category (e.g., "architettura", "design")
-                    label = translations[currentLang][`category_${categoryKey}`] || formatFolderNameForDisplay(categoryKey);
-                } else if (parts.length === 2) { // Sub-category (e.g., "architettura.residenziale")
-                    const mainCat = translations[currentLang][`category_${parts[0]}`] || formatFolderNameForDisplay(parts[0]);
-                    const subCat = translations[currentLang][`category_${parts[1]}`] || formatFolderNameForDisplay(parts[1]);
-                    label = `${mainCat} ${subCat}`; // "Architettura Residenziale" (spazio invece di trattino)
-                }
-                
-                filtersHtml += `<button class="filter-btn" data-filter="${categoryKey}" onclick="filterProjects('${categoryKey}')">${label}</button>`;
-            });
-            filtersContainer.innerHTML = filtersHtml;
-        }
-
-        function filterProjects(filter) {
-            lastActiveFilter = filter; // Salva il filtro attivo
-            const projectsGrid = document.getElementById('projectsGrid');
-            projectsGrid.innerHTML = '';
-            const allProjects = getAllProjects();
-
-            let filteredProjects = (filter === 'all')
-                ? allProjects
-                : allProjects.filter(project => project.categoryPath.startsWith(filter));
-
-            filteredProjects.forEach(project => {
-                const projectCardHtml = `
-                    <div class="project-card fade-in" onclick="showProject(${project.id})">
-                        <img src="${project.images[0].src}" alt="${project.title}" loading="lazy">
-                    </div>
-                `;
-                projectsGrid.insertAdjacentHTML('beforeend', projectCardHtml);
-            });
-            
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.filter === filter);
-            });
-            
-            observeNewElements();
-        }
-
-        // Mostra i dettagli di un singolo progetto
-        function showProject(projectId) {
-            const project = findProjectById(projectId);
-            if (!project) return;
-
-            currentView = 'projectDetail';
-            
-            showSection('projectsSection');
-            document.getElementById('projectFilters').style.display = 'none';
-            document.getElementById('projectsGrid').style.display = 'none';
-
-            const singleProjectDetail = document.getElementById('singleProjectDetail');
-            singleProjectDetail.style.display = 'block';
-            singleProjectDetail.dataset.projectId = projectId; // Salva l'ID del progetto per il ritorno
-
-            // Pulsante "Torna ai Progetti"
-            const backButtonHtml = `<button class="back-to-projects-btn" onclick="goBackToProjects()">${translations[currentLang].backToProjects}</button>`;
-            
-            let galleryHtml = project.images.map(image => `
-                <div class="gallery-item">
-                    <img src="${image.src}" alt="${image.description}" onclick="openImageModal(${project.id}, '${image.src}')">
-                    <p class="gallery-description">${image.description}</p>
-                </div>
-            `).join('');
-
-            singleProjectDetail.innerHTML = `
-                ${backButtonHtml}
-                <h2 class="project-detail-title">${project.title}</h2>
-                <p class="project-detail-category">${getProjectCategoryLabel(project)}</p>
-                <p class="project-detail-description">${project.description}</p>
-                <div class="project-gallery">
-                    ${galleryHtml}
-                </div>
-            `;
-
-            setTimeout(() => {
-                singleProjectDetail.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
-        }
-
-        // NUOVO: Funzione per tornare alla sezione progetti
-        function goBackToProjects() {
-            showProjectsSection(); // Torna alla sezione progetti con l'ultimo filtro attivo
-        }
-
-        // Trova progetto per ID (ora usa l'array appiattito)
-        function findProjectById(id) {
-            return allProjectsFlattened.find(p => p.id === id);
-        }
-
-        // Mostra sezione "Chi Siamo"
-        function showAbout() {
-            currentView = 'about';
-            showSection('aboutSection');
-            // Aggiungi l'animazione al titolo della sezione
-            document.querySelector('#aboutSection .about-title').classList.add('fade-in');
-            requestAnimationFrame(() => {
-                document.getElementById('aboutSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        }
-
-        // Mostra sezione "Contatti"
-        function showContact() {
-            currentView = 'contact';
-            showSection('contactSection');
-            // Aggiungi l'animazione al titolo della sezione
-            document.querySelector('#contactSection .contact-title').classList.add('fade-in');
-            requestAnimationFrame(() => {
-                document.getElementById('contactSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        }
-
-        // Funzioni per il modal delle immagini
+        // Modal Immagini
         function openImageModal(projectId, imageSrc) {
-            const modal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-            
             const project = findProjectById(projectId);
             if (!project) return;
 
             currentProjectImages = project.images;
             currentImageIndex = currentProjectImages.findIndex(img => img.src === imageSrc);
-
-            modalImage.src = currentProjectImages[currentImageIndex].src;
+            
+            const modal = document.getElementById('imageModal');
+            document.getElementById('modalImage').src = imageSrc;
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
 
         function closeImageModal(event) {
-            if (event && (event.target.id === 'modalImage' || event.target.classList.contains('modal-prev') || event.target.classList.contains('modal-next'))) {
-                return;
-            }
-            const modal = document.getElementById('imageModal');
-            modal.style.display = 'none';
+            if (event && event.target.id === 'modalImage') return;
+            document.getElementById('imageModal').style.display = 'none';
             document.body.style.overflow = '';
         }
 
         function showNextImage(event) {
-            if (event) event.stopPropagation();
-            if (currentProjectImages.length === 0) return;
+            event.stopPropagation();
             currentImageIndex = (currentImageIndex + 1) % currentProjectImages.length;
             document.getElementById('modalImage').src = currentProjectImages[currentImageIndex].src;
         }
 
         function showPrevImage(event) {
-            if (event) event.stopPropagation();
-            if (currentProjectImages.length === 0) return;
+            event.stopPropagation();
             currentImageIndex = (currentImageIndex - 1 + currentProjectImages.length) % currentProjectImages.length;
             document.getElementById('modalImage').src = currentProjectImages[currentImageIndex].src;
         }
 
-
-        // Gestione eventi keyboard
-        document.addEventListener('keydown', function(e) {
-            const imageModal = document.getElementById('imageModal');
-            if (e.key === 'Escape') {
-                if (imageModal.style.display === 'flex') {
-                    closeImageModal();
-                } else if (currentView === 'projectDetail') {
-                    goBackToProjects(); // Usa la nuova funzione per tornare indietro
-                }
-            } else if (imageModal.style.display === 'flex') {
-                if (e.key === 'ArrowLeft') showPrevImage();
-                if (e.key === 'ArrowRight') showNextImage();
-            }
-        });
-
-        // Intersection Observer per animazioni
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-        function observeNewElements() {
-            document.querySelectorAll('.project-card:not(.fade-in), .highlight-card:not(.fade-in), .contact-card:not(.fade-in)').forEach(card => {
-                observer.observe(card);
-            });
-        }
-
-        // Effetto header e footer allo scroll
+        // Header e Footer allo scroll
         window.addEventListener('scroll', function() {
-            document.querySelector('header').classList.toggle('scrolled', window.pageYOffset > 50);
-            // Aggiungi la classe 'scrolled' anche al footer se vuoi un effetto simile
-            document.querySelector('footer').classList.toggle('scrolled', window.pageYOffset > 50);
+            const isScrolled = window.pageYOffset > 50;
+            document.querySelector('header').classList.toggle('scrolled', isScrolled);
+            document.querySelector('footer').classList.toggle('scrolled', isScrolled);
         });
-
     </script>
 </body>
 </html>
