@@ -62,13 +62,13 @@
             pointer-events: none;
             transition: opacity var(--transition);
         }
-        body::before { top: 5%; left: 5%; width: 400px; height: 400px; background-color: var(--accent-brown); border-radius: 50%; opacity: 0.2; animation: floatCircle 85s ease-in-out infinite; }
-        body::after { top: 40%; right: 10%; width: 300px; height: 400px; background-color: var(--autumn-blue); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); opacity: 0.2; animation: floatTriangle 250s ease-in-out infinite; }
-        .geometric-square-background { top: 10%; left: 80%; width: 305px; height: 305px; background: var(--accent-green); opacity: 0.19; animation: floatGeometry 250s ease-in-out infinite reverse; border-radius: 2%; }
-        .background-rectangle { bottom: 10%; left: 25%; width: 305px; height: 305px; background: var(--accent-gold); opacity: 0.19; animation: floatRectangle 250s ease-in-out infinite reverse; border-radius: 2%; }
+        body::before { top: 5%; left: 5%; width: 400px; height: 400px; background-color: var(--accent-brown); border-radius: 50%; opacity: 0.25; animation: floatCircle 85s ease-in-out infinite; }
+        body::after { top: 40%; right: 10%; width: 300px; height: 400px; background-color: var(--autumn-blue); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); opacity: 0.25; animation: floatTriangle 250s ease-in-out infinite; }
+        .geometric-square-background { top: 10%; left: 80%; width: 305px; height: 305px; background: var(--accent-green); opacity: 0.25; animation: floatGeometry 250s ease-in-out infinite reverse; border-radius: 2%; }
+        .background-rectangle { bottom: 10%; left: 25%; width: 305px; height: 305px; background: var(--accent-gold); opacity: 0.25; animation: floatRectangle 250s ease-in-out infinite reverse; border-radius: 2%; }
 
         body.dark-theme::before, body.dark-theme::after, body.dark-theme .geometric-square-background, body.dark-theme .background-rectangle {
-            opacity: 0.1;
+            opacity: 0.25;
         }
 
         /* Keyframes per le animazioni */
@@ -634,7 +634,7 @@
                 qualityTitle: "Qualità e Dettaglio", qualityDesc: "Cura maniacale per ogni aspetto, dal concept alla realizzazione.",
                 contactTitle: "Contatti", contactText: "Siamo a vostra disposizione per qualsiasi informazione o per discutere del vostro prossimo progetto. Non esitate a contattarci.",
                 addressLabel: "Indirizzo", mapDirections: "Clicca per indicazioni", phoneLabel: "Telefono", emailLabel: "Email", hoursLabel: "Orari", hoursValue: "Lun-Ven: 9:00 - 18:00",
-                filterAll: "Tutti", backToProjects: "← Torna ai Progetti"
+                filterAll: "Tutti", backToProjects: "← Indietro"
             },
             en: {
                 pageTitle: "Architecture & Design Studio", homeLink: "Home", projectsLink: "Projects", aboutLink: "About Us", contactLink: "Contact",
@@ -648,7 +648,7 @@
                 qualityTitle: "Quality & Detail", qualityDesc: "Meticulous attention to every aspect, from concept to realization.",
                 contactTitle: "Contact", contactText: "We are at your disposal for any information or to discuss your next project. Do not hesitate to contact us.",
                 addressLabel: "Address", mapDirections: "Click for directions", phoneLabel: "Phone", emailLabel: "Email", hoursLabel: "Hours", hoursValue: "Mon-Fri: 9:00 AM - 6:00 PM",
-                filterAll: "All", backToProjects: "← Back to Projects"
+                filterAll: "All", backToProjects: "← Back"
             },
             fr: {
                 pageTitle: "Studio Architecture & Design", homeLink: "Accueil", projectsLink: "Projets", aboutLink: "À Propos", contactLink: "Contact",
@@ -662,7 +662,7 @@
                 qualityTitle: "Qualità et Détail", qualityDesc: "Attention méticuleuse à chaque aspect, du concept à la réalisation.",
                 contactTitle: "Contact", contactText: "Nous siamo a votre disposition pour qualsiasi information ou pour discuter de votre prossimo progetto. N'hésitez pas à nous contacter.",
                 addressLabel: "Adresse", mapDirections: "Cliquer pour les directions", phoneLabel: "Téléphone", emailLabel: "Email", hoursLabel: "Horaires", hoursValue: "Lun-Ven: 9h00 - 18h00",
-                filterAll: "Tous", backToProjects: "← Retour aux Projets"
+                filterAll: "Tous", backToProjects: "← Retour"
             }
         };
         
@@ -807,14 +807,18 @@
             document.getElementById('projectsGrid').style.display = 'block';
 
             const projectsSection = document.getElementById('projectsSection');
-            if (!projectsSection.querySelector('.section-title')) {
-                const sectionTitleElement = document.createElement('h2');
+            let sectionTitleElement = projectsSection.querySelector('.section-title'); // Usa let per riassegnare
+
+            if (!sectionTitleElement) { // Se il titolo non esiste, crealo
+                sectionTitleElement = document.createElement('h2');
                 sectionTitleElement.className = 'section-title';
                 sectionTitleElement.setAttribute('data-lang-key', 'portfolioTitle');
-                sectionTitleElement.textContent = translations[currentLang].portfolioTitle;
                 projectsSection.prepend(sectionTitleElement);
             }
-            
+            // Assicurati che il titolo sia sempre visibile quando si torna alla sezione progetti
+            sectionTitleElement.style.display = 'block'; 
+            sectionTitleElement.textContent = translations[currentLang].portfolioTitle; // Aggiorna il testo in base alla lingua
+
             generateFilters();
             filterProjects(lastActiveFilter);
         }
