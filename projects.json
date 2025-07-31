@@ -1,8 +1,19 @@
 {
   "design": {
     "illuminazione": {
-      "lampadine": {
+      "contenitore": {
         "id": 1,
+        "title": "Contenitore",
+        "description": "Un simpatico paralume azzurro.",
+        "images": [
+          {
+            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/contenitore/image1.jpg",
+            "description": ""
+          }
+        ]
+      },
+      "lampadine": {
+        "id": 2,
         "title": "Lampadine",
         "description": "Sistema di illuminazione in stile Industrial.",
         "images": [
@@ -14,7 +25,7 @@
       }
     },
     "tavolini": {
-      "id": 2,
+      "id": 3,
       "title": "Tavolini",
       "description": "I nostri tavolini di design.",
       "images": [
