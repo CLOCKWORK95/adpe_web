@@ -1,1 +1,32 @@
-{}
+{
+  "design": {
+    "illuminazione": {
+      "lampadine": {
+        "id": 1,
+        "title": "Lampadine",
+        "description": "Sistema di illuminazione in stile Industrial.",
+        "images": [
+          {
+            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/lampadine/image1.jfif",
+            "description": "Lampade a bulbo."
+          }
+        ]
+      }
+    },
+    "tavolini": {
+      "id": 2,
+      "title": "Tavolini",
+      "description": "I nostri tavolini di design.",
+      "images": [
+        {
+          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/tavolini/image1.jpg",
+          "description": "Legno di Acacia."
+        },
+        {
+          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/tavolini/image2.jpg",
+          "description": "Legno e alluminio, colori"
+        }
+      ]
+    }
+  }
+}
