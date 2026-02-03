@@ -1,7 +1,22 @@
 {
+  "architettura": {
+    "uffici": {
+      "ufficio roma": {
+        "id": 1,
+        "title": "Ufficio Roma",
+        "description": "Ufficio al centro di Roma.",
+        "images": [
+          {
+            "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/uffici/ufficio roma/image1.jpg",
+            "description": "Vista frontale"
+          }
+        ]
+      }
+    }
+  },
   "design": {
     "cesto": {
-      "id": 1,
+      "id": 2,
       "title": "Cesto",
       "description": "Cesto di design.",
       "images": [
@@ -13,7 +28,7 @@
     },
     "illuminazione": {
       "contenitore": {
-        "id": 2,
+        "id": 3,
         "title": "Contenitore",
         "description": "Un simpatico paralume azzurro.",
         "images": [
@@ -40,7 +55,7 @@
         ]
       },
       "lampadine": {
-        "id": 3,
+        "id": 4,
         "title": "Lampadine",
         "description": "Sistema di illuminazione in stile Industrial.",
         "images": [
@@ -52,7 +67,7 @@
       }
     },
     "tavolini": {
-      "id": 4,
+      "id": 5,
       "title": "Tavolini",
       "description": "I nostri tavolini di design.",
       "images": [
