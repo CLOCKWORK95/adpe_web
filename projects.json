@@ -1,118 +1,44 @@
 {
-  "architettura": {
-    "residenziale": {
-      "casa-di-gigi": {
-        "id": 1,
-        "title": "Casa Di Gigi",
-        "description": "Ristrutturazione di un appartamento al centro città.",
-        "images": [
-          {
-            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/residenziale/casa-di-gigi/image1.jpg",
-            "description": "Ingresso"
-          },
-          {
-            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/residenziale/casa-di-gigi/image2.jpg",
-            "description": ""
-          }
-        ]
-      }
-    },
-    "uffici": {
-      "ufficio bologna": {
-        "id": 2,
-        "title": "Ufficio Bologna",
-        "description": "Ufficio nella periferia di Bologna.",
-        "images": [
-          {
-            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/uffici/ufficio bologna/casetta.jpg",
-            "description": ""
-          }
-        ]
-      },
-      "ufficio roma": {
-        "id": 3,
-        "title": "Ufficio Roma",
-        "description": "Ufficio al centro di Roma.",
-        "images": [
-          {
-            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/uffici/ufficio roma/image1.jpg",
-            "description": "Vista frontale"
-          },
-          {
-            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/uffici/ufficio roma/image2.jpg",
-            "description": "Corridoio interno con vista."
-          },
-          {
-            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/uffici/ufficio roma/image3.jpg",
-            "description": ""
-          }
-        ]
-      }
-    }
-  },
   "design": {
-    "cesto": {
-      "id": 4,
-      "title": "Cesto",
-      "description": "Cesto di design.",
-      "images": [
-        {
-          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/cesto/image1.jpg",
-          "description": ""
-        }
-      ]
-    },
     "illuminazione": {
       "contenitore": {
-        "id": 5,
+        "id": 1,
         "title": "Contenitore",
         "description": "Un simpatico paralume azzurro.",
         "images": [
           {
-            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/contenitore/image1.jpg",
+            "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/contenitore/image1.jpg",
             "description": ""
           },
           {
-            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/contenitore/image2.jpg",
-            "description": ""
-          },
-          {
-            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/contenitore/image3.jpg",
-            "description": ""
-          },
-          {
-            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/contenitore/image4.jpg",
-            "description": ""
-          },
-          {
-            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/contenitore/image5.jpg",
+            "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/contenitore/image2.jpg",
             "description": ""
           }
         ]
       },
       "lampadine": {
-        "id": 6,
+        "id": 2,
         "title": "Lampadine",
         "description": "Sistema di illuminazione in stile Industrial.",
         "images": [
           {
-            "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/lampadine/image1.jfif",
+            "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/lampadine/image1.jfif",
             "description": "Lampade a bulbo."
           }
         ]
       }
     },
     "tavolini": {
-      "id": 7,
+      "id": 3,
       "title": "Tavolini",
       "description": "I nostri tavolini di design.",
       "images": [
         {
-          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/tavolini/image1.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/tavolini/image1.jpg",
           "description": "Legno di Acacia."
         },
         {
-          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/projects/design/tavolini/image2.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/tavolini/image2.jpg",
           "description": "Legno e alluminio, colori"
         }
       ]
