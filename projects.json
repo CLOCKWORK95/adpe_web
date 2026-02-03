@@ -8,6 +8,10 @@
         "images": [
           {
             "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/residenziale/casa-di-gigi/image1.jpg",
+            "description": "Ingresso"
+          },
+          {
+            "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/residenziale/casa-di-gigi/image2.jpg",
             "description": ""
           }
         ]
