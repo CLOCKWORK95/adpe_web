@@ -478,14 +478,24 @@
 
         /* Mobile fallback */
         @media (max-width: 768px) {
-        .splash-section {
-            grid-template-columns: 1fr !important;
-            height: auto !important;
+
+            .splash-section {
+                display: flex;
+                flex-direction: column;
+                height: auto !important;
+                gap: 1.5rem;
+                padding: 2rem 5vw;
+            }
+
+            .splash-item {
+                width: 100%;
+                height: 40vh;
+            }
+
         }
 
         .splash-item {
             height: 40vh;
-        }
         }
 
         .splash-overlay {
