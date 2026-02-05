@@ -1,0 +1,49 @@
+{
+  "sections": [
+    {
+      "layout": "A",
+      "images": [
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/contenitore/image1.jpg",
+          "text": "Paralume realizzato su misura per un progetto di interior design.",
+          "project_name": "contenitore"
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/contenitore/image2.jpg",
+          "text": "Vista laterale del paralume.",
+          "project_name": "contenitore"
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/contenitore/image3.jpg",
+          "text": "Dettaglio del paralume.",
+          "project_name": "contenitore"
+        }
+      ]
+    },
+    {
+      "layout": "B",
+      "images": [
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/uffici/ufficio roma/image1.jpg",
+          "text": "Vista frontale",
+          "project_name": "ufficio roma"
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/uffici/ufficio roma/image2.jpg",
+          "text": "Corridoio interno con vista.",
+          "project_name": "ufficio roma"
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/uffici/ufficio roma/image3.jpg",
+          "text": "",
+          "project_name": "ufficio roma"
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/uffici/ufficio bologna/casetta.jpg",
+          "text": "",
+          "project_name": "ufficio roma"
+        }
+      ]
+    }
+  ]
+}

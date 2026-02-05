@@ -156,9 +156,10 @@
         .hero { min-height: calc(50vh - 80px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; padding-top: 4rem; padding-bottom: 2rem; scroll-margin-top: 85px; }
         .hero-content { position: relative; z-index: 1; animation: fadeInUp 0.6s ease-out; }
         .hero h1 { font-size: 6rem; font-weight: 300; margin-bottom: 2rem; letter-spacing: 8px; color: var(--text-color); }
-        .studio-logo { width: 132px; height: 132px; background: rgba(255, 255, 255, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 4rem; margin: 8rem auto; box-shadow: var(--shadow-medium); border: 0px solid var(--autumn-blue); animation: logoFloat 6s ease-in-out infinite; overflow: hidden; transition: background var(--transition), border-color var(--transition), box-shadow var(--transition); }
+        .studio-logo { width: 110px; height: 110px; background: rgba(255, 255, 255, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 4rem; margin: 8rem auto; box-shadow: var(--shadow-medium); border: 0px solid var(--autumn-blue); animation: logoFloat 6s ease-in-out infinite; overflow: hidden; transition: background var(--transition), border-color var(--transition), box-shadow var(--transition); }
         body.dark-theme .studio-logo { background: rgba(44, 44, 44, 0.9); border: 0px solid var(--accent-gold); box-shadow: var(--shadow-medium); }
-        .studio-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        .studio-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; filter: grayscale(100%); transition: filter 0.3s ease;}
+        .studio-logo:hover img {filter: grayscale(0%);}
         @keyframes logoFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
 
         /* Media queries per il logo dello studio */
@@ -441,11 +442,112 @@
         .project-detail .back-to-projects-btn {
             margin-top: 6rem; /* Aggiunge un margine superiore per allinearlo visivamente */
         }
+        
+        /* =========================
+        HOME SPLASH (EXPERIMENTAL)
+        ========================= */
+
+        .home-splash {
+            width: 100%;
+        }
+
+        .splash-section {
+            display: grid;
+            gap: 2rem;
+            padding: 3rem 4vw;
+        }
+
+        .splash-item {
+            position: relative;
+            overflow: hidden;
+            background: #eee;
+        }
+
+        .splash-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+
+            filter: grayscale(100%);
+            transition:
+                transform 0.35s ease,
+                filter 0.6s ease;
+        }
+
+
+        /* Mobile fallback */
+        @media (max-width: 768px) {
+        .splash-section {
+            grid-template-columns: 1fr !important;
+            height: auto !important;
+        }
+
+        .splash-item {
+            height: 40vh;
+        }
+        }
+
+        .splash-overlay {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            background: linear-gradient(
+                to top,
+                rgba(0,0,0,0.65),
+                rgba(0,0,0,0.0)
+            );
+
+            color: #fff;
+            padding: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.4;
+
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            backdrop-filter: blur(1px);
+        }
+
+        
+        
+        .splash-item:hover .splash-overlay {
+        opacity: 1;
+        }
+
+        .splash-item img {
+            transition: transform 0.4s ease;
+        }
+
+        .splash-item:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        
+        .splash-overlay {
+            transition: opacity 0.3s ease, backdrop-filter 0.3s ease;
+        }
+
+        /* =========================
+        BACKGROUND ANIMATIONS TOGGLE
+        ========================= */
+
+        body.bg-animations-off::before,
+        body.bg-animations-off::after,
+        body.bg-animations-off .geometric-square-background,
+        body.bg-animations-off .background-rectangle {
+            animation: none !important;
+            opacity: 0 !important;
+        }
+
 
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
+<body class="bg-animations-off">
     <div class="geometric-square-background"></div>
     <div class="background-rectangle"></div>
     <header>
@@ -488,7 +590,7 @@
                 </div>
             </div>
         </section>
-
+        <section id="homeSplash" class="home-splash"></section>
         <section class="home-projects" id="homeProjects">
             <div class="container">
                 <div class="projects-grid" id="homeProjectsGrid">
@@ -777,7 +879,7 @@
         // --- Logica di Navigazione e Visualizzazione Sezioni ---
 
         function showSection(sectionId, shouldScroll = true) {
-            ['hero', 'homeProjects', 'projectsSection', 'aboutSection', 'contactSection'].forEach(id => {
+            ['hero', 'homeSplash', 'homeProjects', 'projectsSection', 'aboutSection', 'contactSection'].forEach(id => {
                 document.getElementById(id).style.display = 'none';
             });
             const targetSection = document.getElementById(sectionId);
@@ -794,9 +896,11 @@
         function showHome() {
             currentView = 'home';
             showSection('hero', false); // Non scrollare all'hero
+            document.getElementById('homeSplash').style.display = 'block';
             document.getElementById('homeProjects').style.display = 'block';
             document.getElementById('singleProjectDetail').style.display = 'none';
-            generateHomeProjects();
+            renderHomeSplash();
+            //generateHomeProjects();
         }
         
         function showProjectsSection(shouldScroll = true) {
@@ -1085,6 +1189,104 @@
             document.querySelector('header').classList.toggle('scrolled', isScrolled);
             document.querySelector('footer').classList.toggle('scrolled', isScrolled);
         });
+
+        async function renderHomeSplash() {
+            try {
+                // 1. Carica i JSON di configurazione
+                const layouts = await fetch('layouts.json').then(r => r.json());
+                const splash = await fetch('splashpage.json').then(r => r.json());
+
+                const container = document.getElementById('homeSplash');
+                if (!container) return;
+
+                // 2. Reset contenuto splash
+                container.innerHTML = '';
+
+                // 3. Loop sulle sezioni verticali della home
+                splash.sections.forEach(section => {
+                const layoutDef = layouts[section.layout];
+                if (!layoutDef) {
+                    console.warn(`Layout "${section.layout}" non trovato`);
+                    return;
+                }
+
+                // Sezione splash (una griglia)
+                const sectionEl = document.createElement('div');
+                sectionEl.className = 'splash-section';
+                sectionEl.style.height = layoutDef.height;
+                sectionEl.style.gridTemplateColumns = `repeat(${layoutDef.columns}, 1fr)`;
+
+                // 4. Loop sui riquadri del layout
+                layoutDef.slots.forEach((slot, index) => {
+                    const imgData = section.images[index];
+                    if (!imgData) return;
+
+                    // Supporto stringa / oggetto
+                    const imgSrc =
+                    typeof imgData === 'string' ? imgData : imgData.src;
+                    const imgText =
+                    typeof imgData === 'object' && imgData.text ? imgData.text : null;
+                    const projectName =
+                    typeof imgData === 'object' && imgData.project_name
+                        ? imgData.project_name
+                        : null;
+
+                    // Riquadro
+                    const item = document.createElement('div');
+                    item.className = 'splash-item';
+                    item.style.gridColumn = slot.col;
+                    if (slot.row) item.style.gridRow = slot.row;
+
+                    // Immagine
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    img.loading = 'lazy';
+                    img.alt = imgText || '';
+
+                    item.appendChild(img);
+
+                    // Overlay testuale (opzionale)
+                    if (imgText) {
+                    const overlay = document.createElement('div');
+                    overlay.className = 'splash-overlay';
+                    overlay.textContent = imgText;
+                    item.appendChild(overlay);
+                    }
+
+                    // Click → progetto (opzionale)
+                    if (projectName) {
+                    const projectId = findProjectIdByName(projectName);
+                    if (projectId) {
+                        item.style.cursor = 'pointer';
+                        item.addEventListener('click', () => {
+                        showProjectsSection(false);
+                        showProject(projectId);
+                        });
+                    } else {
+                        console.warn(`Progetto "${projectName}" non trovato`);
+                    }
+                    }
+
+                    sectionEl.appendChild(item);
+                });
+
+                container.appendChild(sectionEl);
+                });
+
+            } catch (err) {
+                console.error('Errore in renderHomeSplash:', err);
+            }
+        }
+
+        
+        function findProjectIdByName(projectName) {
+            const project = allProjectsFlattened.find(p =>
+                p.categoryPath.split('.').pop() === projectName
+            );
+            return project ? project.id : null;
+        }
+
+
     </script>
 </body>
 </html>

@@ -1,0 +1,21 @@
+{
+  "A": {
+    "height": "70vh",
+    "columns": 12,
+    "slots": [
+      { "col": "1 / span 4" },
+      { "col": "5 / span 3" },
+      { "col": "8 / span 5" }
+    ]
+  },
+  "B": {
+    "height": "90vh",
+    "columns": 12,
+    "slots": [
+      { "col": "1 / span 4", "row": "1" },
+      { "col": "1 / span 4", "row": "2" },
+      { "col": "5 / span 4", "row": "1 / span 2" },
+      { "col": "9 / span 4", "row": "1 / span 2" }
+    ]
+  }
+}
