@@ -1,6 +1,6 @@
 {
   "A": {
-    "height": "70vh",
+    "height": "50vh",
     "columns": 12,
     "slots": [
       { "col": "1 / span 4" },
@@ -9,7 +9,7 @@
     ]
   },
   "B": {
-    "height": "90vh",
+    "height": "80vh",
     "columns": 12,
     "slots": [
       { "col": "1 / span 4", "row": "1" },

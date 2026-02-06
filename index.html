@@ -158,7 +158,7 @@
         .hero h1 { font-size: 6rem; font-weight: 300; margin-bottom: 2rem; letter-spacing: 8px; color: var(--text-color); }
         .studio-logo { width: 110px; height: 110px; background: rgba(255, 255, 255, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 4rem; margin: 8rem auto; box-shadow: var(--shadow-medium); border: 0px solid var(--autumn-blue); animation: logoFloat 6s ease-in-out infinite; overflow: hidden; transition: background var(--transition), border-color var(--transition), box-shadow var(--transition); }
         body.dark-theme .studio-logo { background: rgba(44, 44, 44, 0.9); border: 0px solid var(--accent-gold); box-shadow: var(--shadow-medium); }
-        .studio-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; filter: grayscale(100%); transition: filter 0.3s ease;}
+        .studio-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%;}
         .studio-logo:hover img {filter: grayscale(0%);}
         @keyframes logoFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
 
@@ -455,18 +455,28 @@
             display: grid;
             gap: 2rem;
             padding: 3rem 4vw;
+            grid-auto-rows: 1fr;
         }
+
 
         .splash-item {
             position: relative;
             overflow: hidden;
-            background: #eee;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+         /*utline: 1px solid rgba(0,0,0,0.03);*/
         }
 
+
         .splash-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+
+            object-fit: contain;
             display: block;
 
             filter: grayscale(100%);
@@ -474,6 +484,7 @@
                 transform 0.35s ease,
                 filter 0.6s ease;
         }
+
 
 
         /* Mobile fallback */
@@ -492,10 +503,6 @@
                 height: 40vh;
             }
 
-        }
-
-        .splash-item {
-            height: 40vh;
         }
 
         .splash-overlay {
