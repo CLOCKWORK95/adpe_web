@@ -1052,34 +1052,86 @@
             distributeMasonry(grid);
         }
 
-        function filterProjects(filter) {
+        async function filterProjects(filter) {
+
             lastActiveFilter = filter;
-            const projectsGrid = document.getElementById('projectsGrid');
+
+            const layouts = await fetch('layouts.json').then(r => r.json());
+            const layout = layouts["A"];
+
+            const grid = document.getElementById('projectsGrid');
+            grid.innerHTML = '';
 
             const filteredProjects = (filter === 'all')
                 ? allProjectsFlattened
                 : allProjectsFlattened.filter(p => p.categoryPath.startsWith(filter));
 
-            // Creiamo i progetti come stringa
-            const cardsHTML = filteredProjects.map(project => `
-                <div class="project-card fade-in" onclick="showProject(${project.id})">
-                <img src="${project.images[0].src}" alt="${project.title}" loading="lazy">
-                <div class="project-overlay">${project.description || ''}</div>
-                </div>
-            `).join('');
+            let imageQueue = [];
 
-            // Inseriamo tutte le card temporaneamente
-            projectsGrid.innerHTML = cardsHTML;
+            filteredProjects.forEach(project => {
 
-            // Distribuiamo le card in colonne
-            distributeMasonry(projectsGrid);
+                project.images.forEach(img => {
+                    imageQueue.push({
+                        src: img.src,
+                        description: img.description,
+                        projectId: project.id
+                    });
+                });
 
-            // Aggiorniamo lo stato dei bottoni
+            });
+
+            let i = 0;
+
+            while (i < imageQueue.length) {
+
+                const section = document.createElement('div');
+                section.className = 'splash-section';
+                section.style.height = layout.height;
+                section.style.gridTemplateColumns = `repeat(${layout.columns},1fr)`;
+
+                layout.slots.forEach(slot => {
+
+                    if (i >= imageQueue.length) return;
+
+                    const imgData = imageQueue[i];
+                    i++;
+
+                    const item = document.createElement('div');
+                    item.className = 'splash-item';
+
+                    item.style.gridColumn = slot.col;
+                    if (slot.row) item.style.gridRow = slot.row;
+
+                    const img = document.createElement('img');
+                    img.src = imgData.src;
+                    img.loading = 'lazy';
+
+                    item.appendChild(img);
+
+                    if (imgData.description) {
+
+                        const overlay = document.createElement('div');
+                        overlay.className = 'splash-overlay';
+                        overlay.textContent = imgData.description;
+
+                        item.appendChild(overlay);
+                    }
+
+                    item.addEventListener('click', () => {
+                        showProject(imgData.projectId);
+                    });
+
+                    section.appendChild(item);
+
+                });
+
+                grid.appendChild(section);
+            }
+
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.filter === filter);
             });
         }
-
 
         // Aggiungiamo lo stesso comportamento per le anteprime nella sezione "Progetti"
         document.addEventListener('DOMContentLoaded', () => {
