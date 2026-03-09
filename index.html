@@ -1049,7 +1049,7 @@
                 <div class="project-overlay">${project.description || ''}</div>
                 </div>
             `).join('');
-            distributeMasonry(grid);
+            //distributeMasonry(grid);
         }
 
         async function filterProjects(filter) {
@@ -1236,7 +1236,7 @@
             document.getElementById('modalImage').src = currentProjectImages[currentImageIndex].src;
         }
 
-        function distributeMasonry(grid) {
+        /* function distributeMasonry(grid) {
             const cards = Array.from(grid.querySelectorAll('.project-card'));
             if (cards.length === 0) return;
 
@@ -1256,7 +1256,7 @@
                 colCards.forEach(card => colDiv.appendChild(card));
                 grid.appendChild(colDiv);
             });
-        }
+        }*/
 
         // Header e Footer allo scroll
         window.addEventListener('scroll', function() {
