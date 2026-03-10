@@ -5,10 +5,14 @@
         "id": 1,
         "title": "Casa Di Gigi",
         "description": "Ristrutturazione di un appartamento al centro città.",
-        "luogo_data": "Roma, 2012",
+        "luogo_data": "Roma, 10 Marzo 2026",
         "posizione": "Via di Capo Le Case, Roma",
         "stato": "Completato",
         "committente": "Privato",
+        "layoutSequence": [
+          "PROJECT_SINGLE",
+          "PROJECT_PAIR"
+        ],
         "images": [
           {
             "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/residenziale/casa-di-gigi/image1.jpg",
@@ -26,11 +30,6 @@
         "id": 2,
         "title": "Ufficio Bologna",
         "description": "Ufficio nella periferia di Bologna.",
-        "luogo_data": "Roma, 2012",
-        "posizione": "Via di Capo Le Case, Roma",
-        "stato": "Completato",
-        "committente": "Privato",
-        "layoutSequence": ["PROJECT_PAIR", "PROJECT_SINGLE"],
         "images": [
           {
             "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/uffici/ufficio bologna/casetta.jpg",
@@ -42,11 +41,6 @@
         "id": 3,
         "title": "Ufficio Roma",
         "description": "Ufficio al centro di Roma.",
-        "luogo_data": "Roma, 2012",
-        "posizione": "Via di Capo Le Case, Roma",
-        "stato": "Completato",
-        "committente": "Privato",
-        "layoutSequence": ["PROJECT_PAIR", "PROJECT_SINGLE"],
         "images": [
           {
             "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/uffici/ufficio roma/image1.jpg",
@@ -69,11 +63,6 @@
       "id": 4,
       "title": "Cesto",
       "description": "Cesto di design.",
-      "luogo_data": "Roma, 2012",
-      "posizione": "Via di Capo Le Case, Roma",
-      "stato": "Completato",
-      "committente": "Privato",
-      "layoutSequence": ["PROJECT_PAIR", "PROJECT_SINGLE"],
       "images": [
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/cesto/image1.jpg",
@@ -86,10 +75,6 @@
         "id": 5,
         "title": "Contenitore",
         "description": "Un simpatico paralume azzurro.",
-        "luogo_data": "Roma, 2012",
-        "posizione": "Via di Capo Le Case, Roma",
-        "stato": "Completato",
-        "committente": "Privato",
         "images": [
           {
             "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/contenitore/image1.jpg",
@@ -117,8 +102,6 @@
         "id": 6,
         "title": "Lampadine",
         "description": "Sistema di illuminazione in stile Industrial.",
-        "luogo_data": "Roma, 2012",
-        "layoutSequence": ["PROJECT_SINGLE"],
         "images": [
           {
             "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/lampadine/image1.jfif",
@@ -131,8 +114,6 @@
       "id": 7,
       "title": "Tavolini",
       "description": "I nostri tavolini di design.",
-      "luogo_data": "Roma, 2012",
-      "layoutSequence": ["PROJECT_SINGLE"],
       "images": [
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/tavolini/image1.jpg",
