@@ -164,7 +164,10 @@
             gap: 1.5rem; 
             margin-top: 0.3rem; /* Bilanciamento visivo con i testi del menu */
         }
-        .language-group, .theme-group { display: flex; align-items: center; }
+        .language-group, .theme-group { 
+            display: none !important; /* Nasconde l'icona della lampadina */
+            align-items: center; 
+        }
         .language-group { gap: 0.8rem; margin-right: 0.5rem; }
 
         .header-social-link, .language-selector-item { color: var(--text-color); font-size: 1.3rem; transition: var(--transition); text-decoration: none; cursor: pointer; }
@@ -1392,8 +1395,11 @@
 
             // Se è il caricamento iniziale, mostra la home
             if (isInitialLoad) {
-                const savedTheme = localStorage.getItem('theme') || 'light';
-                if (savedTheme === 'dark') document.body.classList.add('dark-theme');
+                // Disattivato il caricamento del tema scuro
+                // const savedTheme = localStorage.getItem('theme') || 'light';
+                // if (savedTheme === 'dark') document.body.classList.add('dark-theme');
+                document.body.classList.remove('dark-theme'); // Sicurezza extra: rimuove sempre il tema scuro
+                localStorage.setItem('theme', 'light'); // Azzera la memoria del browser
                 showProjectsSection(false); 
             } else {
                 // Altrimenti, ricarica la vista corrente per aggiornare i testi
@@ -1647,8 +1653,6 @@
                     <p class="proj-main-desc">${project.description || ''}</p>
                     
                     ${metaHtml} 
-                    
-                    <button class="btn-back-minimal" onclick="goBackToProjects()">${translations[currentLang].backToProjects}</button>
                 </div>
             </div>`; // <-- Chiude il div project-detail-grid principale
 
