@@ -123,7 +123,7 @@
         nav {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start; /* Modificato: aggancia tutto in alto */
         }
 
         .header-left { display: flex; align-items: center; gap: 10px; }
@@ -132,7 +132,14 @@
         .logo { font-size: 1.6rem; font-weight: 300; color: var(--text-color); text-decoration: none; letter-spacing: 2px; transition: var(--transition); }
         .logo:hover { transform: scale(1.05); }
 
-        .nav-menu { display: flex; gap: 6rem; list-style: none; flex-grow: 1; justify-content: center; }
+        .nav-menu { 
+            display: flex; 
+            gap: 6rem; 
+            list-style: none; 
+            flex-grow: 1; 
+            justify-content: center; 
+            align-items: flex-start; /* Modificato */
+        }
         .nav-link { color: var(--text-color); text-decoration: none; font-weight: 400; font-size: 1.5rem; transition: var(--transition); position: relative; cursor: pointer; letter-spacing: 1px; }
         .nav-link:hover { color: var(--autumn-blue); transform: translateY(-2px) scale(1.02); }
         .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--autumn-blue); transition: var(--transition); }
@@ -141,7 +148,12 @@
         .hamburger { display: none; flex-direction: column; cursor: pointer; transition: var(--transition); }
         .hamburger span { width: 25px; height: 2px; background: var(--text-color); margin: 3px 0; transition: var(--transition); }
 
-        .header-right-icons { display: flex; align-items: center; gap: 1.5rem; }
+        .header-right-icons { 
+            display: flex; 
+            align-items: flex-start; /* Modificato */
+            gap: 1.5rem; 
+            margin-top: 0.3rem; /* Bilanciamento visivo con i testi del menu */
+        }
         .language-group, .theme-group { display: flex; align-items: center; }
         .language-group { gap: 0.8rem; margin-right: 0.5rem; }
 
@@ -636,6 +648,130 @@
             opacity: 1;
             margin-bottom: 2.5rem;
         }
+
+        /* =================================================== */
+        /* --- MENU A TENDINA ELEGANTI E SCONTORNATI --- */
+        /* =================================================== */
+        
+        .nav-item-dropdown, .lang-dropdown { 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Rimosso 'position: relative', ora fluiscono nella barra! */
+        }
+
+        /* Contenitori nascosti dei sottomenu */
+        .nav-item-dropdown .dropdown-content, 
+        .lang-dropdown-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* La transizione fluida del max-height allungherà la barra header */
+            transition: max-height 0.6s ease, opacity 0.4s ease, margin-top 0.4s ease;
+            background: transparent; /* Niente contorno */
+            box-shadow: none; /* Niente ombre */
+        }
+
+        /* Animazioni di apertura SOLO se siamo nella sezione progetti o nel dettaglio di un progetto */
+        body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
+        body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content {
+            max-height: 600px; 
+            opacity: 1;
+            margin-top: 2rem; 
+        }
+
+        .lang-dropdown:hover .lang-dropdown-content {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+
+        /* --- Testo Filtri (Progetti) --- */
+        .dropdown-content .filter-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            padding: 0.6rem 1rem;
+            margin: 0;
+            font-size: 1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .dropdown-content .filter-btn:hover, 
+        .dropdown-content .filter-btn.active {
+            background: transparent; /* Sfondo invisibile */
+            color: var(--autumn-blue);
+            transform: scale(1.1); /* Leggero ingrandimento */
+            font-weight: bold;
+        }
+
+        /* --- Testo Lingua --- */
+        .current-lang {
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--text-color);
+            transition: color var(--transition);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+        
+        .current-lang:hover { color: var(--autumn-blue); }
+
+        .lang-dropdown-content a {
+            padding: 0.4rem 0; 
+            color: var(--text-color); 
+            text-decoration: none;
+            font-size: 0.9rem; 
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        .lang-dropdown-content a:hover { 
+            background: transparent; 
+            color: var(--autumn-blue); 
+        }
+
+        /* =================================================== */
+        /* --- LOGO TITOLO GIGANTE (x3) --- */
+        /* =================================================== */
+        .title-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 12rem; /* Più respiro per il logo gigante */
+            margin-bottom: 12rem; /* Più respiro per il logo gigante */
+            animation: fadeInUp 0.8s ease-out forwards;
+            width: 100%;
+        }
+
+        .title-logo-center {
+            width: 180px; /* x3 esatto rispetto ai vecchi 80px! */
+            height: 180px; 
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: var(--shadow-medium);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .title-logo-center:hover { 
+            transform: scale(1.03); 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15); /* Ombra più drammatica al passaggio */
+        }
+
+        /* Sicurezza per gli smartphone: evita che 240px rompa lo schermo sui telefoni */
+        @media (max-width: 768px) {
+            .title-logo-center {
+                width: 150px;
+                height: 150px;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -644,20 +780,24 @@
     <div class="background-rectangle"></div>
     <header>
         <nav class="container">
-            <div class="header-left">
-                <img src="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="ADPE Logo" class="header-logo-small">
-                <a href="#" class="logo" onclick="showProjectsSection()">ADPE</a>
-            </div>
             <ul class="nav-menu">
-                <li><a href="#" class="nav-link" data-lang-key="projectsLink" onclick="showProjectsSection()">progetti</a></li>
-                <li><a href="#" class="nav-link" data-lang-key="aboutLink" onclick="showAbout()">adpe</a></li>
-                <li><a href="#" class="nav-link" data-lang-key="contactLink" onclick="showContact()">contatti</a></li>
+                <li class="nav-item-dropdown">
+                    <a href="#" class="nav-link" data-lang-key="projectsLink" onclick="showProjectsSection()">Progetti</a>
+                    <div class="dropdown-content" id="projectFilters">
+                        </div>
+                </li>
+                <li><a href="#" class="nav-link" data-lang-key="aboutLink" onclick="showAbout()">Chi Siamo</a></li>
+                <li><a href="#" class="nav-link" data-lang-key="contactLink" onclick="showContact()">Contatti</a></li>
             </ul>
+
             <div class="header-right-icons">
-                <div class="language-group">
-                    <a href="#" class="language-selector-item active" data-lang="it">IT</a>
-                    <a href="#" class="language-selector-item" data-lang="en">EN</a>
-                    <a href="#" class="language-selector-item" data-lang="fr">FR</a>
+                <div class="lang-dropdown">
+                    <span class="current-lang" id="currentLangDisplay">IT <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></span>
+                    <div class="lang-dropdown-content">
+                        <a href="#" class="language-selector-item" data-lang="it">IT</a>
+                        <a href="#" class="language-selector-item" data-lang="en">EN</a>
+                        <a href="#" class="language-selector-item" data-lang="fr">FR</a>
+                    </div>
                 </div>
                 <div class="theme-group">
                     <a href="#" class="header-social-link" id="themeToggle" aria-label="Toggle dark/light theme">
@@ -937,6 +1077,12 @@
                 }
             });
 
+            // Aggiorna testo tendina lingua
+            const currentLangDisplay = document.getElementById('currentLangDisplay');
+            if(currentLangDisplay) {
+                currentLangDisplay.innerHTML = `${lang.toUpperCase()} <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>`;
+            }
+
             // Aggiorna selettore lingua attivo
             document.querySelectorAll('.language-selector-item').forEach(item => {
                 item.classList.toggle('active', item.dataset.lang === lang);
@@ -965,6 +1111,9 @@
         // --- Logica di Navigazione e Visualizzazione Sezioni ---
 
         function showSection(sectionId, shouldScroll = true) {
+            // AGGIUNTA: Diciamo all'HTML in che sezione ci troviamo
+            document.body.setAttribute('data-view', currentView);
+
             [
                 'hero', 
                 'homeSplash', 
@@ -999,24 +1148,21 @@
             currentView = 'projects';
             showSection('projectsSection', shouldScroll);
             document.getElementById('singleProjectDetail').style.display = 'none';
-            document.getElementById('projectFilters').style.display = 'block';
             document.getElementById('projectsGrid').style.display = 'block';
 
             const projectsSection = document.getElementById('projectsSection');
             let titleWrapper = projectsSection.querySelector('.title-wrapper'); 
 
-            if (!titleWrapper) { // Se il contenitore non esiste, crealo
+            if (!titleWrapper) { // Se il contenitore non esiste, crealo con il logo al centro
                 titleWrapper = document.createElement('div');
                 titleWrapper.className = 'title-wrapper';
                 titleWrapper.innerHTML = `
-                    <h2 class="section-title" data-lang-key="portfolioTitle"></h2>
-                    <i class="fas fa-sliders-h filter-toggle-icon" onclick="toggleFilters()" title="Mostra/Nascondi Filtri"></i>
+                    <img src="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="ADPE Logo" class="title-logo-center">
                 `;
                 projectsSection.prepend(titleWrapper);
             }
             // Rendi visibile il wrapper con flexbox
             titleWrapper.style.display = 'flex'; 
-            titleWrapper.querySelector('.section-title').textContent = translations[currentLang].portfolioTitle;
 
             generateFilters();
             filterProjects(lastActiveFilter);
@@ -1038,14 +1184,15 @@
 
             currentView = 'projectDetail';
             showSection('projectsSection', shouldScroll);
-            document.getElementById('projectFilters').style.display = 'none';
+            
+            // RIMOZIONE RIGA BUG: Non nascondiamo più 'projectFilters' perché ora è il menu in alto!
             document.getElementById('projectsGrid').style.display = 'none';
 
-            // Nascondi il titolo "Progetti" quando si visualizza il dettaglio del progetto
+            // Nascondi il logo gigante "x3" quando si entra nel dettaglio del progetto
             const projectsSection = document.getElementById('projectsSection');
-            const sectionTitleElement = projectsSection.querySelector('.section-title');
-            if (sectionTitleElement) {
-                sectionTitleElement.style.display = 'none';
+            const titleWrapper = projectsSection.querySelector('.title-wrapper');
+            if (titleWrapper) {
+                titleWrapper.style.display = 'none';
             }
 
             const detailContainer = document.getElementById('singleProjectDetail');
@@ -1053,6 +1200,7 @@
             detailContainer.dataset.projectId = projectId;
 
             const backButtonHtml = `<button class="back-to-projects-btn" onclick="goBackToProjects()">${translations[currentLang].backToProjects}</button>`;
+            
             const galleryHtml = project.images.map(image => `
                 <div class="gallery-item">
                     <img src="${image.src}" alt="${image.description}" onclick="openImageModal(${project.id}, '${image.src}')" loading="lazy">
@@ -1125,8 +1273,16 @@
         }
 
         async function filterProjects(filter) {
-
             lastActiveFilter = filter;
+
+            // Se eravamo dentro a un progetto specifico, torniamo alla vista a griglia
+            if (currentView === 'projectDetail') {
+                document.getElementById('singleProjectDetail').style.display = 'none';
+                document.getElementById('projectsGrid').style.display = 'block';
+                const titleWrapper = document.querySelector('.title-wrapper');
+                if (titleWrapper) titleWrapper.style.display = 'flex';
+                currentView = 'projects';
+            }
 
             const layouts = await fetch('layouts.json').then(r => r.json());
             const layout = layouts["C"];
@@ -1141,13 +1297,11 @@
             let imageQueue = [];
 
             filteredProjects.forEach(project => {
-                // Verifichiamo che il progetto abbia almeno un'immagine
                 if (project.images && project.images.length > 0) {
-                    const coverImage = project.images[0]; // Prendiamo SOLO la prima immagine
-                    
+                    const coverImage = project.images[0]; 
                     imageQueue.push({
                         src: coverImage.src,
-                        description: project.title, // Usiamo il Titolo del Progetto come didascalia che appare col mouse
+                        description: project.title,
                         projectId: project.id
                     });
                 }
@@ -1156,14 +1310,12 @@
             let i = 0;
 
             while (i < imageQueue.length) {
-
                 const section = document.createElement('div');
                 section.className = 'splash-section';
                 section.style.height = layout.height;
                 section.style.gridTemplateColumns = `repeat(${layout.columns},1fr)`;
 
                 layout.slots.forEach(slot => {
-
                     if (i >= imageQueue.length) return;
 
                     const imgData = imageQueue[i];
@@ -1181,13 +1333,11 @@
 
                     item.appendChild(img);
 
-                    // 1. PRIMA aggiungiamo l'immagine e il suo evento click
                     item.addEventListener('click', () => {
                         showProject(imgData.projectId);
                     });
                     section.appendChild(item); 
 
-                    // 2. DOPO aggiungiamo la didascalia
                     if (imgData.description) {
                         const caption = document.createElement('div');
                         caption.className = 'splash-caption';
@@ -1196,8 +1346,7 @@
                         caption.textContent = imgData.description;
                         section.appendChild(caption);
                     }
-                    
-                }); // <--- Fine del forEach
+                }); 
 
                 grid.appendChild(section);
             }
