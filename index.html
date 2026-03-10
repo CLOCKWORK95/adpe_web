@@ -113,11 +113,11 @@
         }
 
         header.scrolled {
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), transparent);
+            background: var(--primary-color); /* Sfondo solido che maschera i contenuti */
         }
 
         body.dark-theme header.scrolled {
-            background: linear-gradient(to bottom, rgba(26, 26, 26, 0.9), transparent);
+            background: var(--primary-color); /* Funziona in automatico anche col tema scuro */
         }
 
         nav {
@@ -311,7 +311,7 @@
         .gallery-item img { max-height: 70vh; width: auto; max-width: 55%; height: auto; object-fit: contain; display: block; flex-shrink: 0; padding: 0.5rem; border-radius: 8px; box-shadow: var(--shadow-light); cursor: pointer; }
         .gallery-description { flex-grow: 1; padding: 1rem 2rem; margin: 0; max-width: 45%; line-height: 1.7; font-size: 1.15rem; text-align: inherit; color: var(--text-color); opacity: 0.9; font-style: normal; }
 
-        /* Sezioni "Chi Siamo" e "Contatti" */
+        /* Sezioni "adpe" e "Contatti" */
         .projects-section, .about-section, .contact-section { padding: 4rem 0; min-height: calc(100vh - 80px); display: flex; flex-direction: column; align-items: center; text-align: center; scroll-margin-top: 85px; }
         .about-content, .contact-content { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
         .about-title, .contact-title { font-size: 3.5rem; font-weight: 200; margin-bottom: 2rem; color: var(--text-color); letter-spacing: 1px; animation: fadeInUp 0.6s ease-out forwards; }
@@ -461,6 +461,7 @@
             display: grid;
             gap: 2rem;
             padding: 3rem 4vw;
+            margin-bottom: 8rem; /* ...e ho aggiunto questo per distanziare nettamente una fila dall'altra! */
             grid-auto-rows: auto;
         }
 
@@ -589,7 +590,52 @@
             opacity: 0 !important;
         }
 
+        /* --- Wrapper per Titolo e Icona Filtro --- */
+        .title-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px; /* Spazio tra la scritta Progetti e l'icona */
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
 
+        .title-wrapper .section-title {
+            margin-bottom: 0; /* Annulla il margine del titolo base per allinearlo */
+            animation: none;
+        }
+
+        /* Stile dell'icona elegante */
+        .filter-toggle-icon {
+            font-size: 1.8rem;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0.5; /* Leggermente sfumata di default */
+        }
+
+        .filter-toggle-icon:hover {
+            color: var(--autumn-blue);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* --- Animazione Contenitore Filtri --- */
+        .project-filters {
+            max-height: 0; /* Altezza zero di default */
+            opacity: 0;    /* Invisibile di default */
+            overflow: hidden; /* Taglia fuori i bottoni che escono */
+            transition: max-height 0.4s ease, opacity 0.4s ease, margin 0.4s ease;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        /* Questa classe viene aggiunta col clic dal JS */
+        .project-filters.show-filters {
+            max-height: 300px; /* Abbastanza per contenere tutti i bottoni */
+            opacity: 1;
+            margin-bottom: 2.5rem;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -603,9 +649,9 @@
                 <a href="#" class="logo" onclick="showProjectsSection()">ADPE</a>
             </div>
             <ul class="nav-menu">
-                <li><a href="#" class="nav-link" data-lang-key="projectsLink" onclick="showProjectsSection()">Progetti</a></li>
-                <li><a href="#" class="nav-link" data-lang-key="aboutLink" onclick="showAbout()">Chi Siamo</a></li>
-                <li><a href="#" class="nav-link" data-lang-key="contactLink" onclick="showContact()">Contatti</a></li>
+                <li><a href="#" class="nav-link" data-lang-key="projectsLink" onclick="showProjectsSection()">progetti</a></li>
+                <li><a href="#" class="nav-link" data-lang-key="aboutLink" onclick="showAbout()">adpe</a></li>
+                <li><a href="#" class="nav-link" data-lang-key="contactLink" onclick="showContact()">contatti</a></li>
             </ul>
             <div class="header-right-icons">
                 <div class="language-group">
@@ -643,9 +689,8 @@
         </section>
 
         <section class="container projects-section" id="projectsSection" style="display: none;">
-            <div class="project-filters" id="projectFilters" style="text-align: center; margin-bottom: 2.5rem;">
-                <!-- I bottoni del filtro saranno generati da JS -->
-            </div>
+            <div class="project-filters" id="projectFilters">
+                </div>
             
             <div class="projects-grid" id="projectsGrid">
                 <!-- Progetti generati dinamicamente da JavaScript -->
@@ -658,7 +703,6 @@
 
         <section class="about-section" id="aboutSection" style="display: none;">
             <div class="container about-content">
-                <h2 class="about-title" data-lang-key="aboutTitle">Chi Siamo</h2>
                 <img src="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/studioadpe.jpg" alt="Immagine dello Studio" class="about-image">
                 <p class="about-text" data-lang-key="aboutText">
                     Lo Studio ADPE, fondato dall'architetto Adriano Pernazza, è una realtà dinamica e innovativa nel panorama dell'architettura e del design. Da anni, ci dedichiamo alla progettazione di spazi che combinano estetica, funzionalità e sostenibilità. La nostra filosofia si basa sull'ascolto attento delle esigenze del cliente, trasformando le idee in realtà tangibili e uniche.
@@ -690,7 +734,6 @@
 
         <section class="contact-section" id="contactSection" style="display: none;">
             <div class="container contact-content">
-                <h2 class="contact-title" data-lang-key="contactTitle">Contatti</h2>
                 <p class="contact-text" data-lang-key="contactText">
                     Siamo a vostra disposizione per qualsiasi informazione o per discutere del vostro prossimo progetto. Non esitate a contattarci.
                 </p>
@@ -768,10 +811,10 @@
         // Oggetto per le traduzioni
         const translations = {
             it: {
-                pageTitle: "ADPE Architettura e Design", homeLink: "Home", projectsLink: "Progetti", aboutLink: "Chi Siamo", contactLink: "Contatti",
-                heroTitle: "ADPE", heroSubtitle: "Architettura e Design by Adriano Pernazza", portfolioTitle: "Progetti",
+                pageTitle: "ADPE Architettura e Design", homeLink: "Home", projectsLink: "progetti", aboutLink: "adpe", contactLink: "contatti",
+                heroTitle: "ADPE", heroSubtitle: "Architettura e Design by Adriano Pernazza", portfolioTitle: "",
                 category_architettura: "Architettura", category_design: "Design", category_residenziale: "Residenziale", category_pubblica: "Pubblica", category_uffici: "Uffici",
-                unknownCategory: "Categoria Sconosciuta", aboutTitle: "Chi Siamo", category_illuminazione: "Illuminazione",
+                unknownCategory: "Categoria Sconosciuta", aboutTitle: "adpe", category_illuminazione: "Illuminazione",
                 aboutText: "Lo Studio ADPE, fondato dall'architetto Adriano Pernazza, è una realtà dinamica e innovativa nel panorama dell'architettura e del design. Da anni, ci dedichiamo alla progettazione di spazi che combinano estetica, funzionalità e sostenibilità. La nostra filosofia si basa sull'ascolto attento delle esigenze del cliente, trasformando le idee in realtà tangibili e uniche.",
                 creativityTitle: "Creatività e Innovazione", creativityDesc: "Approccio originale e soluzioni all'avanguardia per ogni progetto.",
                 collaborationTitle: "Collaborazione Clienti", collaborationDesc: "Un processo di progettazione partecipato e trasparente.",
@@ -782,8 +825,8 @@
                 filterAll: "Tutti", backToProjects: "← Indietro"
             },
             en: {
-                pageTitle: "Architecture & Design Studio", homeLink: "Home", projectsLink: "Projects", aboutLink: "About Us", contactLink: "Contact",
-                heroTitle: "ADPE", heroSubtitle: "Architecture and Design by Adriano Pernazza", portfolioTitle: "Projects",
+                pageTitle: "Architecture & Design Studio", homeLink: "Home", projectsLink: "projects", aboutLink: "adpe", contactLink: "contact",
+                heroTitle: "ADPE", heroSubtitle: "Architecture and Design by Adriano Pernazza", portfolioTitle: "",
                 category_architettura: "Architecture", category_design: "Design", category_residenziale: "Residential", category_pubblica: "Public", category_uffici: "Offices",
                 unknownCategory: "Unknown Category", aboutTitle: "About Us", category_illuminazione: "Illumination",
                 aboutText: "ADPE Studio, founded by architect Adriano Pernazza, is a dynamic and innovative reality in the field of architecture and design. For years, we have been dedicated to designing spaces that combine aesthetics, functionality, and sustainability. Our philosophy is based on carefully listening to client needs, transforming ideas into tangible and unique realities.",
@@ -796,8 +839,8 @@
                 filterAll: "All", backToProjects: "← Back"
             },
             fr: {
-                pageTitle: "Studio Architecture & Design", homeLink: "Accueil", projectsLink: "Projets", aboutLink: "À Propos", contactLink: "Contact",
-                heroTitle: "ADPE", heroSubtitle: "Architecture et Design par Adriano Pernazza", portfolioTitle: "Projets",
+                pageTitle: "Studio Architecture & Design", homeLink: "Accueil", projectsLink: "projets", aboutLink: "adpe", contactLink: "contact",
+                heroTitle: "ADPE", heroSubtitle: "Architecture et Design par Adriano Pernazza", portfolioTitle: "",
                 category_architettura: "Architecture", category_design: "Design", category_residenziale: "Résidentiel", category_pubblica: "Publique", category_uffici: "Bureaux",
                 unknownCategory: "Catégorie Inconnue", aboutTitle: "À Propos de Nous", category_illuminazione: "Éclairage",
                 aboutText: "Le Studio ADPE, fondé par l'architecte Adriano Pernazza, est une réalité dynamique et innovante dans le domaine de l'architecture et du design. Depuis des années, nous nous consacrons à la conception d'espace qui allient esthétique, fonctionnalité et durabilité. Notre philosophie repose sur une écoute attentive des besoins du client, transformant les idées en réalités tangibles et uniques.",
@@ -960,17 +1003,20 @@
             document.getElementById('projectsGrid').style.display = 'block';
 
             const projectsSection = document.getElementById('projectsSection');
-            let sectionTitleElement = projectsSection.querySelector('.section-title'); // Usa let per riassegnare
+            let titleWrapper = projectsSection.querySelector('.title-wrapper'); 
 
-            if (!sectionTitleElement) { // Se il titolo non esiste, crealo
-                sectionTitleElement = document.createElement('h2');
-                sectionTitleElement.className = 'section-title';
-                sectionTitleElement.setAttribute('data-lang-key', 'portfolioTitle');
-                projectsSection.prepend(sectionTitleElement);
+            if (!titleWrapper) { // Se il contenitore non esiste, crealo
+                titleWrapper = document.createElement('div');
+                titleWrapper.className = 'title-wrapper';
+                titleWrapper.innerHTML = `
+                    <h2 class="section-title" data-lang-key="portfolioTitle"></h2>
+                    <i class="fas fa-sliders-h filter-toggle-icon" onclick="toggleFilters()" title="Mostra/Nascondi Filtri"></i>
+                `;
+                projectsSection.prepend(titleWrapper);
             }
-            // Assicurati che il titolo sia sempre visibile quando si torna alla sezione progetti
-            sectionTitleElement.style.display = 'block'; 
-            sectionTitleElement.textContent = translations[currentLang].portfolioTitle; // Aggiorna il testo in base alla lingua
+            // Rendi visibile il wrapper con flexbox
+            titleWrapper.style.display = 'flex'; 
+            titleWrapper.querySelector('.section-title').textContent = translations[currentLang].portfolioTitle;
 
             generateFilters();
             filterProjects(lastActiveFilter);
@@ -1095,15 +1141,16 @@
             let imageQueue = [];
 
             filteredProjects.forEach(project => {
-
-                project.images.forEach(img => {
+                // Verifichiamo che il progetto abbia almeno un'immagine
+                if (project.images && project.images.length > 0) {
+                    const coverImage = project.images[0]; // Prendiamo SOLO la prima immagine
+                    
                     imageQueue.push({
-                        src: img.src,
-                        description: img.description,
+                        src: coverImage.src,
+                        description: project.title, // Usiamo il Titolo del Progetto come didascalia che appare col mouse
                         projectId: project.id
                     });
-                });
-
+                }
             });
 
             let i = 0;
@@ -1190,6 +1237,12 @@
                     }
                 }
             }
+        }
+        
+        // Funzione per mostrare/nascondere i filtri quando clicchi l'icona
+        function toggleFilters() {
+            const filtersContainer = document.getElementById('projectFilters');
+            filtersContainer.classList.toggle('show-filters');
         }
 
         function generateFilters() {
