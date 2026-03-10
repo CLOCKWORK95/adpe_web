@@ -27,5 +27,18 @@
       { "col": "5 / span 4", "row": "1 / span 7" },
       { "col": "10 / span 3", "row": "1 / span 7" }
     ]
+  },
+  "PROJECT_PAIR": {
+    "columns": 12,
+    "slots": [
+      { "col": "2 / span 3" },
+      { "col": "8 / span 3" }
+    ]
+  },
+  "PROJECT_SINGLE": {
+    "columns": 12,
+    "slots": [
+      { "col": "5 / span 4" }
+    ]
   }
 }

@@ -120,6 +120,16 @@
             background: var(--primary-color); /* Funziona in automatico anche col tema scuro */
         }
 
+        header:hover, 
+        header.scrolled {
+            background: var(--primary-color); 
+        }
+
+        body.dark-theme header:hover, 
+        body.dark-theme header.scrolled {
+            background: var(--primary-color); 
+        }
+
         nav {
             display: flex;
             justify-content: space-between;
@@ -309,7 +319,7 @@
             animation: fadeInUp 0.6s ease-out forwards;
         }
 
-        /* Project Detail Page */
+        /* Project Detail Page 
         .project-detail { padding: 4rem 0; min-height: calc(100vh - 80px); display: flex; flex-direction: column; align-items: center; text-align: center; }
         .project-detail-title { font-size: 3.5rem; font-weight: 200; margin-bottom: 1rem; color: var(--text-color); letter-spacing: 1px; }
         .project-detail-category { color: var(--autumn-blue); font-size: 1.1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2rem; }
@@ -321,7 +331,134 @@
         .gallery-item:nth-child(odd) { flex-direction: row; margin-right: auto; text-align: left; }
         .gallery-item:nth-child(even) { flex-direction: row-reverse; margin-left: auto; text-align: right; }
         .gallery-item img { max-height: 70vh; width: auto; max-width: 55%; height: auto; object-fit: contain; display: block; flex-shrink: 0; padding: 0.5rem; border-radius: 8px; box-shadow: var(--shadow-light); cursor: pointer; }
-        .gallery-description { flex-grow: 1; padding: 1rem 2rem; margin: 0; max-width: 45%; line-height: 1.7; font-size: 1.15rem; text-align: inherit; color: var(--text-color); opacity: 0.9; font-style: normal; }
+        .gallery-description { flex-grow: 1; padding: 1rem 2rem; margin: 0; max-width: 45%; line-height: 1.7; font-size: 1.15rem; text-align: inherit; color: var(--text-color); opacity: 0.9; font-style: normal; } */
+
+        /* =================================================== */
+        /* --- LAYOUT PROGETTO SINGOLO (GRIGLIA EDITORIALE) ---*/
+        /* =================================================== */
+        
+        .project-detail {
+            width: 100%;
+            padding-top: 2rem;
+            padding-bottom: 6rem;
+        }
+
+        .project-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem; /* Distanza tra le colonne */
+            row-gap: 8rem; /* Distanza verticale tra le righe di foto */
+            max-width: 92vw;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .proj-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 100%; /* Si espande per riempire tutta l'altezza della riga */
+            display: flex; /* Flexbox è perfetto per centrare */
+            justify-content: center; /* Centra orizzontalmente se l'immagine è stretta */
+            align-items: center; /* Centra verticalmente se l'immagine è corta */
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .proj-img-wrap img {
+            max-width: 100%; /* Si adatta alla larghezza della colonna senza sbordare */
+            max-height: 85vh; /* Fitta in altezza: non supera mai l'85% dello schermo */
+            width: auto; /* Mantiene le proporzioni originali intatte */
+            height: auto;
+            display: block;
+            box-shadow: var(--shadow-light); /* L'ombra ora "abbraccia" i veri bordi della foto! */
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+
+        .proj-img-wrap img:hover {
+            transform: scale(1.02);
+        }
+
+        /* --- Posizioni sulla Griglia a 12 Colonne --- */
+        
+        /* Layout Coppia: Lascia 1 col vuota, occupa 4, lascia 2 vuote, occupa 4, lascia 1 vuota */
+        .pos-pair-left { grid-column: 2 / span 4; }
+        .pos-pair-right { grid-column: 8 / span 4; }
+        
+        /* Layout Singolo: Lascia 2 col vuote, occupa 8, lascia 2 vuote */
+        .pos-single { grid-column: 3 / span 8; }
+
+        /* --- Blocco Testo Finale --- */
+        .proj-text-block {
+            grid-column: 2 / span 4; /* ALLINEAMENTO PERFETTO: Inizia alla colonna 2 e ne occupa 4, esattamente come l'immagine di sinistra! */
+            font-size: 0.95rem; /* Testo leggermente più piccolo ed elegante */
+            line-height: 1.6;
+            color: var(--text-color);
+            padding-top: 2rem;
+            animation: fadeInUp 0.8s ease-out forwards;
+            text-align: left; /* Assicura l'allineamento a bandiera a sinistra */
+        }
+
+        .proj-bottom-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .proj-main-desc {
+            margin-bottom: 3rem; /* Spazio tra la descrizione e l'inizio dei dati tecnici */
+        }
+
+        /* --- Stile dei Metadati (Tipologia, Posizione, ecc) --- */
+        .proj-metadata {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem; /* Distanza verticale tra i vari dati */
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+        }
+
+        .meta-value {
+            font-size: 0.95rem;
+            font-weight: 400;
+        }
+
+        /* Pulsante Indietro minimalista */
+        .btn-back-minimal {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0;
+            margin-top: 5rem;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+        }
+        .btn-back-minimal:hover { color: var(--autumn-blue); }
+
+        /* Responsività per Smartphone: incolonna tutto */
+        @media (max-width: 768px) {
+            .pos-pair-left, .pos-pair-right, .pos-single, .proj-text-block {
+                grid-column: 1 / span 12;
+            }
+            .project-detail-grid { row-gap: 4rem; }
+        }
 
         /* Sezioni "adpe" e "Contatti" */
         .projects-section, .about-section, .contact-section { padding: 4rem 0; min-height: calc(100vh - 80px); display: flex; flex-direction: column; align-items: center; text-align: center; scroll-margin-top: 85px; }
@@ -656,8 +793,7 @@
         .nav-item-dropdown, .lang-dropdown { 
             display: flex;
             flex-direction: column;
-            align-items: center;
-            /* Rimosso 'position: relative', ora fluiscono nella barra! */
+            align-items: flex-end; /* PRIMA ERA CENTER: Ora allinea tutto a destra! */
         }
 
         /* Contenitori nascosti dei sottomenu */
@@ -668,11 +804,10 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            /* La transizione fluida del max-height allungherà la barra header */
+            align-items: flex-end; /* PRIMA ERA CENTER: Ora i bottoni si impilano a destra */
             transition: max-height 0.6s ease, opacity 0.4s ease, margin-top 0.4s ease;
-            background: transparent; /* Niente contorno */
-            box-shadow: none; /* Niente ombre */
+            background: transparent; 
+            box-shadow: none; 
         }
 
         /* Animazioni di apertura SOLO se siamo nella sezione progetti o nel dettaglio di un progetto */
@@ -694,18 +829,21 @@
             background: transparent;
             border: none;
             color: var(--text-color);
-            padding: 0.6rem 1rem;
+            padding: 0.4rem 0; /* Rimosso il padding orizzontale per allinearsi perfettamente alle lettere */
             margin: 0;
             font-size: 1rem;
             transition: color 0.3s ease, transform 0.3s ease;
             cursor: pointer;
+            text-align: right;
+            width: 100%;
+            transform-origin: right center; /* FONDAMENTALE: Quando il bottone fa l'animazione di ingrandimento, si allarga verso sinistra, mantenendo la destra fissa a filo! */
         }
 
         .dropdown-content .filter-btn:hover, 
         .dropdown-content .filter-btn.active {
-            background: transparent; /* Sfondo invisibile */
+            background: transparent; 
             color: var(--autumn-blue);
-            transform: scale(1.1); /* Leggero ingrandimento */
+            transform: scale(1.1); 
             font-weight: bold;
         }
 
@@ -730,6 +868,8 @@
             text-decoration: none;
             font-size: 0.9rem; 
             font-weight: bold;
+            text-align: right; /* Allinea le lingue a destra */
+            width: 100%;
             transition: color 0.3s ease;
         }
         
@@ -772,6 +912,63 @@
                 height: 150px;
             }
         }
+
+        /* =================================================== */
+        /* --- TESTATINA FISSA DEL SINGOLO PROGETTO --- */
+        /* =================================================== */
+        
+        .project-sticky-header {
+            position: sticky;
+            /* IL TRUCCO È QUI: 67px è l'altezza esatta del tuo menu. Se vedi ancora 1mm di spazio, abbassalo a 66px, o viceversa */
+            top: 67px; 
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            background: var(--primary-color);
+            z-index: 900; 
+            padding: 0.8rem 0;
+            margin-bottom: 4rem; 
+            transition: background var(--transition);
+        }
+
+        .project-sticky-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            max-width: 92vw; 
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+
+        /* NUOVO: Raggruppiamo titolo e data in un unico blocco */
+        .proj-head-wrapper {
+            grid-column: 2 / span 10; /* Parte ESATTAMENTE dalla colonna 2 (come l'immagine) */
+            display: flex;
+            align-items: baseline; /* Allinea i testi alla stessa base */
+            gap: 4rem; /* Distanza orizzontale tra il titolo e la data */
+        }
+
+        .proj-head-title {
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: var(--text-color);
+            text-transform: uppercase;
+        }
+
+        .proj-head-date {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        /* Adattamento Smartphone */
+        @media (max-width: 768px) {
+            .proj-head-wrapper { 
+                grid-column: 1 / span 12; 
+                flex-direction: column; /* Su mobile vanno uno sotto l'altro */
+                gap: 0.2rem;
+            }
+        }
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -937,10 +1134,9 @@
     </footer>
 
     <script>
-        // Struttura dati per i progetti
-        let projects = {};
-
         // Variabili globali
+        let projects = {};
+        let globalLayouts = {}; // <--- Nuova variabile per tenere in memoria i layout
         let currentProjectImages = [];
         let currentImageIndex = 0;
         let lastActiveFilter = 'all'; 
@@ -995,22 +1191,25 @@
         };
         
         // Inizializzazione al caricamento del DOM
-        document.addEventListener('DOMContentLoaded', function() {
-            // Carica i progetti e avvia l'applicazione
-            fetch('projects.json')
-                .then(response => {
-                    if (!response.ok) { throw new Error("Network response was not ok"); }
-                    return response.json();
-                })
-                .then(data => {
-                    projects = data;
-                    allProjectsFlattened = flattenProjects(projects);
-                    updateAllProjectIds();
-                    
-                    setupEventListeners();
-                    setLanguage(currentLang, true); // true for initial load
-                })
-                .catch(error => console.error('Errore nel caricamento dei progetti:', error));
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Carichiamo SIA i progetti CHE i layout contemporaneamente all'avvio
+                const [projectsRes, layoutsRes] = await Promise.all([
+                    fetch('projects.json'),
+                    fetch('layouts.json')
+                ]);
+
+                projects = await projectsRes.json();
+                globalLayouts = await layoutsRes.json();
+
+                allProjectsFlattened = flattenProjects(projects);
+                updateAllProjectIds();
+                
+                setupEventListeners();
+                setLanguage(currentLang, true); 
+            } catch (error) {
+                console.error('Errore nel caricamento dei dati iniziali:', error);
+            }
         });
 
         function setupEventListeners() {
@@ -1178,7 +1377,7 @@
             showSection('contactSection', shouldScroll);
         }
         
-        function showProject(projectId, shouldScroll = true) {
+        /*function showProject(projectId, shouldScroll = true) {
             const project = findProjectById(projectId);
             if (!project) return;
 
@@ -1222,7 +1421,143 @@
                 }, 100);
             }
         }
+        */
         
+        function showProject(projectId, shouldScroll = true) {
+            const project = findProjectById(projectId);
+            if (!project) return;
+
+            currentView = 'projectDetail';
+            showSection('projectsSection', shouldScroll);
+            document.getElementById('projectsGrid').style.display = 'none';
+
+            // Nascondi logo gigante
+            const titleWrapper = document.querySelector('.title-wrapper');
+            if (titleWrapper) titleWrapper.style.display = 'none';
+
+            const detailContainer = document.getElementById('singleProjectDetail');
+            detailContainer.style.display = 'block';
+            detailContainer.dataset.projectId = projectId;
+
+            // 1. Estrai il Luogo e Data (se non c'è, lascia vuoto)
+            const luogoData = project.luogo_data || '';
+
+            // 2. CREA LA TESTATINA FISSA INIZIALE
+            let htmlContent = `
+                <div class="project-sticky-header">
+                    <div class="project-sticky-grid">
+                        <div class="proj-head-wrapper">
+                            <div class="proj-head-title">${project.title}</div>
+                            <div class="proj-head-date">${luogoData}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // 3. Inizia la griglia delle immagini
+            htmlContent += `<div class="project-detail-grid">`;
+            const imgs = project.images;
+            
+            // =========================================================
+            // LOGICA INTELLIGENTE: CONTROLLO LAYOUT SEQUENCE
+            // =========================================================
+            
+            if (project.layoutSequence && project.layoutSequence.length > 0) {
+                // METODO 1: È specificata una sequenza custom nel file JSON
+                let imgIndex = 0;
+                let seqIndex = 0;
+
+                while (imgIndex < imgs.length) {
+                    let layoutName = project.layoutSequence[seqIndex % project.layoutSequence.length];
+                    let layoutDef = globalLayouts[layoutName];
+
+                    if (!layoutDef) {
+                        console.warn(`Layout '${layoutName}' non trovato, salto...`);
+                        seqIndex++;
+                        continue;
+                    }
+
+                    layoutDef.slots.forEach(slot => {
+                        if (imgIndex < imgs.length) {
+                            let imgData = imgs[imgIndex];
+                            htmlContent += `
+                                <div class="proj-img-wrap" style="grid-column: ${slot.col};">
+                                    <img src="${imgData.src}" alt="${imgData.description || ''}" onclick="openImageModal(${project.id}, '${imgData.src}')" loading="lazy">
+                                </div>
+                            `;
+                            imgIndex++;
+                        }
+                    });
+                    seqIndex++; 
+                }
+
+            } else {
+                // METODO 2: Fallback di default (Alternanza statica Coppia -> Singolo)
+                let i = 0;
+                while (i < imgs.length) {
+                    let cycle = i % 3; 
+
+                    if (cycle === 0 && i + 1 < imgs.length) {
+                        // Coppia
+                        htmlContent += `
+                            <div class="proj-img-wrap" style="grid-column: 2 / span 4;">
+                                <img src="${imgs[i].src}" alt="${imgs[i].description || ''}" onclick="openImageModal(${project.id}, '${imgs[i].src}')" loading="lazy">
+                            </div>
+                            <div class="proj-img-wrap" style="grid-column: 8 / span 4;">
+                                <img src="${imgs[i+1].src}" alt="${imgs[i+1].description || ''}" onclick="openImageModal(${project.id}, '${imgs[i+1].src}')" loading="lazy">
+                            </div>
+                        `;
+                        i += 2;
+                    } else {
+                        // Singolo
+                        htmlContent += `
+                            <div class="proj-img-wrap" style="grid-column: 3 / span 8;">
+                                <img src="${imgs[i].src}" alt="${imgs[i].description || ''}" onclick="openImageModal(${project.id}, '${imgs[i].src}')" loading="lazy">
+                            </div>
+                        `;
+                        i++;
+                    }
+                }
+            }
+
+            // =========================================================
+            // BLOCCO TESTO E METADATI FINALI
+            // =========================================================
+            
+            // 1. Estrazione sicura dei dati
+            const tipo = project.tipologia || getProjectCategoryLabel(project);
+            const pos = project.posizione || '';
+            const stato = project.stato || '';
+            const comm = project.committente || '';
+
+            // 2. Costruzione HTML dei Metadati
+            let metaHtml = '<div class="proj-metadata">';
+            if(tipo) metaHtml += `<div class="meta-item"><span class="meta-label">TIPOLOGIA</span><span class="meta-value">${tipo}</span></div>`;
+            if(pos) metaHtml += `<div class="meta-item"><span class="meta-label">POSIZIONE</span><span class="meta-value">${pos}</span></div>`;
+            if(stato) metaHtml += `<div class="meta-item"><span class="meta-label">STATO</span><span class="meta-value">${stato}</span></div>`;
+            if(comm) metaHtml += `<div class="meta-item"><span class="meta-label">COMMITTENTE</span><span class="meta-value">${comm}</span></div>`;
+            metaHtml += '</div>';
+
+            // 3. Inserimento nel blocco di testo allineato
+            htmlContent += `
+                <div class="proj-text-block">
+                    <p class="proj-main-desc">${project.description || ''}</p>
+                    
+                    ${metaHtml} 
+                    
+                    <button class="btn-back-minimal" onclick="goBackToProjects()">${translations[currentLang].backToProjects}</button>
+                </div>
+            </div>`; // <-- Chiude il div project-detail-grid principale
+
+            // Inserisce tutto il contenuto assemblato nel container
+            detailContainer.innerHTML = htmlContent;
+            
+            // Rimuoviamo il timeout e usiamo lo scroll immediato
+            if (shouldScroll) {
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            }
+        }
+
         function goBackToProjects() {
             showProjectsSection();
         }
