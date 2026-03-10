@@ -306,7 +306,6 @@
             background: var(--autumn-blue);
             color: var(--primary-color);
             border-color: var(--autumn-blue);
-            font-weight: bold;
         }
 
         .projects-section .section-title {
@@ -909,13 +908,34 @@
         .lang-dropdown-content {
             max-height: 0;
             opacity: 0;
-            overflow: hidden;
+            visibility: hidden; /* Nasconde l'elemento senza usare overflow */
+            pointer-events: none; /* Impedisce i click quando è invisibile */
             display: flex;
             flex-direction: column;
-            align-items: flex-end; /* PRIMA ERA CENTER: Ora i bottoni si impilano a destra */
-            transition: max-height 0.6s ease, opacity 0.4s ease, margin-top 0.4s ease;
+            align-items: flex-end; 
+            transition: max-height 0.6s ease, opacity 0.4s ease, margin-top 0.4s ease, visibility 0.6s;
             background: transparent; 
             box-shadow: none; 
+            padding-left: 2rem; /* Dà ulteriore respiro all'ingrandimento verso sinistra */
+        }
+
+        /* Animazioni di apertura SOLO se siamo nella sezione progetti o nel dettaglio di un progetto */
+        body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
+        body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content,
+        .lang-dropdown:hover .lang-dropdown-content {
+            max-height: 600px; 
+            opacity: 1;
+            visibility: visible; /* Rende visibile */
+            pointer-events: auto; /* Riattiva i click */
+        }
+        
+        body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
+        body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content {
+            margin-top: 2rem; 
+        }
+
+        .lang-dropdown:hover .lang-dropdown-content {
+            margin-top: 1rem;
         }
 
         /* Animazioni di apertura SOLO se siamo nella sezione progetti o nel dettaglio di un progetto */
@@ -952,7 +972,9 @@
             background: transparent; 
             color: var(--autumn-blue);
             transform: scale(1.1); 
-            font-weight: bold;
+            /* Rimuoviamo font-weight: bold perché è lui a far "sballare" le larghezze! */
+            /* Usiamo invece un'impercettibile ombra solida che crea un effetto grassetto ottico senza muovere i pixel */
+            text-shadow: 0.3px 0 0 var(--autumn-blue);
         }
 
         /* --- Testo Lingua --- */
@@ -1000,8 +1022,9 @@
         }
 
         .title-logo-center {
-            width: 160px; /* x3 esatto rispetto ai vecchi 80px! */
-            height: 160px; 
+            /* Magia fluida: minimo 120px, ottimale 12% dello schermo, massimo 240px */
+            width: clamp(90px, 12vw, 150px); 
+            height: clamp(90px, 12vw, 150px); 
             border-radius: 50%;
             object-fit: cover;
             box-shadow: var(--shadow-medium);
@@ -1010,14 +1033,14 @@
         
         .title-logo-center:hover { 
             transform: scale(1.03); 
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15); /* Ombra più drammatica al passaggio */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
         }
 
         /* Sicurezza per gli smartphone: evita che 240px rompa lo schermo sui telefoni */
         @media (max-width: 768px) {
             .title-logo-center {
-                width: 150px;
-                height: 150px;
+                width: 90px;
+                height: 90px;
             }
         }
 
