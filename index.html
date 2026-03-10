@@ -346,7 +346,7 @@
             display: grid;
             grid-template-columns: repeat(12, 1fr);
             gap: 2rem; /* Distanza tra le colonne */
-            row-gap: 8rem; /* Distanza verticale tra le righe di foto */
+            row-gap: 14rem; /* Distanza verticale tra le righe di foto */
             max-width: 92vw;
             margin: 0 auto;
             align-items: start;
@@ -457,7 +457,7 @@
         @media (max-width: 1024px) {
             .project-detail-grid { 
                 gap: 1rem; 
-                row-gap: 4rem; 
+                row-gap: 6rem; 
             }
             .proj-text-block { 
                 grid-column: 1 / span 8; /* Dà più spazio al testo sui tablet */
@@ -471,7 +471,7 @@
                 grid-column: 1 / span 12 !important; 
             }
             .project-detail-grid { 
-                row-gap: 3rem; 
+                row-gap: 4rem; 
             }
             .proj-text-block {
                 padding-top: 1rem;
@@ -483,7 +483,11 @@
 
         /* Sezioni "adpe" e "Contatti" */
         .projects-section, .about-section, .contact-section { padding: 4rem 0; min-height: calc(100vh - 80px); display: flex; flex-direction: column; align-items: center; text-align: center; scroll-margin-top: 85px; }
-        .about-content, .contact-content { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .about-content, .contact-content { 
+            max-width: 1000px; 
+            margin: 12rem auto 0; /* Allineato all'altezza del logo Progetti! */
+            padding: 0 20px; 
+        }
         .about-title, .contact-title { font-size: 3.5rem; font-weight: 200; margin-bottom: 2rem; color: var(--text-color); letter-spacing: 1px; animation: fadeInUp 0.6s ease-out forwards; }
         .about-text { font-size: 1.3rem; line-height: 1.8; margin-bottom: 3rem; opacity: 0.9; }
         .about-image { max-width: 40%; height: auto; border-radius: 12px; box-shadow: var(--shadow-medium); margin: 2rem auto 3rem auto; display: block; }
@@ -680,12 +684,10 @@
         }
         
         /* =========================
-        HOME SPLASH (EXPERIMENTAL)
+        HOME SPLASH & GRIGLIA PROGETTI
         ========================= */
 
-        .home-splash {
-            width: 100%;
-        }
+        .home-splash { width: 100%; }
 
         .splash-section {
             display: grid;
@@ -695,143 +697,113 @@
             grid-auto-rows: auto;
         }
 
-
         .splash-item {
             position: relative;
             overflow: hidden;
             background: transparent;
-
             display: flex;
-            flex-direction: column;      /* immagine sopra, testo sotto */
-            justify-content: flex-end;   /* immagini allineate in basso */
+            flex-direction: column;
+            justify-content: flex-end; 
             align-items: center;
-
-            gap: 0.4rem;
+            cursor: pointer;
         }
-
 
         .splash-item img {
             max-width: 100%;
             max-height: 100%;
             width: auto;
             height: auto;
-
             object-fit: contain;
             display: block;
-
-            filter: grayscale(100%);
-            transition:
-                transform 0.35s ease,
-                filter 0.6s ease;
-        }
-
-        /* --- Didascalie Preview Progetti (Riga 8) --- */
-        
-        /* Stile di base del testo: invisibile di default */
-        .projects-grid .splash-caption {
-            opacity: 0; /* Invisibile */
-            visibility: hidden; /* Nasconde l'elemento ai lettori dello schermo e previene i clic */
-            transition: opacity 0.4s ease, visibility 0.4s ease; /* Effetto sfumatura fluido */
-            text-align: center;
-            padding: 0.5rem 0;
-            font-size: 0.85rem;
-            color: #222;
-            align-self: start; /* Allinea il testo in alto all'interno della riga 8 */
-            /* Nota: grid-row: 8 e grid-column sono gestiti dal JavaScript */
-        }
-
-        /* Stile per il tema scuro */
-        body.dark-theme .projects-grid .splash-caption {
-            color: #ccc;
-        }
-
-        /* EFFETTO: Quando passo il mouse sopra l'immagine (.splash-item), 
-           mostra il testo (.splash-caption) che viene subito dopo nell'HTML */
-        .projects-grid .splash-item:hover + .splash-caption {
-            opacity: 1; /* Diventa visibile */
-            visibility: visible;
-        }
-
-
-
-        /* --- Tablet orizzontale e Schermi Medi --- */
-        @media (max-width: 1024px) {
-            .splash-section {
-                margin-bottom: 4rem; /* Dimezza lo spazio bianco */
-                gap: 1rem;
-            }
-            .title-wrapper {
-                margin-top: 6rem;
-                margin-bottom: 6rem;
-            }
-        }
-
-        /* --- Tablet Verticale e Smartphone --- */
-        @media (max-width: 768px) {
-            .splash-section {
-                display: flex;
-                flex-direction: column;
-                height: auto !important;
-                gap: 3rem; /* Spazio tra le immagini impilate */
-                padding: 1rem 5vw;
-                margin-bottom: 2rem;
-            }
-            .splash-item { width: 100%; height: auto; min-height: 40vh; }
-            .splash-item img { max-width: 100%; height: auto; } /* Forza l'adattamento */
-            
-            .title-wrapper {
-                margin-top: 3rem;
-                margin-bottom: 3rem;
-            }
-
-            .nav-item-dropdown {
-                align-items: center; /* Nel menu mobile a tutto schermo, centra di nuovo la scritta Progetti */
-            }
-            .nav-item-dropdown .dropdown-content {
-                align-items: center; /* Centra i filtri */
-                position: static; /* Toglie l'effetto tendina volante, fa scorrere la pagina in basso */
-                transform: none;
-                background: transparent;
-            }
-            .dropdown-content .filter-btn {
-                text-align: center; /* Centra il testo dei filtri */
-            }
-        }
-        
-        .splash-overlay {
-            position: static;      /* non più overlay */
-            background: none;
-
-            color: #000;           /* testo nero */
-
-            text-align: center;
-            line-height: 1.4;
-
-            padding: 0.3rem 0;
-            font-size: 0.85rem;
-            color: #222;
-            opacity: 0.8;
-            letter-spacing: 0.03em;
-        }
-
-        
-        
-        .splash-item:hover .splash-overlay {
-        opacity: 1;
-        }
-
-        .splash-item img {
-            transition: transform 0.4s ease;
+            /* Rimosso il filtro bianco e nero */
+            transition: transform 0.35s ease; /* Manteniamo solo lo zoom fluido */
         }
 
         .splash-item:hover img {
             transform: scale(1.05);
-            filter: grayscale(0%);
+            /* Rimosso il filtro */
         }
 
-        
-        .splash-overlay {
-            transition: opacity 0.3s ease, backdrop-filter 0.3s ease;
+        /* --- Didascalie Preview Progetti (Riga 8) --- */
+        .projects-grid .splash-caption {
+            opacity: 0; /* Invisibile di default */
+            visibility: hidden; 
+            transition: opacity 0.4s ease, visibility 0.4s ease; 
+            text-align: center; /* Mantenuto centrato sotto la colonna per massima pulizia */
+            padding: 0.5rem 0;
+            color: var(--text-color);
+            align-self: start; 
+        }
+
+        body.dark-theme .projects-grid .splash-caption { color: #ccc; }
+
+        /* EFFETTO HOVER ORIGINALE: Quando passi il mouse sopra l'immagine, mostra il testo adiacente */
+        .projects-grid .splash-item:hover + .splash-caption {
+            opacity: 1; 
+            visibility: visible;
+        }
+
+        .splash-title {
+            font-size: 0.95rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .splash-date {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 0.2rem;
+        }
+
+        /* ==========================================
+           RESPONSIVITÀ: TABLET, LAPTOP PICCOLI E SMARTPHONE
+           ========================================== */
+           
+        /* Sotto i 1050px la griglia si trasforma in un'elegante colonna singola */
+        @media (max-width: 1050px) {
+            .splash-section {
+                display: flex !important; /* Abbandona la griglia */
+                flex-direction: column;
+                height: auto !important; /* Annulla l'altezza fissa imposta dal Javascript */
+                gap: 2rem; 
+                padding: 2rem 5vw;
+                margin-bottom: 2rem;
+            }
+            
+            .splash-item { 
+                width: 100%; 
+                height: auto; 
+                min-height: 40vh; 
+            }
+            
+            .splash-item img {
+                max-width: 100%;
+                max-height: 65vh; /* Evita che una foto verticale occupi troppo schermo */
+            }
+            
+            /* Il testo è sempre visibile su touch-screen (niente hover) e ben distanziato */
+            .projects-grid .splash-caption {
+                opacity: 1;
+                visibility: visible;
+                margin-bottom: 4rem; 
+            }
+
+            /* Mantiene le altre pagine allineate */
+            .about-content, .contact-content { margin-top: 6rem; }
+        }
+
+        /* Ottimizzazioni extra per schermi piccolissimi (Telefoni) */
+        @media (max-width: 768px) {
+            .splash-section { 
+                padding: 1rem 5vw; 
+            }
+            .projects-grid .splash-caption {
+                margin-bottom: 3rem; 
+            }
+            .about-content, .contact-content { 
+                margin-top: 3rem; 
+            }
         }
 
         /* =========================
@@ -1741,7 +1713,6 @@
         async function filterProjects(filter) {
             lastActiveFilter = filter;
 
-            // Se eravamo dentro a un progetto specifico, torniamo alla vista a griglia
             if (currentView === 'projectDetail') {
                 document.getElementById('singleProjectDetail').style.display = 'none';
                 document.getElementById('projectsGrid').style.display = 'block';
@@ -1750,8 +1721,8 @@
                 currentView = 'projects';
             }
 
-            const layouts = await fetch('layouts.json').then(r => r.json());
-            const layout = layouts["C"];
+            const layout = globalLayouts["C"];
+            if (!layout) return;
 
             const grid = document.getElementById('projectsGrid');
             grid.innerHTML = '';
@@ -1767,7 +1738,8 @@
                     const coverImage = project.images[0]; 
                     imageQueue.push({
                         src: coverImage.src,
-                        description: project.title,
+                        title: project.title, // Estraiamo il titolo
+                        luogo_data: project.luogo_data || '', // Estraiamo luogo e data
                         projectId: project.id
                     });
                 }
@@ -1787,16 +1759,15 @@
                     const imgData = imageQueue[i];
                     i++;
 
+                    // 1. IMMAGINE (nella sua cella definita dal layout, es. righe 1-7)
                     const item = document.createElement('div');
                     item.className = 'splash-item';
-
                     item.style.gridColumn = slot.col;
                     if (slot.row) item.style.gridRow = slot.row;
 
                     const img = document.createElement('img');
                     img.src = imgData.src;
                     img.loading = 'lazy';
-
                     item.appendChild(img);
 
                     item.addEventListener('click', () => {
@@ -1804,14 +1775,18 @@
                     });
                     section.appendChild(item); 
 
-                    if (imgData.description) {
-                        const caption = document.createElement('div');
-                        caption.className = 'splash-caption';
-                        caption.style.gridColumn = slot.col;
-                        caption.style.gridRow = "8";
-                        caption.textContent = imgData.description;
-                        section.appendChild(caption);
-                    }
+                    // 2. DIDASCALIA (nella riga 8 fissa)
+                    const caption = document.createElement('div');
+                    caption.className = 'splash-caption';
+                    caption.style.gridColumn = slot.col;
+                    caption.style.gridRow = "8"; 
+                    
+                    caption.innerHTML = `
+                        <div class="splash-title">${imgData.title}</div>
+                        ${imgData.luogo_data ? `<div class="splash-date">${imgData.luogo_data}</div>` : ''}
+                    `;
+                    
+                    section.appendChild(caption);
                 }); 
 
                 grid.appendChild(section);
