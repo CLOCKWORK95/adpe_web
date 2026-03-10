@@ -23,9 +23,9 @@
     "columns": 12,
     "rows": 8,
     "slots": [
-      { "col": "1 / span 4", "row": "1 / span 7" },
-      { "col": "5 / span 3", "row": "1 / span 7" },
-      { "col": "8 / span 5", "row": "1 / span 7" }
+      { "col": "1 / span 3", "row": "1 / span 7" },
+      { "col": "5 / span 4", "row": "1 / span 7" },
+      { "col": "10 / span 3", "row": "1 / span 7" }
     ]
   }
 }
