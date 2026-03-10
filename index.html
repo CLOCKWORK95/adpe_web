@@ -194,14 +194,14 @@
             padding: 0 20px;
         }
 
-        /* ✅ MANTENUTA LA GRIGLIA MASONRY PER PROGETTI */
+        /* ✅ MANTENUTA LA GRIGLIA MASONRY PER PROGETTI 
         .projects-grid {
             column-count: 3;
             column-gap: 6.0rem;
             max-width: 1300px;
             margin: 0 auto;
             padding: 0 20px;
-        }
+        }*/
 
         .container,
         .home-grid,
@@ -218,7 +218,7 @@
             .projects-grid { column-count: 1; }
         }
 
-        /* Card per il layout Masonry */
+        /* Card per il layout Masonry 
         .project-card {
             background: var(--secondary-color);
             border-radius: 0px;
@@ -226,11 +226,11 @@
             box-shadow: var(--shadow-light);
             transition: var(--transition);
             cursor: pointer;
-            margin-bottom: 6.0rem; /* Spazio tra le card nella stessa colonna */
-            display: inline-block; /* Necessario per il layout a colonne */
+            margin-bottom: 6.0rem; 
+            display: inline-block; 
             width: 100%;
             animation: fadeInUp 0.6s ease-out forwards;
-        }
+        }*/
 
         body.dark-theme .project-card {
             background: rgba(44, 44, 44, 0.9);
@@ -461,7 +461,7 @@
             display: grid;
             gap: 2rem;
             padding: 3rem 4vw;
-            grid-auto-rows: 1fr;
+            grid-auto-rows: auto;
         }
 
 
@@ -469,10 +469,13 @@
             position: relative;
             overflow: hidden;
             background: transparent;
+
             display: flex;
+            flex-direction: column;      /* immagine sopra, testo sotto */
+            justify-content: flex-end;   /* immagini allineate in basso */
             align-items: center;
-            justify-content: center;
-         /*utline: 1px solid rgba(0,0,0,0.03);*/
+
+            gap: 0.4rem;
         }
 
 
@@ -489,6 +492,33 @@
             transition:
                 transform 0.35s ease,
                 filter 0.6s ease;
+        }
+
+        /* --- Didascalie Preview Progetti (Riga 8) --- */
+        
+        /* Stile di base del testo: invisibile di default */
+        .projects-grid .splash-caption {
+            opacity: 0; /* Invisibile */
+            visibility: hidden; /* Nasconde l'elemento ai lettori dello schermo e previene i clic */
+            transition: opacity 0.4s ease, visibility 0.4s ease; /* Effetto sfumatura fluido */
+            text-align: center;
+            padding: 0.5rem 0;
+            font-size: 0.85rem;
+            color: #222;
+            align-self: start; /* Allinea il testo in alto all'interno della riga 8 */
+            /* Nota: grid-row: 8 e grid-column sono gestiti dal JavaScript */
+        }
+
+        /* Stile per il tema scuro */
+        body.dark-theme .projects-grid .splash-caption {
+            color: #ccc;
+        }
+
+        /* EFFETTO: Quando passo il mouse sopra l'immagine (.splash-item), 
+           mostra il testo (.splash-caption) che viene subito dopo nell'HTML */
+        .projects-grid .splash-item:hover + .splash-caption {
+            opacity: 1; /* Diventa visibile */
+            visibility: visible;
         }
 
 
@@ -510,28 +540,21 @@
             }
 
         }
-
+        
         .splash-overlay {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            position: static;      /* non più overlay */
+            background: none;
 
-            background: linear-gradient(
-                to top,
-                rgba(0,0,0,0.65),
-                rgba(0,0,0,0.0)
-            );
+            color: #000;           /* testo nero */
 
-            color: #fff;
-            padding: 1.5rem;
-            font-size: 1.05rem;
+            text-align: center;
             line-height: 1.4;
 
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-            backdrop-filter: blur(1px);
+            padding: 0.3rem 0;
+            font-size: 0.85rem;
+            color: #222;
+            opacity: 0.8;
+            letter-spacing: 0.03em;
         }
 
         
@@ -577,10 +600,9 @@
         <nav class="container">
             <div class="header-left">
                 <img src="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="ADPE Logo" class="header-logo-small">
-                <a href="#" class="logo" onclick="showHome()">ADPE</a>
+                <a href="#" class="logo" onclick="showProjectsSection()">ADPE</a>
             </div>
             <ul class="nav-menu">
-                <li><a href="#" class="nav-link" data-lang-key="homeLink" onclick="showHome()">Home</a></li>
                 <li><a href="#" class="nav-link" data-lang-key="projectsLink" onclick="showProjectsSection()">Progetti</a></li>
                 <li><a href="#" class="nav-link" data-lang-key="aboutLink" onclick="showAbout()">Chi Siamo</a></li>
                 <li><a href="#" class="nav-link" data-lang-key="contactLink" onclick="showContact()">Contatti</a></li>
@@ -598,9 +620,7 @@
                 </div>
             </div>
             <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </div>
         </nav>
     </header>
@@ -883,7 +903,7 @@
             if (isInitialLoad) {
                 const savedTheme = localStorage.getItem('theme') || 'light';
                 if (savedTheme === 'dark') document.body.classList.add('dark-theme');
-                showHome();
+                showProjectsSection(false); 
             } else {
                 // Altrimenti, ricarica la vista corrente per aggiornare i testi
                 switch (currentView) {
@@ -902,7 +922,13 @@
         // --- Logica di Navigazione e Visualizzazione Sezioni ---
 
         function showSection(sectionId, shouldScroll = true) {
-            ['hero', 'homeSplash', 'homeProjects', 'projectsSection', 'aboutSection', 'contactSection'].forEach(id => {
+            [
+                'hero', 
+                'homeSplash', 
+                'homeProjects', 
+                'projectsSection', 
+                'aboutSection', 
+                'contactSection'].forEach(id => {
                 document.getElementById(id).style.display = 'none';
             });
             const targetSection = document.getElementById(sectionId);
@@ -1057,7 +1083,7 @@
             lastActiveFilter = filter;
 
             const layouts = await fetch('layouts.json').then(r => r.json());
-            const layout = layouts["A"];
+            const layout = layouts["C"];
 
             const grid = document.getElementById('projectsGrid');
             grid.innerHTML = '';
@@ -1108,22 +1134,23 @@
 
                     item.appendChild(img);
 
-                    if (imgData.description) {
-
-                        const overlay = document.createElement('div');
-                        overlay.className = 'splash-overlay';
-                        overlay.textContent = imgData.description;
-
-                        item.appendChild(overlay);
-                    }
-
+                    // 1. PRIMA aggiungiamo l'immagine e il suo evento click
                     item.addEventListener('click', () => {
                         showProject(imgData.projectId);
                     });
+                    section.appendChild(item); 
 
-                    section.appendChild(item);
-
-                });
+                    // 2. DOPO aggiungiamo la didascalia
+                    if (imgData.description) {
+                        const caption = document.createElement('div');
+                        caption.className = 'splash-caption';
+                        caption.style.gridColumn = slot.col;
+                        caption.style.gridRow = "8";
+                        caption.textContent = imgData.description;
+                        section.appendChild(caption);
+                    }
+                    
+                }); // <--- Fine del forEach
 
                 grid.appendChild(section);
             }
