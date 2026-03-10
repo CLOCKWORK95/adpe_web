@@ -628,6 +628,37 @@
             body.dark-theme header.mobile-menu-open {
                 background: var(--primary-color) !important;
             }
+
+            /* --- GESTIONE TENDINE TOUCH SU SMARTPHONE --- */
+            
+            /* 1. Annulliamo l'apertura automatica con l'effetto "hover" (illegale sui touch) */
+            body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
+            body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content,
+            .lang-dropdown:hover .lang-dropdown-content {
+                max-height: 0;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                margin-top: 0;
+            }
+
+            /* 2. Apriamo la tendina SOLO tramite la classe .touch-open gestita dal tap (click) */
+            body[data-view="projects"] .nav-item-dropdown.touch-open .dropdown-content,
+            body[data-view="projectDetail"] .nav-item-dropdown.touch-open .dropdown-content {
+                max-height: 600px;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                margin-top: 2rem;
+            }
+
+            .lang-dropdown.touch-open .lang-dropdown-content {
+                max-height: 200px;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                margin-top: 1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1066,8 +1097,12 @@
             opacity: 0.8;
         }
 
-        /* Adattamento Smartphone */
+        /* Adattamento Smartphone per la Testatina */
         @media (max-width: 768px) {
+            .project-sticky-header {
+                top: 60px; /* <--- IL FIX È QUI: compensa l'altezza maggiore del menu su mobile */
+                padding: 1rem 0; /* Un po' più di respiro su mobile */
+            }
             .proj-head-wrapper { 
                 grid-column: 1 / span 12; 
                 flex-direction: column; /* Su mobile vanno uno sotto l'altro */
@@ -1866,19 +1901,68 @@
         function setupMobileMenu() {
             const hamburger = document.querySelector('.hamburger');
             const navMenu = document.querySelector('.nav-menu');
-            const header = document.querySelector('header'); // <--- Aggiunto
+            const header = document.querySelector('header');
 
             hamburger.addEventListener('click', () => {
                 hamburger.classList.toggle('active');
                 navMenu.classList.toggle('active');
-                header.classList.toggle('mobile-menu-open'); // <--- Aggiunto
+                header.classList.toggle('mobile-menu-open');
             });
+
+            // 1. GESTIONE TAP SUI LINK PRINCIPALI
             document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', () => {
+                link.addEventListener('click', (e) => {
+                    // Se siamo su smartphone e si tocca "Progetti"
+                    if (window.innerWidth <= 768 && link.closest('.nav-item-dropdown')) {
+                        // Apri/Chiudi solo la tendina, ma NON chiudere il menu intero
+                        const dropdown = link.closest('.nav-item-dropdown');
+                        dropdown.classList.toggle('touch-open');
+                        
+                        // Chiudi contemporaneamente l'altra tendina delle lingue se era aperta
+                        document.querySelector('.lang-dropdown').classList.remove('touch-open');
+                        return; // Interrompe l'esecuzione per non chiudere l'hamburger!
+                    }
+
+                    // Per tutti gli altri link normali (Chi Siamo, Contatti), chiudi il menu intero
                     hamburger.classList.remove('active');
                     navMenu.classList.remove('active');
-                    header.classList.remove('mobile-menu-open'); // <--- Aggiunto
+                    header.classList.remove('mobile-menu-open');
                 });
+            });
+
+            // 2. GESTIONE TAP SULLE LINGUE
+            const langToggle = document.querySelector('.current-lang');
+            langToggle.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault(); 
+                    document.querySelector('.lang-dropdown').classList.toggle('touch-open');
+                    
+                    // Chiudi la tendina progetti se era aperta
+                    document.querySelector('.nav-item-dropdown').classList.remove('touch-open');
+                }
+            });
+
+            // 3. CHIUSURA AUTOMATICA QUANDO SI SCEGLIE UNA CATEGORIA
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    
+                    // Se tocco una Categoria (es. "Residenziale")
+                    if (e.target.classList.contains('filter-btn')) {
+                        // Chiudo la tendina
+                        document.querySelector('.nav-item-dropdown').classList.remove('touch-open');
+                        
+                        // Chiudo anche l'intero menu hamburger così l'utente vede i progetti filtrati!
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                        header.classList.remove('mobile-menu-open');
+                    }
+                    
+                    // Se tocco una Lingua (es. "EN")
+                    if (e.target.classList.contains('language-selector-item')) {
+                        // In questo caso chiudo solo la tendina della lingua
+                        document.querySelector('.lang-dropdown').classList.remove('touch-open');
+                    }
+                }
             });
         }
 
