@@ -635,29 +635,29 @@
             body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
             body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content,
             .lang-dropdown:hover .lang-dropdown-content {
-                max-height: 0;
-                opacity: 0;
-                visibility: hidden;
-                pointer-events: none;
-                margin-top: 0;
+                max-height: 0 !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+                margin-top: 0 !important;
             }
 
             /* 2. Apriamo la tendina SOLO tramite la classe .touch-open gestita dal tap (click) */
             body[data-view="projects"] .nav-item-dropdown.touch-open .dropdown-content,
             body[data-view="projectDetail"] .nav-item-dropdown.touch-open .dropdown-content {
-                max-height: 600px;
-                opacity: 1;
-                visibility: visible;
-                pointer-events: auto;
-                margin-top: 2rem;
+                max-height: 600px !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+                margin-top: 2rem !important;
             }
 
             .lang-dropdown.touch-open .lang-dropdown-content {
-                max-height: 200px;
-                opacity: 1;
-                visibility: visible;
-                pointer-events: auto;
-                margin-top: 1rem;
+                max-height: 200px !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: auto !important;
+                margin-top: 1rem !important;
             }
         }
 
@@ -1368,6 +1368,12 @@
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
                     setLanguage(this.dataset.lang);
+                    
+                    // FIX MOBILE: Chiude forzatamente la tendina dopo aver scelto la lingua
+                    const langDropdown = document.querySelector('.lang-dropdown');
+                    if (langDropdown) {
+                        langDropdown.classList.remove('touch-open');
+                    }
                 });
             });
 
