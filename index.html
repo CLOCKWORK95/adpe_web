@@ -1377,7 +1377,7 @@
                 qualityTitle: "Qualità e Dettaglio", qualityDesc: "Cura maniacale per ogni aspetto, dal concept alla realizzazione.",
                 contactTitle: "Contatti", contactText: "Siamo a vostra disposizione per qualsiasi informazione o per discutere del vostro prossimo progetto. Non esitate a contattarci.",
                 addressLabel: "Indirizzo", mapDirections: "Clicca per indicazioni", phoneLabel: "Telefono", emailLabel: "Email", hoursLabel: "Orari", hoursValue: "Lun-Ven: 9:00 - 18:00",
-                filterAll: "Tutti", backToProjects: "← Indietro"
+                filterAll: "Tutti", backToProjects: "← Indietro",filterSelection: "Selezione"
             },
             en: {
                 pageTitle: "Architecture & Design Studio", homeLink: "Home", projectsLink: "projects", aboutLink: "adpe", contactLink: "contact",
@@ -1391,7 +1391,7 @@
                 qualityTitle: "Quality & Detail", qualityDesc: "Meticulous attention to every aspect, from concept to realization.",
                 contactTitle: "Contact", contactText: "We are at your disposal for any information or to discuss your next project. Do not hesitate to contact us.",
                 addressLabel: "Address", mapDirections: "Click for directions", phoneLabel: "Phone", emailLabel: "Email", hoursLabel: "Hours", hoursValue: "Mon-Fri: 9:00 AM - 6:00 PM",
-                filterAll: "All", backToProjects: "← Back"
+                filterAll: "All", backToProjects: "← Back", filterSelection: "Selection"
             },
             fr: {
                 pageTitle: "Studio Architecture & Design", homeLink: "Accueil", projectsLink: "projets", aboutLink: "adpe", contactLink: "contact",
@@ -1405,7 +1405,7 @@
                 qualityTitle: "Qualità et Détail", qualityDesc: "Attention méticuleuse à chaque aspect, du concept à la réalisation.",
                 contactTitle: "Contact", contactText: "Nous siamo a votre disposition pour qualsiasi information ou pour discuter de votre prossimo progetto. N'hésitez pas à nous contacter.",
                 addressLabel: "Adresse", mapDirections: "Cliquer pour les directions", phoneLabel: "Téléphone", emailLabel: "Email", hoursLabel: "Horaires", hoursValue: "Lun-Ven: 9h00 - 18h00",
-                filterAll: "Tous", backToProjects: "← Retour"
+                filterAll: "Tous", backToProjects: "← Retour", filterSelection: "Sélection"
             }
         };
         
@@ -2003,14 +2003,21 @@
             const categoryPaths = new Set();
             collectCategoryPaths(projects, '', categoryPaths);
 
+            // 1. Crea il bottone "Tutti"
             let filtersHtml = `<button class="filter-btn" data-filter="all" onclick="filterProjects('all')">${translations[currentLang].filterAll}</button>`;
             
+            // 2. NUOVO: Crea il bottone "Selezione" (collegato a home_custom)
+            filtersHtml += `<button class="filter-btn" data-filter="home_custom" onclick="filterProjects('home_custom')">${translations[currentLang].filterSelection}</button>`;
+            
+            // 3. Genera dinamicamente tutti gli altri bottoni basati sulle cartelle
             const sortedCategories = Array.from(categoryPaths).sort((a, b) => a.localeCompare(b));
 
             sortedCategories.forEach(path => {
                 const label = path.split('.').map(part => translations[currentLang][`category_${part}`] || formatFolderNameForDisplay(part)).join(' ');
                 filtersHtml += `<button class="filter-btn" data-filter="${path}" onclick="filterProjects('${path}')">${label}</button>`;
             });
+            
+            // Inserisce tutto nel menu a tendina
             filtersContainer.innerHTML = filtersHtml;
         }
 
