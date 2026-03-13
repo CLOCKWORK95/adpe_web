@@ -19,15 +19,15 @@
     ]
   },
   "C": {
-    "height": "55vh",
-    "columns": 12,
-    "rows": 8,
-    "slots": [
-      { "col": "1 / span 3", "row": "1 / span 7" },
-      { "col": "5 / span 4", "row": "1 / span 7" },
-      { "col": "10 / span 3", "row": "1 / span 7" }
-    ]
-  },
+          "height": "75vh", 
+          "columns": 12,
+          "rows": 8,
+          "slots": [
+              { "col": "1 / span 4", "row": "1 / span 7" }, 
+              { "col": "5 / span 4", "row": "1 / span 7" },
+              { "col": "9 / span 4", "row": "1 / span 7" }
+          ]
+      },
   "PROJECT_PAIR": {
     "columns": 12,
     "slots": [

@@ -130,27 +130,58 @@
             background: var(--primary-color); 
         }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start; /* Modificato: aggancia tutto in alto */
-        }
-
         .header-left { display: flex; align-items: center; gap: 10px; }
         .header-logo-small { height: 35px; width: 35px; border-radius: 50%; object-fit: cover; transition: var(--transition); }
         .header-logo-small:hover { transform: scale(1.1); }
         .logo { font-size: 1.6rem; font-weight: 300; color: var(--text-color); text-decoration: none; letter-spacing: 2px; transition: var(--transition); }
         .logo:hover { transform: scale(1.05); }
 
-        .nav-menu { 
-            display: flex; 
-            gap: 6rem; 
-            list-style: none; 
-            flex-grow: 1; 
-            justify-content: center; 
-            align-items: flex-start; /* Modificato */
+        /* 1. Il contenitore nav usa l'intera larghezza */
+        nav {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: flex-start; 
         }
-        .nav-link { color: var(--text-color); text-decoration: none; font-weight: 400; font-size: 1.5rem; transition: var(--transition); position: relative; cursor: pointer; letter-spacing: 1px; }
+
+        /* 2. Il menu torna nel flusso normale (NON PIÙ ABSOLUTE) così spinge giù l'header! */
+        .nav-menu { 
+            position: relative; 
+            width: 100%; 
+            display: grid; 
+            grid-template-columns: 1fr auto 1fr; 
+            align-items: flex-start; 
+            list-style: none; 
+            pointer-events: auto; /* Riattiva i click standard */
+        }
+        
+        
+        .nav-menu li {
+            pointer-events: auto; 
+        }
+
+        /* I margini per la simmetria rimangono identici */
+        .nav-menu li:nth-child(1) { justify-self: end; margin-right: 6rem; }
+        .nav-menu li:nth-child(2) { justify-self: center; }
+        .nav-menu li:nth-child(3) { justify-self: start; margin-left: 6rem; }
+
+        /* 1. PROGETTI: sta a sinistra, lo spingiamo tutto verso il centro */
+        .nav-menu li:nth-child(1) {
+            justify-self: end;
+            margin-right: 6rem; /* <-- Cambia questo per avvicinarlo o allontanarlo ad adpe */
+        }
+
+        /* 2. ADPE: perno centrale matematico */
+        .nav-menu li:nth-child(2) {
+            justify-self: center;
+        }
+
+        /* 3. CONTATTI: sta a destra, lo spingiamo tutto verso il centro */
+        .nav-menu li:nth-child(3) {
+            justify-self: start;
+            margin-left: 6rem; /* <-- Deve essere uguale al margin-right di progetti per la simmetria */
+        }
+        .nav-link { color: var(--text-color); text-decoration: none; font-weight: 400; font-size: 1.2rem; transition: var(--transition); position: relative; cursor: pointer; letter-spacing: 1px; }
         .nav-link:hover { color: var(--autumn-blue); transform: translateY(-2px) scale(1.02); }
         .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--autumn-blue); transition: var(--transition); }
         .nav-link:hover::after { width: 100%; }
@@ -159,10 +190,13 @@
         .hamburger span { width: 25px; height: 2px; background: var(--text-color); margin: 3px 0; transition: var(--transition); }
 
         .header-right-icons { 
+            position: absolute; /* Lo slega completamente dal flusso della pagina */
+            right: 0; /* Lo incolla a destra */
+            top: 0.3rem; 
             display: flex; 
-            align-items: flex-start; /* Modificato */
+            align-items: flex-start; 
             gap: 1.5rem; 
-            margin-top: 0.3rem; /* Bilanciamento visivo con i testi del menu */
+            z-index: 100;
         }
         .language-group, .theme-group { 
             display: none !important; /* Nasconde l'icona della lampadina */
@@ -170,7 +204,7 @@
         }
         .language-group { gap: 0.8rem; margin-right: 0.5rem; }
 
-        .header-social-link, .language-selector-item { color: var(--text-color); font-size: 1.3rem; transition: var(--transition); text-decoration: none; cursor: pointer; }
+        .header-social-link, .language-selector-item { color: var(--text-color); font-size: 1rem; transition: var(--transition); text-decoration: none; cursor: pointer; }
         .header-social-link:hover, .language-selector-item:hover { color: var(--autumn-blue); transform: scale(1.2); }
         #themeToggle i { font-size: 1.4rem; color: var(--text-color); transition: color var(--transition); }
         body.dark-theme #themeToggle i { color: var(--accent-gold); }
@@ -540,9 +574,19 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .fade-in { animation: fadeInUp 0.6s ease-out forwards; }
+        /* Nuova animazione: solo dissolvenza senza movimento */
+        @keyframes fadeInOnly { 
+            from { opacity: 0; } 
+            to { opacity: 1; } 
+        }
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            nav {
+                justify-content: space-between !important; 
+                width: 100%; /* Assicura che occupi tutto l'header */
+                align-items: center; /* Li allinea verticalmente alla perfezione */
+            }
             .nav-menu {
                 position: fixed;
                 top: 80px;
@@ -551,19 +595,30 @@
                 height: calc(100vh - 80px);
                 background: rgba(255, 255, 255, 0.98);
                 backdrop-filter: blur(20px);
+                
+                /* --- IL FIX È QUI --- */
+                display: flex !important; /* Forza l'abbandono della griglia del desktop */
+                
                 flex-direction: column;
                 justify-content: flex-start;
-                /* --- CORREZIONE: Allinea tutto a destra --- */
                 align-items: flex-end;
-                padding-top: 5rem; /* Più respiro per le voci principali */
-                padding-right: 2rem; /* Distanza orizzontale dal bordo destro */
+                padding-top: 5rem; 
+                padding-right: 2rem; 
                 transition: var(--transition);
             }
+            /* --- Reset Allineamenti per Menu Mobile --- */
             .nav-menu li {
-                width: 100%; /* Occupa tutta la larghezza per allineare self */
+                width: 100%; 
                 display: flex;
-                justify-content: flex-end; /* Allinea il testo a destra all'interno del li */
-                margin-right: 1.5rem; /* Margine per non toccare il bordo */
+                justify-content: flex-end; 
+                margin-right: 1.5rem !important; /* Mantiene la distanza dal bordo destro */
+                margin-left: 0 !important; /* Azzera le regole del desktop */
+            }
+            
+            .nav-menu li:nth-child(1),
+            .nav-menu li:nth-child(2),
+            .nav-menu li:nth-child(3) {
+                justify-self: auto;
             }
             .nav-link {
                 font-size: 1.5rem; /* Ripristina la dimensione originale per un menu più grande */
@@ -588,7 +643,12 @@
             .about-highlights, .contact-info { grid-template-columns: 1fr; gap: 1.5rem; }
             .project-detail-title { font-size: 2.5rem; }
             .project-detail-description { font-size: 1.1rem; }
-            .header-right-icons { flex-wrap: wrap; justify-content: flex-end; gap: 1rem; }
+            .header-right-icons { 
+                position: relative !important; /* Riporta l'elemento nel flusso! */
+                flex-wrap: wrap; 
+                justify-content: flex-end; 
+                gap: 1rem; 
+            }
             .gallery-item { flex-direction: column !important; margin-left: auto !important; margin-right: auto !important; text-align: center !important; min-height: auto; padding: 0.5rem; margin-bottom: 2rem; }
             .gallery-item img { max-width: 90%; max-height: 50vh; margin-bottom: 1rem; padding: 0; }
             .gallery-description { max-width: 90%; padding: 0.5rem 1rem; font-size: 1.05rem; }
@@ -909,20 +969,30 @@
             align-items: flex-end; /* PRIMA ERA CENTER: Ora allinea tutto a destra! */
         }
 
-        /* Contenitori nascosti dei sottomenu */
+        /* Contenitori nascosti: tornano trasparenti per fondersi con l'header che si allunga */
         .nav-item-dropdown .dropdown-content, 
         .lang-dropdown-content {
             max-height: 0;
             opacity: 0;
-            visibility: hidden; /* Nasconde l'elemento senza usare overflow */
-            pointer-events: none; /* Impedisce i click quando è invisibile */
+            visibility: hidden;
+            pointer-events: none;
             display: flex;
             flex-direction: column;
             align-items: flex-end; 
             transition: max-height 0.6s ease, opacity 0.4s ease, margin-top 0.4s ease, visibility 0.6s;
-            background: transparent; 
-            box-shadow: none; 
-            padding-left: 2rem; /* Dà ulteriore respiro all'ingrandimento verso sinistra */
+            
+            /* TORNATO TRASPARENTE E SENZA OMBRE */
+            background: transparent !important; 
+            padding: 0 !important; 
+            border-radius: 0 !important; 
+            box-shadow: none !important; 
+        }
+
+        /* Supporto per il tema scuro (se lo riattiverai in futuro) */
+        body.dark-theme .nav-item-dropdown .dropdown-content,
+        body.dark-theme .lang-dropdown-content {
+            background: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         /* Animazioni di apertura SOLO se siamo nella sezione progetti o nel dettaglio di un progetto */
@@ -1021,16 +1091,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 12rem; /* Più respiro per il logo gigante */
-            margin-bottom: 12rem; /* Più respiro per il logo gigante */
-            animation: fadeInUp 0.8s ease-out forwards;
+            margin-top: 11rem; /* Più respiro per il logo gigante */
+            margin-bottom: 11rem; /* Più respiro per il logo gigante */
+            animation: fadeInOnly 1s ease-out forwards;
             width: 100%;
         }
 
         .title-logo-center {
             /* Magia fluida: minimo 120px, ottimale 12% dello schermo, massimo 240px */
-            width: clamp(90px, 12vw, 150px); 
-            height: clamp(90px, 12vw, 150px); 
+            width: clamp(80px, 12vw, 130px); 
+            height: clamp(80px, 12vw, 130px); 
             border-radius: 50%;
             object-fit: cover;
             box-shadow: var(--shadow-medium);
@@ -1045,8 +1115,8 @@
         /* Sicurezza per gli smartphone: evita che 240px rompa lo schermo sui telefoni */
         @media (max-width: 768px) {
             .title-logo-center {
-                width: 90px;
-                height: 90px;
+                width: 80px;
+                height: 80px;
             }
         }
 
@@ -1056,8 +1126,7 @@
         
         .project-sticky-header {
             position: sticky;
-            /* IL TRUCCO È QUI: 67px è l'altezza esatta del tuo menu. Se vedi ancora 1mm di spazio, abbassalo a 66px, o viceversa */
-            top: 67px; 
+            top: 50px; /* <--- MODIFICA QUI (prima era 67px) */
             width: 100vw;
             margin-left: calc(50% - 50vw);
             background: var(--primary-color);
@@ -1100,8 +1169,8 @@
         /* Adattamento Smartphone per la Testatina */
         @media (max-width: 768px) {
             .project-sticky-header {
-                top: 60px; /* <--- IL FIX È QUI: compensa l'altezza maggiore del menu su mobile */
-                padding: 1rem 0; /* Un po' più di respiro su mobile */
+                top: 55px; /* <--- MODIFICA QUI (prima era 60px) */
+                padding: 1rem 0; 
             }
             .proj-head-wrapper { 
                 grid-column: 1 / span 12; 
@@ -1277,10 +1346,11 @@
     <script>
         // Variabili globali
         let projects = {};
-        let globalLayouts = {}; // <--- Nuova variabile per tenere in memoria i layout
+        let globalLayouts = {}; 
+        let homeProjectIds = []; // <--- NUOVA VARIABILE
         let currentProjectImages = [];
         let currentImageIndex = 0;
-        let lastActiveFilter = 'all'; 
+        let lastActiveFilter = 'home_custom'; // <--- MODIFICATO (parte dalla home personalizzata)
         let currentView = 'home';
         let allProjectsFlattened = [];
         let currentLang = localStorage.getItem('lang') || 'it';
@@ -1334,14 +1404,18 @@
         // Inizializzazione al caricamento del DOM
         document.addEventListener('DOMContentLoaded', async function() {
             try {
-                // Carichiamo SIA i progetti CHE i layout contemporaneamente all'avvio
-                const [projectsRes, layoutsRes] = await Promise.all([
+                // Carichiamo TUTTI E TRE i JSON contemporaneamente
+                const [projectsRes, layoutsRes, homeProjectsRes] = await Promise.all([
                     fetch('projects.json'),
-                    fetch('layouts.json')
+                    fetch('layouts.json'),
+                    fetch('home_projects.json').catch(() => ({ json: () => [] })) // Fallback se il file manca
                 ]);
 
                 projects = await projectsRes.json();
                 globalLayouts = await layoutsRes.json();
+                
+                // Estraiamo gli ID per la home (se il file è vuoto o ha errori, sarà un array vuoto [])
+                homeProjectIds = await homeProjectsRes.json().catch(() => []);
 
                 allProjectsFlattened = flattenProjects(projects);
                 updateAllProjectIds();
@@ -1505,8 +1579,9 @@
             if (!titleWrapper) { // Se il contenitore non esiste, crealo con il logo al centro
                 titleWrapper = document.createElement('div');
                 titleWrapper.className = 'title-wrapper';
+                // AGGIUNTO cursor:pointer E onclick per richiamare la home custom
                 titleWrapper.innerHTML = `
-                    <img src="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="ADPE Logo" class="title-logo-center">
+                    <img src="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="ADPE Logo" class="title-logo-center" style="cursor: pointer;" onclick="filterProjects('home_custom')">
                 `;
                 projectsSection.prepend(titleWrapper);
             }
@@ -1755,91 +1830,126 @@
             //distributeMasonry(grid);
         }
 
-        async function filterProjects(filter) {
+        async function filterProjects(
+            filter, 
+            fadeOutDuration = 0.2,   // Durata della dissolvenza in uscita (in secondi)
+            delayBeforeRender = 250, // Attesa prima di stampare le nuove foto (in millisecondi)
+            fadeInDuration = 0.8,    // Durata dell'apparizione dal basso (in secondi)
+            staggerDelay = 0       // Ritardo a cascata tra una foto e l'altra (in secondi)
+        ) {
             lastActiveFilter = filter;
-
-            if (currentView === 'projectDetail') {
-                document.getElementById('singleProjectDetail').style.display = 'none';
-                document.getElementById('projectsGrid').style.display = 'block';
-                const titleWrapper = document.querySelector('.title-wrapper');
-                if (titleWrapper) titleWrapper.style.display = 'flex';
-                currentView = 'projects';
-            }
-
-            const layout = globalLayouts["C"];
-            if (!layout) return;
-
             const grid = document.getElementById('projectsGrid');
-            grid.innerHTML = '';
 
-            const filteredProjects = (filter === 'all')
-                ? allProjectsFlattened
-                : allProjectsFlattened.filter(p => p.categoryPath.startsWith(filter));
+            // 1. DISSOLVENZA IN USCITA (Fade Out)
+            grid.style.transition = `opacity ${fadeOutDuration}s ease`;
+            grid.style.opacity = '0';
 
-            let imageQueue = [];
-
-            filteredProjects.forEach(project => {
-                if (project.images && project.images.length > 0) {
-                    const coverImage = project.images[0]; 
-                    imageQueue.push({
-                        src: coverImage.src,
-                        title: project.title, // Estraiamo il titolo
-                        luogo_data: project.luogo_data || '', // Estraiamo luogo e data
-                        projectId: project.id
-                    });
+            // 2. ASPETTIAMO CHE SPARISCANO, POI CAMBIAMO I DATI
+            setTimeout(() => {
+                if (currentView === 'projectDetail') {
+                    document.getElementById('singleProjectDetail').style.display = 'none';
+                    grid.style.display = 'block';
+                    const titleWrapper = document.querySelector('.title-wrapper');
+                    if (titleWrapper) titleWrapper.style.display = 'flex';
+                    currentView = 'projects';
                 }
-            });
 
-            let i = 0;
+                const layout = globalLayouts["C"];
+                if (!layout) {
+                    grid.style.opacity = '1'; 
+                    return;
+                }
 
-            while (i < imageQueue.length) {
-                const section = document.createElement('div');
-                section.className = 'splash-section';
-                section.style.height = layout.height;
-                section.style.gridTemplateColumns = `repeat(${layout.columns},1fr)`;
+                grid.innerHTML = '';
 
-                layout.slots.forEach(slot => {
-                    if (i >= imageQueue.length) return;
+                let filteredProjects = [];
 
-                    const imgData = imageQueue[i];
-                    i++;
+                // === LOGICA VETRINA CUSTOM ===
+                if (filter === 'home_custom' && homeProjectIds.length > 0) {
+                    filteredProjects = homeProjectIds
+                        .map(id => findProjectById(id))
+                        .filter(p => p !== undefined);
+                } else if (filter === 'all' || (filter === 'home_custom' && homeProjectIds.length === 0)) {
+                    filteredProjects = allProjectsFlattened;
+                } else {
+                    filteredProjects = allProjectsFlattened.filter(p => p.categoryPath.startsWith(filter));
+                }
 
-                    // 1. IMMAGINE (nella sua cella definita dal layout, es. righe 1-7)
-                    const item = document.createElement('div');
-                    item.className = 'splash-item';
-                    item.style.gridColumn = slot.col;
-                    if (slot.row) item.style.gridRow = slot.row;
+                let imageQueue = [];
 
-                    const img = document.createElement('img');
-                    img.src = imgData.src;
-                    img.loading = 'lazy';
-                    item.appendChild(img);
+                filteredProjects.forEach(project => {
+                    if (project.images && project.images.length > 0) {
+                        const coverImage = project.images[0]; 
+                        imageQueue.push({
+                            src: coverImage.src,
+                            title: project.title,
+                            luogo_data: project.luogo_data || '',
+                            projectId: project.id
+                        });
+                    }
+                });
 
-                    item.addEventListener('click', () => {
-                        showProject(imgData.projectId);
-                    });
-                    section.appendChild(item); 
+                let i = 0;
+                let staggerIndex = 0; // Contatore per calcolare il ritardo a cascata
 
-                    // 2. DIDASCALIA (nella riga 8 fissa)
-                    const caption = document.createElement('div');
-                    caption.className = 'splash-caption';
-                    caption.style.gridColumn = slot.col;
-                    caption.style.gridRow = "8"; 
-                    
-                    caption.innerHTML = `
-                        <div class="splash-title">${imgData.title}</div>
-                        ${imgData.luogo_data ? `<div class="splash-date">${imgData.luogo_data}</div>` : ''}
-                    `;
-                    
-                    section.appendChild(caption);
-                }); 
+                while (i < imageQueue.length) {
+                    const section = document.createElement('div');
+                    section.className = 'splash-section';
+                    section.style.height = layout.height;
+                    section.style.gridTemplateColumns = `repeat(${layout.columns},1fr)`;
 
-                grid.appendChild(section);
-            }
+                    layout.slots.forEach(slot => {
+                        if (i >= imageQueue.length) return;
 
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.filter === filter);
-            });
+                        const imgData = imageQueue[i];
+                        i++;
+
+                        // 1. IMMAGINE
+                        const item = document.createElement('div');
+                        item.className = 'splash-item';
+                        item.style.gridColumn = slot.col;
+                        if (slot.row) item.style.gridRow = slot.row;
+
+                        // === EFFETTO SFASATO (STAGGER) PARAMETRIZZATO ===
+                        item.style.opacity = '0';
+                        item.style.animation = `fadeInOnly ${fadeInDuration}s ease-out forwards ${staggerIndex * staggerDelay}s`;
+                        staggerIndex++;
+
+                        const img = document.createElement('img');
+                        img.src = imgData.src;
+                        img.loading = 'lazy';
+                        item.appendChild(img);
+
+                        item.addEventListener('click', () => {
+                            showProject(imgData.projectId);
+                        });
+                        section.appendChild(item); 
+
+                        // 2. DIDASCALIA
+                        const caption = document.createElement('div');
+                        caption.className = 'splash-caption';
+                        caption.style.gridColumn = slot.col;
+                        caption.style.gridRow = "8"; 
+                        
+                        caption.innerHTML = `
+                            <div class="splash-title">${imgData.title}</div>
+                            ${imgData.luogo_data ? `<div class="splash-date">${imgData.luogo_data}</div>` : ''}
+                        `;
+                        
+                        section.appendChild(caption);
+                    }); 
+
+                    grid.appendChild(section);
+                }
+
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.filter === filter);
+                });
+
+                // 3. DISSOLVENZA IN ENTRATA (Fade In del contenitore)
+                grid.style.opacity = '1';
+
+            }, delayBeforeRender); 
         }
 
         // Aggiungiamo lo stesso comportamento per le anteprime nella sezione "Progetti"
