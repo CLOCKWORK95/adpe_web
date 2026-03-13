@@ -1355,7 +1355,7 @@
         // Variabili globali
         let projects = {};
         let globalLayouts = {}; 
-        let homeProjectIds = []; // <--- NUOVA VARIABILE
+        let homeProjectNames = []; // <--- NUOVA VARIABILE
         let currentProjectImages = [];
         let currentImageIndex = 0;
         let lastActiveFilter = 'home_custom'; // <--- MODIFICATO (parte dalla home personalizzata)
@@ -1422,8 +1422,8 @@
                 projects = await projectsRes.json();
                 globalLayouts = await layoutsRes.json();
                 
-                // Estraiamo gli ID per la home (se il file è vuoto o ha errori, sarà un array vuoto [])
-                homeProjectIds = await homeProjectsRes.json().catch(() => []);
+                // Estraiamo i NOMI per la home
+                homeProjectNames = await homeProjectsRes.json().catch(() => []);
 
                 allProjectsFlattened = flattenProjects(projects);
                 updateAllProjectIds();
@@ -1873,11 +1873,23 @@
                 let filteredProjects = [];
 
                 // === LOGICA VETRINA CUSTOM ===
-                if (filter === 'home_custom' && homeProjectIds.length > 0) {
-                    filteredProjects = homeProjectIds
-                        .map(id => findProjectById(id))
-                        .filter(p => p !== undefined);
-                } else if (filter === 'all' || (filter === 'home_custom' && homeProjectIds.length === 0)) {
+                if (filter === 'home_custom' && Array.isArray(homeProjectNames) && homeProjectNames.length > 0) {
+                    filteredProjects = homeProjectNames.map(identifier => {
+                        return allProjectsFlattened.find(p => {
+                            // 1. Sicurezza: Se nel file sono rimasti i vecchi ID numerici
+                            if (String(p.id) === String(identifier).trim()) return true;
+                            
+                            // 2. Confronto "intelligente" e a prova di errore per il nome cartella
+                            const folderName = p.categoryPath.split('.').pop().toLowerCase(); // es. "casa-di-gigi"
+                            
+                            // Prende quello che ha scritto l'architetto, lo fa minuscolo e cambia gli spazi in trattini
+                            const searchName = String(identifier).trim().toLowerCase().replace(/\s+/g, '-');
+                            
+                            return folderName === searchName;
+                        });
+                    }).filter(p => p !== undefined); // Scarta se proprio non trova nulla
+                } else if (filter === 'all' || (filter === 'home_custom' && (!Array.isArray(homeProjectNames) || homeProjectNames.length === 0))) {
+                    // Se la vetrina è vuota o rotta, mostra tutti i progetti di default
                     filteredProjects = allProjectsFlattened;
                 } else {
                     filteredProjects = allProjectsFlattened.filter(p => p.categoryPath.startsWith(filter));
