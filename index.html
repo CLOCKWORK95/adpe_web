@@ -1030,17 +1030,21 @@
 
         /* --- Testo Filtri (Progetti) --- */
         .dropdown-content .filter-btn {
+            font-family: inherit; /* <--- IL TRUCCO È QUI: Forza il bottone a usare Roboto Mono! */
+            font-weight: 400; /* Stesso spessore sottile ed elegante del menu in alto */
             background: transparent;
             border: none;
             color: var(--text-color);
-            padding: 0.4rem 0; /* Rimosso il padding orizzontale per allinearsi perfettamente alle lettere */
+            padding: 0.4rem 0; 
             margin: 0;
-            font-size: 1rem;
+            font-size: 0.75rem; /* Dimensione che avevamo impostato */
+            letter-spacing: 0.05rem;
+            text-transform: uppercase;
             transition: color 0.3s ease, transform 0.3s ease;
             cursor: pointer;
             text-align: right;
             width: 100%;
-            transform-origin: right center; /* FONDAMENTALE: Quando il bottone fa l'animazione di ingrandimento, si allarga verso sinistra, mantenendo la destra fissa a filo! */
+            transform-origin: right center; 
         }
 
         .dropdown-content .filter-btn:hover, 
@@ -1055,26 +1059,30 @@
 
         /* --- Testo Lingua --- */
         .current-lang {
-            font-size: 1rem;
-            font-weight: bold;
+            font-family: inherit;
+            font-size: 0.85rem; /* Uguale a Progetti, Adpe, Contatti */
+            font-weight: 400; /* Togliamo il grassetto per la massima coerenza */
             color: var(--text-color);
             transition: color var(--transition);
             text-transform: uppercase;
+            letter-spacing: 0.1rem; /* Stessa spaziatura dei link principali */
             display: flex;
             align-items: center;
             gap: 6px;
             cursor: pointer;
         }
-        
+
         .current-lang:hover { color: var(--autumn-blue); }
 
         .lang-dropdown-content a {
+            font-family: inherit;
+            font-weight: 400; /* Togliamo il grassetto anche qui */
+            letter-spacing: 0.05rem;
             padding: 0.4rem 0; 
             color: var(--text-color); 
             text-decoration: none;
-            font-size: 0.9rem; 
-            font-weight: bold;
-            text-align: right; /* Allinea le lingue a destra */
+            font-size: 0.75rem; /* Uguale ai sottomenu dei progetti */
+            text-align: right; 
             width: 100%;
             transition: color 0.3s ease;
         }
