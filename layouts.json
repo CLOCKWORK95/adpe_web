@@ -85,5 +85,16 @@
       }
     ],
     "columns": 12
+  },
+  "PROJECT_PAIR_HOR-VERT": {
+    "slots": [
+      {
+        "col": "3 / span 5"
+      },
+      {
+        "col": "3 / span 3"
+      }
+    ],
+    "columns": 12
   }
 }
