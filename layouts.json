@@ -59,6 +59,22 @@
     "columns": 15,
     "rows": 8
   },
+  "PROJECT_SINGLE_VERTICAL": {
+    "slots": [
+      {
+        "col": "5 / span 3"
+      }
+    ],
+    "columns": 11
+  },
+  "PROJECT_SINGLE_HORIZONTAL": {
+    "slots": [
+      {
+        "col": "4 / span 7"
+      }
+    ],
+    "columns": 12
+  },
   "PROJECT_PAIR": {
     "slots": [
       {
@@ -70,26 +86,10 @@
     ],
     "columns": 12
   },
-  "PROJECT_SINGLE_VERTICAL": {
-    "slots": [
-      {
-        "col": "4 / span 3"
-      }
-    ],
-    "columns": 9
-  },
-  "PROJECT_SINGLE_HORIZONTAL": {
-    "slots": [
-      {
-        "col": "3 / span 8"
-      }
-    ],
-    "columns": 12
-  },
   "PROJECT_PAIR_HOR-VERT": {
     "slots": [
       {
-        "col": "3 / span 5"
+        "col": "3 / span 4"
       },
       {
         "col": "8 / span 3"
@@ -106,9 +106,9 @@
         "col": "5 / span 3"
       },
       {
-        "col": "10 / span 3"
+        "col": "9 / span 3"
       }
     ],
-    "columns": 12
+    "columns": 11
   }
 }
