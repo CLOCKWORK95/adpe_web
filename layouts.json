@@ -81,9 +81,9 @@
   "PROJECT_SINGLE_HORIZONTAL": {
     "slots": [
       {
-        "col": "4 / span 7"
+        "col": "4 / span 6"
       }
     ],
-    "columns": 13
+    "columns": 12
   }
 }
