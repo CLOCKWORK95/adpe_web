@@ -107,6 +107,10 @@
       ],
       "images": [
         {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/THE-BAVARIAN-DON-GIOVANNI/00.jpg",
+          "description": ""
+        },
+        {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/THE-BAVARIAN-DON-GIOVANNI/01.des.04.jpg",
           "description": ""
         },
@@ -116,10 +120,6 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/THE-BAVARIAN-DON-GIOVANNI/01.des.10.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/THE-BAVARIAN-DON-GIOVANNI/01.jpg",
           "description": ""
         },
         {
