@@ -100,10 +100,10 @@
   "PROJECT_PAIR_VERT-HOR": {
     "slots": [
       {
-        "col": "2 / span 3"
+        "col": "3 / span 3"
       },
       {
-        "col": "9 / span 5"
+        "col": "7 / span 5"
       }
     ],
     "columns": 12
