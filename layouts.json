@@ -62,10 +62,10 @@
   "PROJECT_SINGLE_VERTICAL": {
     "slots": [
       {
-        "col": "6 / span 3"
+        "col": "2 / span 1"
       }
     ],
-    "columns": 12
+    "columns": 3
   },
   "PROJECT_SINGLE_HORIZONTAL": {
     "slots": [
@@ -103,7 +103,7 @@
         "col": "2 / span 3"
       },
       {
-        "col": "5 / span 3"
+        "col": "6 / span 3"
       },
       {
         "col": "9 / span 3"
