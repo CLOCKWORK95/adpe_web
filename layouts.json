@@ -100,10 +100,10 @@
   "PROJECT_TRIPLE": {
     "slots": [
       {
-        "col": "2 / span 3"
+        "col": "1 / span 3"
       },
       {
-        "col": "6 / span 3"
+        "col": "5 / span 3"
       },
       {
         "col": "10 / span 3"
