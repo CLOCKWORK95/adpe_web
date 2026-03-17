@@ -13,12 +13,20 @@
       ],
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/BAVARIAN GENTLEMAN/image1.jpg",
-          "description": "Legno di Acacia."
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/BAVARIAN GENTLEMAN/01.des.04.jpg",
+          "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/BAVARIAN GENTLEMAN/image2.jpg",
-          "description": "Legno e alluminio, colori"
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/BAVARIAN GENTLEMAN/01.des.09.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/BAVARIAN GENTLEMAN/01.des.10.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/BAVARIAN GENTLEMAN/02_the.bavarian.don.giovanni_ADRIANO.PERNAZZA.jpg",
+          "description": ""
         }
       ]
     }
