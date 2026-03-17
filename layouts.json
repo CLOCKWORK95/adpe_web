@@ -47,16 +47,16 @@
         "row": "1 / span 7"
       },
       {
-        "col": "6 / span 3",
+        "col": "8 / span 3",
         "row": "1 / span 7"
       },
       {
-        "col": "10 / span 3",
+        "col": "12 / span 3",
         "row": "1 / span 7"
       }
     ],
     "height": "60vh",
-    "columns": 12,
+    "columns": 15,
     "rows": 8
   },
   "PROJECT_PAIR": {
