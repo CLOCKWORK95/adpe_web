@@ -43,7 +43,11 @@
         "row": "1 / span 7"
       },
       {
-        "col": "5 / span 3",
+        "col": "3 / span 3",
+        "row": "1 / span 7"
+      },
+      {
+        "col": "6 / span 3",
         "row": "1 / span 7"
       },
       {
@@ -51,7 +55,7 @@
         "row": "1 / span 7"
       }
     ],
-    "height": "50vh",
+    "height": "60vh",
     "columns": 12,
     "rows": 8
   },
