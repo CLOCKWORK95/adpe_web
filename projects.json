@@ -225,12 +225,11 @@
       "stato": "Realizzato",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_SINGLE_VERTICAL",
+        "PROJECT_PAIR_VERT-HOR",
         "PROJECT_PAIR",
         "PROJECT_SINGLE_HORIZONTAL",
-        "PROJECT_SINGLE_HORIZONTAL",
-        "PROJECT_PAIR_HOR-VERT",
         "PROJECT_TRIPLE",
+        "PROJECT_PAIR",
         "PROJECT_PAIR"
       ],
       "images": [
