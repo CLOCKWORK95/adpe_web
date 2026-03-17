@@ -70,7 +70,7 @@
   "PROJECT_SINGLE_HORIZONTAL": {
     "slots": [
       {
-        "col": "4 / span 7"
+        "col": "4 / span 6"
       }
     ],
     "columns": 12
@@ -89,7 +89,7 @@
   "PROJECT_PAIR_HOR-VERT": {
     "slots": [
       {
-        "col": "3 / span 4"
+        "col": "2 / span 5"
       },
       {
         "col": "8 / span 3"
@@ -100,13 +100,13 @@
   "PROJECT_TRIPLE": {
     "slots": [
       {
-        "col": "1 / span 3"
+        "col": "2 / span 3"
       },
       {
-        "col": "5 / span 3"
+        "col": "6 / span 3"
       },
       {
-        "col": "9 / span 3"
+        "col": "10 / span 3"
       }
     ],
     "columns": 11
