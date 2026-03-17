@@ -14,14 +14,6 @@
       ],
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/GULP RONF/14.des.r02.gif",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/GULP RONF/14.des.r03.gif",
-          "description": ""
-        },
-        {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/GULP RONF/14.des.r04.gif",
           "description": ""
         }
@@ -30,6 +22,7 @@
     "GULP-RONF": {
       "id": 2,
       "title": "Gulp Ronf",
+      "committente": "Privato",
       "images": [
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/GULP-RONF/14.des.g01.gif",
@@ -53,6 +46,10 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/GULP-RONF/14.des.r03.gif",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/GULP-RONF/14.des.r04.gif",
           "description": ""
         }
       ]
