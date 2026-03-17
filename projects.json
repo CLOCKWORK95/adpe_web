@@ -1,33 +1,11 @@
 {
   "architettura": {
     "residenziale": {
-      "casa-colorata": {
-        "id": 1,
-        "title": "Casa Colorata",
-        "description": "Ristrutturazione di un appartamento al centro città.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
-        "luogo_data": "Roma, 10 Marzo 2026",
-        "posizione": "Via di Capo Le Case, Roma",
-        "stato": "Completato",
-        "committente": "Privato",
-        "layoutSequence": [
-          "PROJECT_SINGLE",
-          "PROJECT_PAIR"
-        ],
-        "images": [
-          {
-            "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/residenziale/casa-colorata/image1.jpg",
-            "description": "Ingresso"
-          },
-          {
-            "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/residenziale/casa-colorata/image2.jpg",
-            "description": ""
-          }
-        ]
-      }
+      "casa-colorata": {}
     },
     "uffici": {
       "ufficio roma": {
-        "id": 2,
+        "id": 1,
         "title": "Ufficio Roma",
         "description": "Ufficio al centro di Roma.",
         "luogo_data": "Roma, 10 Marzo 2026",
@@ -61,7 +39,7 @@
   },
   "design": {
     "acacia": {
-      "id": 3,
+      "id": 2,
       "title": "Acacia",
       "description": "Questo tavolino in legno di acacia è una scelta solida e concreta per chi cerca un piano d'appoggio resistente per la zona giorno. L'acacia è un materiale noto per la sua naturale durezza e compattezza, caratteristiche che rendono questo mobile particolarmente adatto a sopportare l'uso quotidiano, tra tazze appoggiate di fretta, telecomandi, riviste e chiavi. Visivamente, il piano si fa notare per le tipiche venature irregolari del legno e per le sfumature calde, che spaziano dal miele al marrone più scuro. Le linee della struttura sono semplici e squadrate, prive di decorazioni superflue: un design pensato per integrarsi facilmente sia in un salotto dall'arredamento tradizionale, sia in un ambiente moderno dove il legno può aggiungere un tocco di calore senza risultare ingombrante.\r\n\r\nDal punto di vista pratico, le proporzioni del tavolino sono studiate per offrire una superficie utile adeguata senza però sacrificare troppo spazio al centro della stanza. Le quattro gambe massicce garantiscono un'ottima stabilità, evitando fastidiosi dondolii quando ci si appoggia un vassoio o un computer portatile. La finitura protettiva trasparente applicata sulla superficie opaca agevola notevolmente la pulizia quotidiana: è sufficiente un panno leggermente umido per rimuovere la polvere o le macchie accidentali, senza richiedere l'uso di cere o trattamenti particolari. In definitiva, si tratta di un arredo che punta dritto all'essenziale e alla longevità, offrendo una presenza discreta ma del tutto affidabile per la vita di casa.",
       "luogo_data": "Roma, 18 Aprile 2020",
@@ -82,12 +60,8 @@
         }
       ]
     },
-    "arredamento": {
-      "tavoli e tavolini": {}
-    },
-    "illuminazione": {},
     "paralume azzurro": {
-      "id": 4,
+      "id": 3,
       "title": "Paralume Azzurro",
       "description": "Questo paralume azzurro dalle linee essenziali è un complemento d'arredo pensato per unire praticità quotidiana e un design sobrio. Il rivestimento esterno è realizzato in un tessuto resistente, caratterizzato da una tonalità di azzurro opaco e uniforme che aggiunge una nota di colore alla stanza senza risultare visivamente invadente. La sua struttura cilindrica, semplice e rigorosa, permette di abbinarlo con facilità a diverse tipologie di arredamento, dai soggiorni più moderni alle camere da letto tradizionali, offrendo una soluzione d'illuminazione versatile e concreta che non cerca di rubare la scena al resto dei mobili.\r\n\r\nDal punto di vista funzionale, la trama del tessuto azzurro lavora come un filtro efficace, attenuando la forza della lampadina e aiutando a diffondere una luce morbida e ben distribuita nello spazio. Questo lo rende un accessorio particolarmente indicato per le zone della casa dedicate alla lettura o al relax, dove è importante evitare fastidiosi abbagliamenti diretti. Il telaio interno in metallo leggero è studiato per adattarsi ai portalampada standard più diffusi sul mercato, rendendo il montaggio rapido e la pulizia molto agevole. In sintesi, è un oggetto progettato per fare bene il suo lavoro: illuminare l'ambiente in modo confortevole, mantenendo un aspetto curato ma sempre discreto.",
       "luogo_data": "Roma, 18 Aprile 2020",
@@ -116,6 +90,31 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/paralume azzurro/image5.jpg",
+          "description": ""
+        }
+      ]
+    }
+  },
+  "residenziale": {
+    "casa-colorata": {
+      "id": 4,
+      "title": "Casa Colorata",
+      "description": "Ristrutturazione di un appartamento al centro città.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
+      "luogo_data": "Roma, 10 Marzo 2026",
+      "posizione": "Via di Capo Le Case, Roma",
+      "stato": "Completato",
+      "committente": "Privato",
+      "layoutSequence": [
+        "PROJECT_SINGLE",
+        "PROJECT_PAIR"
+      ],
+      "images": [
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/casa-colorata/image1.jpg",
+          "description": "Ingresso"
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/casa-colorata/image2.jpg",
           "description": ""
         }
       ]
