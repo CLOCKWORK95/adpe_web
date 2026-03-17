@@ -73,7 +73,7 @@
   "PROJECT_SINGLE_VERTICAL": {
     "slots": [
       {
-        "col": "5 / span 3"
+        "col": "6 / span 3"
       }
     ],
     "columns": 12
@@ -81,7 +81,7 @@
   "PROJECT_SINGLE_HORIZONTAL": {
     "slots": [
       {
-        "col": "4 / span 6"
+        "col": "3 / span 8"
       }
     ],
     "columns": 12
