@@ -62,18 +62,26 @@
   "PROJECT_PAIR": {
     "slots": [
       {
-        "col": "2 / span 4"
+        "col": "2 / span 3"
       },
       {
-        "col": "7 / span 4"
+        "col": "8 / span 3"
       }
     ],
     "columns": 12
   },
-  "PROJECT_SINGLE": {
+  "PROJECT_SINGLE_VERTICAL": {
     "slots": [
       {
         "col": "6 / span 3"
+      }
+    ],
+    "columns": 12
+  },
+  "PROJECT_SINGLE_HORIZONTAL": {
+    "slots": [
+      {
+        "col": "3 / span 8"
       }
     ],
     "columns": 12
