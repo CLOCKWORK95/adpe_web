@@ -86,40 +86,38 @@
       "tavoli e tavolini": {}
     },
     "illuminazione": {
-      "paralume azzurro": {
-        "id": 4,
-        "title": "Paralume Azzurro",
-        "description": "Questo paralume azzurro dalle linee essenziali è un complemento d'arredo pensato per unire praticità quotidiana e un design sobrio. Il rivestimento esterno è realizzato in un tessuto resistente, caratterizzato da una tonalità di azzurro opaco e uniforme che aggiunge una nota di colore alla stanza senza risultare visivamente invadente. La sua struttura cilindrica, semplice e rigorosa, permette di abbinarlo con facilità a diverse tipologie di arredamento, dai soggiorni più moderni alle camere da letto tradizionali, offrendo una soluzione d'illuminazione versatile e concreta che non cerca di rubare la scena al resto dei mobili.\r\n\r\nDal punto di vista funzionale, la trama del tessuto azzurro lavora come un filtro efficace, attenuando la forza della lampadina e aiutando a diffondere una luce morbida e ben distribuita nello spazio. Questo lo rende un accessorio particolarmente indicato per le zone della casa dedicate alla lettura o al relax, dove è importante evitare fastidiosi abbagliamenti diretti. Il telaio interno in metallo leggero è studiato per adattarsi ai portalampada standard più diffusi sul mercato, rendendo il montaggio rapido e la pulizia molto agevole. In sintesi, è un oggetto progettato per fare bene il suo lavoro: illuminare l'ambiente in modo confortevole, mantenendo un aspetto curato ma sempre discreto.",
-        "luogo_data": "Roma, 18 Aprile 2020",
-        "posizione": "Via degli Ulivi, Frascati",
-        "stato": "Completato",
-        "committente": "Privato",
-        "layoutSequence": [
-          "PROJECT_PAIR"
-        ],
-        "images": [
-          {
-            "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/paralume azzurro/image1.jpg",
-            "description": ""
-          },
-          {
-            "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/paralume azzurro/image2.jpg",
-            "description": ""
-          },
-          {
-            "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/paralume azzurro/image3.jpg",
-            "description": ""
-          },
-          {
-            "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/paralume azzurro/image4.jpg",
-            "description": ""
-          },
-          {
-            "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/illuminazione/paralume azzurro/image5.jpg",
-            "description": ""
-          }
-        ]
-      }
+      "paralume azzurro": {}
+    },
+    "paralume azzurro": {
+      "id": 4,
+      "title": "Paralume Azzurro",
+      "description": "Questo paralume azzurro dalle linee essenziali è un complemento d'arredo pensato per unire praticità quotidiana e un design sobrio. Il rivestimento esterno è realizzato in un tessuto resistente, caratterizzato da una tonalità di azzurro opaco e uniforme che aggiunge una nota di colore alla stanza senza risultare visivamente invadente. La sua struttura cilindrica, semplice e rigorosa, permette di abbinarlo con facilità a diverse tipologie di arredamento, dai soggiorni più moderni alle camere da letto tradizionali, offrendo una soluzione d'illuminazione versatile e concreta che non cerca di rubare la scena al resto dei mobili.\r\n\r\nDal punto di vista funzionale, la trama del tessuto azzurro lavora come un filtro efficace, attenuando la forza della lampadina e aiutando a diffondere una luce morbida e ben distribuita nello spazio. Questo lo rende un accessorio particolarmente indicato per le zone della casa dedicate alla lettura o al relax, dove è importante evitare fastidiosi abbagliamenti diretti. Il telaio interno in metallo leggero è studiato per adattarsi ai portalampada standard più diffusi sul mercato, rendendo il montaggio rapido e la pulizia molto agevole. In sintesi, è un oggetto progettato per fare bene il suo lavoro: illuminare l'ambiente in modo confortevole, mantenendo un aspetto curato ma sempre discreto.",
+      "committente": "Privato",
+      "layoutSequence": [
+        "PROJECT_PAIR"
+      ],
+      "images": [
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/paralume azzurro/image1.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/paralume azzurro/image2.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/paralume azzurro/image3.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/paralume azzurro/image4.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/paralume azzurro/image5.jpg",
+          "description": ""
+        }
+      ]
     }
   }
 }
