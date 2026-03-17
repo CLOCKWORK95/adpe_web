@@ -359,6 +359,20 @@
           "description": ""
         }
       ]
+    },
+    "COLOMBOLAB2": {
+      "id": 8,
+      "title": "Colombolab2",
+      "images": [
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/COLOMBOLAB2/01.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/COLOMBOLAB2/02.jpg",
+          "description": ""
+        }
+      ]
     }
   }
 }
