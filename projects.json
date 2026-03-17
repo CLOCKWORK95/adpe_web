@@ -1,9 +1,5 @@
 {
-  "architettura": {
-    "uffici": {
-      "ufficio roma": {}
-    }
-  },
+  "architettura": {},
   "design": {
     "acacia": {
       "id": 1,
