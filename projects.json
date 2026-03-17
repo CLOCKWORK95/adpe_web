@@ -58,9 +58,22 @@
     }
   },
   "residenziale": {
-    "2022_BERNASCONI": {},
-    "CAPO LE CASE": {
+    "2022_BERNASCONI": {
       "id": 3,
+      "title": "2022_bernasconi",
+      "images": [
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/2022_BERNASCONI/01.png",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/2022_BERNASCONI/Casa Bernasconi_Bagno 03.png",
+          "description": ""
+        }
+      ]
+    },
+    "CAPO LE CASE": {
+      "id": 4,
       "title": "Capo Le Case",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
       "luogo_data": "Roma, 2012",
@@ -124,7 +137,7 @@
       ]
     },
     "NOMENTANA": {
-      "id": 4,
+      "id": 5,
       "title": "Nomentana",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
       "luogo_data": "Roma, 2017",
@@ -199,7 +212,7 @@
       ]
     },
     "casa-colorata": {
-      "id": 5,
+      "id": 6,
       "title": "Casa Colorata",
       "description": "Ristrutturazione di un appartamento al centro città.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
       "luogo_data": "Roma, 10 Marzo 2026",
@@ -224,7 +237,7 @@
   },
   "uffici": {
     "ufficio roma": {
-      "id": 6,
+      "id": 7,
       "title": "Ufficio Roma",
       "description": "Ufficio al centro di Roma.",
       "luogo_data": "Roma, 10 Marzo 2026",
