@@ -4,7 +4,6 @@
       "ufficio roma": {
         "id": 1,
         "title": "Ufficio Roma",
-        "description": "Ufficio al centro di Roma.",
         "luogo_data": "Roma, 10 Marzo 2026",
         "posizione": "Via di Capo Le Case, Roma",
         "stato": "Completato",
@@ -13,18 +12,6 @@
           "PROJECT_PAIR"
         ],
         "images": [
-          {
-            "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/uffici/ufficio roma/image1.jpg",
-            "description": "Vista frontale"
-          },
-          {
-            "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/uffici/ufficio roma/image2.jpg",
-            "description": "Corridoio interno con vista."
-          },
-          {
-            "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/uffici/ufficio roma/image3.jpg",
-            "description": ""
-          },
           {
             "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/architettura/uffici/ufficio roma/image4.jpg",
             "description": ""
@@ -121,7 +108,14 @@
       "id": 5,
       "title": "Ufficio Roma",
       "description": "Ufficio al centro di Roma.",
+      "luogo_data": "Roma, 10 Marzo 2026",
+      "posizione": "Via di Capo Le Case, Roma",
+      "stato": "Completato",
       "committente": "Privato",
+      "layoutSequence": [
+        "PROJECT_SINGLE",
+        "PROJECT_PAIR"
+      ],
       "images": [
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/ufficio roma/image1.jpg",
