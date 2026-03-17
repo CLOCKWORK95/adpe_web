@@ -75,13 +75,24 @@
     ],
     "columns": 12
   },
-  "PROJECT_PAIR": {
+  "PROJECT_PAIR_VERTICAL": {
     "slots": [
       {
         "col": "3 / span 3"
       },
       {
         "col": "8 / span 3"
+      }
+    ],
+    "columns": 12
+  },
+  "PROJECT_PAIR_HORIZONTAL": {
+    "slots": [
+      {
+        "col": "1 / span 5"
+      },
+      {
+        "col": "7 / span 5"
       }
     ],
     "columns": 12
