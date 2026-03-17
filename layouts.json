@@ -78,10 +78,10 @@
   "PROJECT_PAIR": {
     "slots": [
       {
-        "col": "4 / span 3"
+        "col": "3 / span 3"
       },
       {
-        "col": "9 / span 3"
+        "col": "8 / span 3"
       }
     ],
     "columns": 12
@@ -92,7 +92,7 @@
         "col": "2 / span 5"
       },
       {
-        "col": "8 / span 3"
+        "col": "9 / span 3"
       }
     ],
     "columns": 12
@@ -100,13 +100,13 @@
   "PROJECT_TRIPLE": {
     "slots": [
       {
-        "col": "1 / span 3"
+        "col": "1 / span 4"
       },
       {
-        "col": "5 / span 3"
+        "col": "5 / span 4"
       },
       {
-        "col": "9 / span 3"
+        "col": "9 / span 4"
       }
     ],
     "columns": 11
