@@ -1696,25 +1696,30 @@
             // =========================================================
             
             if (project.layoutSequence && project.layoutSequence.length > 0) {
-                // METODO 1: È specificata una sequenza custom nel file JSON
                 let imgIndex = 0;
                 let seqIndex = 0;
+                let failsafe = 0; // <--- IL SALVAVITA DEVE ESSERE QUI
 
-                while (imgIndex < imgs.length) {
+                // IL FAILSAFE < 1000 IMPEDISCE IL CRASH DEL SITO
+                while (imgIndex < imgs.length && failsafe < 1000) {
+                    failsafe++; 
+                    
                     let layoutName = project.layoutSequence[seqIndex % project.layoutSequence.length];
                     let layoutDef = globalLayouts[layoutName];
 
+                    // SE L'ARCHITETTO SCRIVE UN NOME SBAGLIATO, FORZIAMO UN LAYOUT VALIDO
                     if (!layoutDef) {
-                        console.warn(`Layout '${layoutName}' non trovato, salto...`);
-                        seqIndex++;
-                        continue;
+                        console.warn(`ATTENZIONE: Layout '${layoutName}' non trovato! Uso fallback.`);
+                        layoutDef = { columns: 12, slots: [{ col: "3 / span 8" }] };
                     }
 
                     layoutDef.slots.forEach(slot => {
                         if (imgIndex < imgs.length) {
                             let imgData = imgs[imgIndex];
+                            let rowStyle = slot.row ? `grid-row: ${slot.row};` : '';
+                            
                             htmlContent += `
-                                <div class="proj-img-wrap" style="grid-column: ${slot.col};">
+                                <div class="proj-img-wrap" style="grid-column: ${slot.col}; ${rowStyle}">
                                     <img src="${imgData.src}" alt="${imgData.description || ''}" onclick="openImageModal(${project.id}, '${imgData.src}')" loading="lazy">
                                 </div>
                             `;
