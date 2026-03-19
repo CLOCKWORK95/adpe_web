@@ -9,6 +9,11 @@
     <!-- Google Font: Roboto Mono -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.7; }
+        }
         /* Variabili CSS per il tema chiaro */
         :root {
             --primary-color: #ffffff;
@@ -892,8 +897,13 @@
             .splash-section { 
                 padding: 1rem 5vw; 
             }
+            /* Il testo è sempre visibile su touch-screen (niente hover) e ben distanziato */
             .projects-grid .splash-caption {
-                margin-bottom: 3rem; 
+                opacity: 1;
+                visibility: visible;
+                margin-bottom: 4rem; 
+                align-self: center; /* <--- FIX: Lo posiziona al centro della colonna */
+                width: 100%;        /* <--- FIX: Si allarga permettendo al testo di centrarsi */
             }
             .about-content, .contact-content { 
                 margin-top: 3rem; 
@@ -1191,6 +1201,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body class="bg-animations-off">
+    <div id="globalLoader" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--primary-color); z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease, visibility 0.6s ease;">
+        <img src="https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="Loading" style="width: 80px; height: 80px; border-radius: 50%; animation: pulse 1.5s infinite ease-in-out;">
+    </div>
     <div class="geometric-square-background"></div>
     <div class="background-rectangle"></div>
     <header>
@@ -1430,6 +1443,16 @@
                 
                 setupEventListeners();
                 setLanguage(currentLang, true); 
+
+                // === ALZA IL SIPARIO ===
+                // Diamo al browser 800 millisecondi di respiro per dipingere le foto pesanti
+                setTimeout(() => {
+                    const loader = document.getElementById('globalLoader');
+                    if (loader) {
+                        loader.style.opacity = '0';
+                        loader.style.visibility = 'hidden';
+                    }
+                }, 1200); 
             } catch (error) {
                 console.error('Errore nel caricamento dei dati iniziali:', error);
             }
@@ -1718,9 +1741,15 @@
                             let imgData = imgs[imgIndex];
                             let rowStyle = slot.row ? `grid-row: ${slot.row};` : '';
                             
+                            // Aggiunto style con opacità 0 e transizione, più l'onload per farla apparire dolcemente
                             htmlContent += `
                                 <div class="proj-img-wrap" style="grid-column: ${slot.col}; ${rowStyle}">
-                                    <img src="${imgData.src}" alt="${imgData.description || ''}" onclick="openImageModal(${project.id}, '${imgData.src}')" loading="lazy">
+                                    <img src="${imgData.src}" 
+                                         alt="${imgData.description || ''}" 
+                                         onclick="openImageModal(${project.id}, '${imgData.src}')" 
+                                         loading="lazy"
+                                         style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;"
+                                         onload="this.style.opacity=1">
                                 </div>
                             `;
                             imgIndex++;
@@ -1736,21 +1765,36 @@
                     let cycle = i % 3; 
 
                     if (cycle === 0 && i + 1 < imgs.length) {
-                        // Coppia
+                        // Coppia - Aggiunto style e onload su entrambe le immagini
                         htmlContent += `
                             <div class="proj-img-wrap" style="grid-column: 2 / span 4;">
-                                <img src="${imgs[i].src}" alt="${imgs[i].description || ''}" onclick="openImageModal(${project.id}, '${imgs[i].src}')" loading="lazy">
+                                <img src="${imgs[i].src}" 
+                                     alt="${imgs[i].description || ''}" 
+                                     onclick="openImageModal(${project.id}, '${imgs[i].src}')" 
+                                     loading="lazy"
+                                     style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;"
+                                     onload="this.style.opacity=1">
                             </div>
                             <div class="proj-img-wrap" style="grid-column: 8 / span 4;">
-                                <img src="${imgs[i+1].src}" alt="${imgs[i+1].description || ''}" onclick="openImageModal(${project.id}, '${imgs[i+1].src}')" loading="lazy">
+                                <img src="${imgs[i+1].src}" 
+                                     alt="${imgs[i+1].description || ''}" 
+                                     onclick="openImageModal(${project.id}, '${imgs[i+1].src}')" 
+                                     loading="lazy"
+                                     style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;"
+                                     onload="this.style.opacity=1">
                             </div>
                         `;
                         i += 2;
                     } else {
-                        // Singolo
+                        // Singolo - Aggiunto style e onload
                         htmlContent += `
                             <div class="proj-img-wrap" style="grid-column: 3 / span 8;">
-                                <img src="${imgs[i].src}" alt="${imgs[i].description || ''}" onclick="openImageModal(${project.id}, '${imgs[i].src}')" loading="lazy">
+                                <img src="${imgs[i].src}" 
+                                     alt="${imgs[i].description || ''}" 
+                                     onclick="openImageModal(${project.id}, '${imgs[i].src}')" 
+                                     loading="lazy"
+                                     style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;"
+                                     onload="this.style.opacity=1">
                             </div>
                         `;
                         i++;
@@ -1793,7 +1837,7 @@
                 window.scrollTo({ top: 0, behavior: 'instant' });
             }
         }
-
+        
         function goBackToProjects() {
             showProjectsSection();
         }
