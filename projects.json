@@ -1003,14 +1003,6 @@
       ],
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AVOLTA NEXT/04.JPG",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AVOLTA NEXT/05.JPG",
-          "description": ""
-        },
-        {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AVOLTA NEXT/06.JPG",
           "description": ""
         },
@@ -1054,6 +1046,14 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AVOLTA-NEXT/05.JPG",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AVOLTA-NEXT/06.JPG",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AVOLTA-NEXT/07.jpg",
           "description": ""
         }
       ]
