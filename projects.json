@@ -143,8 +143,9 @@
       "stato": "Render",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_SINGLE",
-        "PROJECT_PAIR"
+        "PROJECT_PAIR_VERT_HOR",
+        "PROJECT_SINGLE_HORIZONTAL",
+        "PROJECT_PAIR_HORIZONTAL"
       ],
       "images": [
         {
@@ -157,6 +158,14 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/2022_BERNASCONI/03.png",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/2022_BERNASCONI/04.png",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/2022_BERNASCONI/05.png",
           "description": ""
         },
         {
