@@ -1084,8 +1084,8 @@
       "stato": "Completato",
       "committente": "Business School 24",
       "layoutSequence": [
-        "PROJECT_PAIR_VERT",
-        "PROJECT_PAIR_VERT_HOR",
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_PAIR_VERT_HORIZONTAL",
         "PROJECT_PAIR_HOR_VERT",
         "PROJECT_TRIPLE"
       ],
