@@ -1254,8 +1254,10 @@
       "stato": "Completato",
       "committente": "Studio Medico Colombo",
       "layoutSequence": [
-        "PROJECT_SINGLE",
-        "PROJECT_PAIR"
+        "PROJECT_PAIR_VERT-HOR",
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_PAIR_VERTICAL"
       ],
       "images": [
         {
