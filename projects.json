@@ -257,9 +257,7 @@
       "stato": "Realizzato",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_SINGLE",
-        "PROJECT_PAIR",
-        "PROJECT_SINGLE"
+        "PROJECT_PAIR_VERTICAL"
       ],
       "images": [
         {
