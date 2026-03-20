@@ -179,7 +179,9 @@
       "stato": "Completato",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_PAIR"
+        "PROJECT_PAIR_VERT-HOR",
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_PAIR_VERTICAL"
       ],
       "images": [
         {
