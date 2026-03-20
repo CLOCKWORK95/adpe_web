@@ -221,7 +221,7 @@
       "stato": "Render",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_PAIR_VERT_HOR",
+        "PROJECT_PAIR_VERT-HOR",
         "PROJECT_SINGLE_HORIZONTAL",
         "PROJECT_PAIR_HORIZONTAL"
       ],
