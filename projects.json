@@ -27,26 +27,6 @@
       "title": "Clavetta",
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/CLAVETTA/._01.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/CLAVETTA/._12.des.01.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/CLAVETTA/._12.des.02.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/CLAVETTA/._12.des.03.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/CLAVETTA/._12.des.05.jpg",
-          "description": ""
-        },
-        {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/CLAVETTA/01.jpg",
           "description": ""
         },
@@ -776,10 +756,6 @@
       ],
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/ORTONA/._01.jpg",
-          "description": ""
-        },
-        {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/ORTONA/01.jpg",
           "description": ""
         },
@@ -966,8 +942,10 @@
       "stato": "Completato",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_SINGLE",
-        "PROJECT_PAIR"
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_PAIR_VERT-HOR",
+        "PROJECT_PAIR_HORIZONTAL",
+        "PROJECT_TRIPLE"
       ],
       "images": [
         {
