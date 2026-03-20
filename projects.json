@@ -299,9 +299,12 @@
       "stato": "Realizzato",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_SINGLE",
-        "PROJECT_PAIR",
-        "PROJECT_SINGLE"
+        "PROJECT_PAIR_HOR-VERT",
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_PAIR_HORIZONTAL",
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_PAIR_HORIZONTAL"
       ],
       "images": [
         {
