@@ -370,9 +370,10 @@
       "stato": "Realizzato",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_SINGLE",
-        "PROJECT_PAIR",
-        "PROJECT_SINGLE"
+        "PROJECT_TRIPLE",
+        "PROJECT_TRIPLE",
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_PAIR_HOR-VERT"
       ],
       "images": [
         {
