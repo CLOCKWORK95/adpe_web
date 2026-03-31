@@ -891,90 +891,29 @@
     "AMI": {
       "id": 20,
       "title": "Ami",
-      "description": "Ristrutturazione di un appartamento al centro città.\r\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
-      "luogo_data": "Roma, 2024",
-      "posizione": "Via dell'Arte, Roma",
-      "stato": "Completato",
-      "committente": "JLL",
-      "layoutSequence": [
-        "PROJECT_SINGLE",
-        "PROJECT_PAIR"
-      ],
       "images": [
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/00.jpg",
-          "description": ""
-        },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/01.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_3154_01.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/02.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_3157.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/03.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_3185_01.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/04.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_3192_01.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/05.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_3200.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_6553.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_6556.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_6560.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_6564.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_6570.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_6573.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_6575.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_6594.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_6605_01.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_6615.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_6629.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/IMG_6635.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/06.jpg",
           "description": ""
         }
       ]
