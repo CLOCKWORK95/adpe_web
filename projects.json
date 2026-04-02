@@ -897,7 +897,7 @@
       "stato": "Completato",
       "committente": "JLL",
       "layoutSequence": [
-        "PROJECT_PAIR_HORIZONTAL",
+        "PROJECT_PAIR_VERT-HOR",
         "PROJECT_TRIPLE",
         "PROJECT_PAIR_HORIZONTAL",
         "PROJECT_PAIR_HORIZONTAL",
