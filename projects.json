@@ -898,10 +898,11 @@
       "committente": "JLL",
       "layoutSequence": [
         "PROJECT_PAIR_VERT-HOR",
+        "PROJECT_SINGLE_HORIZONTAL",
+        "PROJECT_TRIPLE",
         "PROJECT_PAIR_HORIZONTAL",
         "PROJECT_TRIPLE",
-        "PROJECT_TRIPLE",
-        "PROJECT_TRIPLE"
+        "PROJECT_PAIR_HORIZONTAL"
       ],
       "images": [
         {
