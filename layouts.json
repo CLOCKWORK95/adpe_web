@@ -132,5 +132,19 @@
       }
     ],
     "columns": 12
+  },
+  "PROJECT_TRIPLE_VERT": {
+    "slots": [
+      {
+        "col": "1 / span 3"
+      },
+      {
+        "col": "5 / span 3"
+      },
+      {
+        "col": "9 / span 3"
+      }
+    ],
+    "columns": 12
   }
 }
