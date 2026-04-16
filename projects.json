@@ -814,7 +814,9 @@
       "stato": "Completato",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_PAIR_HORIZONTAL"
+        "PROJECT_PAIR_HORIZONTAL",
+        "PROJECT_PAIR_HORIZONTAL",
+        "PROJECT_SINGLE_HORIZONTAL"
       ],
       "images": [
         {
