@@ -996,8 +996,10 @@
       "stato": "Realizzato",
       "committente": "AVOLTA",
       "layoutSequence": [
-        "PROJECT_SINGLE",
-        "PROJECT_PAIR"
+        "PROJECT_PAIR_HORIZONTAL",
+        "PROJECT_SINGLE_HORIZONTAL",
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_SINGLE_VERTICAL"
       ],
       "images": [
         {
