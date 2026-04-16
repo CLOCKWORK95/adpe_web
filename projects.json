@@ -1167,7 +1167,7 @@
       "committente": "Cellnex Italia",
       "layoutSequence": [
         "PROJECT_PAIR_HOR-VERT",
-        "PROJECT_PAIR_VERT-HOR",
+        "PROJECT_PAIR_HORIZONTAL",
         "PROJECT_PAIR_HORIZONTAL"
       ],
       "images": [
