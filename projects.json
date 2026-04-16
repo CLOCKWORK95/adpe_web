@@ -1264,9 +1264,7 @@
       "committente": "Studio Medico Colombo",
       "layoutSequence": [
         "PROJECT_PAIR_VERT-HOR",
-        "PROJECT_PAIR_VERTICAL",
-        "PROJECT_PAIR_VERTICAL",
-        "PROJECT_PAIR_VERTICAL"
+        "PROJECT_TRIPLE_VERT"
       ],
       "images": [
         {
