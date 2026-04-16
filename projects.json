@@ -1071,7 +1071,7 @@
       "committente": "BNL SPA",
       "layoutSequence": [
         "PROJECT_PAIR_VERTICAL",
-        "PROJECT_TRIPLE"
+        "PROJECT_PAIR_HOR-VERT"
       ],
       "images": [
         {
