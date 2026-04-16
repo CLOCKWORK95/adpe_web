@@ -1316,6 +1316,12 @@
       "stato": "In corso",
       "committente": "KUWAIT PETROLEUM ITALIA",
       "layoutSequence": [
+        "PROJECT_PAIR_HORIZONTAL",
+        "PROJECT_SINGLE_HORIZONTAL",
+        "PROJECT_SINGLE_HORIZONTAL",
+        "PROJECT_PAIR_HORIZONTAL",
+        "PROJECT_TRIPLE",
+        "PROJECT_PAIR_HORIZONTAL",
         "PROJECT_PAIR_HORIZONTAL"
       ],
       "images": [
