@@ -840,17 +840,13 @@
       "stato": "Completato",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_PAIR_HORIZONTAL",
-        "PROJECT_PAIR_HORIZONTAL",
-        "PROJECT_SINGLE_HORIZONTAL"
+        "PROJECT_SINGLE_HORIZONTAL",
+        "PROJECT_SINGLE_HORIZONTAL",
+        "PROJECT_PAIR_HORIZONTAL"
       ],
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/OSTIA/001_c.png",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/OSTIA/001_d.png",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/OSTIA/01.png",
           "description": ""
         },
         {
@@ -862,7 +858,7 @@
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/OSTIA/04.png",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/OSTIA/04.jpg",
           "description": ""
         }
       ]
