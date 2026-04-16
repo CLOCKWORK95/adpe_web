@@ -629,10 +629,6 @@
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/CLORO/12.jpg",
           "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/CLORO/13.jpg",
-          "description": ""
         }
       ]
     },
@@ -822,7 +818,7 @@
       ],
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/OSTIA/01.png",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/OSTIA/003_b2.png",
           "description": ""
         },
         {
@@ -831,10 +827,6 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/OSTIA/03.png",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/OSTIA/04.jpg",
           "description": ""
         }
       ]
