@@ -1037,8 +1037,8 @@
       "stato": "In corso",
       "committente": "BNL",
       "layoutSequence": [
-        "PROJECT_SINGLE",
-        "PROJECT_PAIR"
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_PAIR_VERT-HOR"
       ],
       "images": [
         {
