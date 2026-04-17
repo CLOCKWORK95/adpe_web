@@ -1210,12 +1210,12 @@
         <nav class="container">
             <ul class="nav-menu">
                 <li class="nav-item-dropdown">
-                    <a href="#" class="nav-link" data-lang-key="projectsLink" onclick="showProjectsSection()">Progetti</a>
+                    <a href="javascript:void(0)" class="nav-link" data-lang-key="projectsLink" onclick="showProjectsSection()">Progetti</a>
                     <div class="dropdown-content" id="projectFilters">
                         </div>
                 </li>
-                <li><a href="#" class="nav-link" data-lang-key="aboutLink" onclick="showAbout()">Chi Siamo</a></li>
-                <li><a href="#" class="nav-link" data-lang-key="contactLink" onclick="showContact()">Contatti</a></li>
+                <li><a href="javascript:void(0)" class="nav-link" data-lang-key="aboutLink" onclick="showAbout()">Chi Siamo</a></li>
+                <li><a href="javascript:void(0)" class="nav-link" data-lang-key="contactLink" onclick="showContact()">Contatti</a></li>
             </ul>
 
             <div class="header-right-icons">
@@ -1564,8 +1564,9 @@
 
         // --- Logica di Navigazione e Visualizzazione Sezioni ---
 
+        // --- Logica di Navigazione e Visualizzazione Sezioni con History API ---
+
         function showSection(sectionId, shouldScroll = true) {
-            // AGGIUNTA: Diciamo all'HTML in che sezione ci troviamo
             document.body.setAttribute('data-view', currentView);
 
             [
@@ -1588,18 +1589,21 @@
             }
         }
 
-        function showHome() {
+        function showHome(shouldScroll = false, addToHistory = true) {
             currentView = 'home';
-            showSection('hero', false); // Non scrollare all'hero
+            if (addToHistory) saveState('home'); // Salva nella cronologia
+
+            showSection('hero', shouldScroll);
             document.getElementById('homeSplash').style.display = 'block';
             document.getElementById('homeProjects').style.display = 'block';
             document.getElementById('singleProjectDetail').style.display = 'none';
             renderHomeSplash();
-            //generateHomeProjects();
         }
         
-        function showProjectsSection(shouldScroll = true) {
+        function showProjectsSection(shouldScroll = true, addToHistory = true) {
             currentView = 'projects';
+            if (addToHistory) saveState('projects', null, lastActiveFilter); // Salva nella cronologia
+
             showSection('projectsSection', shouldScroll);
             document.getElementById('singleProjectDetail').style.display = 'none';
             document.getElementById('projectsGrid').style.display = 'block';
@@ -1607,87 +1611,43 @@
             const projectsSection = document.getElementById('projectsSection');
             let titleWrapper = projectsSection.querySelector('.title-wrapper'); 
 
-            if (!titleWrapper) { // Se il contenitore non esiste, crealo con il logo al centro
+            if (!titleWrapper) { 
                 titleWrapper = document.createElement('div');
                 titleWrapper.className = 'title-wrapper';
-                // AGGIUNTO cursor:pointer E onclick per richiamare la home custom
                 titleWrapper.innerHTML = `
                     <img src="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="ADPE Logo" class="title-logo-center" style="cursor: pointer;" onclick="filterProjects('home_custom')">
                 `;
                 projectsSection.prepend(titleWrapper);
             }
-            // Rendi visibile il wrapper con flexbox
             titleWrapper.style.display = 'flex'; 
 
             generateFilters();
-            filterProjects(lastActiveFilter);
+            // Evita di creare un doppio salvataggio passando "false" come ultimo parametro
+            filterProjects(lastActiveFilter, 0.2, 250, 0.8, 0, false); 
         }
 
-        function showAbout(shouldScroll = true) {
+        function showAbout(shouldScroll = true, addToHistory = true) {
             currentView = 'about';
+            if (addToHistory) saveState('about'); // Salva nella cronologia
             showSection('aboutSection', shouldScroll);
         }
 
-        function showContact(shouldScroll = true) {
+        function showContact(shouldScroll = true, addToHistory = true) {
             currentView = 'contact';
+            if (addToHistory) saveState('contact'); // Salva nella cronologia
             showSection('contactSection', shouldScroll);
         }
-        
-        /*function showProject(projectId, shouldScroll = true) {
+
+        function showProject(projectId, shouldScroll = true, addToHistory = true) {
             const project = findProjectById(projectId);
             if (!project) return;
 
             currentView = 'projectDetail';
-            showSection('projectsSection', shouldScroll);
-            
-            // RIMOZIONE RIGA BUG: Non nascondiamo più 'projectFilters' perché ora è il menu in alto!
-            document.getElementById('projectsGrid').style.display = 'none';
+            if (addToHistory) saveState('projectDetail', projectId, null); // Salva nella cronologia
 
-            // Nascondi il logo gigante "x3" quando si entra nel dettaglio del progetto
-            const projectsSection = document.getElementById('projectsSection');
-            const titleWrapper = projectsSection.querySelector('.title-wrapper');
-            if (titleWrapper) {
-                titleWrapper.style.display = 'none';
-            }
-
-            const detailContainer = document.getElementById('singleProjectDetail');
-            detailContainer.style.display = 'block';
-            detailContainer.dataset.projectId = projectId;
-
-            const backButtonHtml = `<button class="back-to-projects-btn" onclick="goBackToProjects()">${translations[currentLang].backToProjects}</button>`;
-            
-            const galleryHtml = project.images.map(image => `
-                <div class="gallery-item">
-                    <img src="${image.src}" alt="${image.description}" onclick="openImageModal(${project.id}, '${image.src}')" loading="lazy">
-                    <p class="gallery-description">${image.description || ''}</p>
-                </div>
-            `).join('');
-
-            detailContainer.innerHTML = `
-                ${backButtonHtml}
-                <h2 class="project-detail-title">${project.title}</h2>
-                <p class="project-detail-category">${getProjectCategoryLabel(project)}</p>
-                <p class="project-detail-description">${project.description}</p>
-                <div class="project-gallery">${galleryHtml}</div>
-            `;
-            
-            if (shouldScroll) {
-                setTimeout(() => {
-                    detailContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
-            }
-        }
-        */
-        
-        function showProject(projectId, shouldScroll = true) {
-            const project = findProjectById(projectId);
-            if (!project) return;
-
-            currentView = 'projectDetail';
             showSection('projectsSection', shouldScroll);
             document.getElementById('projectsGrid').style.display = 'none';
 
-            // Nascondi logo gigante
             const titleWrapper = document.querySelector('.title-wrapper');
             if (titleWrapper) titleWrapper.style.display = 'none';
 
@@ -1695,10 +1655,8 @@
             detailContainer.style.display = 'block';
             detailContainer.dataset.projectId = projectId;
 
-            // 1. Estrai il Luogo e Data (se non c'è, lascia vuoto)
             const luogoData = project.luogo_data || '';
 
-            // 2. CREA LA TESTATINA FISSA INIZIALE
             let htmlContent = `
                 <div class="project-sticky-header">
                     <div class="project-sticky-grid">
@@ -1708,29 +1666,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="project-detail-grid">
             `;
-
-            // 3. Inizia la griglia delle immagini
-            htmlContent += `<div class="project-detail-grid">`;
-            const imgs = project.images;
             
-            // =========================================================
-            // LOGICA INTELLIGENTE: CONTROLLO LAYOUT SEQUENCE
-            // =========================================================
+            const imgs = project.images;
             
             if (project.layoutSequence && project.layoutSequence.length > 0) {
                 let imgIndex = 0;
                 let seqIndex = 0;
-                let failsafe = 0; // <--- IL SALVAVITA DEVE ESSERE QUI
+                let failsafe = 0; 
 
-                // IL FAILSAFE < 1000 IMPEDISCE IL CRASH DEL SITO
                 while (imgIndex < imgs.length && failsafe < 1000) {
                     failsafe++; 
-                    
                     let layoutName = project.layoutSequence[seqIndex % project.layoutSequence.length];
                     let layoutDef = globalLayouts[layoutName];
 
-                    // SE L'ARCHITETTO SCRIVE UN NOME SBAGLIATO, FORZIAMO UN LAYOUT VALIDO
                     if (!layoutDef) {
                         console.warn(`ATTENZIONE: Layout '${layoutName}' non trovato! Uso fallback.`);
                         layoutDef = { columns: 12, slots: [{ col: "3 / span 8" }] };
@@ -1741,7 +1691,6 @@
                             let imgData = imgs[imgIndex];
                             let rowStyle = slot.row ? `grid-row: ${slot.row};` : '';
                             
-                            // Aggiunto style con opacità 0 e transizione, più l'onload per farla apparire dolcemente
                             htmlContent += `
                                 <div class="proj-img-wrap" style="grid-column: ${slot.col}; ${rowStyle}">
                                     <img src="${imgData.src}" 
@@ -1757,15 +1706,12 @@
                     });
                     seqIndex++; 
                 }
-
             } else {
-                // METODO 2: Fallback di default (Alternanza statica Coppia -> Singolo)
                 let i = 0;
                 while (i < imgs.length) {
                     let cycle = i % 3; 
 
                     if (cycle === 0 && i + 1 < imgs.length) {
-                        // Coppia - Aggiunto style e onload su entrambe le immagini
                         htmlContent += `
                             <div class="proj-img-wrap" style="grid-column: 2 / span 4;">
                                 <img src="${imgs[i].src}" 
@@ -1786,7 +1732,6 @@
                         `;
                         i += 2;
                     } else {
-                        // Singolo - Aggiunto style e onload
                         htmlContent += `
                             <div class="proj-img-wrap" style="grid-column: 3 / span 8;">
                                 <img src="${imgs[i].src}" 
@@ -1802,17 +1747,11 @@
                 }
             }
 
-            // =========================================================
-            // BLOCCO TESTO E METADATI FINALI
-            // =========================================================
-            
-            // 1. Estrazione sicura dei dati
             const tipo = project.tipologia || getProjectCategoryLabel(project);
             const pos = project.posizione || '';
             const stato = project.stato || '';
             const comm = project.committente || '';
 
-            // 2. Costruzione HTML dei Metadati
             let metaHtml = '<div class="proj-metadata">';
             if(tipo) metaHtml += `<div class="meta-item"><span class="meta-label">TIPOLOGIA</span><span class="meta-value">${tipo}</span></div>`;
             if(pos) metaHtml += `<div class="meta-item"><span class="meta-label">POSIZIONE</span><span class="meta-value">${pos}</span></div>`;
@@ -1820,26 +1759,24 @@
             if(comm) metaHtml += `<div class="meta-item"><span class="meta-label">COMMITTENTE</span><span class="meta-value">${comm}</span></div>`;
             metaHtml += '</div>';
 
-            // 3. Inserimento nel blocco di testo allineato
             htmlContent += `
                 <div class="proj-text-block">
                     <p class="proj-main-desc">${project.description || ''}</p>
-                    
                     ${metaHtml} 
+                    
+                    <button class="btn-back-minimal" onclick="history.back()">${translations[currentLang].backToProjects}</button>
                 </div>
-            </div>`; // <-- Chiude il div project-detail-grid principale
+            </div>`; 
 
-            // Inserisce tutto il contenuto assemblato nel container
             detailContainer.innerHTML = htmlContent;
             
-            // Rimuoviamo il timeout e usiamo lo scroll immediato
             if (shouldScroll) {
                 window.scrollTo({ top: 0, behavior: 'instant' });
             }
         }
         
         function goBackToProjects() {
-            showProjectsSection();
+            history.back(); // Ora anche questo richiama il tasto indietro del browser!
         }
 
         // --- Logica di Gestione Progetti e Filtri ---
@@ -1889,19 +1826,23 @@
 
         async function filterProjects(
             filter, 
-            fadeOutDuration = 0.2,   // Durata della dissolvenza in uscita (in secondi)
-            delayBeforeRender = 250, // Attesa prima di stampare le nuove foto (in millisecondi)
-            fadeInDuration = 0.8,    // Durata dell'apparizione dal basso (in secondi)
-            staggerDelay = 0       // Ritardo a cascata tra una foto e l'altra (in secondi)
+            fadeOutDuration = 0.2,   
+            delayBeforeRender = 250, 
+            fadeInDuration = 0.8,    
+            staggerDelay = 0,
+            addToHistory = true 
         ) {
             lastActiveFilter = filter;
-            const grid = document.getElementById('projectsGrid');
+            
+            // FIX: Salva sempre lo stato, anche se clicchiamo il filtro mentre stiamo guardando un singolo progetto!
+            if (addToHistory) {
+                saveState('projects', null, filter);
+            }
 
-            // 1. DISSOLVENZA IN USCITA (Fade Out)
+            const grid = document.getElementById('projectsGrid');
             grid.style.transition = `opacity ${fadeOutDuration}s ease`;
             grid.style.opacity = '0';
 
-            // 2. ASPETTIAMO CHE SPARISCANO, POI CAMBIAMO I DATI
             setTimeout(() => {
                 if (currentView === 'projectDetail') {
                     document.getElementById('singleProjectDetail').style.display = 'none';
@@ -1918,34 +1859,24 @@
                 }
 
                 grid.innerHTML = '';
-
                 let filteredProjects = [];
 
-                // === LOGICA VETRINA CUSTOM ===
                 if (filter === 'home_custom' && Array.isArray(homeProjectNames) && homeProjectNames.length > 0) {
                     filteredProjects = homeProjectNames.map(identifier => {
                         return allProjectsFlattened.find(p => {
-                            // 1. Sicurezza: Se nel file sono rimasti i vecchi ID numerici
                             if (String(p.id) === String(identifier).trim()) return true;
-                            
-                            // 2. Confronto "intelligente" e a prova di errore per il nome cartella
-                            const folderName = p.categoryPath.split('.').pop().toLowerCase(); // es. "casa-di-gigi"
-                            
-                            // Prende quello che ha scritto l'architetto, lo fa minuscolo e cambia gli spazi in trattini
+                            const folderName = p.categoryPath.split('.').pop().toLowerCase(); 
                             const searchName = String(identifier).trim().toLowerCase().replace(/\s+/g, '-');
-                            
                             return folderName === searchName;
                         });
-                    }).filter(p => p !== undefined); // Scarta se proprio non trova nulla
+                    }).filter(p => p !== undefined); 
                 } else if (filter === 'all' || (filter === 'home_custom' && (!Array.isArray(homeProjectNames) || homeProjectNames.length === 0))) {
-                    // Se la vetrina è vuota o rotta, mostra tutti i progetti di default
                     filteredProjects = allProjectsFlattened;
                 } else {
                     filteredProjects = allProjectsFlattened.filter(p => p.categoryPath.startsWith(filter));
                 }
 
                 let imageQueue = [];
-
                 filteredProjects.forEach(project => {
                     if (project.images && project.images.length > 0) {
                         const coverImage = project.images[0]; 
@@ -1959,7 +1890,7 @@
                 });
 
                 let i = 0;
-                let staggerIndex = 0; // Contatore per calcolare il ritardo a cascata
+                let staggerIndex = 0; 
 
                 while (i < imageQueue.length) {
                     const section = document.createElement('div');
@@ -1973,20 +1904,23 @@
                         const imgData = imageQueue[i];
                         i++;
 
-                        // 1. IMMAGINE
                         const item = document.createElement('div');
                         item.className = 'splash-item';
                         item.style.gridColumn = slot.col;
                         if (slot.row) item.style.gridRow = slot.row;
 
-                        // === EFFETTO SFASATO (STAGGER) PARAMETRIZZATO ===
                         item.style.opacity = '0';
                         item.style.animation = `fadeInOnly ${fadeInDuration}s ease-out forwards ${staggerIndex * staggerDelay}s`;
                         staggerIndex++;
 
                         const img = document.createElement('img');
                         img.src = imgData.src;
-                        img.loading = 'lazy';
+                        // Manteniamo il lazy loading intelligente che avevamo aggiunto!
+                        if (i <= 4) {
+                            img.loading = 'eager'; 
+                        } else {
+                            img.loading = 'lazy';
+                        }
                         item.appendChild(img);
 
                         item.addEventListener('click', () => {
@@ -1994,7 +1928,6 @@
                         });
                         section.appendChild(item); 
 
-                        // 2. DIDASCALIA
                         const caption = document.createElement('div');
                         caption.className = 'splash-caption';
                         caption.style.gridColumn = slot.col;
@@ -2004,10 +1937,8 @@
                             <div class="splash-title">${imgData.title}</div>
                             ${imgData.luogo_data ? `<div class="splash-date">${imgData.luogo_data}</div>` : ''}
                         `;
-                        
                         section.appendChild(caption);
                     }); 
-
                     grid.appendChild(section);
                 }
 
@@ -2015,12 +1946,10 @@
                     btn.classList.toggle('active', btn.dataset.filter === filter);
                 });
 
-                // 3. DISSOLVENZA IN ENTRATA (Fade In del contenitore)
                 grid.style.opacity = '1';
 
             }, delayBeforeRender); 
         }
-
         // Aggiungiamo lo stesso comportamento per le anteprime nella sezione "Progetti"
         document.addEventListener('DOMContentLoaded', () => {
             const projectsGrid = document.getElementById('projectsGrid');
@@ -2314,6 +2243,62 @@
             );
             return project ? project.id : null;
         }
+
+
+        // ==========================================
+        // GESTIONE CRONOLOGIA E TASTO "INDIETRO"
+        // ==========================================
+
+        // 1. Funzione per salvare lo stato nel browser
+        function saveState(view, projectId = null, filter = null) {
+            const currentState = history.state;
+            
+            // Evita di salvare lo stesso stato due volte di fila
+            if (currentState && currentState.view === view && currentState.projectId === projectId && currentState.filter === filter) {
+                return;
+            }
+
+            const stateObj = { view: view, projectId: projectId, filter: filter };
+            
+            // Creiamo un URL finto ma parlante (es. ?view=projects&filter=design)
+            let url = `?view=${view}`;
+            if (projectId) url += `&id=${projectId}`;
+            if (filter) url += `&filter=${filter}`;
+
+            // Scrive nella cronologia del browser
+            history.pushState(stateObj, '', url);
+        }
+
+        // 2. Il "Listener" che scatta quando premi il tasto INDIETRO o AVANTI del browser
+        window.addEventListener('popstate', function(event) {
+            const state = event.state;
+            
+            if (!state) {
+                showProjectsSection(false, false); // Ritorna alla home di base
+                return;
+            }
+
+            // Il "false, false" serve a NON far scattare un nuovo salvataggio mentre andiamo indietro!
+            switch (state.view) {
+                case 'home': 
+                    showHome(false, false); 
+                    break;
+                case 'about': 
+                    showAbout(false, false); 
+                    break;
+                case 'contact': 
+                    showContact(false, false); 
+                    break;
+                case 'projects': 
+                    showProjectsSection(false, false);
+                    // Passiamo 'false' anche qui per non far riscrivere la cronologia!
+                    if (state.filter) filterProjects(state.filter, 0.2, 250, 0.8, 0, false); 
+                    break;
+                case 'projectDetail': 
+                    if (state.projectId) showProject(state.projectId, false, false);
+                    break;
+            }
+        });
 
 
     </script>
