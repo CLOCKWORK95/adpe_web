@@ -1012,9 +1012,12 @@
       "stato": "Realizzato",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_SINGLE",
-        "PROJECT_PAIR",
-        "PROJECT_SINGLE"
+        "PROJECT_TRIPLE_VERTICAL",
+        "PROJECT_PAIR_HOR-VERT",
+        "PROJECT_SINGLE_HORIZONTAL",
+        "PROJECT_PAIR_VERT-HOR",
+        "PROJECT_PAIR_HORIZONTAL",
+        "PROJECT_SINGLE_HORIZONTAL"
       ],
       "images": [
         {
