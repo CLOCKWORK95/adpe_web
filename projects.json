@@ -1013,7 +1013,7 @@
       "committente": "Privato",
       "layoutSequence": [
         "PROJECT_TRIPLE_VERT",
-        "PROJECT_PAIR_HOR-VERT",
+        "PROJECT_PAIR_VERTICAL",
         "PROJECT_SINGLE_HORIZONTAL",
         "PROJECT_PAIR_VERT-HOR",
         "PROJECT_PAIR_HORIZONTAL",
