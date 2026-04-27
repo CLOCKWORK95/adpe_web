@@ -1618,10 +1618,9 @@
       "stato": "Completato",
       "committente": "Studio Medico Colombo",
       "layoutSequence": [
-        "PROJECT_PAIR_VERT-HOR",
+        "PROJECT_PAIR_VERT_HOR",
         "PROJECT_TRIPLE_VERT",
-        "PROJECT_PAIR_VERTICAL",
-        "PROJECT_PAIR_VERTICAL"
+        "PROJECT_PAIR_VERT"
       ],
       "images": [
         {
@@ -1633,31 +1632,7 @@
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/COLOMBOLAB2/03.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/COLOMBOLAB2/04.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/COLOMBOLAB2/05.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/COLOMBOLAB2/06.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/COLOMBOLAB2/07.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/COLOMBOLAB2/08.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/COLOMBOLAB2/09.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/COLOMBOLAB2/11.jpg",
           "description": ""
         }
       ]
