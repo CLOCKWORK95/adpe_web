@@ -783,7 +783,8 @@
       "stato": "In corso",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_SINGLE"
+        "PROJECT_SINGLE_VERTICAL",
+        "PROJECT_PAIR_VERTICAL"
       ],
       "images": [
         {
