@@ -1620,7 +1620,8 @@
       "layoutSequence": [
         "PROJECT_PAIR_VERT-HOR",
         "PROJECT_TRIPLE_VERT",
-        "PROJECT_TRIPLE_VERT"
+        "PROJECT_PAIR_VERT",
+        "PROJECT_PAIR_VERT"
       ],
       "images": [
         {
