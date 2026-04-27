@@ -1320,8 +1320,7 @@
       "layoutSequence": [
         "PROJECT_PAIR_HORIZONTAL",
         "PROJECT_SINGLE_HORIZONTAL",
-        "PROJECT_PAIR_VERTICAL",
-        "PROJECT_SINGLE_VERTICAL"
+        "PROJECT_TRIPLE_VERT"
       ],
       "images": [
         {
