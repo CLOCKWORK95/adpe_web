@@ -1217,14 +1217,47 @@
       "stato": "Completato",
       "committente": "JLL",
       "layoutSequence": [
-        "PROJECT_PAIR_HORIZONTAL",
+        "PROJECT_PAIR_VERT-HOR",
         "PROJECT_SINGLE_HORIZONTAL",
-        "PROJECT_TRIPLE_VERT",
+        "PROJECT_TRIPLE",
         "PROJECT_PAIR_HORIZONTAL",
-        "PROJECT_PAIR_HORIZONTAL",
-        "PROJECT_TRIPLE"
+        "PROJECT_TRIPLE",
+        "PROJECT_PAIR_HORIZONTAL"
       ],
-      "images": []
+      "images": [
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/01.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/02 (2).jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/03.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/04.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/05.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/06.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/07.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/AMI/08.jpg",
+          "description": ""
+        }
+      ]
     },
     "ANCORA": {
       "id": 30,
