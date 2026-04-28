@@ -597,7 +597,7 @@
       "stato": "Realizzato",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_TRIPLE",
+        "PROJECT_TRIPLE_VERT",
         "PROJECT_TRIPLE",
         "PROJECT_PAIR_VERTICAL",
         "PROJECT_PAIR_HOR-VERT"
