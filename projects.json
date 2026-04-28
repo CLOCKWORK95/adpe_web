@@ -1421,7 +1421,7 @@
       "committente": "Business School 24",
       "layoutSequence": [
         "PROJECT_PAIR_VERT",
-        "PROJECT_PAIR_VERT_HOR",
+        "PROJECT_PAIR_VERT-HOR",
         "PROJECT_TRIPLE",
         "PROJECT_TRIPLE",
         "PROJECT_TRIPLE_VERT"
