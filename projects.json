@@ -473,7 +473,7 @@
         "PROJECT_PAIR_VERTICAL",
         "PROJECT_PAIR_HORIZONTAL",
         "PROJECT_PAIR_VERTICAL",
-        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_TRIPLE",
         "PROJECT_PAIR_HORIZONTAL"
       ],
       "images": [
@@ -507,10 +507,6 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AMELIA/07.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AMELIA/08.jpg",
           "description": ""
         },
         {
