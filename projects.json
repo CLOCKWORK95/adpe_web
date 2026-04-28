@@ -1486,8 +1486,8 @@
       "committente": "Business School 24",
       "layoutSequence": [
         "PROJECT_PAIR_HORIZONTAL",
-        "PROJECT_TRIPLE_VERT",
         "PROJECT_PAIR_VERT-HOR",
+        "PROJECT_TRIPLE_VERT",
         "PROJECT_PAIR_HORIZONTAL",
         "PROJECT_TRIPLE_VERT"
       ],
@@ -1501,7 +1501,7 @@
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/BS-24-RM/03 (2).jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/BS-24-RM/03.jpg",
           "description": ""
         },
         {
@@ -1509,15 +1509,15 @@
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/BS-24-RM/05.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/BS-24-RM/06.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/BS-24-RM/09.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/BS-24-RM/07.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/BS-24-RM/10.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/BS-24-RM/08.jpg",
           "description": ""
         },
         {
@@ -1526,18 +1526,6 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/BS-24-RM/12.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/BS-24-RM/13.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/BS-24-RM/14.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/BS-24-RM/15.jpg",
           "description": ""
         }
       ]
