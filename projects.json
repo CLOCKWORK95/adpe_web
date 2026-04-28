@@ -1900,12 +1900,8 @@
       "stato": "Completato",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_TRIPLE",
-        "PROJECT_PAIR_VERTICAL",
-        "PROJECT_TRIPLE",
-        "PROJECT_PAIR_VERTICAL",
-        "PROJECT_SINGLE_HORIZONTAL",
-        "PROJECT_PAIR_VERT-HOR"
+        "PROJECT_SINGLE",
+        "PROJECT_PAIR"
       ],
       "images": [
         {
