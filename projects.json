@@ -1596,7 +1596,7 @@
       "stato": "Completato",
       "committente": "Cellnex Italia",
       "layoutSequence": [
-        "PROJECT_PAIR_VERT-HOR",
+        "PROJECT_PAIR_HORIZONTAL",
         "PROJECT_PAIR_HORIZONTAL",
         "PROJECT_TRIPLE",
         "PROJECT_PAIR_VERT-HOR",
