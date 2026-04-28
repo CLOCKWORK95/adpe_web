@@ -1561,10 +1561,11 @@
       "stato": "Completato",
       "committente": "Cellnex Italia",
       "layoutSequence": [
+        "PROJECT_PAIR_VERT-HOR",
         "PROJECT_PAIR_HORIZONTAL",
         "PROJECT_TRIPLE",
-        "PROJECT_PAIR_HOR-VERT",
-        "PROJECT_TRIPLE"
+        "PROJECT_PAIR_VERT-HOR",
+        "PROJECT_TRIPLE_VERT"
       ],
       "images": [
         {
@@ -1572,39 +1573,47 @@
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/02.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/02_01.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/IMG_2199 4.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/03.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/IMG_2273.JPG",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/04 (2).jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/IMG_2277 2 2.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/05.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/IMG_2303.JPG",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/06.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/IMG_2311.JPG",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/07.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/IMG_2339 2.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/08.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/IMG_3097 2.JPG",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/09.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/IMG_3098.JPG",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/10.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/11.JPG",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/CELLNEX-VIOLA/12.JPG",
           "description": ""
         }
       ]
