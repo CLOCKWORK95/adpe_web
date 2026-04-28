@@ -1486,11 +1486,12 @@
       "stato": "Completato",
       "committente": "Business School 24",
       "layoutSequence": [
-        "PROJECT_PAIR_HORIZONTAL",
         "PROJECT_PAIR_VERT-HOR",
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_PAIR_VERTICAL",
         "PROJECT_TRIPLE_VERT",
-        "PROJECT_PAIR_HORIZONTAL",
-        "PROJECT_TRIPLE_VERT"
+        "PROJECT_SINGLE_HORIZONTAL",
+        "PROJECT_PAIR_HORIZONTAL"
       ],
       "images": [
         {
@@ -1531,6 +1532,10 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/BS-24-RM/10.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/BS-24-RM/11.jpg",
           "description": ""
         }
       ]
