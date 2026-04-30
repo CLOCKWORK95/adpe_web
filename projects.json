@@ -55,6 +55,15 @@
     "BORGOLUCE": {
       "id": 3,
       "title": "Borgoluce",
+      "luogo_data": "Roma, 2022",
+      "posizione": "Via Merulana, Roma",
+      "stato": "Completato",
+      "committente": "Privato",
+      "layoutSequence": [
+        "PROJECT_PAIR_VERT-HOR",
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_SINGLE_HORIZONTAL"
+      ],
       "images": [
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/BORGOLUCE/00.jpg",
@@ -86,6 +95,10 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/BORGOLUCE/08.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/BORGOLUCE/09.jpg",
           "description": ""
         }
       ]
