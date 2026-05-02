@@ -146,13 +146,5 @@
       }
     ],
     "columns": 12
-  },
-  "ADPE_CENTER": {
-    "slots": [
-      {
-        "col": "4 / span 6"  
-      }
-    ],
-    "columns": 12
   }
 }
