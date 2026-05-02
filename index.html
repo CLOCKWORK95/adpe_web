@@ -1117,8 +1117,8 @@
 
         .title-logo-center {
             /* Magia fluida: minimo 120px, ottimale 12% dello schermo, massimo 240px */
-            width: clamp(80px, 12vw, 130px); 
-            height: clamp(80px, 12vw, 130px); 
+            width: clamp(80px, 12vw, 80px); 
+            height: clamp(80px, 12vw, 80px); 
             border-radius: 50%;
             object-fit: cover;
             box-shadow: var(--shadow-medium);
@@ -1231,7 +1231,20 @@
         @media (max-width: 1024px) {
             /* Su Tablet, allarghiamo un po' la colonna (occupa 8 colonne) */
             .adpe-text-block { grid-column: 2 / span 8; padding: 0; }
+            .project-detail-grid { 
+                gap: 1rem; 
+                row-gap: 6rem; 
+            }
+            .proj-text-block { 
+                grid-column: 1 / span 8; 
+            }
+            
+            /* === FIX FOTO ADPE: Allarga la foto su schermi medi === */
+            .adpe-block .proj-img-wrap {
+                grid-column: 2 / span 10 !important; /* Sovrascrive il JSON: ora occupa 10 colonne su 12! */
+            }
         }
+        
         @media (max-width: 768px) {
             /* Su Smartphone, usa tutta la larghezza disponibile */
             .adpe-text-block { grid-column: 1 / span 12 !important; padding: 0 15px; }
