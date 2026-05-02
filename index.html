@@ -1196,7 +1196,47 @@
                 gap: 0.2rem;
             }
         }
+        /* =========================
+           SEZIONE ADPE (CHI SIAMO)
+           ========================= */
+        
+        /* Questo contenitore è vitale: dice al titolo "appiccicoso" quando smettere di incollarsi e farsi spingere via */
+        .adpe-block {
+            position: relative;
+            width: 100%;
+            padding-bottom: 6rem; /* Spazio tra una sezione e l'altra */
+        }
 
+        /* FIX DISTANZA TESTO: Riduciamo il gap gigante ereditato dai progetti */
+        .adpe-block .project-detail-grid {
+            row-gap: 4rem; /* <-- Distanza perfetta tra immagine e testo sottostante */
+        }
+
+        /* Il blocco di testo nella sezione ADPE */
+        .adpe-text-block {
+            /* FIX COLONNA STRETTA: 
+               Invece di occupare 8 colonne (span 8), gli diciamo di occuparne solo 5. 
+               Così il testo andrà a capo automaticamente formando una colonna stretta. */
+            grid-column: 2 / span 5; 
+            
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            padding-top: 2rem;
+            text-align: left;
+            /* text-align: justify; <-- Se vuoi il testo giustificato come un giornale vero, scommenta questa riga */
+            white-space: pre-line; 
+        }
+
+        @media (max-width: 1024px) {
+            /* Su Tablet, allarghiamo un po' la colonna (occupa 8 colonne) */
+            .adpe-text-block { grid-column: 2 / span 8; padding: 0; }
+        }
+        @media (max-width: 768px) {
+            /* Su Smartphone, usa tutta la larghezza disponibile */
+            .adpe-text-block { grid-column: 1 / span 12 !important; padding: 0 15px; }
+            .adpe-block .project-detail-grid { row-gap: 2rem; } 
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -1270,34 +1310,7 @@
         </section>
 
         <section class="about-section" id="aboutSection" style="display: none;">
-            <div class="container about-content">
-                <img src="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/studioadpe.jpg" alt="Immagine dello Studio" class="about-image">
-                <p class="about-text" data-lang-key="aboutText">
-                    Lo Studio ADPE, fondato dall'architetto Adriano Pernazza, è una realtà dinamica e innovativa nel panorama dell'architettura e del design. Da anni, ci dedichiamo alla progettazione di spazi che combinano estetica, funzionalità e sostenibilità. La nostra filosofia si basa sull'ascolto attento delle esigenze del cliente, trasformando le idee in realtà tangibili e uniche.
-                </p>
-                <div class="about-highlights">
-                    <div class="highlight-card">
-                        <i class="fas fa-lightbulb highlight-icon"></i>
-                        <h3 class="highlight-title" data-lang-key="creativityTitle">Creatività e Innovazione</h3>
-                        <p class="highlight-description" data-lang-key="creativityDesc">Approccio originale e soluzioni all'avanguardia per ogni progetto.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <i class="fas fa-handshake highlight-icon"></i>
-                        <h3 class="highlight-title" data-lang-key="collaborationTitle">Collaborazione Clienti</h3>
-                        <p class="highlight-description" data-lang-key="collaborationDesc">Un processo di progettazione partecipato e trasparente.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <i class="fas fa-seedling highlight-icon"></i>
-                        <h3 class="highlight-title" data-lang-key="sustainabilityTitle">Sostenibilità</h3>
-                        <p class="highlight-description" data-lang-key="sustainabilityDesc">Progettazione attenta all'ambiente e all'efficienza energetica.</p>
-                    </div>
-                    <div class="highlight-card">
-                        <i class="fas fa-award highlight-icon"></i>
-                        <h3 class="highlight-title" data-lang-key="qualityTitle">Qualità e Dettaglio</h3>
-                        <p class="highlight-description" data-lang-key="qualityDesc">Cura maniacale per ogni aspetto, dal concept alla realizzazione.</p>
-                    </div>
-                </div>
-            </div>
+            <div id="adpeDynamicContent" style="width: 100%;"></div>
         </section>
 
         <section class="contact-section" id="contactSection" style="display: none;">
@@ -1425,18 +1438,20 @@
         // Inizializzazione al caricamento del DOM
         document.addEventListener('DOMContentLoaded', async function() {
             try {
-                // Carichiamo TUTTI E TRE i JSON contemporaneamente
-                const [projectsRes, layoutsRes, homeProjectsRes] = await Promise.all([
+                // Carichiamo TUTTI I JSON contemporaneamente
+                const [projectsRes, layoutsRes, homeProjectsRes, adpeRes] = await Promise.all([
                     fetch('projects.json'),
                     fetch('layouts.json'),
-                    fetch('home_projects.json').catch(() => ({ json: () => [] })) // Fallback se il file manca
+                    fetch('home_projects.json').catch(() => ({ json: () => [] })),
+                    fetch('adpe.json').catch(() => ({ json: () => ({ sections: [] }) })) // <--- NUOVO
                 ]);
 
                 projects = await projectsRes.json();
                 globalLayouts = await layoutsRes.json();
-                
-                // Estraiamo i NOMI per la home
                 homeProjectNames = await homeProjectsRes.json().catch(() => []);
+                
+                // Salviamo i dati ADPE in una variabile globale
+                window.adpeData = await adpeRes.json().catch(() => ({ sections: [] }));
 
                 allProjectsFlattened = flattenProjects(projects);
                 updateAllProjectIds();
@@ -1628,8 +1643,14 @@
 
         function showAbout(shouldScroll = true, addToHistory = true) {
             currentView = 'about';
-            if (addToHistory) saveState('about'); // Salva nella cronologia
+            if (addToHistory) saveState('about'); 
             showSection('aboutSection', shouldScroll);
+            
+            // Generiamo il contenuto solo se non è già stato generato
+            const container = document.getElementById('adpeDynamicContent');
+            if (container && container.innerHTML.trim() === '') {
+                renderAdpeSection();
+            }
         }
 
         function showContact(shouldScroll = true, addToHistory = true) {
@@ -2011,7 +2032,73 @@
             filtersContainer.innerHTML = filtersHtml;
         }
 
+        function renderAdpeSection() {
+            const container = document.getElementById('adpeDynamicContent');
+            if (!container || !window.adpeData || !window.adpeData.sections) return;
 
+            let htmlContent = '';
+
+            // Cicliano ogni sezione (Filosofia, Curriculum, ecc.)
+            window.adpeData.sections.forEach(section => {
+                
+                // 1. Apriamo il blocco (fondamentale per far scivolare via i titoli)
+                htmlContent += `<div class="adpe-block">`;
+
+                // 2. La testatina fissa (Riusiamo le classi dei progetti!)
+                htmlContent += `
+                    <div class="project-sticky-header">
+                        <div class="project-sticky-grid">
+                            <div class="proj-head-wrapper">
+                                <div class="proj-head-title">${section.title}</div>
+                                <div class="proj-head-date">${section.subtitle || ''}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // 3. Griglia Immagini (Riusiamo le classi dei progetti!)
+                htmlContent += `<div class="project-detail-grid">`;
+                
+                const imgs = section.images || [];
+                const layoutName = section.layout || "PROJECT_SINGLE";
+                let layoutDef = globalLayouts[layoutName] || { columns: 12, slots: [{ col: "3 / span 8" }] };
+
+                // Stampiamo le immagini usando il layout scelto
+                let imgIndex = 0;
+                layoutDef.slots.forEach(slot => {
+                    if (imgIndex < imgs.length) {
+                        let imgData = imgs[imgIndex];
+                        let rowStyle = slot.row ? `grid-row: ${slot.row};` : '';
+                        
+                        htmlContent += `
+                            <div class="proj-img-wrap" style="grid-column: ${slot.col}; ${rowStyle}">
+                                <img src="${imgData.src}" 
+                                     alt="${imgData.description || ''}" 
+                                     onclick="openImageModal(null, '${imgData.src}')" 
+                                     loading="lazy"
+                                     style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;"
+                                     onload="this.style.opacity=1">
+                            </div>
+                        `;
+                        imgIndex++;
+                    }
+                });
+
+                // 4. Testo descrittivo allineato a sinistra
+                if (section.text) {
+                    htmlContent += `
+                        <div class="adpe-text-block">
+                            ${section.text}
+                        </div>
+                    `;
+                }
+
+                // Chiudiamo griglia e blocco
+                htmlContent += `</div></div>`; 
+            });
+
+            container.innerHTML = htmlContent;
+        }
 
         // --- Funzioni di Utilità e UI ---
 
