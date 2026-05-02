@@ -1214,18 +1214,27 @@
 
         /* Il blocco di testo nella sezione ADPE */
         .adpe-text-block {
-            /* FIX COLONNA STRETTA: 
-               Invece di occupare 8 colonne (span 8), gli diciamo di occuparne solo 5. 
-               Così il testo andrà a capo automaticamente formando una colonna stretta. */
             grid-column: 2 / span 5; 
-            
             font-size: 1.05rem;
             line-height: 1.6;
             color: var(--text-color);
             padding-top: 2rem;
             text-align: left;
-            /* text-align: justify; <-- Se vuoi il testo giustificato come un giornale vero, scommenta questa riga */
-            white-space: pre-line; 
+            /* Rimosso white-space: pre-line; perché ora usiamo il parser! */
+        }
+
+        /* --- NUOVE REGOLE PER GLI ELENCHI E LE INDENTAZIONI --- */
+        .adpe-main-item {
+            margin-bottom: 0.4rem;
+            line-height: 1.6;
+        }
+
+        .adpe-sub-item {
+            margin-left: 2.5rem; /* Crea un'indentazione netta ed elegantissima */
+            margin-bottom: 0.3rem;
+            line-height: 1.5;
+            font-size: 0.95em; /* Testo impercettibilmente più piccolo */
+            opacity: 0.85; /* Leggermente più tenue per creare gerarchia */
         }
 
         @media (max-width: 1024px) {
@@ -2152,7 +2161,7 @@
                 if (section.text) {
                     htmlContent += `
                         <div class="adpe-text-block">
-                            ${section.text}
+                            ${formatAdpeText(section.text)}
                         </div>
                     `;
                 }
@@ -2162,6 +2171,37 @@
             });
 
             container.innerHTML = htmlContent;
+        }
+
+        // --- FUNZIONE PER FORMATTARE AUTOMATICAMENTE IL TESTO ADPE ---
+        function formatAdpeText(rawText) {
+            if (!rawText) return '';
+            const lines = rawText.split('\n');
+            let html = '';
+            
+            lines.forEach(line => {
+                // Controlla se la riga inizia con uno o più spazi
+                const hasLeadingSpace = /^[ \t]+/.test(line);
+                const trimmed = line.trim();
+                
+                if (trimmed === '') {
+                    // Riga vuota nel file di testo -> crea uno spazio verticale per staccare i progetti
+                    html += `<div style="height: 1.5rem;"></div>`;
+                } else if (trimmed.startsWith('-') || trimmed.startsWith('*') || hasLeadingSpace) {
+                    // È una SOTTOVOCE (identificata da spazio, trattino o asterisco)
+                    let cleanText = trimmed;
+                    // Rimuove il trattino o asterisco iniziale per massima pulizia
+                    if (cleanText.startsWith('-') || cleanText.startsWith('*')) {
+                        cleanText = cleanText.substring(1).trim();
+                    }
+                    html += `<div class="adpe-sub-item">${cleanText}</div>`;
+                } else {
+                    // È una VOCE PRINCIPALE o un paragrafo normale (es. la Filosofia)
+                    html += `<div class="adpe-main-item">${trimmed}</div>`;
+                }
+            });
+            
+            return html;
         }
 
         function renderContactSection() {
