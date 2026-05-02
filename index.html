@@ -1250,6 +1250,101 @@
             .adpe-text-block { grid-column: 1 / span 12 !important; padding: 0 15px; }
             .adpe-block .project-detail-grid { row-gap: 2rem; } 
         }
+
+        /* =========================
+           SEZIONE CONTATTI
+           ========================= */
+        .contact-block {
+            position: relative;
+            width: 100%;
+            padding-bottom: 6rem;
+            padding-top: 2rem;
+        }
+
+        .contact-block .project-detail-grid {
+            row-gap: 4rem; /* Distanza tra foto principale e testi sotto */
+        }
+
+        /* Colonna stretta a sinistra (come in ADPE) */
+        .contact-text-block {
+            grid-column: 2 / span 5; 
+            text-align: left;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            gap: 3rem; /* Distanza verticale tra i blocchi INDIRIZZO, TELEFONO, ecc. */
+            padding-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem; /* Distanza tra la parolina "INDIRIZZO" e l'indirizzo vero e proprio */
+        }
+
+        .contact-item-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            /* Se lo vuoi in grassetto scommenta la riga sotto */
+            /* font-weight: bold; */
+        }
+
+        .contact-item-value, .contact-item-value a {
+            font-size: 1.05rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color var(--transition);
+            line-height: 1.5;
+        }
+
+        .contact-item-value a:hover {
+            color: var(--autumn-blue);
+        }
+
+        /* Lo schizzo della mappa */
+        .contact-map-sketch {
+            width: 100%;
+            max-width: 250px; /* Grandezza massima della mappa a mano */
+            height: auto;
+            margin-top: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.4s ease;
+            box-shadow: var(--shadow-light);
+        }
+
+        .contact-map-sketch:hover {
+            transform: scale(1.03);
+        }
+
+        /* Icone Social allineate a sinistra */
+        .contact-social-icons {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 0.2rem;
+        }
+
+        .contact-social-icons a {
+            font-size: 1.4rem;
+            color: var(--text-color);
+            transition: color var(--transition), transform var(--transition);
+        }
+
+        .contact-social-icons a:hover {
+            color: var(--autumn-blue);
+            transform: scale(1.1);
+        }
+
+        /* Responsività per Tablet e Smartphone */
+        @media (max-width: 1024px) {
+            .contact-text-block { grid-column: 2 / span 8; }
+            .contact-block .proj-img-wrap { grid-column: 2 / span 10 !important; }
+        }
+        @media (max-width: 768px) {
+            .contact-text-block { grid-column: 1 / span 12 !important; padding: 0 15px; }
+            .contact-block .project-detail-grid { row-gap: 2rem; }
+        }
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -1327,49 +1422,7 @@
         </section>
 
         <section class="contact-section" id="contactSection" style="display: none;">
-            <div class="container contact-content">
-                <p class="contact-text" data-lang-key="contactText">
-                    Siamo a vostra disposizione per qualsiasi informazione o per discutere del vostro prossimo progetto. Non esitate a contattarci.
-                </p>
-                <div class="contact-info">
-                    <div class="contact-card">
-                        <i class="fas fa-map-marker-alt contact-icon"></i>
-                        <h3 class="contact-label" data-lang-key="addressLabel">Indirizzo</h3>
-                        <div class="map-widget">
-                            <iframe
-                                src="https://maps.google.com/maps?q=Via%20di%20Monte%20Savello%2029A,%2000186%20Roma%20(RM),%20Italia&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                                width="100%"
-                                height="200"
-                                style="border:0; border-radius: 8px;"
-                                allowfullscreen=""
-                                loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
-                            <a href="https://www.google.com/maps/dir/?api=1&destination=Via%20di%20Monte%20Savello%2029A,%2000186%20Roma%20(RM),%20Italia"
-                               target="_blank" class="map-overlay-link" aria-label="Ottieni indicazioni su Google Maps">
-                               <span class="map-text-overlay" data-lang-key="mapDirections">Clicca per indicazioni</span>
-                            </a>
-                        </div>
-                        <p class="contact-value">Via di Monte Savello 29A, 00186 Roma (RM), Italia</p>
-                    </div>
-                    <div class="contact-card">
-                        <i class="fas fa-phone contact-icon"></i>
-                        <h3 class="contact-label" data-lang-key="phoneLabel">Telefono</h3>
-                        <p class="contact-value"><a href="tel:+393285725667">+39 3285725667</a></p>
-                    </div>
-                    <div class="contact-card">
-                        <i class="fas fa-envelope contact-icon"></i>
-                        <h3 class="contact-label" data-lang-key="emailLabel">Email</h3>
-                        <p class="contact-value"><a href="mailto:info@adpe.it">info@adpe.it</a></p>
-                        <p class="contact-value"><a href="mailto:adpe.progetti@gmail.com">adpe.progetti@gmail.com</a></p>
-                    </div>
-                    <div class="contact-card">
-                        <i class="fas fa-clock contact-icon"></i>
-                        <h3 class="contact-label" data-lang-key="hoursLabel">Orari</h3>
-                        <p class="contact-value" data-lang-key="hoursValue">Lun-Ven: 9:00 - 18:00</p>
-                    </div>
-                </div>
-            </div>
+            <div id="contactDynamicContent" style="width: 100%;"></div>
         </section>
 
     </main>
@@ -1381,14 +1434,6 @@
         <span class="modal-next" onclick="showNextImage(event)">&gt;</span>
         <img class="image-modal-content" id="modalImage">
     </div>
-
-    <footer>
-        <div class="footer-social-group">
-            <a href="https://www.instagram.com/adpe_studiodiarchitettura/" target="_blank" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/AdpeStudioDiArchitettura" target="_blank" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.linkedin.com/company/adpe-studio/" target="_blank" class="footer-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-    </footer>
 
     <script>
         // Variabili globali
@@ -1452,19 +1497,19 @@
         document.addEventListener('DOMContentLoaded', async function() {
             try {
                 // Carichiamo TUTTI I JSON contemporaneamente
-                const [projectsRes, layoutsRes, homeProjectsRes, adpeRes] = await Promise.all([
+                const [projectsRes, layoutsRes, homeProjectsRes, adpeRes, contattiRes] = await Promise.all([
                     fetch('projects.json'),
                     fetch('layouts.json'),
                     fetch('home_projects.json').catch(() => ({ json: () => [] })),
-                    fetch('adpe.json').catch(() => ({ json: () => ({ sections: [] }) })) // <--- NUOVO
+                    fetch('adpe.json').catch(() => ({ json: () => ({ sections: [] }) })),
+                    fetch('contatti.json').catch(() => ({ json: () => ({}) })) // <--- NUOVO
                 ]);
 
                 projects = await projectsRes.json();
                 globalLayouts = await layoutsRes.json();
                 homeProjectNames = await homeProjectsRes.json().catch(() => []);
-                
-                // Salviamo i dati ADPE in una variabile globale
                 window.adpeData = await adpeRes.json().catch(() => ({ sections: [] }));
+                window.contattiData = await contattiRes.json().catch(() => ({})); // <--- NUOVO
 
                 allProjectsFlattened = flattenProjects(projects);
                 updateAllProjectIds();
@@ -1668,8 +1713,14 @@
 
         function showContact(shouldScroll = true, addToHistory = true) {
             currentView = 'contact';
-            if (addToHistory) saveState('contact'); // Salva nella cronologia
+            if (addToHistory) saveState('contact'); 
             showSection('contactSection', shouldScroll);
+
+            // Generiamo il contenuto solo se non è già stato generato
+            const container = document.getElementById('contactDynamicContent');
+            if (container && container.innerHTML.trim() === '') {
+                renderContactSection();
+            }
         }
 
         function showProject(projectId, shouldScroll = true, addToHistory = true) {
@@ -2110,6 +2161,87 @@
                 htmlContent += `</div></div>`; 
             });
 
+            container.innerHTML = htmlContent;
+        }
+
+        function renderContactSection() {
+            const container = document.getElementById('contactDynamicContent');
+            if (!container || !window.contattiData) return;
+
+            const data = window.contattiData;
+            
+            // Usiamo il layout specificato nel JSON o cadiamo sul default centrale
+            const layoutName = data.layout || "ADPE_CENTER"; 
+            let layoutDef = globalLayouts[layoutName] || { columns: 12, slots: [{ col: "4 / span 6" }] };
+
+            let htmlContent = `<div class="contact-block">`;
+            htmlContent += `<div class="project-detail-grid">`;
+
+            // 1. Immagine principale in alto (se esiste nel JSON)
+            if (data.main_image) {
+                let slot = layoutDef.slots[0];
+                htmlContent += `
+                    <div class="proj-img-wrap" style="grid-column: ${slot.col};">
+                        <img src="${data.main_image}" alt="Studio ADPE" 
+                             style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;" 
+                             onload="this.style.opacity=1">
+                    </div>
+                `;
+            }
+
+            // 2. Blocco Testo a sinistra (5 colonne)
+            htmlContent += `<div class="contact-text-block">`;
+
+            // --- Indirizzo + Mappa ---
+            if (data.address) {
+                htmlContent += `
+                    <div class="contact-item">
+                        <span class="contact-item-label">${data.address.label || 'Indirizzo'}</span>
+                        <span class="contact-item-value">${data.address.text}</span>
+                        ${data.address.map_image ? `
+                            <a href="${data.address.map_link}" target="_blank" aria-label="Apri su Google Maps">
+                                <img src="${data.address.map_image}" alt="Mappa dello studio" class="contact-map-sketch">
+                            </a>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            // --- Telefono ---
+            if (data.phone) {
+                htmlContent += `
+                    <div class="contact-item">
+                        <span class="contact-item-label">${data.phone.label || 'Telefono'}</span>
+                        <span class="contact-item-value"><a href="tel:${data.phone.text.replace(/\s+/g, '')}">${data.phone.text}</a></span>
+                    </div>
+                `;
+            }
+
+            // --- Email ---
+            if (data.email) {
+                htmlContent += `
+                    <div class="contact-item">
+                        <span class="contact-item-label">${data.email.label || 'Email'}</span>
+                        <span class="contact-item-value"><a href="mailto:${data.email.text}">${data.email.text}</a></span>
+                    </div>
+                `;
+            }
+
+            // --- Social Icons ---
+            if (data.social) {
+                htmlContent += `
+                    <div class="contact-item">
+                        <span class="contact-item-label">${data.social.label || 'Social'}</span>
+                        <div class="contact-social-icons">
+                            ${data.social.instagram ? `<a href="${data.social.instagram}" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>` : ''}
+                            ${data.social.facebook ? `<a href="${data.social.facebook}" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>` : ''}
+                            ${data.social.linkedin ? `<a href="${data.social.linkedin}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+
+            htmlContent += `</div></div></div>`; // Chiude i div
             container.innerHTML = htmlContent;
         }
 

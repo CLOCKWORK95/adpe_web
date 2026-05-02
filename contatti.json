@@ -1,0 +1,24 @@
+{
+  "layout": "ADPE_CENTER",
+  "main_image": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/studioadpe.jpg",
+  "address": {
+    "label": "INDIRIZZO",
+    "text": "Via di Monte Savello, 29, 00186 Roma RM",
+    "map_image": "https://link-allo-schizzo-della-mappa.jpg",
+    "map_link": "https://www.google.com/maps/dir/?api=1&destination=Via%20di%20Monte%20Savello%2029A,%2000186%20Roma%20(RM),%20Italia"
+  },
+  "phone": {
+    "label": "TELEFONO",
+    "text": "+39 328 572 5667"
+  },
+  "email": {
+    "label": "EMAIL",
+    "text": "adpe.progetti@gmail.com"
+  },
+  "social": {
+    "label": "SOCIAL",
+    "instagram": "https://www.instagram.com/adpe_studiodiarchitettura/",
+    "facebook": "https://www.facebook.com/AdpeStudioDiArchitettura",
+    "linkedin": "https://www.linkedin.com/company/adpe-studio/"
+  }
+}
