@@ -3,41 +3,31 @@
     {
       "id": "filosofia",
       "title": "FILOSOFIA",
-      "subtitle": "Metodo di lavoro",
-      "layout": "ADPE_CENTER",
-      "images": [
-        {
-          "src": "https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/studioadpe.jpg",
-          "description": ""
-        }
-      ],
-      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      "subtitle": "Metodo Di Lavoro",
+      "layout": "PROJECT_SINGLE_VERTICAL",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "images": []
     },
     {
       "id": "curriculum",
       "title": "CURRICULUM",
       "subtitle": "Adriano Pernazza",
-      "layout": "ADPE_CENTER",
-      "images": [
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/AGATA/01.png",
-          "description": ""
-        }
-      ],
-      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+      "layout": "PROJECT_SINGLE_VERTICAL",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "images": []
     },
     {
-      "id": "elenco-lavori",
+      "id": "elenco-dei-lavori",
       "title": "ELENCO DEI LAVORI",
       "subtitle": "2003-2026",
-      "layout": "ADPE_CENTER",
+      "layout": "PROJECT_SINGLE_VERTICAL",
+      "text": "2003 Concorso OPERA COMMEMORATIVA...\r\n2004 Progetto PIANO DEL COLORE...\r\n2005 Valorizzazione funzionale...",
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/AGATA/01.png",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/adpe/03-elenco-dei-lavori/esempioschizzo.jpg",
           "description": ""
         }
-      ],
-      "text": "2003 Concorso OPERA COMMEMORATIVA...\n2004 Progetto PIANO DEL COLORE...\n2005 Valorizzazione funzionale..."
+      ]
     }
   ]
 }
