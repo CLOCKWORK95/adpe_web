@@ -1449,6 +1449,7 @@
         let projects = {};
         let globalLayouts = {}; 
         let homeProjectNames = []; // <--- NUOVA VARIABILE
+        let globalProjectOrder = [];
         let currentProjectImages = [];
         let currentImageIndex = 0;
         let lastActiveFilter = 'home_custom'; // <--- MODIFICATO (parte dalla home personalizzata)
@@ -1506,19 +1507,21 @@
         document.addEventListener('DOMContentLoaded', async function() {
             try {
                 // Carichiamo TUTTI I JSON contemporaneamente
-                const [projectsRes, layoutsRes, homeProjectsRes, adpeRes, contattiRes] = await Promise.all([
+                const [projectsRes, layoutsRes, homeProjectsRes, adpeRes, contattiRes, orderRes] = await Promise.all([
                     fetch('projects.json'),
                     fetch('layouts.json'),
                     fetch('home_projects.json').catch(() => ({ json: () => [] })),
                     fetch('adpe.json').catch(() => ({ json: () => ({ sections: [] }) })),
-                    fetch('contatti.json').catch(() => ({ json: () => ({}) })) // <--- NUOVO
+                    fetch('contatti.json').catch(() => ({ json: () => ({}) })),
+                    fetch('ordine_progetti.json').catch(() => ({ json: () => [] })) // <--- NUOVO
                 ]);
 
                 projects = await projectsRes.json();
                 globalLayouts = await layoutsRes.json();
                 homeProjectNames = await homeProjectsRes.json().catch(() => []);
                 window.adpeData = await adpeRes.json().catch(() => ({ sections: [] }));
-                window.contattiData = await contattiRes.json().catch(() => ({})); // <--- NUOVO
+                window.contattiData = await contattiRes.json().catch(() => ({})); 
+                globalProjectOrder = await orderRes.json().catch(() => []); // <--- SALVIAMO L'ORDINE
 
                 allProjectsFlattened = flattenProjects(projects);
                 updateAllProjectIds();
@@ -1968,6 +1971,31 @@
                     filteredProjects = allProjectsFlattened;
                 } else {
                     filteredProjects = allProjectsFlattened.filter(p => p.categoryPath.startsWith(filter));
+                }
+                
+                // Applichiamo l'ordinamento globale SOLO se non siamo nella vetrina Home (che ha già il suo ordine rigido)
+                if (filter !== 'home_custom') {
+                    filteredProjects.sort((a, b) => {
+                        // Estraiamo il nome esatto della cartella (es. "casa-rossa")
+                        const nameA = a.categoryPath.split('.').pop().toLowerCase();
+                        const nameB = b.categoryPath.split('.').pop().toLowerCase();
+
+                        // Cerchiamo la loro posizione nel file di testo degli architetti
+                        const indexA = globalProjectOrder.findIndex(name => name.toLowerCase().replace(/\s+/g, '-') === nameA);
+                        const indexB = globalProjectOrder.findIndex(name => name.toLowerCase().replace(/\s+/g, '-') === nameB);
+
+                        // 1. Se ENTRAMBI sono nel file, rispetta l'ordine del file
+                        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+                        
+                        // 2. Se SOLO il progetto A è nel file, A vince e va in cima
+                        if (indexA !== -1) return -1;
+                        
+                        // 3. Se SOLO il progetto B è nel file, B vince e va in cima
+                        if (indexB !== -1) return 1;
+                        
+                        // 4. Se NESSUNO dei due è nel file, mettili in ordine alfabetico a fine lista
+                        return nameA.localeCompare(nameB);
+                    });
                 }
 
                 let imageQueue = [];
