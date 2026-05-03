@@ -594,20 +594,19 @@
             }
             .nav-menu {
                 position: fixed;
-                top: 80px;
+                top: 0; /* <-- FIX 1: Parte dal primissimo pixel in alto */
                 left: -100%;
                 width: 100%;
-                height: calc(100vh - 80px);
+                height: 100vh; /* <-- FIX 2: Copre l'intera altezza dello schermo (non più calc) */
                 background: rgba(255, 255, 255, 0.98);
                 backdrop-filter: blur(20px);
+                z-index: -1; /* <-- FIX 3: Fa scivolare il menu "sotto" ai bottoni IT e X */
                 
-                /* --- IL FIX È QUI --- */
-                display: flex !important; /* Forza l'abbandono della griglia del desktop */
-                
+                display: flex !important;
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: flex-end;
-                padding-top: 5rem; 
+                padding-top: 7rem; /* <-- Aumentato leggermente per spingere "progetti" più in basso, al sicuro dall'header */
                 padding-right: 2rem; 
                 transition: var(--transition);
             }
