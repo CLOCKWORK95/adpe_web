@@ -1973,16 +1973,24 @@
                     filteredProjects = allProjectsFlattened.filter(p => p.categoryPath.startsWith(filter));
                 }
                 
-                // Applichiamo l'ordinamento globale SOLO se non siamo nella vetrina Home (che ha già il suo ordine rigido)
+                // Applichiamo l'ordinamento globale SOLO se non siamo nella vetrina Home
                 if (filter !== 'home_custom') {
-                    filteredProjects.sort((a, b) => {
-                        // Estraiamo il nome esatto della cartella (es. "casa-rossa")
-                        const nameA = a.categoryPath.split('.').pop().toLowerCase();
-                        const nameB = b.categoryPath.split('.').pop().toLowerCase();
+                    
+                    // Funzione "Schiacciasassi" che rimuove spazi, trattini e underscore per un confronto perfetto
+                    const normalizeStr = (str) => str.toLowerCase().replace(/[\s\-_]/g, '');
 
-                        // Cerchiamo la loro posizione nel file di testo degli architetti
-                        const indexA = globalProjectOrder.findIndex(name => name.toLowerCase().replace(/\s+/g, '-') === nameA);
-                        const indexB = globalProjectOrder.findIndex(name => name.toLowerCase().replace(/\s+/g, '-') === nameB);
+                    filteredProjects.sort((a, b) => {
+                        // Estraiamo i nomi originali delle cartelle
+                        const originalNameA = a.categoryPath.split('.').pop();
+                        const originalNameB = b.categoryPath.split('.').pop();
+
+                        // Normalizziamo le cartelle
+                        const nameA = normalizeStr(originalNameA);
+                        const nameB = normalizeStr(originalNameB);
+
+                        // Cerchiamo la loro posizione nel file di testo degli architetti (normalizzando anche quello!)
+                        const indexA = globalProjectOrder.findIndex(name => normalizeStr(String(name)) === nameA);
+                        const indexB = globalProjectOrder.findIndex(name => normalizeStr(String(name)) === nameB);
 
                         // 1. Se ENTRAMBI sono nel file, rispetta l'ordine del file
                         if (indexA !== -1 && indexB !== -1) return indexA - indexB;
@@ -1993,8 +2001,8 @@
                         // 3. Se SOLO il progetto B è nel file, B vince e va in cima
                         if (indexB !== -1) return 1;
                         
-                        // 4. Se NESSUNO dei due è nel file, mettili in ordine alfabetico a fine lista
-                        return nameA.localeCompare(nameB);
+                        // 4. Se NESSUNO dei due è nel file, mettili in ordine alfabetico usando i nomi originali
+                        return originalNameA.localeCompare(originalNameB);
                     });
                 }
 
