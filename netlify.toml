@@ -1,0 +1,2 @@
+[build]
+  ignore = 'test "$SITE_NAME" = "adpeprod" && test -z "$INCOMING_HOOK_TITLE"'
