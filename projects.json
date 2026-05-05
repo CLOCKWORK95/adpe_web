@@ -751,7 +751,8 @@
         "PROJECT_SINGLE_HORIZONTAL",
         "PROJECT_TRIPLE",
         "PROJECT_PAIR_VERTICAL",
-        "PROJECT_PAIR_VERTICAL"
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_SINGLE_HORIZONTAL"
       ],
       "images": [
         {
