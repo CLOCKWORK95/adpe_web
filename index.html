@@ -798,15 +798,13 @@
         .splash-item {
             position: relative;
             overflow: hidden;
-            background: transparent; /* Sfondo trasparente come richiesto (niente grigio) */
+            background: transparent;
             display: flex;
             flex-direction: column;
             justify-content: flex-end; 
             align-items: center;
             cursor: pointer;
-            /* AGGIUNTA ANTI-SALTO: prenota lo spazio in proporzione (4:3) */
-            /* Puoi provare anche 3 / 2 o 16 / 9 se vedi che taglia male */
-            aspect-ratio: 4 / 3; 
+            /* Nessun aspect-ratio o altezza fissa qui! Lasciamo fare al tuo JS */
         }
 
         .splash-item img {
@@ -816,13 +814,25 @@
             height: auto;
             object-fit: contain;
             display: block;
-            opacity: 0; /* NUOVO: L'immagine nasce trasparente */
-            /* NUOVO: Uniamo la tua animazione dello zoom (transform) a quella di apparizione (opacity) */
-            transition: transform 0.35s ease, opacity 0.6s ease-in-out; 
+            
+            /* L'immagine nasce trasparente per l'effetto fade */
+            opacity: 0; 
+            transition: transform 0.35s ease, opacity 0.5s ease-in-out; 
         }
 
         .splash-item:hover img {
             transform: scale(1.05);
+        }
+
+        /* Togliamo anche eventuali min-height che avevamo messo a .proj-img-wrap */
+        .proj-img-wrap {
+            position: relative;
+            width: 100%;
+            height: 100%; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background: transparent; /* Niente sfondo grigio! */
         }
 
         /* --- Didascalie Preview Progetti (Riga 8) --- */
