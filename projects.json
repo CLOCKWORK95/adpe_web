@@ -969,8 +969,43 @@
         }
       ]
     },
-    "NOMENTANA": {
+    "FERRARI": {
       "id": 24,
+      "title": "Ferrari",
+      "luogo_data": "Roma, 2015",
+      "posizione": "Roma",
+      "stato": "Realizzato",
+      "committente": "Privato",
+      "layoutSequence": [
+        "PROJECT_SINGLE",
+        "PROJECT_PAIR",
+        "PROJECT_SINGLE"
+      ],
+      "images": [
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/FERRARI/01.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/FERRARI/02.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/FERRARI/03.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/FERRARI/04.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/FERRARI/05.jpg",
+          "description": ""
+        }
+      ]
+    },
+    "NOMENTANA": {
+      "id": 25,
       "title": "Nomentana",
       "luogo_data": "Roma, 2017",
       "posizione": "Via Nomentana, Roma",
@@ -1045,7 +1080,7 @@
       ]
     },
     "ORTONA": {
-      "id": 25,
+      "id": 26,
       "title": "Ortona",
       "luogo_data": "Ortona, 2013",
       "posizione": "Via Costanzo Cloro, Roma",
@@ -1107,7 +1142,7 @@
       ]
     },
     "OSTIA": {
-      "id": 26,
+      "id": 27,
       "title": "Ostia",
       "luogo_data": "Ostia, 2022",
       "posizione": "Ostia, Roma",
@@ -1138,7 +1173,7 @@
       ]
     },
     "SURRIPA": {
-      "id": 27,
+      "id": 28,
       "title": "Surripa",
       "luogo_data": "Amelia, 2022-2026",
       "posizione": "Località Surripa, Amelia TR",
@@ -1187,7 +1222,7 @@
       ]
     },
     "VIA DELLA CROCE": {
-      "id": 28,
+      "id": 29,
       "title": "Via Della Croce",
       "luogo_data": "Roma, 2025",
       "posizione": "Via della Croce, Roma",
@@ -1218,7 +1253,7 @@
       ]
     },
     "VIA NISCO": {
-      "id": 29,
+      "id": 30,
       "title": "Via Nisco",
       "luogo_data": "Roma, 2025",
       "posizione": "Via N. Nisco, Roma",
@@ -1249,7 +1284,7 @@
   },
   "uffici": {
     "AMI": {
-      "id": 30,
+      "id": 31,
       "title": "Ami",
       "luogo_data": "Roma, 2024",
       "posizione": "Via dell'Arte, Roma",
@@ -1319,7 +1354,7 @@
       ]
     },
     "ANCORA": {
-      "id": 31,
+      "id": 32,
       "title": "Ancora",
       "luogo_data": "Napoli, 2024-",
       "posizione": "Via nuova delle Brecce, Napoli",
@@ -1348,7 +1383,7 @@
       ]
     },
     "AVOLTA-NEXT": {
-      "id": 32,
+      "id": 33,
       "title": "Avolta Next",
       "luogo_data": "Milano, 2024",
       "posizione": "Milano",
@@ -1387,7 +1422,7 @@
       ]
     },
     "BNL-GUBBIO": {
-      "id": 33,
+      "id": 34,
       "title": "Bnl Gubbio",
       "luogo_data": "Gubbio, 2022",
       "posizione": "Via Beniamino Ubaldi 1, Gubbio PG",
@@ -1417,7 +1452,7 @@
       ]
     },
     "BNL-P2-P10": {
-      "id": 34,
+      "id": 35,
       "title": "Bnl P2 P10",
       "luogo_data": "Roma, 2023-2024",
       "posizione": "Via Altiero Spinelli, Roma",
@@ -1456,7 +1491,7 @@
       ]
     },
     "BS-24-MI": {
-      "id": 35,
+      "id": 36,
       "title": "Bs 24 Mi",
       "luogo_data": "Milano, 2021",
       "posizione": "Via Monte Rosa 91, Milano",
@@ -1525,7 +1560,7 @@
       ]
     },
     "BS-24-RM": {
-      "id": 36,
+      "id": 37,
       "title": "Bs 24 Rm",
       "luogo_data": "Roma, 2022",
       "posizione": "Via Gaeta, Roma",
@@ -1591,7 +1626,7 @@
       ]
     },
     "CELLNEX-INDUSTRIA": {
-      "id": 37,
+      "id": 38,
       "title": "Cellnex Industria",
       "luogo_data": "Roma, 2025-2026",
       "posizione": "Piazzale dell'Industria, Roma",
@@ -1630,7 +1665,7 @@
       ]
     },
     "CELLNEX-VIOLA": {
-      "id": 38,
+      "id": 39,
       "title": "Cellnex Viola",
       "luogo_data": "Roma, 2019",
       "posizione": "Via Viola, Roma",
@@ -1695,7 +1730,7 @@
       ]
     },
     "COLOMBOLAB2": {
-      "id": 39,
+      "id": 40,
       "title": "Colombolab2",
       "luogo_data": "Roma, 2025",
       "posizione": "Via Tiberio Imperatore, Roma",
@@ -1755,7 +1790,7 @@
       ]
     },
     "Q8-NA": {
-      "id": 40,
+      "id": 41,
       "title": "Q8 Na",
       "luogo_data": "Napoli, 2024-",
       "posizione": "Via nuova delle Brecce, Napoli",
@@ -1826,7 +1861,7 @@
       ]
     },
     "SIAE": {
-      "id": 41,
+      "id": 42,
       "title": "Siae",
       "luogo_data": "Roma, 2024",
       "posizione": "Viale della Letteratura, Roma",
@@ -1867,7 +1902,7 @@
       ]
     },
     "SV": {
-      "id": 42,
+      "id": 43,
       "title": "Sv",
       "luogo_data": "2026",
       "stato": "In corso",
@@ -1916,7 +1951,7 @@
       ]
     },
     "URBANA": {
-      "id": 43,
+      "id": 44,
       "title": "Urbana",
       "luogo_data": "Ortona, 2013",
       "posizione": "Via Costanzo Cloro, Roma",
@@ -1960,7 +1995,7 @@
       ]
     },
     "VERO": {
-      "id": 44,
+      "id": 45,
       "title": "Vero",
       "luogo_data": "Roma, 2018",
       "posizione": "Via Nomentana, Roma",
