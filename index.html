@@ -402,16 +402,6 @@
         .modal-prev { left: 0; border-radius: 0 3px 3px 0; }
         .modal-prev:hover, .modal-next:hover { background-color: rgba(0,0,0,0.8); }
 
-        footer { 
-            background: transparent; padding: 1rem 0; position: fixed; bottom: 0; width: 100%; 
-            z-index: 999; transition: background 0.3s ease; display: flex; justify-content: center; align-items: center; 
-        }
-        footer.scrolled { background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent); }
-        body.dark-theme footer.scrolled { background: linear-gradient(to top, rgba(26, 26, 26, 0.9), transparent); }
-        .footer-social-group { display: flex; gap: 1.5rem; padding: 0 20px; }
-        .footer-social-link { color: var(--text-color); font-size: 1.5rem; transition: var(--transition); text-decoration: none; cursor: pointer; }
-        .footer-social-link:hover { color: var(--autumn-blue); transform: scale(1.2); }
-
         /* ==========================================================================
            10. RESPONSIVE DESIGN (Media Queries)
            ========================================================================== */
@@ -495,7 +485,7 @@
 
     <!-- Global Preloader -->
     <div id="globalLoader" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--primary-color); z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease, visibility 0.6s ease;">
-        <img src="/.netlify/images?url=https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg&w=150&q=80" alt="Loading" style="width: 80px; height: 80px; border-radius: 50%; animation: pulse 1.5s infinite ease-in-out;">
+        <img src="https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="Loading" style="width: 80px; height: 80px; border-radius: 50%; animation: pulse 1.5s infinite ease-in-out;">
     </div>
 
     <!-- Geometric Backgrounds -->
@@ -543,7 +533,7 @@
         <section class="hero" id="hero">
             <div class="hero-content">
                 <div class="studio-logo">
-                    <img src="/.netlify/images?url=https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg&w=200&q=80" alt="Studio Logo">
+                    <img src="https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="Studio Logo">
                 </div>
             </div>
         </section>
@@ -586,12 +576,33 @@
 
     <!-- Scripts -->
     <script>
+        // === CONFIGURAZIONE SVILUPPATORE ===
+        // Imposta su 'true' per attivare la CDN di Netlify sulle immagini dinamiche.
+        // Imposta su 'false' per pescare tutte le immagini direttamente da S3 (più reattivo e consigliato se le foto sono già leggere).
+        const USE_NETLIFY_CDN = false;
+        // ===================================
+
         /**
-         * CDN Optimizer
-         * Re-routes image URLs through Netlify's Image CDN for automated WebP conversion & resizing.
+         * CDN Optimizer Toggle
+         * Re-routes image URLs through Netlify's Image CDN ONLY if the toggle is TRUE and we are on Netlify.
          */
         function getOptimizedUrl(originalUrl, width = 1280) {
+            // Se l'interruttore CDN è spento, carica sempre le immagini da S3
+            if (!USE_NETLIFY_CDN) return originalUrl;
+
+            // Se non è un'immagine di S3, non toccarla
             if (!originalUrl.includes('amazonaws.com')) return originalUrl;
+            
+            // Controlliamo se siamo su Netlify (test o prod) oppure se abbiamo già il dominio ufficiale
+            const isNetlifyEnv = window.location.hostname.includes('netlify.app') || 
+                                 window.location.hostname.includes('adpe.it');
+
+            // Se siamo in locale (127.0.0.1 o localhost), restituisci il link originale
+            if (!isNetlifyEnv) {
+                return originalUrl;
+            }
+
+            // Altrimenti (siamo su Netlify e il toggle è on), usa la CDN
             return `/.netlify/images?url=${encodeURIComponent(originalUrl)}&w=${width}&q=80`;
         }
 
@@ -794,7 +805,7 @@
             if (!titleWrapper) { 
                 titleWrapper = document.createElement('div');
                 titleWrapper.className = 'title-wrapper';
-                titleWrapper.innerHTML = `<img src="/.netlify/images?url=https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg&w=200&q=80" alt="ADPE Logo" class="title-logo-center" style="cursor: pointer;" onclick="filterProjects('home_custom')">`;
+                titleWrapper.innerHTML = `<img src="${getOptimizedUrl('https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg', 200)}" alt="ADPE Logo" class="title-logo-center" style="cursor: pointer;" onclick="filterProjects('home_custom')">`;
                 projectsSection.prepend(titleWrapper);
             }
             titleWrapper.style.display = 'flex'; 
