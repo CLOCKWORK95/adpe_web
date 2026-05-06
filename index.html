@@ -576,33 +576,40 @@
 
     <!-- Scripts -->
     <script>
-        // === CONFIGURAZIONE SVILUPPATORE ===
-        // Imposta su 'true' per attivare la CDN di Netlify sulle immagini dinamiche.
-        // Imposta su 'false' per pescare tutte le immagini direttamente da S3 (più reattivo e consigliato se le foto sono già leggere).
-        const USE_NETLIFY_CDN = false;
-        // ===================================
+        // === CONFIGURAZIONE CDN INTELLIGENTE ===
+        // 'auto' -> S3 su Desktop (massima velocità), Netlify CDN su Mobile (risparmio dati)
+        // 's3'   -> S3 Diretto per tutti (esclude Netlify)
+        // 'cdn'  -> Netlify CDN per tutti
+        const CDN_STRATEGY = 'auto';
+        // =======================================
 
         /**
-         * CDN Optimizer Toggle
-         * Re-routes image URLs through Netlify's Image CDN ONLY if the toggle is TRUE and we are on Netlify.
+         * CDN Optimizer Ibrido
+         * Re-indirizza le immagini in base al dispositivo (Mobile vs Desktop) e all'ambiente.
          */
         function getOptimizedUrl(originalUrl, width = 1280) {
-            // Se l'interruttore CDN è spento, carica sempre le immagini da S3
-            if (!USE_NETLIFY_CDN) return originalUrl;
-
             // Se non è un'immagine di S3, non toccarla
             if (!originalUrl.includes('amazonaws.com')) return originalUrl;
             
-            // Controlliamo se siamo su Netlify (test o prod) oppure se abbiamo già il dominio ufficiale
+            // Capiamo se siamo su Netlify o sul dominio ufficiale (esclude il Live Server locale)
             const isNetlifyEnv = window.location.hostname.includes('netlify.app') || 
                                  window.location.hostname.includes('adpe.it');
 
-            // Se siamo in locale (127.0.0.1 o localhost), restituisci il link originale
-            if (!isNetlifyEnv) {
+            // Se siamo in locale o forziamo lo spegnimento, usa sempre S3
+            if (!isNetlifyEnv || CDN_STRATEGY === 's3') {
                 return originalUrl;
             }
 
-            // Altrimenti (siamo su Netlify e il toggle è on), usa la CDN
+            // --- LA MAGIA DELL'ADAPTIVE DELIVERY ---
+            // Consideriamo "Mobile/Tablet" tutto ciò che è sotto i 1024 pixel di larghezza
+            const isMobile = window.innerWidth <= 1024;
+
+            // Se la strategia è 'auto' e siamo su un computer Desktop, usa S3 diretto
+            if (CDN_STRATEGY === 'auto' && !isMobile) {
+                return originalUrl;
+            }
+
+            // Altrimenti (siamo su Mobile o abbiamo forzato 'cdn'), usa Netlify CDN
             return `/.netlify/images?url=${encodeURIComponent(originalUrl)}&w=${width}&q=80`;
         }
 
