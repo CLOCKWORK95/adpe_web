@@ -21,8 +21,18 @@
     <link rel="icon" href="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" type="image/jpeg">
     
     <!-- Google Fonts & FontAwesome -->
+    <!-- 1. Preconnect per Google Fonts (anticipa la connessione ai server di Google) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- 2. Caricamento Asincrono per FontAwesome (NON blocca il rendering!) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
+    
+    <!-- Fallback di sicurezza se l'utente ha JavaScript disabilitato -->
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </noscript>
 
     <style>
         /* ==========================================================================
