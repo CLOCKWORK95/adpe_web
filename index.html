@@ -497,11 +497,11 @@
         <nav class="container">
             <ul class="nav-menu">
                 <li class="nav-item-dropdown">
-                    <a href="javascript:void(0)" class="nav-link" data-lang-key="projectsLink" onclick="showProjectsSection()">Progetti</a>
+                    <a href="?view=projects" class="nav-link" data-lang-key="projectsLink" onclick="event.preventDefault(); showProjectsSection();">Progetti</a>
                     <div class="dropdown-content" id="projectFilters"></div>
                 </li>
-                <li><a href="javascript:void(0)" class="nav-link" data-lang-key="aboutLink" onclick="showAbout()">Chi Siamo</a></li>
-                <li><a href="javascript:void(0)" class="nav-link" data-lang-key="contactLink" onclick="showContact()">Contatti</a></li>
+                <li><a href="?view=about" class="nav-link" data-lang-key="aboutLink" onclick="event.preventDefault(); showAbout();">Chi Siamo</a></li>
+                <li><a href="?view=contact" class="nav-link" data-lang-key="contactLink" onclick="event.preventDefault(); showContact();">Contatti</a></li>
             </ul>
 
             <div class="header-right-icons">
