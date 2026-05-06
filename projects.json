@@ -572,7 +572,16 @@
     "AVENTINO": {
       "id": 16,
       "title": "Aventino",
+      "luogo_data": "Roma, 2022-2023",
+      "posizione": "Via di S. Alessio, Roma",
       "stato": "Completato",
+      "committente": "Privato",
+      "layoutSequence": [
+        "PROJECT_PAIR_VERT-HOR",
+        "PROJECT_PAIR_HORIZONTAL",
+        "PROJECT_TRIPLE_VERT",
+        "PROJECT_TRIPLE_VERT"
+      ],
       "images": [
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/01 (2).jpg",
@@ -600,6 +609,18 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/08.JPG",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/09.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/10.JPG",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/11.JPG",
           "description": ""
         }
       ]
