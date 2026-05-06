@@ -798,12 +798,15 @@
         .splash-item {
             position: relative;
             overflow: hidden;
-            background: transparent;
+            background: transparent; /* Sfondo trasparente come richiesto (niente grigio) */
             display: flex;
             flex-direction: column;
             justify-content: flex-end; 
             align-items: center;
             cursor: pointer;
+            /* AGGIUNTA ANTI-SALTO: prenota lo spazio in proporzione (4:3) */
+            /* Puoi provare anche 3 / 2 o 16 / 9 se vedi che taglia male */
+            aspect-ratio: 4 / 3; 
         }
 
         .splash-item img {
@@ -813,13 +816,13 @@
             height: auto;
             object-fit: contain;
             display: block;
-            /* Rimosso il filtro bianco e nero */
-            transition: transform 0.35s ease; /* Manteniamo solo lo zoom fluido */
+            opacity: 0; /* NUOVO: L'immagine nasce trasparente */
+            /* NUOVO: Uniamo la tua animazione dello zoom (transform) a quella di apparizione (opacity) */
+            transition: transform 0.35s ease, opacity 0.6s ease-in-out; 
         }
 
         .splash-item:hover img {
             transform: scale(1.05);
-            /* Rimosso il filtro */
         }
 
         /* --- Didascalie Preview Progetti (Riga 8) --- */
