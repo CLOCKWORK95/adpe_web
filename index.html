@@ -1363,7 +1363,7 @@
 </head>
 <body class="bg-animations-off">
     <div id="globalLoader" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--primary-color); z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease, visibility 0.6s ease;">
-        <img src="https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="Loading" style="width: 80px; height: 80px; border-radius: 50%; animation: pulse 1.5s infinite ease-in-out;">
+        <img src="/.netlify/images?url=https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg&w=150&q=80" alt="Loading" style="width: 80px; height: 80px; border-radius: 50%; animation: pulse 1.5s infinite ease-in-out;">
     </div>
     <div class="geometric-square-background"></div>
     <div class="background-rectangle"></div>
@@ -1404,7 +1404,7 @@
         <section class="hero" id="hero">
             <div class="hero-content">
                 <div class="studio-logo">
-                    <img src="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="Studio Logo">
+                    <img src="/.netlify/images?url=https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg&w=150&q=80" alt="Loading" style="width: 80px; height: 80px; border-radius: 50%; animation: pulse 1.5s infinite ease-in-out;">
                 </div>
             </div>
         </section>
@@ -1455,7 +1455,6 @@
             if (!originalUrl.includes('amazonaws.com')) return originalUrl;
             return `/.netlify/images?url=${encodeURIComponent(originalUrl)}&w=${width}&q=80`;
         }
-        
         // Variabili globali
         let projects = {};
         let globalLayouts = {}; 
@@ -2055,7 +2054,11 @@
                         staggerIndex++;
 
                         const img = document.createElement('img');
-                        img.src = getOptimizedUrl(imgData.src, 800); // Usiamo 800px per le anteprime, così risparmiamo ancora più banda
+                        img.src = getOptimizedUrl(imgData.src, 800);
+                        img.style.opacity = '0'; // Assicurati che parta da 0
+                        img.onload = function() {
+                            this.style.opacity = '1'; // Appare sfumata solo quando è pronta nel browser
+                        };
                         // Manteniamo il lazy loading intelligente che avevamo aggiunto!
                         if (i <= 4) {
                             img.loading = 'eager'; 
