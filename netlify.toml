@@ -1,2 +1,5 @@
 [build]
   ignore = 'test "$SITE_NAME" = "adpeprod" && test -z "$INCOMING_HOOK_TITLE"'
+
+[images]
+  remote_images = ["https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/.*"]

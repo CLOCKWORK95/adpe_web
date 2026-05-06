@@ -1352,7 +1352,12 @@
             .contact-text-block { grid-column: 1 / span 12 !important; padding: 0 15px; }
             .contact-block .project-detail-grid { row-gap: 5rem; }
         }
-
+        /* Ottimizzazione paliativa per il caricamento */
+        .proj-img-wrap img, .splash-item img {
+            content-visibility: auto; /* Dice al browser di non renderizzare finché non serve */
+            background: rgba(0,0,0,0.03); /* Crea un placeholder leggero durante l'attesa */
+            transition: opacity 0.5s ease-in-out;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -1444,6 +1449,22 @@
     </div>
 
     <script>
+        // Funzione per ottimizzare l'immagine solo in produzione
+        function getOptimizedUrl(originalUrl, width = 1280) {
+            // 1. Controlla se siamo su un ambiente di produzione
+            // (Aggiungi adpe.it se hai già collegato il dominio)
+            const isProduction = window.location.hostname.includes('adpeprod') || 
+                                window.location.hostname.includes('adpe.it');
+
+            // 2. Se non siamo in produzione o l'URL non è di S3, restituisci l'originale
+            if (!isProduction || !originalUrl.includes('amazonaws.com')) {
+                return originalUrl;
+            }
+
+            // 3. Altrimenti, incapsula l'URL per la CDN di Netlify
+            // w=width: ridimensiona, q=80: comprime, fm=webp: converte in formato moderno
+            return `/.netlify/images?url=${encodeURIComponent(originalUrl)}&w=${width}&q=80`;
+        }
         // Variabili globali
         let projects = {};
         let globalLayouts = {}; 
@@ -1789,7 +1810,7 @@
                             
                             htmlContent += `
                                 <div class="proj-img-wrap" style="grid-column: ${slot.col}; ${rowStyle}">
-                                    <img src="${imgData.src}" 
+                                    <img src="${getOptimizedUrl(imgData.src, 1600)}" // 1600px per la visione a tutto schermo
                                          alt="${imgData.description || ''}" 
                                          onclick="openImageModal(${project.id}, '${imgData.src}')" 
                                          loading="lazy"
@@ -2043,7 +2064,7 @@
                         staggerIndex++;
 
                         const img = document.createElement('img');
-                        img.src = imgData.src;
+                        img.src = getOptimizedUrl(imgData.src, 800); // Usiamo 800px per le anteprime, così risparmiamo ancora più banda
                         // Manteniamo il lazy loading intelligente che avevamo aggiunto!
                         if (i <= 4) {
                             img.loading = 'eager'; 
