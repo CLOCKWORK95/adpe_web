@@ -3,27 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-lang-key="pageTitle">Studio Architettura & Design</title>
-    <!-- Favicon per la barra del browser -->
+    
+    <!-- SEO & Meta Tags -->
+    <title data-lang-key="pageTitle">Studio Architettura & Design | ADPE</title>
+    <meta name="description" content="Studio ADPE, fondato dall'architetto Adriano Pernazza. Realtà dinamica e innovativa nel panorama dell'architettura e del design. Progettazione di spazi unici, estetici e funzionali.">
+    <meta name="keywords" content="architettura, design, studio architettura roma, adriano pernazza, progettazione, residenziale, uffici, interior design">
+    <meta name="author" content="Studio ADPE">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Studio Architettura & Design | ADPE">
+    <meta property="og:description" content="Progettazione di spazi che combinano estetica, funzionalità e sostenibilità.">
+    <meta property="og:image" content="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
     <link rel="icon" href="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" type="image/jpeg">
-    <!-- Google Font: Roboto Mono -->
+    
+    <!-- Google Fonts & FontAwesome -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <style>
-        @keyframes pulse {
-            0% { transform: scale(0.95); opacity: 0.7; }
-            50% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(0.95); opacity: 0.7; }
-        }
-        /* Variabili CSS per il tema chiaro */
+        /* ==========================================================================
+           1. VARIABLES & BASE STYLES
+           ========================================================================== */
         :root {
             --primary-color: #ffffff;
             --secondary-color: #f8f9fa;
             --text-color: rgb(8, 43, 46);
-            --autumn-blue: #4a90e2; /* Colore dal logo: blu */
-            --autumn-blue: #2da6c4; /* Colore autunnale: blu */
-            --accent-orange: #d4693a; /* Colore dal logo: arancio */
-            --accent-brown: #8b4513; /* Colore dal logo: marrone */
-            --accent-green: #7fb069; /* Colore dal logo: verde */
+            --autumn-blue: #2da6c4; 
+            --accent-orange: #d4693a;
+            --accent-brown: #8b4513;
+            --accent-green: #7fb069;
             --accent-gold: #efb34b;
             --border-color: rgb(45, 166, 196);
             --shadow-light: 0 4px 20px rgba(0,0,0,0.05);
@@ -31,7 +43,6 @@
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Variabili CSS per il tema scuro */
         body.dark-theme {
             --primary-color: #1a1a1a;
             --secondary-color: #2c2c2c;
@@ -41,11 +52,7 @@
             --shadow-medium: 0 8px 30px rgba(0,0,0,0.5);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Roboto Mono', monospace;
@@ -59,1334 +66,439 @@
             transition: background var(--transition), color var(--transition);
         }
 
-        /* Background Geometric Elements */
-        body::before, body::after, .geometric-square-background, .background-rectangle {
-            content: '';
-            position: fixed;
-            z-index: -1;
-            pointer-events: none;
-            transition: opacity var(--transition);
+        .container { max-width: 1800px; margin: 0 auto; padding: 0 20px; }
+
+        /* ==========================================================================
+           2. ANIMATIONS
+           ========================================================================== */
+        @keyframes pulse {
+            0%, 100% { transform: scale(0.95); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 1; }
         }
-        body::before { top: 5%; left: 5%; width: 400px; height: 400px; background-color: var(--accent-brown); border-radius: 50%; opacity: 0.25; animation: floatCircle 85s ease-in-out infinite; }
-        body::after { top: 40%; right: 10%; width: 300px; height: 400px; background-color: var(--autumn-blue); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); opacity: 0.25; animation: floatTriangle 250s ease-in-out infinite; }
-        .geometric-square-background { top: 10%; left: 80%; width: 305px; height: 305px; background: var(--accent-green); opacity: 0.25; animation: floatGeometry 250s ease-in-out infinite reverse; border-radius: 2%; }
-        .background-rectangle { bottom: 10%; left: 25%; width: 305px; height: 305px; background: var(--accent-gold); opacity: 0.25; animation: floatRectangle 250s ease-in-out infinite reverse; border-radius: 2%; }
-
-        body.dark-theme::before, body.dark-theme::after, body.dark-theme .geometric-square-background, body.dark-theme .background-rectangle {
-            opacity: 0.25;
+        @keyframes floatTriangle { 
+            0%, 100% { transform: rotate(0deg) translateY(0px); } 
+            33% { transform: rotate(120deg) translateY(-20px); } 
+            66% { transform: rotate(240deg) translateY(10px); } 
         }
-
-        /* Keyframes per le animazioni */
-        @keyframes floatTriangle { 0%, 100% { transform: rotate(0deg) translateY(0px); } 33% { transform: rotate(120deg) translateY(-20px); } 66% { transform: rotate(240deg) translateY(10px); } }
-        @keyframes floatCircle { 0%, 100% { transform: translate(0px, 0px) scale(1); } 40% { transform: translate(-30px, 50px) scale(1.02); } 70% { transform: translate(20px, -40px) scale(0.98); } }
-        @keyframes floatGeometry { 0%, 100% { transform: rotate(0deg) translateX(20px); } 33% { transform: rotate(120deg) translateY(-20px); } 66% { transform: rotate(240deg) translateY(10px); } }
-        @keyframes floatRectangle { 0%, 100% { transform: rotate(0deg) translateX(-100px); } 33% { transform: rotate(120deg) translateY(-20px); } 66% { transform: rotate(240deg) translateY(10px); } }
-
-        /* Media queries per le forme geometriche */
-        @media (max-width: 768px) {
-            body::before { width: 200px; height: 200px; top: 8%; left: 8%; } /* Increased size */
-            body::after { width: 160px; height: 200px; top: 45%; right: 7%; } /* Increased size */
-            .geometric-square-background { width: 160px; height: 160px; top: 12%; left: 75%; } /* Increased size */
-            .background-rectangle { width: 160px; height: 160px; bottom: 12%; left: 22%; } /* Increased size */
+        @keyframes floatCircle { 
+            0%, 100% { transform: translate(0px, 0px) scale(1); } 
+            40% { transform: translate(-30px, 50px) scale(1.02); } 
+            70% { transform: translate(20px, -40px) scale(0.98); } 
         }
-
-        @media (max-width: 480px) {
-            body::before { width: 120px; height: 120px; top: 12%; left: 7%; } /* Increased size */
-            body::after { width: 90px; height: 120px; top: 55%; right: 4%; } /* Increased size */
-            .geometric-square-background { width: 90px; height: 90px; top: 18%; left: 78%; } /* Increased size */
-            .background-rectangle { width: 90px; height: 90px; bottom: 18%; left: 15%; } /* Increased size */
+        @keyframes floatGeometry { 
+            0%, 100% { transform: rotate(0deg) translateX(20px); } 
+            33% { transform: rotate(120deg) translateY(-20px); } 
+            66% { transform: rotate(240deg) translateY(10px); } 
         }
-
-        .container {
-            max-width: 1800px;
-            margin: 0 auto;
-            padding: 0 20px;
+        @keyframes floatRectangle { 
+            0%, 100% { transform: rotate(0deg) translateX(-100px); } 
+            33% { transform: rotate(120deg) translateY(-20px); } 
+            66% { transform: rotate(240deg) translateY(10px); } 
         }
-
-        /* Header */
-        header {
-            background: transparent;
-            padding: 1rem 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            border-bottom: none;
-            box-shadow: none;
-            backdrop-filter: none;
-            transition: background 0.3s ease;
-        }
-
-        header.scrolled {
-            background: var(--primary-color); /* Sfondo solido che maschera i contenuti */
-        }
-
-        body.dark-theme header.scrolled {
-            background: var(--primary-color); /* Funziona in automatico anche col tema scuro */
-        }
-
-        header:hover, 
-        header.scrolled {
-            background: var(--primary-color); 
-        }
-
-        body.dark-theme header:hover, 
-        body.dark-theme header.scrolled {
-            background: var(--primary-color); 
-        }
-
-        .header-left { display: flex; align-items: center; gap: 10px; }
-        .header-logo-small { height: 35px; width: 35px; border-radius: 50%; object-fit: cover; transition: var(--transition); }
-        .header-logo-small:hover { transform: scale(1.1); }
-        .logo { font-size: 1.6rem; font-weight: 300; color: var(--text-color); text-decoration: none; letter-spacing: 2px; transition: var(--transition); }
-        .logo:hover { transform: scale(1.05); }
-
-        /* 1. Il contenitore nav usa l'intera larghezza */
-        nav {
-            position: relative;
-            width: 100%;
-            display: flex;
-            align-items: flex-start; 
-        }
-
-        /* 2. Il menu torna nel flusso normale (NON PIÙ ABSOLUTE) così spinge giù l'header! */
-        .nav-menu { 
-            position: relative; 
-            width: 100%; 
-            display: grid; 
-            grid-template-columns: 1fr auto 1fr; 
-            align-items: flex-start; 
-            list-style: none; 
-            pointer-events: auto; /* Riattiva i click standard */
-        }
-        
-        
-        .nav-menu li {
-            pointer-events: auto; 
-        }
-
-        /* I margini per la simmetria rimangono identici */
-        .nav-menu li:nth-child(1) { justify-self: end; margin-right: 6rem; }
-        .nav-menu li:nth-child(2) { justify-self: center; }
-        .nav-menu li:nth-child(3) { justify-self: start; margin-left: 6rem; }
-
-        /* 1. PROGETTI: sta a sinistra, lo spingiamo tutto verso il centro */
-        .nav-menu li:nth-child(1) {
-            justify-self: end;
-            margin-right: 6rem; /* <-- Cambia questo per avvicinarlo o allontanarlo ad adpe */
-        }
-
-        /* 2. ADPE: perno centrale matematico */
-        .nav-menu li:nth-child(2) {
-            justify-self: center;
-        }
-
-        /* 3. CONTATTI: sta a destra, lo spingiamo tutto verso il centro */
-        .nav-menu li:nth-child(3) {
-            justify-self: start;
-            margin-left: 6rem; /* <-- Deve essere uguale al margin-right di progetti per la simmetria */
-        }
-        .nav-link { color: var(--text-color); text-decoration: none; font-weight: 400; font-size: 1.0rem; transition: var(--transition); position: relative; cursor: pointer; letter-spacing: 1px; }
-        .nav-link:hover { color: var(--autumn-blue); transform: translateY(-2px) scale(1.02); }
-        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--autumn-blue); transition: var(--transition); }
-        .nav-link:hover::after { width: 100%; }
-
-        .hamburger { display: none; flex-direction: column; cursor: pointer; transition: var(--transition); }
-        .hamburger span { width: 25px; height: 2px; background: var(--text-color); margin: 3px 0; transition: var(--transition); }
-
-        .header-right-icons { 
-            position: absolute; /* Lo slega completamente dal flusso della pagina */
-            right: 0; /* Lo incolla a destra */
-            top: 0.3rem; 
-            display: flex; 
-            align-items: flex-start; 
-            gap: 1.5rem; 
-            z-index: 100;
-        }
-        .language-group, .theme-group { 
-            display: none !important; /* Nasconde l'icona della lampadina */
-            align-items: center; 
-        }
-        .language-group { gap: 0.8rem; margin-right: 0.5rem; }
-
-        .header-social-link, .language-selector-item { color: var(--text-color); font-size: 1rem; transition: var(--transition); text-decoration: none; cursor: pointer; }
-        .header-social-link:hover, .language-selector-item:hover { color: var(--autumn-blue); transform: scale(1.2); }
-        #themeToggle i { font-size: 1.4rem; color: var(--text-color); transition: color var(--transition); }
-        body.dark-theme #themeToggle i { color: var(--accent-gold); }
-        .language-selector-item { font-size: 1.0rem; font-weight: bold; text-transform: uppercase; }
-        .language-selector-item.active { color: var(--autumn-blue); text-decoration: underline; }
-
-        /* Hero Section */
-        .hero { min-height: calc(50vh - 80px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; padding-top: 4rem; padding-bottom: 2rem; scroll-margin-top: 85px; }
-        .hero-content { position: relative; z-index: 1; animation: fadeInUp 0.6s ease-out; }
-        .hero h1 { font-size: 6rem; font-weight: 300; margin-bottom: 2rem; letter-spacing: 8px; color: var(--text-color); }
-        .studio-logo { width: 110px; height: 110px; background: rgba(255, 255, 255, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 4rem; margin: 8rem auto; box-shadow: var(--shadow-medium); border: 0px solid var(--autumn-blue); animation: logoFloat 6s ease-in-out infinite; overflow: hidden; transition: background var(--transition), border-color var(--transition), box-shadow var(--transition); }
-        body.dark-theme .studio-logo { background: rgba(44, 44, 44, 0.9); border: 0px solid var(--accent-gold); box-shadow: var(--shadow-medium); }
-        .studio-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%;}
-        .studio-logo:hover img {filter: grayscale(0%);}
-        @keyframes logoFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
-
-        /* Media queries per il logo dello studio */
-        @media (max-width: 768px) {
-            .studio-logo {
-                width: 110px; /* Increased size */
-                height: 110px; /* Increased size */
-                margin: 5rem auto; /* Adjusted margin */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .studio-logo {
-                width: 90px; /* Increased size */
-                height: 90px; /* Increased size */
-                margin: 4rem auto; /* Adjusted margin */
-            }
-        }
-
-        /* Home Projects Section */
-        .home-projects { padding: 4rem 0; background: linear-gradient(180deg, rgba(248, 249, 250, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%); transition: background var(--transition); scroll-margin-top: 85px; }
-        body.dark-theme .home-projects { background: linear-gradient(180deg, rgba(44, 44, 44, 0.3) 0%, rgba(26, 26, 26, 0.1) 100%); }
-        .home-projects h2 { text-align: center; font-size: 3rem; font-weight: 200; margin-bottom: 3rem; color: var(--text-color); letter-spacing: 2px; }
-        
-        /* ✅ NUOVA GRIGLIA PER LA HOME */
-        .home-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 6.0rem;
-            max-width: 1800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* ✅ MANTENUTA LA GRIGLIA MASONRY PER PROGETTI 
-        .projects-grid {
-            column-count: 3;
-            column-gap: 6.0rem;
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }*/
-
-        .container,
-        .home-grid,
-        .projects-grid {
-            max-width: 92vw;     /* Occupa il 95% della larghezza viewport */
-            margin: 0 auto;      /* Mantiene centrato */
-            padding: 0 10px;     /* Riduce il padding laterale */
-        }
-
-        @media (max-width: 1024px) {
-            .projects-grid { column-count: 2; }
-        }
-        @media (max-width: 768px) {
-            .projects-grid { column-count: 1; }
-        }
-
-        /* Card per il layout Masonry 
-        .project-card {
-            background: var(--secondary-color);
-            border-radius: 0px;
-            overflow: hidden;
-            box-shadow: var(--shadow-light);
-            transition: var(--transition);
-            cursor: pointer;
-            margin-bottom: 6.0rem; 
-            display: inline-block; 
-            width: 100%;
-            animation: fadeInUp 0.6s ease-out forwards;
-        }*/
-
-        body.dark-theme .project-card {
-            background: rgba(44, 44, 44, 0.9);
-            box-shadow: var(--shadow-light);
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: var(--shadow-medium);
-        }
-        
-        .project-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-
-            filter: grayscale(100%);
-            transition:
-                transform 0.3s ease,
-                filter 0.4s ease;
-        }
-
-        
-        .project-card:hover img {
-            transform: scale(1.05);
-            filter: grayscale(0%);
-        }
-
-        /* Stili per i bottoni del filtro */
-        .filter-btn {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 0.8rem 1.5rem;
-            margin: 0.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: var(--transition);
-            font-weight: 500;
-            font-size: 1.1rem;
-        }
-
-        .filter-btn:hover {
-            background: var(--autumn-blue);
-            color: var(--primary-color);
-            border-color: var(--autumn-blue);
-            transform: translateY(-2px);
-        }
-
-        .filter-btn.active {
-            background: var(--autumn-blue);
-            color: var(--primary-color);
-            border-color: var(--autumn-blue);
-        }
-
-        .projects-section .section-title {
-            text-align: center;
-            font-size: 3rem;
-            font-weight: 200;
-            margin-bottom: 2rem;
-            color: var(--text-color);
-            letter-spacing: 1px;
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-
-        /* Project Detail Page 
-        .project-detail { padding: 4rem 0; min-height: calc(100vh - 80px); display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .project-detail-title { font-size: 3.5rem; font-weight: 200; margin-bottom: 1rem; color: var(--text-color); letter-spacing: 1px; }
-        .project-detail-category { color: var(--autumn-blue); font-size: 1.1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2rem; }
-        .project-detail-description { max-width: 800px; margin: 0 auto 3rem; font-size: 1.2rem; line-height: 1.8; text-align: center; opacity: 0.9; }
-        .project-gallery { display: flex; flex-direction: column; max-width: 1200px; margin: 0 auto; width: 100%; padding: 0 20px; }
-        .gallery-item { background: transparent; border-radius: 12px; overflow: hidden; box-shadow: none; transition: var(--transition); height: auto; min-height: 75vh; display: flex; align-items: center; padding: 1rem; margin-bottom: 2.5rem; }
-        .gallery-item:last-child { margin-bottom: 0; }
-        .gallery-item:hover { transform: translateY(-5px) scale(1.01); }
-        .gallery-item:nth-child(odd) { flex-direction: row; margin-right: auto; text-align: left; }
-        .gallery-item:nth-child(even) { flex-direction: row-reverse; margin-left: auto; text-align: right; }
-        .gallery-item img { max-height: 70vh; width: auto; max-width: 55%; height: auto; object-fit: contain; display: block; flex-shrink: 0; padding: 0.5rem; border-radius: 8px; box-shadow: var(--shadow-light); cursor: pointer; }
-        .gallery-description { flex-grow: 1; padding: 1rem 2rem; margin: 0; max-width: 45%; line-height: 1.7; font-size: 1.15rem; text-align: inherit; color: var(--text-color); opacity: 0.9; font-style: normal; } */
-
-        /* =================================================== */
-        /* --- LAYOUT PROGETTO SINGOLO (GRIGLIA EDITORIALE) ---*/
-        /* =================================================== */
-        
-        .project-detail {
-            width: 100%;
-            padding-top: 2rem;
-            padding-bottom: 6rem;
-        }
-
-        .project-detail-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 2rem; /* Distanza tra le colonne */
-            row-gap: 14rem; /* Distanza verticale tra le righe di foto */
-            max-width: 92vw;
-            margin: 0 auto;
-            align-items: start;
-        }
-
-        .proj-img-wrap {
-            position: relative;
-            width: 100%;
-            height: 100%; /* Si espande per riempire tutta l'altezza della riga */
-            display: flex; /* Flexbox è perfetto per centrare */
-            justify-content: center; /* Centra orizzontalmente se l'immagine è stretta */
-            align-items: center; /* Centra verticalmente se l'immagine è corta */
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-
-        .proj-img-wrap img {
-            max-width: 100%; /* Si adatta alla larghezza della colonna senza sbordare */
-            max-height: 85vh; /* Fitta in altezza: non supera mai l'85% dello schermo */
-            width: auto; /* Mantiene le proporzioni originali intatte */
-            height: auto;
-            display: block;
-            box-shadow: var(--shadow-light); /* L'ombra ora "abbraccia" i veri bordi della foto! */
-            cursor: pointer;
-            transition: transform 0.4s ease;
-        }
-
-        .proj-img-wrap img:hover {
-            transform: scale(1.02);
-        }
-
-        /* --- Posizioni sulla Griglia a 12 Colonne --- */
-        
-        /* Layout Coppia: Lascia 1 col vuota, occupa 4, lascia 2 vuote, occupa 4, lascia 1 vuota */
-        .pos-pair-left { grid-column: 2 / span 4; }
-        .pos-pair-right { grid-column: 8 / span 4; }
-        
-        /* Layout Singolo: Lascia 2 col vuote, occupa 8, lascia 2 vuote */
-        .pos-single { grid-column: 3 / span 8; }
-
-        /* --- Blocco Testo Finale --- */
-        .proj-text-block {
-            grid-column: 2 / span 4; /* ALLINEAMENTO PERFETTO: Inizia alla colonna 2 e ne occupa 4, esattamente come l'immagine di sinistra! */
-            font-size: 0.75rem; /* Testo leggermente più piccolo ed elegante */
-            line-height: 1.6;
-            color: var(--text-color);
-            padding-top: 2rem;
-            animation: fadeInUp 0.8s ease-out forwards;
-            text-align: left; /* Assicura l'allineamento a bandiera a sinistra */
-        }
-
-        .proj-bottom-title {
-            font-size: 0,75rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .proj-main-desc {
-            margin-bottom: 3rem; /* Spazio tra la descrizione e l'inizio dei dati tecnici */
-        }
-
-        /* --- Stile dei Metadati (Tipologia, Posizione, ecc) --- */
-        .proj-metadata {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem; /* Distanza verticale tra i vari dati */
-        }
-
-        .meta-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.2rem;
-        }
-
-        .meta-label {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            opacity: 0.8;
-        }
-
-        .meta-value {
-            font-size: 0.75rem;
-            font-weight: 400;
-        }
-
-        /* Pulsante Indietro minimalista */
-        .btn-back-minimal {
-            background: transparent;
-            border: none;
-            color: var(--text-color);
-            font-family: inherit;
-            font-size: 0.75rem;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 0;
-            margin-top: 5rem;
-            text-decoration: underline;
-            transition: color 0.3s ease;
-            text-transform: uppercase;
-        }
-        .btn-back-minimal:hover { color: var(--autumn-blue); }
-
-        /* --- Responsività Dettaglio Progetto --- */
-        
-        /* Tablet orizzontali / Schermi intermedi */
-        @media (max-width: 1024px) {
-            .project-detail-grid { 
-                gap: 1rem; 
-                row-gap: 6rem; 
-            }
-            .proj-text-block { 
-                grid-column: 1 / span 8; /* Dà più spazio al testo sui tablet */
-            }
-        }
-
-        /* Smartphone e Tablet piccoli: Incolonna tutto a piena larghezza */
-        @media (max-width: 768px) {
-            /* Uso !important per sovrascrivere lo stile inline di grid-column generato dal JS */
-            .proj-img-wrap, .proj-text-block {
-                grid-column: 1 / span 12 !important; 
-            }
-            .project-detail-grid { 
-                row-gap: 4rem; 
-            }
-            .proj-text-block {
-                padding-top: 1rem;
-            }
-            .btn-back-minimal {
-                margin-top: 3rem;
-            }
-        }
-
-        /* Sezioni "adpe" e "Contatti" */
-        .projects-section, .about-section, .contact-section { padding: 4rem 0; min-height: calc(100vh - 80px); display: flex; flex-direction: column; align-items: center; text-align: center; scroll-margin-top: 85px; }
-        .about-content, .contact-content { 
-            max-width: 1000px; 
-            margin: 12rem auto 0; /* Allineato all'altezza del logo Progetti! */
-            padding: 0 20px; 
-        }
-        .about-title, .contact-title { font-size: 3.5rem; font-weight: 200; margin-bottom: 2rem; color: var(--text-color); letter-spacing: 1px; animation: fadeInUp 0.6s ease-out forwards; }
-        .about-text { font-size: 1.3rem; line-height: 1.8; margin-bottom: 3rem; opacity: 0.9; }
-        .about-image { max-width: 40%; height: auto; border-radius: 12px; box-shadow: var(--shadow-medium); margin: 2rem auto 3rem auto; display: block; }
-        .about-highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem; }
-        .highlight-card { background: rgba(255, 255, 255, 0.8); padding: 2.5rem; border-radius: 12px; box-shadow: var(--shadow-light); transition: var(--transition); text-align: center; }
-        body.dark-theme .highlight-card { background: rgba(44, 44, 44, 0.8); }
-        .highlight-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow-medium); }
-        .highlight-icon { font-size: 3.5rem; margin-bottom: 1.5rem; display: block; color: var(--accent-orange); }
-        .highlight-title { font-size: 1.6rem; font-weight: 500; margin-bottom: 1rem; color: var(--text-color); letter-spacing: 0.5px; }
-        .highlight-description { font-size: 1.05rem; color: var(--text-color); opacity: 0.8; }
-        .contact-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
-        .contact-card { background: rgba(255, 255, 255, 0.8); padding: 2.5rem; border-radius: 12px; box-shadow: var(--shadow-light); transition: var(--transition); text-align: center; }
-        body.dark-theme .contact-card { background: rgba(44, 44, 44, 0.8); }
-        .contact-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow-medium); }
-        .contact-icon { font-size: 3rem; margin-bottom: 1.5rem; color: var(--autumn-blue); }
-        .contact-label { font-weight: 500; margin-bottom: 0.8rem; color: var(--text-color); font-size: 1.3rem; letter-spacing: 0.5px; }
-        .contact-value { opacity: 0.9; line-height: 1.6; font-size: 1.1rem; word-wrap: break-word; }
-        .contact-value a { color: var(--text-color); text-decoration: none; transition: var(--transition); }
-        .contact-value a:hover { color: var(--autumn-blue); text-decoration: underline; }
-        .map-widget { position: relative; width: 100%; height: 200px; border-radius: 8px; overflow: hidden; margin-top: 1rem; margin-bottom: 1rem; }
-        .map-widget iframe { width: 100%; height: 100%; display: block; }
-        .map-overlay-link { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; font-size: 1.1rem; font-weight: bold; opacity: 0; transition: opacity 0.3s ease; z-index: 10; border-radius: 8px; cursor: pointer; }
-        .map-widget:hover .map-overlay-link { opacity: 1; }
-        .map-text-overlay { padding: 10px 20px; background: rgba(0, 0, 0, 0.7); border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-
-        /* Modal per immagine a schermo intero */
-        .image-modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); align-items: center; justify-content: center; animation: fadeIn 0.3s ease-out; }
-        .image-modal-content { margin: auto; display: block; max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; box-shadow: var(--shadow-medium); transition: transform 0.3s ease; }
-        .image-modal-content:hover { transform: scale(1.01); }
-        .modal-close { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; z-index: 10000; }
-        .modal-close:hover, .modal-close:focus { color: var(--autumn-blue); text-decoration: none; cursor: pointer; }
-        .modal-prev, .modal-next { cursor: pointer; position: absolute; top: 50%; width: auto; padding: 16px; margin-top: -50px; color: white; font-weight: bold; font-size: 20px; transition: 0.6s ease; border-radius: 0 3px 3px 0; user-select: none; -webkit-user-select: none; background-color: rgba(0,0,0,0.5); z-index: 10000; }
-        .modal-next { right: 0; border-radius: 3px 0 0 3px; }
-        .modal-prev { left: 0; }
-        .modal-prev:hover, .modal-next:hover { background-color: rgba(0,0,0,0.8); }
-
-        /* Footer Styles */
-        footer { background: transparent; padding: 1rem 0; position: fixed; bottom: 0; width: 100%; z-index: 999; border-top: none; box-shadow: none; backdrop-filter: none; transition: background 0.3s ease; display: flex; justify-content: center; align-items: center; }
-        footer.scrolled { background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent); }
-        body.dark-theme footer { background: transparent; border-top: none; backdrop-filter: none; }
-        body.dark-theme footer.scrolled { background: linear-gradient(to top, rgba(26, 26, 26, 0.9), transparent); }
-        .footer-social-group { display: flex; gap: 1.5rem; padding: 0 20px; }
-        .footer-social-link { color: var(--text-color); font-size: 1.5rem; transition: var(--transition); text-decoration: none; cursor: pointer; }
-        .footer-social-link:hover { color: var(--autumn-blue); transform: scale(1.2); }
-
-        /* Animazioni */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInOnly { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes logoFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+
         .fade-in { animation: fadeInUp 0.6s ease-out forwards; }
-        /* Nuova animazione: solo dissolvenza senza movimento */
-        @keyframes fadeInOnly { 
-            from { opacity: 0; } 
-            to { opacity: 1; } 
+
+        /* ==========================================================================
+           3. BACKGROUND GEOMETRY
+           ========================================================================== */
+        body::before, body::after, .geometric-square-background, .background-rectangle {
+            content: ''; position: fixed; z-index: -1; pointer-events: none;
+            transition: opacity var(--transition); opacity: 0.25;
         }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            nav {
-                justify-content: space-between !important; 
-                width: 100%; /* Assicura che occupi tutto l'header */
-                align-items: center; /* Li allinea verticalmente alla perfezione */
-            }
-            .nav-menu {
-                position: fixed;
-                top: 0; /* <-- FIX 1: Parte dal primissimo pixel in alto */
-                left: -100%;
-                width: 100%;
-                height: 100vh; /* <-- FIX 2: Copre l'intera altezza dello schermo (non più calc) */
-                background: rgba(255, 255, 255, 0.98);
-                backdrop-filter: blur(20px);
-                z-index: -1; /* <-- FIX 3: Fa scivolare il menu "sotto" ai bottoni IT e X */
-                
-                display: flex !important;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-end;
-                padding-top: 7rem; /* <-- Aumentato leggermente per spingere "progetti" più in basso, al sicuro dall'header */
-                padding-right: 2rem; 
-                transition: var(--transition);
-            }
-            /* --- Reset Allineamenti per Menu Mobile --- */
-            .nav-menu li {
-                width: 100%; 
-                display: flex;
-                justify-content: flex-end; 
-                margin-right: 1.5rem !important; /* Mantiene la distanza dal bordo destro */
-                margin-left: 0 !important; /* Azzera le regole del desktop */
-            }
-            
-            .nav-menu li:nth-child(1),
-            .nav-menu li:nth-child(2),
-            .nav-menu li:nth-child(3) {
-                justify-self: auto;
-            }
-            .nav-link {
-                font-size: 1.5rem; /* Ripristina la dimensione originale per un menu più grande */
-                text-align: right;
-                margin-bottom: 2rem; /* Distanza verticale tra le voci */
-            }
-            body.dark-theme .nav-menu { background: rgba(26, 26, 26, 0.98); }
-            .nav-menu.active { left: 0; }
-            .hamburger { display: flex; }
-            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-            .hamburger.active span:nth-child(2) { opacity: 0; }
-            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
-            /* Transizione fluida del menu su schermi medi (Laptop/Tablet) */
-            @media (max-width: 1024px) {
-                .nav-menu { 
-                    gap: 2.5rem; /* Riduce drasticamente lo spazio tra i link per evitare sovrapposizioni */
-                }
-            }
-            .hero h1 { font-size: 3rem; }
-            .nav-link { font-size: 1.1rem; }
-            .project-description { font-size: 1rem; }
-            .about-highlights, .contact-info { grid-template-columns: 1fr; gap: 1.5rem; }
-            .project-detail-title { font-size: 2.5rem; }
-            .project-detail-description { font-size: 1.1rem; }
-            .header-right-icons { 
-                position: relative !important; /* Riporta l'elemento nel flusso! */
-                flex-wrap: wrap; 
-                justify-content: flex-end; 
-                gap: 1rem; 
-            }
-            .gallery-item { flex-direction: column !important; margin-left: auto !important; margin-right: auto !important; text-align: center !important; min-height: auto; padding: 0.5rem; margin-bottom: 2rem; }
-            .gallery-item img { max-width: 90%; max-height: 50vh; margin-bottom: 1rem; padding: 0; }
-            .gallery-description { max-width: 90%; padding: 0.5rem 1rem; font-size: 1.05rem; }
-            .modal-close { font-size: 30px; top: 15px; right: 20px; }
-            .modal-prev, .modal-next { padding: 10px; font-size: 16px; margin-top: -30px; }
-            .home-projects h2, .projects-section .section-title, .about-title, .contact-title { font-size: 2.5rem; }
-            .highlight-title { font-size: 1.4rem; }
-            .highlight-description { font-size: 1rem; }
-            .contact-label { font-size: 1.1rem; }
-            .contact-value { font-size: 1.05rem; }
-            .footer-social-group { gap: 1rem; }
-            /* --- Sottomenu mobile centrato --- */
-            .nav-item-dropdown {
-                align-items: flex-end; /* Allinea l'item a destra per coerenza */
-                width: 100%;
-            }
-            .nav-item-dropdown .dropdown-content {
-                align-items: center; /* Centra i filtri */
-                position: static; /* Toglie l'effetto tendina volante, fa scorrere la pagina in basso */
-                transform: none;
-                background: transparent;
-                text-align: center;
-                width: 100%;
-                margin-top: 1rem;
-            }
-            .dropdown-content .filter-btn {
-                text-align: center; /* Centra il testo dei filtri */
-                margin: 0.5rem auto; /* Margine e auto per centrare all'interno del li */
-                width: auto; /* Non forzare la larghezza del desktop */
-                margin-right: 0; /* Rimuove i margini speciali del desktop */
-            }
-            /* --- Header mobile solido quando il menu è aperto --- */
-            header.mobile-menu-open {
-                background: var(--primary-color) !important; /* Forza lo sfondo solido */
-                backdrop-filter: blur(20px);
-            }
-            body.dark-theme header.mobile-menu-open {
-                background: var(--primary-color) !important;
-            }
-
-            /* --- GESTIONE TENDINE TOUCH SU SMARTPHONE --- */
-            
-            /* 1. Annulliamo l'apertura automatica con l'effetto "hover" (illegale sui touch) */
-            body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
-            body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content,
-            .lang-dropdown:hover .lang-dropdown-content {
-                max-height: 0 !important;
-                opacity: 0 !important;
-                visibility: hidden !important;
-                pointer-events: none !important;
-                margin-top: 0 !important;
-            }
-
-            /* 2. Apriamo la tendina SOLO tramite la classe .touch-open gestita dal tap (click) */
-            body[data-view="projects"] .nav-item-dropdown.touch-open .dropdown-content,
-            body[data-view="projectDetail"] .nav-item-dropdown.touch-open .dropdown-content {
-                max-height: 600px !important;
-                opacity: 1 !important;
-                visibility: visible !important;
-                pointer-events: auto !important;
-                margin-top: 2rem !important;
-            }
-
-            .lang-dropdown.touch-open .lang-dropdown-content {
-                max-height: 200px !important;
-                opacity: 1 !important;
-                visibility: visible !important;
-                pointer-events: auto !important;
-                margin-top: 1rem !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container { padding: 0 15px; }
-            .hero h1 { font-size: 2.5rem; }
-            .projects-grid { padding: 0 1rem; }
-            .project-detail-title { font-size: 2rem; }
-            .about-title, .contact-title { font-size: 2rem; }
-        }
-
-        /* Stili per il pulsante "Torna ai Progetti" */
-        .back-to-projects-btn {
-            background: var(--autumn-blue);
-            color: var(--primary-color);
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 1.1rem;
-            transition: var(--transition);
-            margin-bottom: 2rem;
-        }
-
-        .back-to-projects-btn:hover {
-            background: var(--text-color);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-light);
-        }
-
-        .project-card {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            padding: 0.8rem;
-            text-align: center;
-            font-size: 1rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-card:hover .project-overlay {
-            opacity: 1;
-        }
-        
-        /* Nuovo stile per allineare il pulsante "Torna ai Progetti" */
-        .project-detail .back-to-projects-btn {
-            margin-top: 6rem; /* Aggiunge un margine superiore per allinearlo visivamente */
-        }
-        
-        /* =========================
-        HOME SPLASH & GRIGLIA PROGETTI
-        ========================= */
-
-        .home-splash { width: 100%; }
-
-        .splash-section {
-            display: grid;
-            gap: 2rem;
-            padding: 3rem 4vw;
-            margin-bottom: 8rem; 
-            grid-auto-rows: auto;
-        }
-
-        .splash-item {
-            position: relative;
-            overflow: hidden;
-            background: transparent;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end; 
-            align-items: center;
-            cursor: pointer;
-            /* Nessun aspect-ratio o altezza fissa qui! Lasciamo fare al tuo JS */
-        }
-
-        .splash-item img {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            object-fit: contain;
-            display: block;
-            
-            /* L'immagine nasce trasparente per l'effetto fade */
-            opacity: 0; 
-            transition: transform 0.35s ease, opacity 0.5s ease-in-out; 
-        }
-
-        .splash-item:hover img {
-            transform: scale(1.05);
-        }
-
-        /* Togliamo anche eventuali min-height che avevamo messo a .proj-img-wrap */
-        .proj-img-wrap {
-            position: relative;
-            width: 100%;
-            height: 100%; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            background: transparent; /* Niente sfondo grigio! */
-        }
-
-        /* --- Didascalie Preview Progetti (Riga 8) --- */
-        .projects-grid .splash-caption {
-            opacity: 0; /* Invisibile di default */
-            visibility: hidden; 
-            transition: opacity 0.4s ease, visibility 0.4s ease; 
-            text-align: center; /* Mantenuto centrato sotto la colonna per massima pulizia */
-            padding: 0.5rem 0;
-            color: var(--text-color);
-            align-self: start; 
-        }
-
-        body.dark-theme .projects-grid .splash-caption { color: #ccc; }
-
-        /* EFFETTO HOVER ORIGINALE: Quando passi il mouse sopra l'immagine, mostra il testo adiacente */
-        .projects-grid .splash-item:hover + .splash-caption {
-            opacity: 1; 
-            visibility: visible;
-        }
-
-        .splash-title {
-            font-size: 0.8rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .splash-date {
-            font-size: 0.75rem;
-            opacity: 0.7;
-            margin-top: 0.2rem;
-        }
-
-        /* ==========================================
-           RESPONSIVITÀ: TABLET, LAPTOP PICCOLI E SMARTPHONE
-           ========================================== */
-           
-        /* Sotto i 1050px la griglia si trasforma in un'elegante colonna singola */
-        @media (max-width: 1050px) {
-            .splash-section {
-                display: flex !important; /* Abbandona la griglia */
-                flex-direction: column;
-                height: auto !important; /* Annulla l'altezza fissa imposta dal Javascript */
-                gap: 2rem; 
-                padding: 2rem 5vw;
-                margin-bottom: 2rem;
-            }
-            
-            .splash-item { 
-                width: 100%; 
-                height: auto; 
-                min-height: 40vh; 
-            }
-            
-            .splash-item img {
-                max-width: 100%;
-                max-height: 65vh; /* Evita che una foto verticale occupi troppo schermo */
-            }
-            
-            /* Il testo è sempre visibile su touch-screen (niente hover) e ben distanziato */
-            .projects-grid .splash-caption {
-                opacity: 1;
-                visibility: visible;
-                margin-bottom: 4rem; 
-            }
-
-            /* Mantiene le altre pagine allineate */
-            .about-content, .contact-content { margin-top: 6rem; }
-        }
-
-        /* Ottimizzazioni extra per schermi piccolissimi (Telefoni) */
-        @media (max-width: 768px) {
-            .splash-section { 
-                padding: 1rem 5vw; 
-            }
-            /* Il testo è sempre visibile su touch-screen (niente hover) e ben distanziato */
-            .projects-grid .splash-caption {
-                opacity: 1;
-                visibility: visible;
-                margin-bottom: 4rem; 
-                align-self: center; /* <--- FIX: Lo posiziona al centro della colonna */
-                width: 100%;        /* <--- FIX: Si allarga permettendo al testo di centrarsi */
-            }
-            .about-content, .contact-content { 
-                margin-top: 3rem; 
-            }
-        }
-
-        /* =========================
-        BACKGROUND ANIMATIONS TOGGLE
-        ========================= */
+        body::before { top: 5%; left: 5%; width: 400px; height: 400px; background-color: var(--accent-brown); border-radius: 50%; animation: floatCircle 85s ease-in-out infinite; }
+        body::after { top: 40%; right: 10%; width: 300px; height: 400px; background-color: var(--autumn-blue); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); animation: floatTriangle 250s ease-in-out infinite; }
+        .geometric-square-background { top: 10%; left: 80%; width: 305px; height: 305px; background: var(--accent-green); animation: floatGeometry 250s ease-in-out infinite reverse; border-radius: 2%; }
+        .background-rectangle { bottom: 10%; left: 25%; width: 305px; height: 305px; background: var(--accent-gold); animation: floatRectangle 250s ease-in-out infinite reverse; border-radius: 2%; }
 
         body.bg-animations-off::before,
         body.bg-animations-off::after,
         body.bg-animations-off .geometric-square-background,
         body.bg-animations-off .background-rectangle {
-            animation: none !important;
-            opacity: 0 !important;
+            animation: none !important; opacity: 0 !important;
         }
 
-        /* --- Wrapper per Titolo e Icona Filtro --- */
-        .title-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px; /* Spazio tra la scritta Progetti e l'icona */
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.6s ease-out forwards;
+        /* ==========================================================================
+           4. HEADER & NAVIGATION
+           ========================================================================== */
+        header {
+            background: transparent; padding: 1rem 0; position: fixed;
+            top: 0; width: 100%; z-index: 1000; transition: background 0.3s ease;
         }
+        header:hover, header.scrolled { background: var(--primary-color); }
 
-        .title-wrapper .section-title {
-            margin-bottom: 0; /* Annulla il margine del titolo base per allinearlo */
-            animation: none;
+        nav { position: relative; width: 100%; display: flex; align-items: flex-start; }
+
+        .nav-menu { 
+            position: relative; width: 100%; display: grid; 
+            grid-template-columns: 1fr auto 1fr; align-items: flex-start; 
+            list-style: none; pointer-events: auto; 
         }
+        .nav-menu li { pointer-events: auto; }
+        .nav-menu li:nth-child(1) { justify-self: end; margin-right: 6rem; }
+        .nav-menu li:nth-child(2) { justify-self: center; }
+        .nav-menu li:nth-child(3) { justify-self: start; margin-left: 6rem; }
 
-        /* Stile dell'icona elegante */
-        .filter-toggle-icon {
-            font-size: 1.8rem;
-            color: var(--text-color);
-            cursor: pointer;
-            transition: var(--transition);
-            opacity: 0.5; /* Leggermente sfumata di default */
+        .nav-link {
+            color: var(--text-color); text-decoration: none; font-weight: 400; 
+            font-size: 1.0rem; transition: var(--transition); position: relative; 
+            cursor: pointer; letter-spacing: 1px;
         }
+        .nav-link:hover { color: var(--autumn-blue); transform: translateY(-2px) scale(1.02); }
+        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--autumn-blue); transition: var(--transition); }
+        .nav-link:hover::after { width: 100%; }
 
-        .filter-toggle-icon:hover {
-            color: var(--autumn-blue);
-            opacity: 1;
-            transform: scale(1.1);
+        .header-right-icons { 
+            position: absolute; right: 0; top: 0.3rem; display: flex; 
+            align-items: flex-start; gap: 1.5rem; z-index: 100;
         }
+        .language-group, .theme-group { display: none !important; align-items: center; }
+        .language-group { gap: 0.8rem; margin-right: 0.5rem; }
 
-        /* --- Animazione Contenitore Filtri --- */
-        .project-filters {
-            max-height: 0; /* Altezza zero di default */
-            opacity: 0;    /* Invisibile di default */
-            overflow: hidden; /* Taglia fuori i bottoni che escono */
-            transition: max-height 0.4s ease, opacity 0.4s ease, margin 0.4s ease;
-            text-align: center;
-            margin-bottom: 0;
-        }
-
-        /* Questa classe viene aggiunta col clic dal JS */
-        .project-filters.show-filters {
-            max-height: 300px; /* Abbastanza per contenere tutti i bottoni */
-            opacity: 1;
-            margin-bottom: 2.5rem;
-        }
-
-        /* =================================================== */
-        /* --- MENU A TENDINA ELEGANTI E SCONTORNATI --- */
-        /* =================================================== */
+        .header-social-link, .language-selector-item { color: var(--text-color); font-size: 1rem; transition: var(--transition); text-decoration: none; cursor: pointer; }
+        .header-social-link:hover, .language-selector-item:hover { color: var(--autumn-blue); transform: scale(1.2); }
         
+        #themeToggle i { font-size: 1.4rem; color: var(--text-color); transition: color var(--transition); }
+        body.dark-theme #themeToggle i { color: var(--accent-gold); }
+        
+        .language-selector-item { font-size: 1.0rem; font-weight: bold; text-transform: uppercase; }
+        .language-selector-item.active { color: var(--autumn-blue); text-decoration: underline; }
+
+        .hamburger { display: none; flex-direction: column; cursor: pointer; transition: var(--transition); }
+        .hamburger span { width: 25px; height: 2px; background: var(--text-color); margin: 3px 0; transition: var(--transition); }
+
+        /* ==========================================================================
+           5. DROPDOWNS (Filters & Language)
+           ========================================================================== */
         .nav-item-dropdown, .lang-dropdown { 
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end; /* PRIMA ERA CENTER: Ora allinea tutto a destra! */
+            display: flex; flex-direction: column; align-items: flex-end; 
         }
-
-        /* Contenitori nascosti: tornano trasparenti per fondersi con l'header che si allunga */
-        .nav-item-dropdown .dropdown-content, 
-        .lang-dropdown-content {
-            max-height: 0;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end; 
+        .nav-item-dropdown .dropdown-content, .lang-dropdown-content {
+            max-height: 0; opacity: 0; visibility: hidden; pointer-events: none;
+            display: flex; flex-direction: column; align-items: flex-end; 
             transition: max-height 0.6s ease, opacity 0.4s ease, margin-top 0.4s ease, visibility 0.6s;
-            
-            /* TORNATO TRASPARENTE E SENZA OMBRE */
-            background: transparent !important; 
-            padding: 0 !important; 
-            border-radius: 0 !important; 
-            box-shadow: none !important; 
+            background: transparent !important; padding: 0 !important; 
+            border-radius: 0 !important; box-shadow: none !important; 
         }
 
-        /* Supporto per il tema scuro (se lo riattiverai in futuro) */
-        body.dark-theme .nav-item-dropdown .dropdown-content,
-        body.dark-theme .lang-dropdown-content {
-            background: var(--primary-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        /* Animazioni di apertura SOLO se siamo nella sezione progetti o nel dettaglio di un progetto */
-        body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
-        body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content,
-        .lang-dropdown:hover .lang-dropdown-content {
-            max-height: 600px; 
-            opacity: 1;
-            visibility: visible; /* Rende visibile */
-            pointer-events: auto; /* Riattiva i click */
-        }
-        
         body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
         body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content {
-            margin-top: 2rem; 
+            max-height: 600px; opacity: 1; visibility: visible; pointer-events: auto; margin-top: 2rem; 
         }
-
         .lang-dropdown:hover .lang-dropdown-content {
-            margin-top: 1rem;
+            max-height: 200px; opacity: 1; visibility: visible; pointer-events: auto; margin-top: 1rem;
         }
 
-        /* Animazioni di apertura SOLO se siamo nella sezione progetti o nel dettaglio di un progetto */
-        body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
-        body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content {
-            max-height: 600px; 
-            opacity: 1;
-            margin-top: 2rem; 
-        }
-
-        .lang-dropdown:hover .lang-dropdown-content {
-            max-height: 200px;
-            opacity: 1;
-            margin-top: 1rem;
-        }
-
-        /* --- Testo Filtri (Progetti) --- */
         .dropdown-content .filter-btn {
-            font-family: inherit; /* <--- IL TRUCCO È QUI: Forza il bottone a usare Roboto Mono! */
-            font-weight: 400; /* Stesso spessore sottile ed elegante del menu in alto */
-            background: transparent;
-            border: none;
-            color: var(--text-color);
-            padding: 0.4rem 0; 
-            margin: 0;
-            font-size: 0.65rem; /* Dimensione che avevamo impostato */
-            letter-spacing: 0.05rem;
-            text-transform: uppercase;
-            transition: color 0.3s ease, transform 0.3s ease;
-            cursor: pointer;
-            text-align: right;
-            width: 100%;
-            transform-origin: right center; 
+            font-family: inherit; font-weight: 400; background: transparent; border: none;
+            color: var(--text-color); padding: 0.4rem 0; margin: 0; font-size: 0.65rem; 
+            letter-spacing: 0.05rem; text-transform: uppercase; 
+            transition: color 0.3s ease, transform 0.3s ease; cursor: pointer; 
+            text-align: right; width: 100%; transform-origin: right center; 
         }
-
-        .dropdown-content .filter-btn:hover, 
-        .dropdown-content .filter-btn.active {
-            background: transparent; 
-            color: var(--autumn-blue);
-            transform: scale(1.1); 
-            /* Rimuoviamo font-weight: bold perché è lui a far "sballare" le larghezze! */
-            /* Usiamo invece un'impercettibile ombra solida che crea un effetto grassetto ottico senza muovere i pixel */
+        .dropdown-content .filter-btn:hover, .dropdown-content .filter-btn.active {
+            background: transparent; color: var(--autumn-blue); transform: scale(1.1); 
             text-shadow: 0.3px 0 0 var(--autumn-blue);
         }
 
-        /* --- Testo Lingua --- */
         .current-lang {
-            font-family: inherit;
-            font-size: 0.75rem; /* Uguale a Progetti, Adpe, Contatti */
-            font-weight: 400; /* Togliamo il grassetto per la massima coerenza */
-            color: var(--text-color);
-            transition: color var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 0.1rem; /* Stessa spaziatura dei link principali */
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
+            font-family: inherit; font-size: 0.75rem; font-weight: 400; color: var(--text-color);
+            transition: color var(--transition); text-transform: uppercase; 
+            letter-spacing: 0.1rem; display: flex; align-items: center; gap: 6px; cursor: pointer;
         }
-
         .current-lang:hover { color: var(--autumn-blue); }
 
         .lang-dropdown-content a {
-            font-family: inherit;
-            font-weight: 400; /* Togliamo il grassetto anche qui */
-            letter-spacing: 0.05rem;
-            padding: 0.4rem 0; 
-            color: var(--text-color); 
-            text-decoration: none;
-            font-size: 0.75rem; /* Uguale ai sottomenu dei progetti */
-            text-align: right; 
-            width: 100%;
-            transition: color 0.3s ease;
+            font-family: inherit; font-weight: 400; letter-spacing: 0.05rem; padding: 0.4rem 0; 
+            color: var(--text-color); text-decoration: none; font-size: 0.75rem; 
+            text-align: right; width: 100%; transition: color 0.3s ease;
         }
+        .lang-dropdown-content a:hover { background: transparent; color: var(--autumn-blue); }
+
+        /* ==========================================================================
+           6. HERO & TITLES
+           ========================================================================== */
+        .hero { 
+            min-height: calc(50vh - 80px); display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; text-align: center; 
+            position: relative; overflow: hidden; padding-top: 4rem; padding-bottom: 2rem; scroll-margin-top: 85px; 
+        }
+        .hero-content { position: relative; z-index: 1; animation: fadeInUp 0.6s ease-out; }
         
-        .lang-dropdown-content a:hover { 
-            background: transparent; 
-            color: var(--autumn-blue); 
+        .studio-logo { 
+            width: 110px; height: 110px; background: rgba(255, 255, 255, 0.9); border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; margin: 8rem auto; 
+            box-shadow: var(--shadow-medium); animation: logoFloat 6s ease-in-out infinite; 
+            overflow: hidden; transition: var(--transition); 
         }
+        body.dark-theme .studio-logo { background: rgba(44, 44, 44, 0.9); }
+        .studio-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 
-        /* =================================================== */
-        /* --- LOGO TITOLO GIGANTE (x3) --- */
-        /* =================================================== */
         .title-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 11rem; /* Più respiro per il logo gigante */
-            margin-bottom: 11rem; /* Più respiro per il logo gigante */
-            animation: fadeInOnly 1s ease-out forwards;
-            width: 100%;
+            display: flex; justify-content: center; align-items: center; width: 100%;
+            margin-top: 11rem; margin-bottom: 11rem; animation: fadeInOnly 1s ease-out forwards;
         }
-
         .title-logo-center {
-            /* Magia fluida: minimo 120px, ottimale 12% dello schermo, massimo 240px */
-            width: clamp(80px, 12vw, 95px); 
-            height: clamp(80px, 12vw, 95px); 
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: var(--shadow-medium);
+            width: clamp(80px, 12vw, 95px); height: clamp(80px, 12vw, 95px); 
+            border-radius: 50%; object-fit: cover; box-shadow: var(--shadow-medium); 
             transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
+        .title-logo-center:hover { transform: scale(1.03); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+
+        /* ==========================================================================
+           7. GRIDS & LAYOUTS (Home, Splash, Details)
+           ========================================================================== */
+        .home-projects { padding: 4rem 0; scroll-margin-top: 85px; }
         
-        .title-logo-center:hover { 
-            transform: scale(1.03); 
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15); 
+        .container, .home-grid, .projects-grid { max-width: 92vw; margin: 0 auto; padding: 0 10px; }
+
+        .home-splash { width: 100%; }
+        .splash-section {
+            display: grid; gap: 2rem; padding: 3rem 4vw; margin-bottom: 8rem; grid-auto-rows: auto;
         }
 
-        /* Sicurezza per gli smartphone: evita che 240px rompa lo schermo sui telefoni */
-        @media (max-width: 768px) {
-            .title-logo-center {
-                width: 80px;
-                height: 80px;
-            }
-        }
-
-        /* =================================================== */
-        /* --- TESTATINA FISSA DEL SINGOLO PROGETTO --- */
-        /* =================================================== */
-        
-        .project-sticky-header {
-            position: sticky;
-            top: 50px; /* <--- MODIFICA QUI (prima era 67px) */
-            width: 100vw;
-            margin-left: calc(50% - 50vw);
-            background: var(--primary-color);
-            z-index: 900; 
-            padding: 0.8rem 0;
-            margin-bottom: 4rem; 
-            transition: background var(--transition);
-        }
-
-        .project-sticky-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 2rem;
-            max-width: 92vw; 
-            margin: 0 auto;
-            /* Ho rimosso "padding: 0 10px;" così ora è MATEMATICAMENTE IDENTICA alla griglia foto in basso */
-        }
-
-        /* NUOVO: Raggruppiamo titolo e data in un unico blocco */
-        .proj-head-wrapper {
-            grid-column: 2 / span 10; /* <--- ECCO LA CORREZIONE: Ora parte esattamente dalla colonna 2! */
-            display: flex;
-            align-items: baseline; 
-            gap: 4rem; 
-        }
-
-        .proj-head-title {
-            font-size: 0.8rem;
-            font-weight: bold;
-            color: var(--text-color);
-            text-transform: uppercase;
-        }
-
-        .proj-head-date {
-            font-size: 0.75rem;
-            color: var(--text-color);
-            opacity: 0.8;
-        }
-
-        /* Adattamento Smartphone per la Testatina */
-        @media (max-width: 768px) {
-            .project-sticky-header {
-                top: 55px; /* <--- MODIFICA QUI (prima era 60px) */
-                padding: 1rem 0; 
-            }
-            .proj-head-wrapper { 
-                grid-column: 1 / span 12; 
-                flex-direction: column; /* Su mobile vanno uno sotto l'altro */
-                gap: 0.2rem;
-            }
-        }
-        /* =========================
-           SEZIONE ADPE (CHI SIAMO)
-           ========================= */
-        
-        /* Questo contenitore è vitale: dice al titolo "appiccicoso" quando smettere di incollarsi e farsi spingere via */
-        .adpe-block {
-            position: relative;
-            width: 100%;
-            padding-bottom: 6rem; /* Spazio tra una sezione e l'altra */
-        }
-
-        /* FIX DISTANZA TESTO: Riduciamo il gap gigante ereditato dai progetti */
-        .adpe-block .project-detail-grid {
-            row-gap: 4rem; /* <-- Distanza perfetta tra immagine e testo sottostante */
-        }
-
-        /* Il blocco di testo nella sezione ADPE */
-        .adpe-text-block {
-            grid-column: 2 / span 5; 
-            font-size: 0.75rem;
-            line-height: 1.6;
-            color: var(--text-color);
-            padding-top: 2rem;
-            text-align: left;
-            /* Rimosso white-space: pre-line; perché ora usiamo il parser! */
-        }
-
-        /* --- NUOVE REGOLE PER GLI ELENCHI E LE INDENTAZIONI --- */
-        .adpe-main-item {
-            margin-bottom: 0.4rem;
-            line-height: 1.6;
-        }
-
-        .adpe-sub-item {
-            margin-left: 2.5rem; /* Crea un'indentazione netta ed elegantissima */
-            margin-bottom: 0.3rem;
-            line-height: 1.5;
-            font-size: 0.95em; /* Testo impercettibilmente più piccolo */
-            opacity: 0.85; /* Leggermente più tenue per creare gerarchia */
-        }
-
-        @media (max-width: 1024px) {
-            /* Su Tablet, allarghiamo un po' la colonna (occupa 8 colonne) */
-            .adpe-text-block { grid-column: 2 / span 8; padding: 0; }
-            .project-detail-grid { 
-                gap: 1rem; 
-                row-gap: 6rem; 
-            }
-            .proj-text-block { 
-                grid-column: 1 / span 8; 
-            }
-            
-            /* === FIX FOTO ADPE: Allarga la foto su schermi medi === */
-            .adpe-block .proj-img-wrap {
-                grid-column: 2 / span 10 !important; /* Sovrascrive il JSON: ora occupa 10 colonne su 12! */
-            }
+        .splash-item {
+            position: relative; overflow: hidden; background: transparent;
+            display: flex; flex-direction: column; justify-content: flex-end; 
+            align-items: center; cursor: pointer;
         }
         
-        @media (max-width: 768px) {
-            /* Su Smartphone, usa tutta la larghezza disponibile */
-            .adpe-text-block { grid-column: 1 / span 12 !important; padding: 0 15px; }
-            .adpe-block .project-detail-grid { row-gap: 2rem; } 
-        }
-
-        /* =========================
-           SEZIONE CONTATTI
-           ========================= */
-        .contact-block {
-            position: relative;
-            width: 100%;
-            padding-bottom: 6rem;
-            padding-top: 2rem;
-        }
-
-        .contact-block .project-detail-grid {
-            row-gap: 8rem; /* Distanza tra foto principale e testi sotto */
-        }
-
-        /* Colonna stretta a sinistra (come in ADPE) */
-        .contact-text-block {
-            grid-column: 2 / span 5; 
-            text-align: left;
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            gap: 3rem; /* Distanza verticale tra i blocchi INDIRIZZO, TELEFONO, ecc. */
-            padding-bottom: 2rem;
-        }
-
-        .contact-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem; /* Distanza tra la parolina "INDIRIZZO" e l'indirizzo vero e proprio */
-        }
-
-        .contact-item-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            /* Se lo vuoi in grassetto scommenta la riga sotto */
-            /* font-weight: bold; */
-        }
-
-        .contact-item-value, .contact-item-value a {
-            font-size: 0.75rem;
-            color: var(--text-color);
-            text-decoration: none;
-            transition: color var(--transition);
-            line-height: 1.5;
-        }
-
-        .contact-item-value a:hover {
-            color: var(--autumn-blue);
-        }
-
-        /* Lo schizzo della mappa */
-        .contact-map-sketch {
-            width: 100%;
-            max-width: 250px; /* Grandezza massima della mappa a mano */
-            height: auto;
-            margin-top: 0.5rem;
-            cursor: pointer;
-            transition: transform 0.4s ease;
-            box-shadow: var(--shadow-light);
-        }
-
-        .contact-map-sketch:hover {
-            transform: scale(1.03);
-        }
-
-        /* Icone Social allineate a sinistra */
-        .contact-social-icons {
-            display: flex;
-            gap: 1.2rem;
-            margin-top: 0.2rem;
-        }
-
-        .contact-social-icons a {
-            font-size: 1.0rem;
-            color: var(--text-color);
-            transition: color var(--transition), transform var(--transition);
-        }
-
-        .contact-social-icons a:hover {
-            color: var(--autumn-blue);
-            transform: scale(1.1);
-        }
-
-        /* Responsività per Tablet e Smartphone */
-        @media (max-width: 1024px) {
-            .contact-text-block { grid-column: 2 / span 8; }
-            .contact-block .proj-img-wrap { grid-column: 2 / span 10 !important; }
-        }
-        @media (max-width: 768px) {
-            .contact-text-block { grid-column: 1 / span 12 !important; padding: 0 15px; }
-            .contact-block .project-detail-grid { row-gap: 5rem; }
-        }
-        /* Ottimizzazione paliativa per il caricamento */
+        /* Optimization & Transitions for Images */
         .proj-img-wrap img, .splash-item img {
-            content-visibility: auto; /* Dice al browser di non renderizzare finché non serve */
-            background: rgba(0,0,0,0.03); /* Crea un placeholder leggero durante l'attesa */
-            transition: opacity 0.5s ease-in-out;
+            content-visibility: auto; background: rgba(0,0,0,0.03); 
+            transition: opacity 0.5s ease-in-out, transform 0.35s ease;
+        }
+        
+        .splash-item img {
+            max-width: 100%; max-height: 100%; width: auto; height: auto;
+            object-fit: contain; display: block; opacity: 0; 
+        }
+        .splash-item:hover img { transform: scale(1.05); }
+
+        .projects-grid .splash-caption {
+            opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease; 
+            text-align: center; padding: 0.5rem 0; color: var(--text-color); align-self: start; 
+        }
+        body.dark-theme .projects-grid .splash-caption { color: #ccc; }
+        .projects-grid .splash-item:hover + .splash-caption { opacity: 1; visibility: visible; }
+
+        .splash-title { font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+        .splash-date { font-size: 0.75rem; opacity: 0.7; margin-top: 0.2rem; }
+
+        /* Single Project Grid */
+        .project-detail { width: 100%; padding-top: 2rem; padding-bottom: 6rem; }
+        .project-detail-grid {
+            display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem; 
+            row-gap: 14rem; max-width: 92vw; margin: 0 auto; align-items: start;
+        }
+
+        .proj-img-wrap {
+            position: relative; width: 100%; height: 100%; display: flex; 
+            justify-content: center; align-items: center; background: transparent;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .proj-img-wrap img {
+            max-width: 100%; max-height: 85vh; width: auto; height: auto; display: block;
+            box-shadow: var(--shadow-light); cursor: pointer; transition: transform 0.4s ease;
+        }
+        .proj-img-wrap img:hover { transform: scale(1.02); }
+
+        .pos-pair-left { grid-column: 2 / span 4; }
+        .pos-pair-right { grid-column: 8 / span 4; }
+        .pos-single { grid-column: 3 / span 8; }
+
+        /* Sticky Header inside Projects/About */
+        .project-sticky-header {
+            position: sticky; top: 50px; width: 100vw; margin-left: calc(50% - 50vw);
+            background: var(--primary-color); z-index: 900; padding: 0.8rem 0;
+            margin-bottom: 4rem; transition: background var(--transition);
+        }
+        .project-sticky-grid {
+            display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem; 
+            max-width: 92vw; margin: 0 auto;
+        }
+        .proj-head-wrapper {
+            grid-column: 2 / span 10; display: flex; align-items: baseline; gap: 4rem; 
+        }
+        .proj-head-title { font-size: 0.8rem; font-weight: bold; color: var(--text-color); text-transform: uppercase; }
+        .proj-head-date { font-size: 0.75rem; color: var(--text-color); opacity: 0.8; }
+
+        /* Typography & Details inside Projects */
+        .proj-text-block {
+            grid-column: 2 / span 4; font-size: 0.75rem; line-height: 1.6; color: var(--text-color);
+            padding-top: 2rem; animation: fadeInUp 0.8s ease-out forwards; text-align: left; 
+        }
+        .proj-main-desc { margin-bottom: 3rem; }
+        .proj-metadata { display: flex; flex-direction: column; gap: 1.5rem; }
+        .meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+        .meta-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; }
+        .meta-value { font-size: 0.75rem; font-weight: 400; }
+
+        /* Back Button */
+        .btn-back-minimal {
+            background: transparent; border: none; color: var(--text-color); font-family: inherit;
+            font-size: 0.75rem; font-weight: bold; cursor: pointer; padding: 0;
+            margin-top: 5rem; text-decoration: underline; transition: color 0.3s ease; text-transform: uppercase;
+        }
+        .btn-back-minimal:hover { color: var(--autumn-blue); }
+
+        /* ==========================================================================
+           8. ABOUT & CONTACT SECTIONS
+           ========================================================================== */
+        .projects-section, .about-section, .contact-section { 
+            padding: 4rem 0; min-height: calc(100vh - 80px); display: flex; 
+            flex-direction: column; align-items: center; text-align: center; scroll-margin-top: 85px; 
+        }
+        .adpe-block { position: relative; width: 100%; padding-bottom: 6rem; }
+        .adpe-block .project-detail-grid { row-gap: 4rem; }
+        .adpe-text-block { grid-column: 2 / span 5; font-size: 0.75rem; line-height: 1.6; color: var(--text-color); padding-top: 2rem; text-align: left; }
+        .adpe-main-item { margin-bottom: 0.4rem; line-height: 1.6; }
+        .adpe-sub-item { margin-left: 2.5rem; margin-bottom: 0.3rem; line-height: 1.5; font-size: 0.95em; opacity: 0.85; }
+
+        .contact-block { position: relative; width: 100%; padding-bottom: 6rem; padding-top: 2rem; }
+        .contact-block .project-detail-grid { row-gap: 8rem; }
+        .contact-text-block {
+            grid-column: 2 / span 5; text-align: left; color: var(--text-color);
+            display: flex; flex-direction: column; gap: 3rem; padding-bottom: 2rem;
+        }
+        .contact-item { display: flex; flex-direction: column; gap: 0.3rem; }
+        .contact-item-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .contact-item-value, .contact-item-value a { font-size: 0.75rem; color: var(--text-color); text-decoration: none; transition: color var(--transition); line-height: 1.5; }
+        .contact-item-value a:hover { color: var(--autumn-blue); }
+        .contact-map-sketch { width: 100%; max-width: 250px; height: auto; margin-top: 0.5rem; cursor: pointer; transition: transform 0.4s ease; box-shadow: var(--shadow-light); }
+        .contact-map-sketch:hover { transform: scale(1.03); }
+        
+        .contact-social-icons { display: flex; gap: 1.2rem; margin-top: 0.2rem; }
+        .contact-social-icons a { font-size: 1.0rem; color: var(--text-color); transition: var(--transition); }
+        .contact-social-icons a:hover { color: var(--autumn-blue); transform: scale(1.1); }
+
+        /* ==========================================================================
+           9. MODALS & FOOTER
+           ========================================================================== */
+        .image-modal { 
+            display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; 
+            overflow: hidden; background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); 
+            align-items: center; justify-content: center; animation: fadeIn 0.3s ease-out; 
+        }
+        .image-modal-content { margin: auto; display: block; max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; box-shadow: var(--shadow-medium); transition: transform 0.3s ease; }
+        .image-modal-content:hover { transform: scale(1.01); }
+        .modal-close { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; z-index: 10000; }
+        .modal-close:hover { color: var(--autumn-blue); text-decoration: none; }
+        .modal-prev, .modal-next { cursor: pointer; position: absolute; top: 50%; width: auto; padding: 16px; margin-top: -50px; color: white; font-weight: bold; font-size: 20px; transition: 0.6s ease; background-color: rgba(0,0,0,0.5); z-index: 10000; user-select: none; }
+        .modal-next { right: 0; border-radius: 3px 0 0 3px; }
+        .modal-prev { left: 0; border-radius: 0 3px 3px 0; }
+        .modal-prev:hover, .modal-next:hover { background-color: rgba(0,0,0,0.8); }
+
+        footer { 
+            background: transparent; padding: 1rem 0; position: fixed; bottom: 0; width: 100%; 
+            z-index: 999; transition: background 0.3s ease; display: flex; justify-content: center; align-items: center; 
+        }
+        footer.scrolled { background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent); }
+        body.dark-theme footer.scrolled { background: linear-gradient(to top, rgba(26, 26, 26, 0.9), transparent); }
+        .footer-social-group { display: flex; gap: 1.5rem; padding: 0 20px; }
+        .footer-social-link { color: var(--text-color); font-size: 1.5rem; transition: var(--transition); text-decoration: none; cursor: pointer; }
+        .footer-social-link:hover { color: var(--autumn-blue); transform: scale(1.2); }
+
+        /* ==========================================================================
+           10. RESPONSIVE DESIGN (Media Queries)
+           ========================================================================== */
+        @media (max-width: 1050px) {
+            .splash-section { display: flex !important; flex-direction: column; height: auto !important; gap: 2rem; padding: 2rem 5vw; margin-bottom: 2rem; }
+            .splash-item { width: 100%; height: auto; min-height: 40vh; }
+            .splash-item img { max-width: 100%; max-height: 65vh; }
+            .projects-grid .splash-caption { opacity: 1; visibility: visible; margin-bottom: 4rem; }
+            .about-content, .contact-content { margin-top: 6rem; }
+            .project-detail-grid { gap: 1rem; row-gap: 6rem; }
+            .proj-text-block, .adpe-text-block, .contact-text-block { grid-column: 1 / span 8; padding: 0; }
+            .adpe-block .proj-img-wrap, .contact-block .proj-img-wrap { grid-column: 2 / span 10 !important; }
+            .nav-menu { gap: 2.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            body::before { width: 200px; height: 200px; top: 8%; left: 8%; } 
+            body::after { width: 160px; height: 200px; top: 45%; right: 7%; } 
+            .geometric-square-background { width: 160px; height: 160px; top: 12%; left: 75%; } 
+            .background-rectangle { width: 160px; height: 160px; bottom: 12%; left: 22%; }
+            .studio-logo { width: 110px; height: 110px; margin: 5rem auto; }
+            .title-logo-center { width: 80px; height: 80px; }
+            
+            nav { justify-content: space-between !important; width: 100%; align-items: center; }
+            .nav-menu {
+                position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
+                background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px);
+                z-index: -1; display: flex !important; flex-direction: column;
+                justify-content: flex-start; align-items: flex-end;
+                padding-top: 7rem; padding-right: 2rem; transition: var(--transition);
+            }
+            body.dark-theme .nav-menu { background: rgba(26, 26, 26, 0.98); }
+            .nav-menu.active { left: 0; }
+            .nav-menu li { width: 100%; display: flex; justify-content: flex-end; margin-right: 1.5rem !important; margin-left: 0 !important; }
+            .nav-menu li:nth-child(1), .nav-menu li:nth-child(2), .nav-menu li:nth-child(3) { justify-self: auto; }
+            .nav-link { font-size: 1.5rem; text-align: right; margin-bottom: 2rem; }
+            .hamburger { display: flex; }
+            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .hamburger.active span:nth-child(2) { opacity: 0; }
+            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+            .splash-section { padding: 1rem 5vw; }
+            .projects-grid .splash-caption { align-self: center; width: 100%; }
+            .about-content, .contact-content { margin-top: 3rem; }
+            .project-sticky-header { top: 55px; padding: 1rem 0; }
+            .proj-head-wrapper { grid-column: 1 / span 12; flex-direction: column; gap: 0.2rem; }
+            .proj-img-wrap, .proj-text-block, .adpe-text-block, .contact-text-block { grid-column: 1 / span 12 !important; padding: 0 15px; }
+            .project-detail-grid { row-gap: 4rem; }
+            .adpe-block .project-detail-grid { row-gap: 2rem; }
+            .contact-block .project-detail-grid { row-gap: 5rem; }
+            .btn-back-minimal { margin-top: 3rem; }
+            
+            .header-right-icons { position: relative !important; flex-wrap: wrap; justify-content: flex-end; gap: 1rem; }
+            .nav-item-dropdown { align-items: flex-end; width: 100%; }
+            .nav-item-dropdown .dropdown-content { position: static; transform: none; background: transparent; text-align: center; width: 100%; margin-top: 1rem; }
+            .dropdown-content .filter-btn { text-align: center; margin: 0.5rem auto; width: auto; margin-right: 0; }
+            header.mobile-menu-open { background: var(--primary-color) !important; backdrop-filter: blur(20px); }
+
+            /* Gestione Touch Menu */
+            body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
+            body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content,
+            .lang-dropdown:hover .lang-dropdown-content { max-height: 0 !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; margin-top: 0 !important; }
+            body[data-view="projects"] .nav-item-dropdown.touch-open .dropdown-content,
+            body[data-view="projectDetail"] .nav-item-dropdown.touch-open .dropdown-content { max-height: 600px !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; margin-top: 2rem !important; }
+            .lang-dropdown.touch-open .lang-dropdown-content { max-height: 200px !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; margin-top: 1rem !important; }
+        }
+
+        @media (max-width: 480px) {
+            body::before { width: 120px; height: 120px; top: 12%; left: 7%; } 
+            body::after { width: 90px; height: 120px; top: 55%; right: 4%; } 
+            .geometric-square-background { width: 90px; height: 90px; top: 18%; left: 78%; } 
+            .background-rectangle { width: 90px; height: 90px; bottom: 18%; left: 15%; }
+            .studio-logo { width: 90px; height: 90px; margin: 4rem auto; }
+            .container { padding: 0 15px; }
+            .projects-grid { padding: 0 1rem; }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body class="bg-animations-off">
+
+    <!-- Global Preloader -->
     <div id="globalLoader" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--primary-color); z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease, visibility 0.6s ease;">
         <img src="/.netlify/images?url=https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg&w=150&q=80" alt="Loading" style="width: 80px; height: 80px; border-radius: 50%; animation: pulse 1.5s infinite ease-in-out;">
     </div>
+
+    <!-- Geometric Backgrounds -->
     <div class="geometric-square-background"></div>
     <div class="background-rectangle"></div>
+
+    <!-- Navigation Header -->
     <header>
         <nav class="container">
             <ul class="nav-menu">
                 <li class="nav-item-dropdown">
                     <a href="javascript:void(0)" class="nav-link" data-lang-key="projectsLink" onclick="showProjectsSection()">Progetti</a>
-                    <div class="dropdown-content" id="projectFilters">
-                        </div>
+                    <div class="dropdown-content" id="projectFilters"></div>
                 </li>
                 <li><a href="javascript:void(0)" class="nav-link" data-lang-key="aboutLink" onclick="showAbout()">Chi Siamo</a></li>
                 <li><a href="javascript:void(0)" class="nav-link" data-lang-key="contactLink" onclick="showContact()">Contatti</a></li>
@@ -1407,13 +519,17 @@
                     </a>
                 </div>
             </div>
+            
+            <!-- Mobile Menu Toggle -->
             <div class="hamburger">
                 <span></span><span></span><span></span>
             </div>
         </nav>
     </header>
 
+    <!-- Main Content -->
     <main>
+        <!-- Hero Section -->
         <section class="hero" id="hero">
             <div class="hero-content">
                 <div class="studio-logo">
@@ -1421,39 +537,36 @@
                 </div>
             </div>
         </section>
+        
+        <!-- Splash Page -->
         <section id="homeSplash" class="home-splash"></section>
+        
+        <!-- Legacy Home Projects (Kept structure for dynamic logic safety) -->
         <section class="home-projects" id="homeProjects">
             <div class="container">
-                <div class="projects-grid" id="homeProjectsGrid">
-                    <!-- Progetti generati dinamicamente -->
-                </div>
+                <div class="projects-grid" id="homeProjectsGrid"></div>
             </div>
         </section>
 
+        <!-- Projects Grid & Detail Section -->
         <section class="container projects-section" id="projectsSection" style="display: none;">
-            <div class="project-filters" id="projectFilters">
-                </div>
-            
-            <div class="projects-grid" id="projectsGrid">
-                <!-- Progetti generati dinamicamente da JavaScript -->
-            </div>
-
-            <div class="project-detail" id="singleProjectDetail" style="display: none;">
-                <!-- Dettaglio singolo progetto generato dinamicamente -->
-            </div>
+            <div class="project-filters" id="projectFilters"></div>
+            <div class="projects-grid" id="projectsGrid"></div>
+            <div class="project-detail" id="singleProjectDetail" style="display: none;"></div>
         </section>
 
+        <!-- About Section -->
         <section class="about-section" id="aboutSection" style="display: none;">
             <div id="adpeDynamicContent" style="width: 100%;"></div>
         </section>
 
+        <!-- Contact Section -->
         <section class="contact-section" id="contactSection" style="display: none;">
             <div id="contactDynamicContent" style="width: 100%;"></div>
         </section>
-
     </main>
 
-    <!-- Modal per visualizzazione immagine a schermo intero -->
+    <!-- Image Modal -->
     <div id="imageModal" class="image-modal" onclick="closeImageModal(event)">
         <span class="modal-close" onclick="closeImageModal(event)">&times;</span>
         <span class="modal-prev" onclick="showPrevImage(event)">&lt;</span>
@@ -1461,53 +574,43 @@
         <img class="image-modal-content" id="modalImage">
     </div>
 
+    <!-- Scripts -->
     <script>
-        // Funzione per ottimizzare l'immagine solo in produzione
-        // Funzione semplificata: usa sempre la CDN ovunque
+        /**
+         * CDN Optimizer
+         * Re-routes image URLs through Netlify's Image CDN for automated WebP conversion & resizing.
+         */
         function getOptimizedUrl(originalUrl, width = 1280) {
             if (!originalUrl.includes('amazonaws.com')) return originalUrl;
             return `/.netlify/images?url=${encodeURIComponent(originalUrl)}&w=${width}&q=80`;
         }
-        // Variabili globali
+
+        // Global Variables
         let projects = {};
         let globalLayouts = {}; 
-        let homeProjectNames = []; // <--- NUOVA VARIABILE
+        let homeProjectNames = []; 
         let globalProjectOrder = [];
         let currentProjectImages = [];
         let currentImageIndex = 0;
-        let lastActiveFilter = 'home_custom'; // <--- MODIFICATO (parte dalla home personalizzata)
+        let lastActiveFilter = 'home_custom';
         let currentView = 'home';
         let allProjectsFlattened = [];
         let currentLang = localStorage.getItem('lang') || 'it';
 
-        // Oggetto per le traduzioni
+        // Translations Object
         const translations = {
             it: {
                 pageTitle: "ADPE Architettura e Design", homeLink: "Home", projectsLink: "progetti", aboutLink: "adpe", contactLink: "contatti",
                 heroTitle: "ADPE", heroSubtitle: "Architettura e Design by Adriano Pernazza", portfolioTitle: "",
                 category_architettura: "Architettura", category_design: "Design", category_residenziale: "Residenziale", category_pubblica: "Pubblica", category_uffici: "Uffici",
                 unknownCategory: "Categoria Sconosciuta", aboutTitle: "adpe", category_illuminazione: "Illuminazione",
-                aboutText: "Lo Studio ADPE, fondato dall'architetto Adriano Pernazza, è una realtà dinamica e innovativa nel panorama dell'architettura e del design. Da anni, ci dedichiamo alla progettazione di spazi che combinano estetica, funzionalità e sostenibilità. La nostra filosofia si basa sull'ascolto attento delle esigenze del cliente, trasformando le idee in realtà tangibili e uniche.",
-                creativityTitle: "Creatività e Innovazione", creativityDesc: "Approccio originale e soluzioni all'avanguardia per ogni progetto.",
-                collaborationTitle: "Collaborazione Clienti", collaborationDesc: "Un processo di progettazione partecipato e trasparente.",
-                sustainabilityTitle: "Sostenibilità", sustainabilityDesc: "Progettazione attenta all'ambiente e all'efficienza energetica.",
-                qualityTitle: "Qualità e Dettaglio", qualityDesc: "Cura maniacale per ogni aspetto, dal concept alla realizzazione.",
-                contactTitle: "Contatti", contactText: "Siamo a vostra disposizione per qualsiasi informazione o per discutere del vostro prossimo progetto. Non esitate a contattarci.",
-                addressLabel: "Indirizzo", mapDirections: "Clicca per indicazioni", phoneLabel: "Telefono", emailLabel: "Email", hoursLabel: "Orari", hoursValue: "Lun-Ven: 9:00 - 18:00",
-                filterAll: "Tutti", backToProjects: "← Indietro",filterSelection: "Selezione"
+                filterAll: "Tutti", backToProjects: "← Indietro", filterSelection: "Selezione"
             },
             en: {
                 pageTitle: "Architecture & Design Studio", homeLink: "Home", projectsLink: "projects", aboutLink: "adpe", contactLink: "contact",
                 heroTitle: "ADPE", heroSubtitle: "Architecture and Design by Adriano Pernazza", portfolioTitle: "",
                 category_architettura: "Architecture", category_design: "Design", category_residenziale: "Residential", category_pubblica: "Public", category_uffici: "Offices",
                 unknownCategory: "Unknown Category", aboutTitle: "About Us", category_illuminazione: "Illumination",
-                aboutText: "ADPE Studio, founded by architect Adriano Pernazza, is a dynamic and innovative reality in the field of architecture and design. For years, we have been dedicated to designing spaces that combine aesthetics, functionality, and sustainability. Our philosophy is based on carefully listening to client needs, transforming ideas into tangible and unique realities.",
-                creativityTitle: "Creativity & Innovation", creativityDesc: "Original approach and cutting-edge solutions for every project.",
-                collaborationTitle: "Client Collaboration", collaborationDesc: "A participatory and transparent design process.",
-                sustainabilityTitle: "Sustainability", sustainabilityDesc: "Environmentally conscious and energy-efficient design.",
-                qualityTitle: "Quality & Detail", qualityDesc: "Meticulous attention to every aspect, from concept to realization.",
-                contactTitle: "Contact", contactText: "We are at your disposal for any information or to discuss your next project. Do not hesitate to contact us.",
-                addressLabel: "Address", mapDirections: "Click for directions", phoneLabel: "Phone", emailLabel: "Email", hoursLabel: "Hours", hoursValue: "Mon-Fri: 9:00 AM - 6:00 PM",
                 filterAll: "All", backToProjects: "← Back", filterSelection: "Selection"
             },
             fr: {
@@ -1515,28 +618,21 @@
                 heroTitle: "ADPE", heroSubtitle: "Architecture et Design par Adriano Pernazza", portfolioTitle: "",
                 category_architettura: "Architecture", category_design: "Design", category_residenziale: "Résidentiel", category_pubblica: "Publique", category_uffici: "Bureaux",
                 unknownCategory: "Catégorie Inconnue", aboutTitle: "À Propos de Nous", category_illuminazione: "Éclairage",
-                aboutText: "Le Studio ADPE, fondé par l'architecte Adriano Pernazza, est une réalité dynamique et innovante dans le domaine de l'architecture et du design. Depuis des années, nous nous consacrons à la conception d'espace qui allient esthétique, fonctionnalité et durabilité. Notre philosophie repose sur une écoute attentive des besoins du client, transformant les idées en réalités tangibles et uniques.",
-                creativityTitle: "Créatività et Innovation", creativityDesc: "Approche originale et solutions de pointe pour chaque projet.",
-                collaborationTitle: "Collaborazione Client", collaborationDesc: "Un processo de conception participatif et transparent.",
-                sustainabilityTitle: "Durabilité", sustainabilityDesc: "Conception soucieuse de l'environnement et de l'efficience énergétique.",
-                qualityTitle: "Qualità et Détail", qualityDesc: "Attention méticuleuse à chaque aspect, du concept à la réalisation.",
-                contactTitle: "Contact", contactText: "Nous siamo a votre disposition pour qualsiasi information ou pour discuter de votre prossimo progetto. N'hésitez pas à nous contacter.",
-                addressLabel: "Adresse", mapDirections: "Cliquer pour les directions", phoneLabel: "Téléphone", emailLabel: "Email", hoursLabel: "Horaires", hoursValue: "Lun-Ven: 9h00 - 18h00",
                 filterAll: "Tous", backToProjects: "← Retour", filterSelection: "Sélection"
             }
         };
         
-        // Inizializzazione al caricamento del DOM
+        /**
+         * Bootstrap: Fetch Data & Initialize App
+         */
         document.addEventListener('DOMContentLoaded', async function() {
             try {
-                // Carichiamo TUTTI I JSON contemporaneamente
                 const [projectsRes, layoutsRes, homeProjectsRes, adpeRes, contattiRes, orderRes] = await Promise.all([
-                    fetch('projects.json'),
-                    fetch('layouts.json'),
+                    fetch('projects.json'), fetch('layouts.json'),
                     fetch('home_projects.json').catch(() => ({ json: () => [] })),
                     fetch('adpe.json').catch(() => ({ json: () => ({ sections: [] }) })),
                     fetch('contatti.json').catch(() => ({ json: () => ({}) })),
-                    fetch('ordine_progetti.json').catch(() => ({ json: () => [] })) // <--- NUOVO
+                    fetch('ordine_progetti.json').catch(() => ({ json: () => [] }))
                 ]);
 
                 projects = await projectsRes.json();
@@ -1544,53 +640,48 @@
                 homeProjectNames = await homeProjectsRes.json().catch(() => []);
                 window.adpeData = await adpeRes.json().catch(() => ({ sections: [] }));
                 window.contattiData = await contattiRes.json().catch(() => ({})); 
-                globalProjectOrder = await orderRes.json().catch(() => []); // <--- SALVIAMO L'ORDINE
+                globalProjectOrder = await orderRes.json().catch(() => []);
 
                 allProjectsFlattened = flattenProjects(projects);
-                updateAllProjectIds();
+                allProjectsFlattened.forEach((p, index) => p.id = index + 1);
                 
                 setupEventListeners();
                 setLanguage(currentLang, true); 
 
-                // === ALZA IL SIPARIO ===
-                // Diamo al browser 800 millisecondi di respiro per dipingere le foto pesanti
+                // Reveal app after short delay for images parsing
                 setTimeout(() => {
                     const loader = document.getElementById('globalLoader');
-                    if (loader) {
-                        loader.style.opacity = '0';
-                        loader.style.visibility = 'hidden';
-                    }
+                    if (loader) { loader.style.opacity = '0'; loader.style.visibility = 'hidden'; }
                 }, 2000); 
             } catch (error) {
                 console.error('Errore nel caricamento dei dati iniziali:', error);
             }
         });
 
+        /**
+         * System Event Listeners & UI Toggles
+         */
         function setupEventListeners() {
             setupMobileMenu();
 
-            // Toggle Tema
+            // Theme Toggle
             document.getElementById('themeToggle').addEventListener('click', (e) => {
                 e.preventDefault();
                 const newTheme = document.body.classList.toggle('dark-theme') ? 'dark' : 'light';
                 localStorage.setItem('theme', newTheme);
             });
 
-            // Selettore Lingua
+            // Language Selector
             document.querySelectorAll('.language-selector-item').forEach(item => {
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
                     setLanguage(this.dataset.lang);
-                    
-                    // FIX MOBILE: Chiude forzatamente la tendina dopo aver scelto la lingua
                     const langDropdown = document.querySelector('.lang-dropdown');
-                    if (langDropdown) {
-                        langDropdown.classList.remove('touch-open');
-                    }
+                    if (langDropdown) langDropdown.classList.remove('touch-open');
                 });
             });
 
-            // Eventi Keyboard per Modal
+            // Modal Keyboard Nav
             document.addEventListener('keydown', function(e) {
                 const imageModal = document.getElementById('imageModal');
                 if (imageModal.style.display !== 'flex') return;
@@ -1599,67 +690,50 @@
                 if (e.key === 'ArrowRight') showNextImage(e);
             });
 
-            // Eventi Touch per Modal (Swipe)
+            // Modal Touch Nav (Swipe)
             const imageModal = document.getElementById('imageModal');
-            let touchStartX = 0;
-            let touchEndX = 0;
-
-            imageModal.addEventListener('touchstart', (e) => {
-                touchStartX = e.touches[0].clientX;
-            });
-
-            imageModal.addEventListener('touchmove', (e) => {
-                touchEndX = e.touches[0].clientX;
-            });
-
+            let touchStartX = 0, touchEndX = 0;
+            imageModal.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+            imageModal.addEventListener('touchmove', (e) => { touchEndX = e.touches[0].clientX; });
             imageModal.addEventListener('touchend', () => {
-                if (touchStartX - touchEndX > 50) { // Swipe left
-                    showNextImage(event);
-                }
-                if (touchStartX - touchEndX < -50) { // Swipe right
-                    showPrevImage(event);
-                }
-                touchStartX = 0;
-                touchEndX = 0;
+                if (touchStartX - touchEndX > 50) showNextImage(event);
+                if (touchStartX - touchEndX < -50) showPrevImage(event);
+            });
+
+            // Scroll Header Effect
+            window.addEventListener('scroll', function() {
+                const isScrolled = window.pageYOffset > 50;
+                document.querySelector('header').classList.toggle('scrolled', isScrolled);
             });
         }
 
+        /**
+         * Internationalization (i18n)
+         */
         function setLanguage(lang, isInitialLoad = false) {
             currentLang = lang;
             localStorage.setItem('lang', lang);
 
-            // Applica traduzioni
             document.querySelectorAll('[data-lang-key]').forEach(element => {
                 const key = element.dataset.langKey;
-                if (translations[lang]?.[key]) {
-                    element.textContent = translations[lang][key];
-                }
+                if (translations[lang]?.[key]) element.textContent = translations[lang][key];
             });
 
-            // Aggiorna testo tendina lingua
             const currentLangDisplay = document.getElementById('currentLangDisplay');
-            if(currentLangDisplay) {
-                currentLangDisplay.innerHTML = `${lang.toUpperCase()} <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>`;
-            }
+            if(currentLangDisplay) currentLangDisplay.innerHTML = `${lang.toUpperCase()} <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>`;
 
-            // Aggiorna selettore lingua attivo
             document.querySelectorAll('.language-selector-item').forEach(item => {
                 item.classList.toggle('active', item.dataset.lang === lang);
             });
 
-            // Se è il caricamento iniziale, mostra la home
             if (isInitialLoad) {
-                // Disattivato il caricamento del tema scuro
-                // const savedTheme = localStorage.getItem('theme') || 'light';
-                // if (savedTheme === 'dark') document.body.classList.add('dark-theme');
-                document.body.classList.remove('dark-theme'); // Sicurezza extra: rimuove sempre il tema scuro
-                localStorage.setItem('theme', 'light'); // Azzera la memoria del browser
+                document.body.classList.remove('dark-theme'); 
+                localStorage.setItem('theme', 'light'); 
                 showProjectsSection(false); 
             } else {
-                // Altrimenti, ricarica la vista corrente per aggiornare i testi
                 switch (currentView) {
                     case 'home': showHome(); break;
-                    case 'projects': showProjectsSection(false); break; // false = non scrollare
+                    case 'projects': showProjectsSection(false); break; 
                     case 'projectDetail':
                         const projectId = document.getElementById('singleProjectDetail').dataset.projectId;
                         if (projectId) showProject(parseInt(projectId), false);
@@ -1670,37 +744,26 @@
             }
         }
 
-        // --- Logica di Navigazione e Visualizzazione Sezioni ---
-
-        // --- Logica di Navigazione e Visualizzazione Sezioni con History API ---
-
+        /**
+         * General View Navigation Logic
+         */
         function showSection(sectionId, shouldScroll = true) {
             document.body.setAttribute('data-view', currentView);
-
-            [
-                'hero', 
-                'homeSplash', 
-                'homeProjects', 
-                'projectsSection', 
-                'aboutSection', 
-                'contactSection'].forEach(id => {
+            ['hero', 'homeSplash', 'homeProjects', 'projectsSection', 'aboutSection', 'contactSection'].forEach(id => {
                 document.getElementById(id).style.display = 'none';
             });
             const targetSection = document.getElementById(sectionId);
             if (targetSection) {
                 targetSection.style.display = 'block';
                 if (shouldScroll) {
-                    requestAnimationFrame(() => {
-                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    });
+                    requestAnimationFrame(() => targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' }));
                 }
             }
         }
 
         function showHome(shouldScroll = false, addToHistory = true) {
             currentView = 'home';
-            if (addToHistory) saveState('home'); // Salva nella cronologia
-
+            if (addToHistory) saveState('home');
             showSection('hero', shouldScroll);
             document.getElementById('homeSplash').style.display = 'block';
             document.getElementById('homeProjects').style.display = 'block';
@@ -1710,27 +773,23 @@
         
         function showProjectsSection(shouldScroll = true, addToHistory = true) {
             currentView = 'projects';
-            if (addToHistory) saveState('projects', null, lastActiveFilter); // Salva nella cronologia
-
+            if (addToHistory) saveState('projects', null, lastActiveFilter);
+            
             showSection('projectsSection', shouldScroll);
             document.getElementById('singleProjectDetail').style.display = 'none';
             document.getElementById('projectsGrid').style.display = 'block';
 
             const projectsSection = document.getElementById('projectsSection');
             let titleWrapper = projectsSection.querySelector('.title-wrapper'); 
-
             if (!titleWrapper) { 
                 titleWrapper = document.createElement('div');
                 titleWrapper.className = 'title-wrapper';
-                titleWrapper.innerHTML = `
-                    <img src="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="ADPE Logo" class="title-logo-center" style="cursor: pointer;" onclick="filterProjects('home_custom')">
-                `;
+                titleWrapper.innerHTML = `<img src="/.netlify/images?url=https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg&w=200&q=80" alt="ADPE Logo" class="title-logo-center" style="cursor: pointer;" onclick="filterProjects('home_custom')">`;
                 projectsSection.prepend(titleWrapper);
             }
             titleWrapper.style.display = 'flex'; 
 
             generateFilters();
-            // Evita di creare un doppio salvataggio passando "false" come ultimo parametro
             filterProjects(lastActiveFilter, 0.2, 250, 0.8, 0, false); 
         }
 
@@ -1738,36 +797,30 @@
             currentView = 'about';
             if (addToHistory) saveState('about'); 
             showSection('aboutSection', shouldScroll);
-            
-            // Generiamo il contenuto solo se non è già stato generato
             const container = document.getElementById('adpeDynamicContent');
-            if (container && container.innerHTML.trim() === '') {
-                renderAdpeSection();
-            }
+            if (container && container.innerHTML.trim() === '') renderAdpeSection();
         }
 
         function showContact(shouldScroll = true, addToHistory = true) {
             currentView = 'contact';
             if (addToHistory) saveState('contact'); 
             showSection('contactSection', shouldScroll);
-
-            // Generiamo il contenuto solo se non è già stato generato
             const container = document.getElementById('contactDynamicContent');
-            if (container && container.innerHTML.trim() === '') {
-                renderContactSection();
-            }
+            if (container && container.innerHTML.trim() === '') renderContactSection();
         }
 
+        /**
+         * Single Project Render Logic
+         */
         function showProject(projectId, shouldScroll = true, addToHistory = true) {
             const project = findProjectById(projectId);
             if (!project) return;
 
             currentView = 'projectDetail';
-            if (addToHistory) saveState('projectDetail', projectId, null); // Salva nella cronologia
+            if (addToHistory) saveState('projectDetail', projectId, null);
 
             showSection('projectsSection', shouldScroll);
             document.getElementById('projectsGrid').style.display = 'none';
-
             const titleWrapper = document.querySelector('.title-wrapper');
             if (titleWrapper) titleWrapper.style.display = 'none';
 
@@ -1776,7 +829,6 @@
             detailContainer.dataset.projectId = projectId;
 
             const luogoData = project.luogo_data || '';
-
             let htmlContent = `
                 <div class="project-sticky-header">
                     <div class="project-sticky-grid">
@@ -1790,30 +842,20 @@
             `;
             
             const imgs = project.images;
-            
             if (project.layoutSequence && project.layoutSequence.length > 0) {
-                let imgIndex = 0;
-                let seqIndex = 0;
-                let failsafe = 0; 
-
+                let imgIndex = 0, seqIndex = 0, failsafe = 0; 
                 while (imgIndex < imgs.length && failsafe < 1000) {
                     failsafe++; 
                     let layoutName = project.layoutSequence[seqIndex % project.layoutSequence.length];
-                    let layoutDef = globalLayouts[layoutName];
-
-                    if (!layoutDef) {
-                        console.warn(`ATTENZIONE: Layout '${layoutName}' non trovato! Uso fallback.`);
-                        layoutDef = { columns: 12, slots: [{ col: "3 / span 8" }] };
-                    }
+                    let layoutDef = globalLayouts[layoutName] || { columns: 12, slots: [{ col: "3 / span 8" }] };
 
                     layoutDef.slots.forEach(slot => {
                         if (imgIndex < imgs.length) {
                             let imgData = imgs[imgIndex];
                             let rowStyle = slot.row ? `grid-row: ${slot.row};` : '';
-                            
                             htmlContent += `
                                 <div class="proj-img-wrap" style="grid-column: ${slot.col}; ${rowStyle}">
-                                    <img src="${getOptimizedUrl(imgData.src, 1600)}" // 1600px per la visione a tutto schermo
+                                    <img src="${getOptimizedUrl(imgData.src, 1600)}" 
                                          alt="${imgData.description || ''}" 
                                          onclick="openImageModal(${project.id}, '${imgData.src}')" 
                                          loading="lazy"
@@ -1825,45 +867,6 @@
                         }
                     });
                     seqIndex++; 
-                }
-            } else {
-                let i = 0;
-                while (i < imgs.length) {
-                    let cycle = i % 3; 
-
-                    if (cycle === 0 && i + 1 < imgs.length) {
-                        htmlContent += `
-                            <div class="proj-img-wrap" style="grid-column: 2 / span 4;">
-                                <img src="${imgs[i].src}" 
-                                     alt="${imgs[i].description || ''}" 
-                                     onclick="openImageModal(${project.id}, '${imgs[i].src}')" 
-                                     loading="lazy"
-                                     style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;"
-                                     onload="this.style.opacity=1">
-                            </div>
-                            <div class="proj-img-wrap" style="grid-column: 8 / span 4;">
-                                <img src="${imgs[i+1].src}" 
-                                     alt="${imgs[i+1].description || ''}" 
-                                     onclick="openImageModal(${project.id}, '${imgs[i+1].src}')" 
-                                     loading="lazy"
-                                     style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;"
-                                     onload="this.style.opacity=1">
-                            </div>
-                        `;
-                        i += 2;
-                    } else {
-                        htmlContent += `
-                            <div class="proj-img-wrap" style="grid-column: 3 / span 8;">
-                                <img src="${imgs[i].src}" 
-                                     alt="${imgs[i].description || ''}" 
-                                     onclick="openImageModal(${project.id}, '${imgs[i].src}')" 
-                                     loading="lazy"
-                                     style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;"
-                                     onload="this.style.opacity=1">
-                            </div>
-                        `;
-                        i++;
-                    }
                 }
             }
 
@@ -1883,24 +886,17 @@
                 <div class="proj-text-block">
                     <p class="proj-main-desc">${project.description || ''}</p>
                     ${metaHtml} 
-                    
                     <button class="btn-back-minimal" onclick="history.back()">${translations[currentLang].backToProjects}</button>
                 </div>
             </div>`; 
 
             detailContainer.innerHTML = htmlContent;
-            
-            if (shouldScroll) {
-                window.scrollTo({ top: 0, behavior: 'instant' });
-            }
-        }
-        
-        function goBackToProjects() {
-            history.back(); // Ora anche questo richiama il tasto indietro del browser!
+            if (shouldScroll) window.scrollTo({ top: 0, behavior: 'instant' });
         }
 
-        // --- Logica di Gestione Progetti e Filtri ---
-
+        /**
+         * Project Data Flattening & Utilities
+         */
         function flattenProjects(node, path = '', projects = []) {
             for (const key in node) {
                 if (Object.prototype.hasOwnProperty.call(node, key)) {
@@ -1918,46 +914,20 @@
             return projects;
         }
 
-        function updateAllProjectIds() {
-            allProjectsFlattened.forEach((p, index) => p.id = index + 1);
-        }
-
-        function findProjectById(id) {
-            return allProjectsFlattened.find(p => p.id === id);
-        }
+        function findProjectById(id) { return allProjectsFlattened.find(p => p.id === id); }
 
         function getProjectCategoryLabel(project) {
             if (!project?.categoryPath) return translations[currentLang].unknownCategory;
             const pathParts = project.categoryPath.split('.').slice(0, -1);
             return pathParts.map(part => translations[currentLang][`category_${part}`] || formatFolderNameForDisplay(part)).join(' ') || translations[currentLang].unknownCategory;
         }
-        
-        function generateHomeProjects() {
-            const grid = document.getElementById('homeProjectsGrid');
-            if (!grid) return;
-            grid.innerHTML = allProjectsFlattened.map(project => `
-                <div class="project-card fade-in" onclick="showProject(${project.id})">
-                <img src="${project.images[0].src}" alt="${project.title}" loading="lazy">
-                <div class="project-overlay">${project.description || ''}</div>
-                </div>
-            `).join('');
-            //distributeMasonry(grid);
-        }
 
-        async function filterProjects(
-            filter, 
-            fadeOutDuration = 0.2,   
-            delayBeforeRender = 250, 
-            fadeInDuration = 0.8,    
-            staggerDelay = 0,
-            addToHistory = true 
-        ) {
+        /**
+         * Dynamic Filtering & Masonry Render Logic
+         */
+        async function filterProjects(filter, fadeOutDuration = 0.2, delayBeforeRender = 250, fadeInDuration = 0.8, staggerDelay = 0, addToHistory = true) {
             lastActiveFilter = filter;
-            
-            // FIX: Salva sempre lo stato, anche se clicchiamo il filtro mentre stiamo guardando un singolo progetto!
-            if (addToHistory) {
-                saveState('projects', null, filter);
-            }
+            if (addToHistory) saveState('projects', null, filter);
 
             const grid = document.getElementById('projectsGrid');
             grid.style.transition = `opacity ${fadeOutDuration}s ease`;
@@ -1973,10 +943,7 @@
                 }
 
                 const layout = globalLayouts["C"];
-                if (!layout) {
-                    grid.style.opacity = '1'; 
-                    return;
-                }
+                if (!layout) { grid.style.opacity = '1'; return; }
 
                 grid.innerHTML = '';
                 let filteredProjects = [];
@@ -1996,35 +963,20 @@
                     filteredProjects = allProjectsFlattened.filter(p => p.categoryPath.startsWith(filter));
                 }
                 
-                // Applichiamo l'ordinamento globale SOLO se non siamo nella vetrina Home
+                // Alpha/Config Custom Sorting
                 if (filter !== 'home_custom') {
-                    
-                    // Funzione "Schiacciasassi" che rimuove spazi, trattini e underscore per un confronto perfetto
                     const normalizeStr = (str) => str.toLowerCase().replace(/[\s\-_]/g, '');
-
                     filteredProjects.sort((a, b) => {
-                        // Estraiamo i nomi originali delle cartelle
                         const originalNameA = a.categoryPath.split('.').pop();
                         const originalNameB = b.categoryPath.split('.').pop();
-
-                        // Normalizziamo le cartelle
                         const nameA = normalizeStr(originalNameA);
                         const nameB = normalizeStr(originalNameB);
-
-                        // Cerchiamo la loro posizione nel file di testo degli architetti (normalizzando anche quello!)
                         const indexA = globalProjectOrder.findIndex(name => normalizeStr(String(name)) === nameA);
                         const indexB = globalProjectOrder.findIndex(name => normalizeStr(String(name)) === nameB);
 
-                        // 1. Se ENTRAMBI sono nel file, rispetta l'ordine del file
                         if (indexA !== -1 && indexB !== -1) return indexA - indexB;
-                        
-                        // 2. Se SOLO il progetto A è nel file, A vince e va in cima
                         if (indexA !== -1) return -1;
-                        
-                        // 3. Se SOLO il progetto B è nel file, B vince e va in cima
                         if (indexB !== -1) return 1;
-                        
-                        // 4. Se NESSUNO dei due è nel file, mettili in ordine alfabetico usando i nomi originali
                         return originalNameA.localeCompare(originalNameB);
                     });
                 }
@@ -2032,19 +984,14 @@
                 let imageQueue = [];
                 filteredProjects.forEach(project => {
                     if (project.images && project.images.length > 0) {
-                        const coverImage = project.images[0]; 
                         imageQueue.push({
-                            src: coverImage.src,
-                            title: project.title,
-                            luogo_data: project.luogo_data || '',
-                            projectId: project.id
+                            src: project.images[0].src, title: project.title,
+                            luogo_data: project.luogo_data || '', projectId: project.id
                         });
                     }
                 });
 
-                let i = 0;
-                let staggerIndex = 0; 
-
+                let i = 0, staggerIndex = 0; 
                 while (i < imageQueue.length) {
                     const section = document.createElement('div');
                     section.className = 'splash-section';
@@ -2053,43 +1000,27 @@
 
                     layout.slots.forEach(slot => {
                         if (i >= imageQueue.length) return;
-
-                        const imgData = imageQueue[i];
-                        i++;
+                        const imgData = imageQueue[i++];
 
                         const item = document.createElement('div');
                         item.className = 'splash-item';
                         item.style.gridColumn = slot.col;
                         if (slot.row) item.style.gridRow = slot.row;
 
-                        item.style.opacity = '0';
-                        item.style.animation = `fadeInOnly ${fadeInDuration}s ease-out forwards ${staggerIndex * staggerDelay}s`;
-                        staggerIndex++;
-
                         const img = document.createElement('img');
                         img.src = getOptimizedUrl(imgData.src, 800);
-                        img.style.opacity = '0'; // Assicurati che parta da 0
-                        img.onload = function() {
-                            this.style.opacity = '1'; // Appare sfumata solo quando è pronta nel browser
-                        };
-                        // Manteniamo il lazy loading intelligente che avevamo aggiunto!
-                        if (i <= 4) {
-                            img.loading = 'eager'; 
-                        } else {
-                            img.loading = 'lazy';
-                        }
-                        item.appendChild(img);
+                        img.loading = i <= 4 ? 'eager' : 'lazy';
+                        img.alt = imgText = '';
+                        img.onload = function() { this.style.opacity = '1'; };
 
-                        item.addEventListener('click', () => {
-                            showProject(imgData.projectId);
-                        });
+                        item.appendChild(img);
+                        item.addEventListener('click', () => showProject(imgData.projectId));
                         section.appendChild(item); 
 
                         const caption = document.createElement('div');
                         caption.className = 'splash-caption';
                         caption.style.gridColumn = slot.col;
                         caption.style.gridRow = "8"; 
-                        
                         caption.innerHTML = `
                             <div class="splash-title">${imgData.title}</div>
                             ${imgData.luogo_data ? `<div class="splash-date">${imgData.luogo_data}</div>` : ''}
@@ -2104,45 +1035,34 @@
                 });
 
                 grid.style.opacity = '1';
-
             }, delayBeforeRender); 
         }
-        // Aggiungiamo lo stesso comportamento per le anteprime nella sezione "Progetti"
+
+        // Overlay hover effects mapping
         document.addEventListener('DOMContentLoaded', () => {
             const projectsGrid = document.getElementById('projectsGrid');
             projectsGrid.addEventListener('mouseover', e => {
-                if (e.target.closest('.project-card')) {
-                e.target.closest('.project-card').querySelector('.project-overlay').style.opacity = '1';
-                }
+                if (e.target.closest('.project-card')) e.target.closest('.project-card').querySelector('.project-overlay').style.opacity = '1';
             });
             projectsGrid.addEventListener('mouseout', e => {
-                if (e.target.closest('.project-card')) {
-                e.target.closest('.project-card').querySelector('.project-overlay').style.opacity = '0';
-                }
+                if (e.target.closest('.project-card')) e.target.closest('.project-card').querySelector('.project-overlay').style.opacity = '0';
             });
         });
         
-        // MODIFICATO: Logica di generazione filtri per escludere i progetti "foglia"
+        /**
+         * Collect logic for filter dropdown menus
+         */
         function collectCategoryPaths(node, path, pathsSet) {
             for (const key in node) {
                 if (Object.prototype.hasOwnProperty.call(node, key)) {
                     const childNode = node[key];
-                    // Un nodo è una "categoria" se è un oggetto e NON ha una proprietà "images".
-                    // La proprietà "images" identifica un nodo come un progetto finale (foglia).
                     if (typeof childNode === 'object' && childNode !== null && !Array.isArray(childNode.images)) {
                         const currentPath = path ? `${path}.${key}` : key;
                         pathsSet.add(currentPath);
-                        // Continua la ricorsione all'interno di questa categoria.
                         collectCategoryPaths(childNode, currentPath, pathsSet);
                     }
                 }
             }
-        }
-        
-        // Funzione per mostrare/nascondere i filtri quando clicchi l'icona
-        function toggleFilters() {
-            const filtersContainer = document.getElementById('projectFilters');
-            filtersContainer.classList.toggle('show-filters');
         }
 
         function generateFilters() {
@@ -2150,37 +1070,28 @@
             const categoryPaths = new Set();
             collectCategoryPaths(projects, '', categoryPaths);
 
-            // 1. Crea il bottone "Tutti"
             let filtersHtml = `<button class="filter-btn" data-filter="all" onclick="filterProjects('all')">${translations[currentLang].filterAll}</button>`;
-            
-            // 2. NUOVO: Crea il bottone "Selezione" (collegato a home_custom)
             filtersHtml += `<button class="filter-btn" data-filter="home_custom" onclick="filterProjects('home_custom')">${translations[currentLang].filterSelection}</button>`;
             
-            // 3. Genera dinamicamente tutti gli altri bottoni basati sulle cartelle
             const sortedCategories = Array.from(categoryPaths).sort((a, b) => a.localeCompare(b));
-
             sortedCategories.forEach(path => {
                 const label = path.split('.').map(part => translations[currentLang][`category_${part}`] || formatFolderNameForDisplay(part)).join(' ');
                 filtersHtml += `<button class="filter-btn" data-filter="${path}" onclick="filterProjects('${path}')">${label}</button>`;
             });
             
-            // Inserisce tutto nel menu a tendina
             filtersContainer.innerHTML = filtersHtml;
         }
 
+        /**
+         * Render About/Adpe content injected via JSON
+         */
         function renderAdpeSection() {
             const container = document.getElementById('adpeDynamicContent');
             if (!container || !window.adpeData || !window.adpeData.sections) return;
 
             let htmlContent = '';
-
-            // Cicliano ogni sezione (Filosofia, Curriculum, ecc.)
             window.adpeData.sections.forEach(section => {
-                
-                // 1. Apriamo il blocco (fondamentale per far scivolare via i titoli)
                 htmlContent += `<div class="adpe-block">`;
-
-                // 2. La testatina fissa (Riusiamo le classi dei progetti!)
                 htmlContent += `
                     <div class="project-sticky-header">
                         <div class="project-sticky-grid">
@@ -2191,15 +1102,12 @@
                         </div>
                     </div>
                 `;
-
-                // 3. Griglia Immagini (Riusiamo le classi dei progetti!)
                 htmlContent += `<div class="project-detail-grid">`;
                 
                 const imgs = section.images || [];
                 const layoutName = section.layout || "PROJECT_SINGLE";
                 let layoutDef = globalLayouts[layoutName] || { columns: 12, slots: [{ col: "3 / span 8" }] };
 
-                // Stampiamo le immagini usando il layout scelto
                 let imgIndex = 0;
                 layoutDef.slots.forEach(slot => {
                     if (imgIndex < imgs.length) {
@@ -2208,7 +1116,7 @@
                         
                         htmlContent += `
                             <div class="proj-img-wrap" style="grid-column: ${slot.col}; ${rowStyle}">
-                                <img src="${imgData.src}" 
+                                <img src="${getOptimizedUrl(imgData.src, 1600)}" 
                                      alt="${imgData.description || ''}" 
                                      onclick="openImageModal(null, '${imgData.src}')" 
                                      loading="lazy"
@@ -2220,82 +1128,57 @@
                     }
                 });
 
-                // 4. Testo descrittivo allineato a sinistra
                 if (section.text) {
-                    htmlContent += `
-                        <div class="adpe-text-block">
-                            ${formatAdpeText(section.text)}
-                        </div>
-                    `;
+                    htmlContent += `<div class="adpe-text-block">${formatAdpeText(section.text)}</div>`;
                 }
-
-                // Chiudiamo griglia e blocco
                 htmlContent += `</div></div>`; 
             });
-
             container.innerHTML = htmlContent;
         }
 
-        // --- FUNZIONE PER FORMATTARE AUTOMATICAMENTE IL TESTO ADPE ---
         function formatAdpeText(rawText) {
             if (!rawText) return '';
-            const lines = rawText.split('\n');
             let html = '';
-            
-            lines.forEach(line => {
-                // Controlla se la riga inizia con uno o più spazi
+            rawText.split('\n').forEach(line => {
                 const hasLeadingSpace = /^[ \t]+/.test(line);
                 const trimmed = line.trim();
-                
-                if (trimmed === '') {
-                    // Riga vuota nel file di testo -> crea uno spazio verticale per staccare i progetti
-                    html += `<div style="height: 1.5rem;"></div>`;
-                } else if (trimmed.startsWith('-') || trimmed.startsWith('*') || hasLeadingSpace) {
-                    // È una SOTTOVOCE (identificata da spazio, trattino o asterisco)
+                if (trimmed === '') html += `<div style="height: 1.5rem;"></div>`;
+                else if (trimmed.startsWith('-') || trimmed.startsWith('*') || hasLeadingSpace) {
                     let cleanText = trimmed;
-                    // Rimuove il trattino o asterisco iniziale per massima pulizia
-                    if (cleanText.startsWith('-') || cleanText.startsWith('*')) {
-                        cleanText = cleanText.substring(1).trim();
-                    }
+                    if (cleanText.startsWith('-') || cleanText.startsWith('*')) cleanText = cleanText.substring(1).trim();
                     html += `<div class="adpe-sub-item">${cleanText}</div>`;
                 } else {
-                    // È una VOCE PRINCIPALE o un paragrafo normale (es. la Filosofia)
                     html += `<div class="adpe-main-item">${trimmed}</div>`;
                 }
             });
-            
             return html;
         }
 
+        /**
+         * Render Contact info via JSON payload
+         */
         function renderContactSection() {
             const container = document.getElementById('contactDynamicContent');
             if (!container || !window.contattiData) return;
 
             const data = window.contattiData;
-            
-            // Usiamo il layout specificato nel JSON o cadiamo sul default centrale
             const layoutName = data.layout || "ADPE_CENTER"; 
             let layoutDef = globalLayouts[layoutName] || { columns: 12, slots: [{ col: "4 / span 6" }] };
 
-            let htmlContent = `<div class="contact-block">`;
-            htmlContent += `<div class="project-detail-grid">`;
+            let htmlContent = `<div class="contact-block"><div class="project-detail-grid">`;
 
-            // 1. Immagine principale in alto (se esiste nel JSON)
             if (data.main_image) {
                 let slot = layoutDef.slots[0];
                 htmlContent += `
                     <div class="proj-img-wrap" style="grid-column: ${slot.col};">
-                        <img src="${data.main_image}" alt="Studio ADPE" 
+                        <img src="${getOptimizedUrl(data.main_image, 1200)}" alt="Studio ADPE" 
                              style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;" 
                              onload="this.style.opacity=1">
                     </div>
                 `;
             }
 
-            // 2. Blocco Testo a sinistra (5 colonne)
             htmlContent += `<div class="contact-text-block">`;
-
-            // --- Indirizzo + Mappa ---
             if (data.address) {
                 htmlContent += `
                     <div class="contact-item">
@@ -2303,14 +1186,12 @@
                         <span class="contact-item-value">${data.address.text}</span>
                         ${data.address.map_image ? `
                             <a href="${data.address.map_link}" target="_blank" aria-label="Apri su Google Maps">
-                                <img src="${data.address.map_image}" alt="Mappa dello studio" class="contact-map-sketch">
+                                <img src="${getOptimizedUrl(data.address.map_image, 500)}" alt="Mappa dello studio" class="contact-map-sketch">
                             </a>
                         ` : ''}
                     </div>
                 `;
             }
-
-            // --- Telefono ---
             if (data.phone) {
                 htmlContent += `
                     <div class="contact-item">
@@ -2319,8 +1200,6 @@
                     </div>
                 `;
             }
-
-            // --- Email ---
             if (data.email) {
                 htmlContent += `
                     <div class="contact-item">
@@ -2329,8 +1208,6 @@
                     </div>
                 `;
             }
-
-            // --- Social Icons ---
             if (data.social) {
                 htmlContent += `
                     <div class="contact-item">
@@ -2344,16 +1221,20 @@
                 `;
             }
 
-            htmlContent += `</div></div></div>`; // Chiude i div
+            htmlContent += `</div></div></div>`; 
             container.innerHTML = htmlContent;
         }
 
-        // --- Funzioni di Utilità e UI ---
-
+        /**
+         * Format & Utilities
+         */
         function formatFolderNameForDisplay(name) {
             return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
         }
 
+        /**
+         * Mobile Dropdown Handlers
+         */
         function setupMobileMenu() {
             const hamburger = document.querySelector('.hamburger');
             const navMenu = document.querySelector('.nav-menu');
@@ -2365,70 +1246,57 @@
                 header.classList.toggle('mobile-menu-open');
             });
 
-            // 1. GESTIONE TAP SUI LINK PRINCIPALI
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', (e) => {
-                    // Se siamo su smartphone e si tocca "Progetti"
                     if (window.innerWidth <= 768 && link.closest('.nav-item-dropdown')) {
-                        // Apri/Chiudi solo la tendina, ma NON chiudere il menu intero
-                        const dropdown = link.closest('.nav-item-dropdown');
-                        dropdown.classList.toggle('touch-open');
-                        
-                        // Chiudi contemporaneamente l'altra tendina delle lingue se era aperta
+                        link.closest('.nav-item-dropdown').classList.toggle('touch-open');
                         document.querySelector('.lang-dropdown').classList.remove('touch-open');
-                        return; // Interrompe l'esecuzione per non chiudere l'hamburger!
+                        return; 
                     }
-
-                    // Per tutti gli altri link normali (Chi Siamo, Contatti), chiudi il menu intero
                     hamburger.classList.remove('active');
                     navMenu.classList.remove('active');
                     header.classList.remove('mobile-menu-open');
                 });
             });
 
-            // 2. GESTIONE TAP SULLE LINGUE
-            const langToggle = document.querySelector('.current-lang');
-            langToggle.addEventListener('click', (e) => {
+            document.querySelector('.current-lang').addEventListener('click', (e) => {
                 if (window.innerWidth <= 768) {
                     e.preventDefault(); 
                     document.querySelector('.lang-dropdown').classList.toggle('touch-open');
-                    
-                    // Chiudi la tendina progetti se era aperta
                     document.querySelector('.nav-item-dropdown').classList.remove('touch-open');
                 }
             });
 
-            // 3. CHIUSURA AUTOMATICA QUANDO SI SCEGLIE UNA CATEGORIA
             document.addEventListener('click', (e) => {
                 if (window.innerWidth <= 768) {
-                    
-                    // Se tocco una Categoria (es. "Residenziale")
                     if (e.target.classList.contains('filter-btn')) {
-                        // Chiudo la tendina
                         document.querySelector('.nav-item-dropdown').classList.remove('touch-open');
-                        
-                        // Chiudo anche l'intero menu hamburger così l'utente vede i progetti filtrati!
                         hamburger.classList.remove('active');
                         navMenu.classList.remove('active');
                         header.classList.remove('mobile-menu-open');
                     }
-                    
-                    // Se tocco una Lingua (es. "EN")
                     if (e.target.classList.contains('language-selector-item')) {
-                        // In questo caso chiudo solo la tendina della lingua
                         document.querySelector('.lang-dropdown').classList.remove('touch-open');
                     }
                 }
             });
         }
 
-        // Modal Immagini
+        /**
+         * Lightbox Modals 
+         */
         function openImageModal(projectId, imageSrc) {
-            const project = findProjectById(projectId);
-            if (!project) return;
+            let images = [];
+            // If projectId is null, it's called from About/Contact, bypass array finding.
+            if(projectId){
+               const project = findProjectById(projectId);
+               if(project) images = project.images;
+            }
 
-            currentProjectImages = project.images;
-            currentImageIndex = currentProjectImages.findIndex(img => img.src === imageSrc);
+            if (images.length > 0) {
+               currentProjectImages = images;
+               currentImageIndex = currentProjectImages.findIndex(img => img.src === imageSrc);
+            }
             
             const modal = document.getElementById('imageModal');
             document.getElementById('modalImage').src = imageSrc;
@@ -2444,189 +1312,110 @@
 
         function showNextImage(event) {
             event.stopPropagation();
+            if(!currentProjectImages.length) return;
             currentImageIndex = (currentImageIndex + 1) % currentProjectImages.length;
-            document.getElementById('modalImage').src = currentProjectImages[currentImageIndex].src;
+            document.getElementById('modalImage').src = getOptimizedUrl(currentProjectImages[currentImageIndex].src, 1600);
         }
 
         function showPrevImage(event) {
             event.stopPropagation();
+            if(!currentProjectImages.length) return;
             currentImageIndex = (currentImageIndex - 1 + currentProjectImages.length) % currentProjectImages.length;
-            document.getElementById('modalImage').src = currentProjectImages[currentImageIndex].src;
+            document.getElementById('modalImage').src = getOptimizedUrl(currentProjectImages[currentImageIndex].src, 1600);
         }
 
-        /* function distributeMasonry(grid) {
-            const cards = Array.from(grid.querySelectorAll('.project-card'));
-            if (cards.length === 0) return;
-
-            // Svuoto la griglia
-            grid.innerHTML = '';
-
-            // Creo 3 colonne
-            const columns = [[], [], []];
-            cards.forEach((card, i) => {
-                columns[i % 3].push(card);
-            });
-
-            // Popolo le colonne e le aggiungo al container
-            columns.forEach(colCards => {
-                const colDiv = document.createElement('div');
-                colDiv.className = 'projects-column';
-                colCards.forEach(card => colDiv.appendChild(card));
-                grid.appendChild(colDiv);
-            });
-        }*/
-
-        // Header e Footer allo scroll
-        window.addEventListener('scroll', function() {
-            const isScrolled = window.pageYOffset > 50;
-            document.querySelector('header').classList.toggle('scrolled', isScrolled);
-            document.querySelector('footer').classList.toggle('scrolled', isScrolled);
-        });
-
+        /**
+         * Splashpage Initializer
+         */
         async function renderHomeSplash() {
             try {
-                // 1. Carica i JSON di configurazione
                 const layouts = await fetch('layouts.json').then(r => r.json());
                 const splash = await fetch('splashpage.json').then(r => r.json());
 
                 const container = document.getElementById('homeSplash');
                 if (!container) return;
-
-                // 2. Reset contenuto splash
                 container.innerHTML = '';
 
-                // 3. Loop sulle sezioni verticali della home
                 splash.sections.forEach(section => {
-                const layoutDef = layouts[section.layout];
-                if (!layoutDef) {
-                    console.warn(`Layout "${section.layout}" non trovato`);
-                    return;
-                }
+                    const layoutDef = layouts[section.layout];
+                    if (!layoutDef) return;
 
-                // Sezione splash (una griglia)
-                const sectionEl = document.createElement('div');
-                sectionEl.className = 'splash-section';
-                sectionEl.style.height = layoutDef.height;
-                sectionEl.style.gridTemplateColumns = `repeat(${layoutDef.columns}, 1fr)`;
+                    const sectionEl = document.createElement('div');
+                    sectionEl.className = 'splash-section';
+                    sectionEl.style.height = layoutDef.height;
+                    sectionEl.style.gridTemplateColumns = `repeat(${layoutDef.columns}, 1fr)`;
 
-                // 4. Loop sui riquadri del layout
-                layoutDef.slots.forEach((slot, index) => {
-                    const imgData = section.images[index];
-                    if (!imgData) return;
+                    layoutDef.slots.forEach((slot, index) => {
+                        const imgData = section.images[index];
+                        if (!imgData) return;
 
-                    // Supporto stringa / oggetto
-                    const imgSrc =
-                    typeof imgData === 'string' ? imgData : imgData.src;
-                    const imgText =
-                    typeof imgData === 'object' && imgData.text ? imgData.text : null;
-                    const projectName =
-                    typeof imgData === 'object' && imgData.project_name
-                        ? imgData.project_name
-                        : null;
+                        const imgSrc = typeof imgData === 'string' ? imgData : imgData.src;
+                        const imgText = typeof imgData === 'object' && imgData.text ? imgData.text : null;
+                        const projectName = typeof imgData === 'object' && imgData.project_name ? imgData.project_name : null;
 
-                    // Riquadro
-                    const item = document.createElement('div');
-                    item.className = 'splash-item';
-                    item.style.gridColumn = slot.col;
-                    if (slot.row) item.style.gridRow = slot.row;
+                        const item = document.createElement('div');
+                        item.className = 'splash-item';
+                        item.style.gridColumn = slot.col;
+                        if (slot.row) item.style.gridRow = slot.row;
 
-                    // Immagine
-                    const img = document.createElement('img');
-                    img.src = imgSrc;
-                    img.loading = 'lazy';
-                    img.alt = imgText || '';
+                        const img = document.createElement('img');
+                        img.src = getOptimizedUrl(imgSrc, 800);
+                        img.loading = index <= 4 ? 'eager' : 'lazy';
+                        img.alt = imgText || '';
+                        img.onload = function() { this.style.opacity = '1'; };
 
-                    item.appendChild(img);
+                        item.appendChild(img);
 
-                    // Overlay testuale (opzionale)
-                    if (imgText) {
-                    const overlay = document.createElement('div');
-                    overlay.className = 'splash-overlay';
-                    overlay.textContent = imgText;
-                    item.appendChild(overlay);
-                    }
+                        if (projectName) {
+                            const projectId = findProjectIdByName(projectName);
+                            if (projectId) {
+                                item.style.cursor = 'pointer';
+                                item.addEventListener('click', () => {
+                                    showProjectsSection(false);
+                                    showProject(projectId);
+                                });
+                            }
+                        }
 
-                    // Click → progetto (opzionale)
-                    if (projectName) {
-                    const projectId = findProjectIdByName(projectName);
-                    if (projectId) {
-                        item.style.cursor = 'pointer';
-                        item.addEventListener('click', () => {
-                        showProjectsSection(false);
-                        showProject(projectId);
-                        });
-                    } else {
-                        console.warn(`Progetto "${projectName}" non trovato`);
-                    }
-                    }
-
-                    sectionEl.appendChild(item);
+                        sectionEl.appendChild(item);
+                    });
+                    container.appendChild(sectionEl);
                 });
-
-                container.appendChild(sectionEl);
-                });
-
             } catch (err) {
                 console.error('Errore in renderHomeSplash:', err);
             }
         }
-
         
         function findProjectIdByName(projectName) {
-            const project = allProjectsFlattened.find(p =>
-                p.categoryPath.split('.').pop() === projectName
-            );
+            const project = allProjectsFlattened.find(p => p.categoryPath.split('.').pop() === projectName);
             return project ? project.id : null;
         }
 
-
-        // ==========================================
-        // GESTIONE CRONOLOGIA E TASTO "INDIETRO"
-        // ==========================================
-
-        // 1. Funzione per salvare lo stato nel browser
+        /**
+         * State & History API Management
+         */
         function saveState(view, projectId = null, filter = null) {
             const currentState = history.state;
-            
-            // Evita di salvare lo stesso stato due volte di fila
-            if (currentState && currentState.view === view && currentState.projectId === projectId && currentState.filter === filter) {
-                return;
-            }
+            if (currentState && currentState.view === view && currentState.projectId === projectId && currentState.filter === filter) return;
 
             const stateObj = { view: view, projectId: projectId, filter: filter };
-            
-            // Creiamo un URL finto ma parlante (es. ?view=projects&filter=design)
             let url = `?view=${view}`;
             if (projectId) url += `&id=${projectId}`;
             if (filter) url += `&filter=${filter}`;
 
-            // Scrive nella cronologia del browser
             history.pushState(stateObj, '', url);
         }
 
-        // 2. Il "Listener" che scatta quando premi il tasto INDIETRO o AVANTI del browser
         window.addEventListener('popstate', function(event) {
             const state = event.state;
-            
-            if (!state) {
-                showProjectsSection(false, false); // Ritorna alla home di base
-                return;
-            }
+            if (!state) { showProjectsSection(false, false); return; }
 
-            // Il "false, false" serve a NON far scattare un nuovo salvataggio mentre andiamo indietro!
             switch (state.view) {
-                case 'home': 
-                    showHome(false, false); 
-                    break;
-                case 'about': 
-                    showAbout(false, false); 
-                    break;
-                case 'contact': 
-                    showContact(false, false); 
-                    break;
+                case 'home': showHome(false, false); break;
+                case 'about': showAbout(false, false); break;
+                case 'contact': showContact(false, false); break;
                 case 'projects': 
                     showProjectsSection(false, false);
-                    // Passiamo 'false' anche qui per non far riscrivere la cronologia!
                     if (state.filter) filterProjects(state.filter, 0.2, 250, 0.8, 0, false); 
                     break;
                 case 'projectDetail': 
@@ -2634,8 +1423,6 @@
                     break;
             }
         });
-
-
     </script>
 </body>
 </html>
