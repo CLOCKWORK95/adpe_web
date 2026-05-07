@@ -1866,9 +1866,64 @@
         }
       ]
     },
-    "MONTE SAVELLO": {},
-    "Q8-NA": {
+    "MONTE SAVELLO": {
       "id": 42,
+      "title": "Monte Savello",
+      "luogo_data": "Roma, 2020",
+      "posizione": "Via di Monte Savello, Roma",
+      "stato": "Completato",
+      "committente": "Privato",
+      "layoutSequence": [
+        "PROJECT_TRIPLE_VERT",
+        "PROJECT_TRIPLE",
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_PAIR_VERTICAL"
+      ],
+      "images": [
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE SAVELLO/00.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE SAVELLO/01.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE SAVELLO/02.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE SAVELLO/03.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE SAVELLO/04.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE SAVELLO/05.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE SAVELLO/06.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE SAVELLO/07.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE SAVELLO/08.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE SAVELLO/09.jpg",
+          "description": ""
+        }
+      ]
+    },
+    "Q8-NA": {
+      "id": 43,
       "title": "Q8 Na",
       "luogo_data": "Napoli, 2024-",
       "posizione": "Via nuova delle Brecce, Napoli",
@@ -1939,7 +1994,7 @@
       ]
     },
     "RANDSTAD": {
-      "id": 43,
+      "id": 44,
       "title": "Randstad",
       "luogo_data": "Roma, 2019",
       "posizione": "P.le Luigi Sturzo, Roma",
@@ -1969,7 +2024,7 @@
       ]
     },
     "SIAE": {
-      "id": 44,
+      "id": 45,
       "title": "Siae",
       "luogo_data": "Roma, 2024",
       "posizione": "Viale della Letteratura, Roma",
@@ -2010,7 +2065,7 @@
       ]
     },
     "SV": {
-      "id": 45,
+      "id": 46,
       "title": "Sv",
       "luogo_data": "2026",
       "stato": "In corso",
@@ -2059,7 +2114,7 @@
       ]
     },
     "UNILEVER": {
-      "id": 46,
+      "id": 47,
       "title": "Unilever",
       "luogo_data": "Roma, 2023",
       "posizione": "Via Paolo di Dono, Roma",
@@ -2103,7 +2158,7 @@
       ]
     },
     "URBANA": {
-      "id": 47,
+      "id": 48,
       "title": "Urbana",
       "luogo_data": "Ortona, 2013",
       "posizione": "Via Costanzo Cloro, Roma",
@@ -2147,7 +2202,7 @@
       ]
     },
     "VERO": {
-      "id": 48,
+      "id": 49,
       "title": "Vero",
       "luogo_data": "Roma, 2018",
       "posizione": "Via Nomentana, Roma",
@@ -2195,7 +2250,7 @@
       ]
     },
     "WEX": {
-      "id": 49,
+      "id": 50,
       "title": "Wex",
       "luogo_data": "Roma, 2019",
       "posizione": "Via Carlo Veneziani, Roma",
