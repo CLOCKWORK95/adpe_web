@@ -1239,6 +1239,10 @@
           "description": ""
         },
         {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/SURRIPA/08.jpg",
+          "description": ""
+        },
+        {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/SURRIPA/09.jpg",
           "description": ""
         },
@@ -1256,10 +1260,6 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/SURRIPA/13.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/SURRIPA/80.jpg",
           "description": ""
         }
       ]
