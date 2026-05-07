@@ -1950,8 +1950,38 @@
         }
       ]
     },
-    "SIAE": {
+    "RANDSTAD": {
       "id": 43,
+      "title": "Randstad",
+      "luogo_data": "Roma, 2019",
+      "posizione": "P.le Luigi Sturzo, Roma",
+      "stato": "Realizzato",
+      "committente": "Randstad",
+      "layoutSequence": [
+        "PROJECT_PAIR_VERT-HOR",
+        "PROJECT_PAIR_HORIZONTAL"
+      ],
+      "images": [
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/RANDSTAD/00.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/RANDSTAD/01.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/RANDSTAD/02.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/RANDSTAD/03.jpg",
+          "description": ""
+        }
+      ]
+    },
+    "SIAE": {
+      "id": 44,
       "title": "Siae",
       "luogo_data": "Roma, 2024",
       "posizione": "Viale della Letteratura, Roma",
@@ -1992,7 +2022,7 @@
       ]
     },
     "SV": {
-      "id": 44,
+      "id": 45,
       "title": "Sv",
       "luogo_data": "2026",
       "stato": "In corso",
@@ -2041,7 +2071,7 @@
       ]
     },
     "URBANA": {
-      "id": 45,
+      "id": 46,
       "title": "Urbana",
       "luogo_data": "Ortona, 2013",
       "posizione": "Via Costanzo Cloro, Roma",
@@ -2085,7 +2115,7 @@
       ]
     },
     "VERO": {
-      "id": 46,
+      "id": 47,
       "title": "Vero",
       "luogo_data": "Roma, 2018",
       "posizione": "Via Nomentana, Roma",
@@ -2133,7 +2163,7 @@
       ]
     },
     "WEX": {
-      "id": 47,
+      "id": 48,
       "title": "Wex",
       "luogo_data": "Roma, 2019",
       "posizione": "Via Carlo Veneziani, Roma",
