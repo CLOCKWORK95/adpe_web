@@ -2131,6 +2131,43 @@
           "description": ""
         }
       ]
+    },
+    "WEX": {
+      "id": 47,
+      "title": "Wex",
+      "luogo_data": "Roma, 2019",
+      "posizione": "Via Carlo Veneziani, Roma",
+      "stato": "Realizzato",
+      "committente": "WEX Europe Services Srl",
+      "layoutSequence": [
+        "PROJECT_PAIR_VERTICAL"
+      ],
+      "images": [
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/WEX/00.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/WEX/02.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/WEX/03.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/WEX/04.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/WEX/05.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/WEX/06.jpg",
+          "description": ""
+        }
+      ]
     }
   }
 }
