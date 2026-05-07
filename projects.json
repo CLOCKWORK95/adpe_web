@@ -849,10 +849,6 @@
       ],
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/CIRCEO/00.jpg",
-          "description": ""
-        },
-        {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/CIRCEO/01.jpg",
           "description": ""
         },
@@ -1286,7 +1282,7 @@
       "stato": "In corso",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_PAIR_VERTICAL"
+        "PROJECT_TRIPLE_VERT"
       ],
       "images": [
         {
@@ -1303,6 +1299,14 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/VIA NISCO/04.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/VIA NISCO/05.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/VIA NISCO/06.jpg",
           "description": ""
         }
       ]
