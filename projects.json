@@ -829,7 +829,7 @@
         }
       ]
     },
-    "CAPPELLA GENTILIZIA": {
+    "CAPPELLA-GENTILIZIA": {
       "id": 22,
       "title": "Cappella Gentilizia",
       "luogo_data": "Nicotera, VV, 2025",
@@ -842,15 +842,15 @@
       ],
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/CAPPELLA GENTILIZIA/01.png",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/CAPPELLA-GENTILIZIA/01.png",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/CAPPELLA GENTILIZIA/03.png",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/CAPPELLA-GENTILIZIA/03.png",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/CAPPELLA GENTILIZIA/04.png",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/CAPPELLA-GENTILIZIA/04.png",
           "description": ""
         }
       ]
@@ -1352,18 +1352,6 @@
         "PROJECT_TRIPLE_VERT"
       ],
       "images": [
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/VIA NISCO/01.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/VIA NISCO/02.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/VIA NISCO/03.jpg",
-          "description": ""
-        },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/VIA NISCO/04.jpg",
           "description": ""
