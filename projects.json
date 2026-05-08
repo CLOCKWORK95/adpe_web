@@ -1310,9 +1310,39 @@
         }
       ]
     },
-    "VIA DELLA CROCE": {},
-    "VIA-NISCO": {
+    "VIA-DELLA-CROCE": {
       "id": 32,
+      "title": "Via Della Croce",
+      "luogo_data": "Roma, 2025",
+      "posizione": "Via della Croce, Roma",
+      "stato": "In corso",
+      "committente": "Privato",
+      "layoutSequence": [
+        "PROJECT_SINGLE_VERTICAL",
+        "PROJECT_SINGLE_HORIZONTAL",
+        "PROJECT_PAIR_HORIZONTAL"
+      ],
+      "images": [
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/VIA-DELLA-CROCE/bagno_render_Pagina_1.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/VIA-DELLA-CROCE/bagno_render_Pagina_2.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/VIA-DELLA-CROCE/bagno_render_Pagina_3.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/VIA-DELLA-CROCE/bagno_render_Pagina_4.jpg",
+          "description": ""
+        }
+      ]
+    },
+    "VIA-NISCO": {
+      "id": 33,
       "title": "Via Nisco",
       "luogo_data": "Roma, 2025",
       "posizione": "Via N. Nisco, Roma",
@@ -1351,7 +1381,7 @@
   },
   "uffici": {
     "AMI": {
-      "id": 33,
+      "id": 34,
       "title": "Ami",
       "luogo_data": "Roma, 2024",
       "posizione": "Via dell'Arte, Roma",
@@ -1421,7 +1451,7 @@
       ]
     },
     "ANCORA": {
-      "id": 34,
+      "id": 35,
       "title": "Ancora",
       "luogo_data": "Napoli, 2024-",
       "posizione": "Via nuova delle Brecce, Napoli",
@@ -1450,7 +1480,7 @@
       ]
     },
     "AVOLTA-NEXT": {
-      "id": 35,
+      "id": 36,
       "title": "Avolta Next",
       "luogo_data": "Milano, 2024",
       "posizione": "Milano",
@@ -1489,7 +1519,7 @@
       ]
     },
     "BNL-GUBBIO": {
-      "id": 36,
+      "id": 37,
       "title": "Bnl Gubbio",
       "luogo_data": "Gubbio, 2022",
       "posizione": "Via Beniamino Ubaldi 1, Gubbio PG",
@@ -1519,7 +1549,7 @@
       ]
     },
     "BNL-P2-P10": {
-      "id": 37,
+      "id": 38,
       "title": "Bnl P2 P10",
       "luogo_data": "Roma, 2023-2024",
       "posizione": "Via Altiero Spinelli, Roma",
@@ -1558,7 +1588,7 @@
       ]
     },
     "BS-24-MI": {
-      "id": 38,
+      "id": 39,
       "title": "Bs 24 Mi",
       "luogo_data": "Milano, 2021",
       "posizione": "Via Monte Rosa 91, Milano",
@@ -1627,7 +1657,7 @@
       ]
     },
     "BS-24-RM": {
-      "id": 39,
+      "id": 40,
       "title": "Bs 24 Rm",
       "luogo_data": "Roma, 2022",
       "posizione": "Via Gaeta, Roma",
@@ -1693,7 +1723,7 @@
       ]
     },
     "CELLNEX-INDUSTRIA": {
-      "id": 40,
+      "id": 41,
       "title": "Cellnex Industria",
       "luogo_data": "Roma, 2025-2026",
       "posizione": "Piazzale dell'Industria, Roma",
@@ -1732,7 +1762,7 @@
       ]
     },
     "CELLNEX-VIOLA": {
-      "id": 41,
+      "id": 42,
       "title": "Cellnex Viola",
       "luogo_data": "Roma, 2019",
       "posizione": "Via Viola, Roma",
@@ -1797,7 +1827,7 @@
       ]
     },
     "COLOMBOLAB2": {
-      "id": 42,
+      "id": 43,
       "title": "Colombolab2",
       "luogo_data": "Roma, 2025",
       "posizione": "Via Tiberio Imperatore, Roma",
@@ -1856,19 +1886,65 @@
         }
       ]
     },
-    "IL TORCHIO": {
-      "id": 43,
-      "title": "Il Torchio",
+    "IL TORCHIO": {},
+    "MONTE-SAVELLO": {
+      "id": 44,
+      "title": "Monte Savello",
+      "luogo_data": "Roma, 2020",
+      "posizione": "Via di Monte Savello, Roma",
+      "stato": "Completato",
+      "committente": "Privato",
+      "layoutSequence": [
+        "PROJECT_TRIPLE_VERT",
+        "PROJECT_TRIPLE",
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_PAIR_VERTICAL"
+      ],
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/IL TORCHIO/01_Torchio.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE-SAVELLO/00.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE-SAVELLO/01.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE-SAVELLO/02.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE-SAVELLO/03.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE-SAVELLO/04.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE-SAVELLO/05.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE-SAVELLO/06.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE-SAVELLO/07.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE-SAVELLO/08.jpg",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/MONTE-SAVELLO/09.jpg",
           "description": ""
         }
       ]
     },
-    "MONTE SAVELLO": {},
     "Q8-NA": {
-      "id": 44,
+      "id": 45,
       "title": "Q8 Na",
       "luogo_data": "Napoli, 2024-",
       "posizione": "Via nuova delle Brecce, Napoli",
@@ -1939,7 +2015,7 @@
       ]
     },
     "RANDSTAD": {
-      "id": 45,
+      "id": 46,
       "title": "Randstad",
       "luogo_data": "Roma, 2019",
       "posizione": "P.le Luigi Sturzo, Roma",
@@ -1969,7 +2045,7 @@
       ]
     },
     "SIAE": {
-      "id": 46,
+      "id": 47,
       "title": "Siae",
       "luogo_data": "Roma, 2024",
       "posizione": "Viale della Letteratura, Roma",
@@ -2010,7 +2086,7 @@
       ]
     },
     "SV": {
-      "id": 47,
+      "id": 48,
       "title": "Sv",
       "luogo_data": "2026",
       "stato": "In corso",
@@ -2059,7 +2135,7 @@
       ]
     },
     "UNILEVER": {
-      "id": 48,
+      "id": 49,
       "title": "Unilever",
       "luogo_data": "Roma, 2023",
       "posizione": "Via Paolo di Dono, Roma",
@@ -2103,7 +2179,7 @@
       ]
     },
     "URBANA": {
-      "id": 49,
+      "id": 50,
       "title": "Urbana",
       "luogo_data": "Ortona, 2013",
       "posizione": "Via Costanzo Cloro, Roma",
@@ -2147,7 +2223,7 @@
       ]
     },
     "VERO": {
-      "id": 50,
+      "id": 51,
       "title": "Vero",
       "luogo_data": "Roma, 2018",
       "posizione": "Via Nomentana, Roma",
@@ -2195,7 +2271,7 @@
       ]
     },
     "WEX": {
-      "id": 51,
+      "id": 52,
       "title": "Wex",
       "luogo_data": "Roma, 2019",
       "posizione": "Via Carlo Veneziani, Roma",
