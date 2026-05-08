@@ -193,9 +193,18 @@
         }
       ]
     },
-    "COLORE_3": {},
-    "FROTTAGE": {
+    "COLORE_3": {
       "id": 7,
+      "title": "Colore_3",
+      "images": [
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/COLORE_3/COLORE_3.png",
+          "description": ""
+        }
+      ]
+    },
+    "FROTTAGE": {
+      "id": 8,
       "title": "Frottage",
       "images": [
         {
@@ -225,7 +234,7 @@
       ]
     },
     "GULP-RONF": {
-      "id": 8,
+      "id": 9,
       "title": "Gulp Ronf",
       "luogo_data": "Roma, 10 Marzo 2026",
       "posizione": "Via di Capo Le Case, Roma",
@@ -266,7 +275,7 @@
       ]
     },
     "MISS-LUBKA": {
-      "id": 9,
+      "id": 10,
       "title": "Miss Lubka",
       "luogo_data": "Roma, 10 Marzo 2026",
       "posizione": "Via di Capo Le Case, Roma",
@@ -315,7 +324,7 @@
       ]
     },
     "SCALA": {
-      "id": 10,
+      "id": 11,
       "title": "Scala",
       "luogo_data": "Amelia TR, 2012",
       "posizione": "Amelia, TR",
@@ -349,7 +358,7 @@
       ]
     },
     "SHLITZER": {
-      "id": 11,
+      "id": 12,
       "title": "Shlitzer",
       "luogo_data": "Roma, 2017",
       "posizione": "Roma",
@@ -383,7 +392,7 @@
       ]
     },
     "THE-BAVARIAN-DON-GIOVANNI": {
-      "id": 12,
+      "id": 13,
       "title": "The Bavarian Don Giovanni",
       "luogo_data": "Roma, 18 Aprile 2020",
       "posizione": "Via degli Ulivi, Frascati",
@@ -425,7 +434,7 @@
   },
   "residenziale": {
     "2022_BERNASCONI": {
-      "id": 13,
+      "id": 14,
       "title": "2022_bernasconi",
       "luogo_data": "Roma, 2022",
       "posizione": "Via Fratelli Bandiera, Roma",
@@ -460,7 +469,7 @@
       ]
     },
     "AGIATI": {
-      "id": 14,
+      "id": 15,
       "title": "Agiati",
       "luogo_data": "Roma, 2011",
       "posizione": "Via Accademia degli Agiati, Roma",
@@ -501,7 +510,7 @@
       ]
     },
     "AMELIA": {
-      "id": 15,
+      "id": 16,
       "title": "Amelia",
       "luogo_data": "Amelia TR, 2012",
       "posizione": "Amelia, TR",
@@ -571,7 +580,7 @@
       ]
     },
     "AVENTINO": {
-      "id": 16,
+      "id": 17,
       "title": "Aventino",
       "luogo_data": "Roma, 2022-2023",
       "posizione": "Via di S. Alessio, Roma",
@@ -627,7 +636,7 @@
       ]
     },
     "BACCARINI": {
-      "id": 17,
+      "id": 18,
       "title": "Baccarini",
       "luogo_data": "Roma, 2008",
       "posizione": "Via Alfredo Baccarini, Roma",
@@ -683,7 +692,7 @@
       ]
     },
     "CAMPIONI": {
-      "id": 18,
+      "id": 19,
       "title": "Campioni",
       "luogo_data": "Roma, 2018",
       "posizione": "Via Nomentana, Roma",
@@ -740,7 +749,7 @@
       ]
     },
     "CAPO-LE-CASE": {
-      "id": 19,
+      "id": 20,
       "title": "Capo Le Case",
       "luogo_data": "Roma, 2012",
       "posizione": "Via di Capo Le Case, Roma",
@@ -811,7 +820,7 @@
       ]
     },
     "CAPPELLA GENTILIZIA": {
-      "id": 20,
+      "id": 21,
       "title": "Cappella Gentilizia",
       "luogo_data": "Nicotera, VV, 2025",
       "posizione": "SP29, Nicotera VV",
@@ -837,7 +846,7 @@
       ]
     },
     "CIRCEO": {
-      "id": 21,
+      "id": 22,
       "title": "Circeo",
       "luogo_data": "San Felice Circeo, 2022-2025",
       "posizione": "Via della Valle, San Felica Circeo",
@@ -880,7 +889,7 @@
       ]
     },
     "CLORO": {
-      "id": 22,
+      "id": 23,
       "title": "Cloro",
       "luogo_data": "Roma, 2012",
       "posizione": "Via Costanzo Cloro, Roma",
@@ -945,7 +954,7 @@
       ]
     },
     "COLOSSEO": {
-      "id": 23,
+      "id": 24,
       "title": "Colosseo",
       "luogo_data": "Roma, 2024",
       "posizione": "Via Frangipane, Roma",
@@ -993,7 +1002,7 @@
       ]
     },
     "FERRARI": {
-      "id": 24,
+      "id": 25,
       "title": "Ferrari",
       "luogo_data": "Roma, 2015",
       "posizione": "Roma",
@@ -1028,7 +1037,7 @@
       ]
     },
     "NOMENTANA": {
-      "id": 25,
+      "id": 26,
       "title": "Nomentana",
       "luogo_data": "Roma, 2017",
       "posizione": "Via Nomentana, Roma",
@@ -1090,7 +1099,7 @@
       ]
     },
     "ORTONA": {
-      "id": 26,
+      "id": 27,
       "title": "Ortona",
       "luogo_data": "Ortona, 2013",
       "posizione": "Via Costanzo Cloro, Roma",
@@ -1152,7 +1161,7 @@
       ]
     },
     "OSTIA": {
-      "id": 27,
+      "id": 28,
       "title": "Ostia",
       "luogo_data": "Ostia, 2022",
       "posizione": "Ostia, Roma",
@@ -1183,7 +1192,7 @@
       ]
     },
     "SAVELLO": {
-      "id": 28,
+      "id": 29,
       "title": "Savello",
       "luogo_data": "Roma, 2020",
       "posizione": "Via di Monte Savello, Roma",
@@ -1222,7 +1231,7 @@
       ]
     },
     "SURRIPA": {
-      "id": 29,
+      "id": 30,
       "title": "Surripa",
       "luogo_data": "Amelia, 2022-2026",
       "posizione": "Località Surripa, Amelia TR",
@@ -1292,7 +1301,7 @@
       ]
     },
     "VIA DELLA CROCE": {
-      "id": 30,
+      "id": 31,
       "title": "Via Della Croce",
       "luogo_data": "Roma, 2025",
       "posizione": "Via della Croce, Roma",
@@ -1323,7 +1332,7 @@
       ]
     },
     "VIA NISCO": {
-      "id": 31,
+      "id": 32,
       "title": "Via Nisco",
       "luogo_data": "Roma, 2025",
       "posizione": "Via N. Nisco, Roma",
@@ -1362,7 +1371,7 @@
   },
   "uffici": {
     "AMI": {
-      "id": 32,
+      "id": 33,
       "title": "Ami",
       "luogo_data": "Roma, 2024",
       "posizione": "Via dell'Arte, Roma",
@@ -1432,7 +1441,7 @@
       ]
     },
     "ANCORA": {
-      "id": 33,
+      "id": 34,
       "title": "Ancora",
       "luogo_data": "Napoli, 2024-",
       "posizione": "Via nuova delle Brecce, Napoli",
@@ -1461,7 +1470,7 @@
       ]
     },
     "AVOLTA-NEXT": {
-      "id": 34,
+      "id": 35,
       "title": "Avolta Next",
       "luogo_data": "Milano, 2024",
       "posizione": "Milano",
@@ -1500,7 +1509,7 @@
       ]
     },
     "BNL-GUBBIO": {
-      "id": 35,
+      "id": 36,
       "title": "Bnl Gubbio",
       "luogo_data": "Gubbio, 2022",
       "posizione": "Via Beniamino Ubaldi 1, Gubbio PG",
@@ -1530,7 +1539,7 @@
       ]
     },
     "BNL-P2-P10": {
-      "id": 36,
+      "id": 37,
       "title": "Bnl P2 P10",
       "luogo_data": "Roma, 2023-2024",
       "posizione": "Via Altiero Spinelli, Roma",
@@ -1569,7 +1578,7 @@
       ]
     },
     "BS-24-MI": {
-      "id": 37,
+      "id": 38,
       "title": "Bs 24 Mi",
       "luogo_data": "Milano, 2021",
       "posizione": "Via Monte Rosa 91, Milano",
@@ -1638,7 +1647,7 @@
       ]
     },
     "BS-24-RM": {
-      "id": 38,
+      "id": 39,
       "title": "Bs 24 Rm",
       "luogo_data": "Roma, 2022",
       "posizione": "Via Gaeta, Roma",
@@ -1704,7 +1713,7 @@
       ]
     },
     "CELLNEX-INDUSTRIA": {
-      "id": 39,
+      "id": 40,
       "title": "Cellnex Industria",
       "luogo_data": "Roma, 2025-2026",
       "posizione": "Piazzale dell'Industria, Roma",
@@ -1743,7 +1752,7 @@
       ]
     },
     "CELLNEX-VIOLA": {
-      "id": 40,
+      "id": 41,
       "title": "Cellnex Viola",
       "luogo_data": "Roma, 2019",
       "posizione": "Via Viola, Roma",
@@ -1808,7 +1817,7 @@
       ]
     },
     "COLOMBOLAB2": {
-      "id": 41,
+      "id": 42,
       "title": "Colombolab2",
       "luogo_data": "Roma, 2025",
       "posizione": "Via Tiberio Imperatore, Roma",
@@ -1868,7 +1877,7 @@
       ]
     },
     "MONTE SAVELLO": {
-      "id": 42,
+      "id": 43,
       "title": "Monte Savello",
       "luogo_data": "Roma, 2020",
       "posizione": "Via di Monte Savello, Roma",
@@ -1924,7 +1933,7 @@
       ]
     },
     "Q8-NA": {
-      "id": 43,
+      "id": 44,
       "title": "Q8 Na",
       "luogo_data": "Napoli, 2024-",
       "posizione": "Via nuova delle Brecce, Napoli",
@@ -1995,7 +2004,7 @@
       ]
     },
     "RANDSTAD": {
-      "id": 44,
+      "id": 45,
       "title": "Randstad",
       "luogo_data": "Roma, 2019",
       "posizione": "P.le Luigi Sturzo, Roma",
@@ -2025,7 +2034,7 @@
       ]
     },
     "SIAE": {
-      "id": 45,
+      "id": 46,
       "title": "Siae",
       "luogo_data": "Roma, 2024",
       "posizione": "Viale della Letteratura, Roma",
@@ -2066,7 +2075,7 @@
       ]
     },
     "SV": {
-      "id": 46,
+      "id": 47,
       "title": "Sv",
       "luogo_data": "2026",
       "stato": "In corso",
@@ -2115,7 +2124,7 @@
       ]
     },
     "UNILEVER": {
-      "id": 47,
+      "id": 48,
       "title": "Unilever",
       "luogo_data": "Roma, 2023",
       "posizione": "Via Paolo di Dono, Roma",
@@ -2159,7 +2168,7 @@
       ]
     },
     "URBANA": {
-      "id": 48,
+      "id": 49,
       "title": "Urbana",
       "luogo_data": "Ortona, 2013",
       "posizione": "Via Costanzo Cloro, Roma",
@@ -2203,7 +2212,7 @@
       ]
     },
     "VERO": {
-      "id": 49,
+      "id": 50,
       "title": "Vero",
       "luogo_data": "Roma, 2018",
       "posizione": "Via Nomentana, Roma",
@@ -2251,7 +2260,7 @@
       ]
     },
     "WEX": {
-      "id": 50,
+      "id": 51,
       "title": "Wex",
       "luogo_data": "Roma, 2019",
       "posizione": "Via Carlo Veneziani, Roma",
