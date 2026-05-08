@@ -1886,8 +1886,18 @@
         }
       ]
     },
-    "MONTE SAVELLO": {
+    "IL TORCHIO": {
       "id": 44,
+      "title": "Il Torchio",
+      "images": [
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/IL TORCHIO/01_Torchio.jpg",
+          "description": ""
+        }
+      ]
+    },
+    "MONTE SAVELLO": {
+      "id": 45,
       "title": "Monte Savello",
       "luogo_data": "Roma, 2020",
       "posizione": "Via di Monte Savello, Roma",
@@ -1943,7 +1953,7 @@
       ]
     },
     "Q8-NA": {
-      "id": 45,
+      "id": 46,
       "title": "Q8 Na",
       "luogo_data": "Napoli, 2024-",
       "posizione": "Via nuova delle Brecce, Napoli",
@@ -2014,7 +2024,7 @@
       ]
     },
     "RANDSTAD": {
-      "id": 46,
+      "id": 47,
       "title": "Randstad",
       "luogo_data": "Roma, 2019",
       "posizione": "P.le Luigi Sturzo, Roma",
@@ -2044,7 +2054,7 @@
       ]
     },
     "SIAE": {
-      "id": 47,
+      "id": 48,
       "title": "Siae",
       "luogo_data": "Roma, 2024",
       "posizione": "Viale della Letteratura, Roma",
@@ -2085,7 +2095,7 @@
       ]
     },
     "SV": {
-      "id": 48,
+      "id": 49,
       "title": "Sv",
       "luogo_data": "2026",
       "stato": "In corso",
@@ -2134,7 +2144,7 @@
       ]
     },
     "UNILEVER": {
-      "id": 49,
+      "id": 50,
       "title": "Unilever",
       "luogo_data": "Roma, 2023",
       "posizione": "Via Paolo di Dono, Roma",
@@ -2178,7 +2188,7 @@
       ]
     },
     "URBANA": {
-      "id": 50,
+      "id": 51,
       "title": "Urbana",
       "luogo_data": "Ortona, 2013",
       "posizione": "Via Costanzo Cloro, Roma",
@@ -2222,7 +2232,7 @@
       ]
     },
     "VERO": {
-      "id": 51,
+      "id": 52,
       "title": "Vero",
       "luogo_data": "Roma, 2018",
       "posizione": "Via Nomentana, Roma",
@@ -2270,7 +2280,7 @@
       ]
     },
     "WEX": {
-      "id": 52,
+      "id": 53,
       "title": "Wex",
       "luogo_data": "Roma, 2019",
       "posizione": "Via Carlo Veneziani, Roma",
