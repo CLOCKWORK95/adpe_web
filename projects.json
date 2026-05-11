@@ -2026,7 +2026,7 @@
       "stato": "In corso",
       "committente": "SIAE",
       "layoutSequence": [
-        "PROJECT_PAIR_VERT-HOR",
+        "PROJECT_SINGLE_HORIZONTAL",
         "PROJECT_SINGLE_HORIZONTAL",
         "PROJECT_SINGLE_HORIZONTAL",
         "PROJECT_SINGLE_HORIZONTAL",
@@ -2034,7 +2034,7 @@
       ],
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/SIAE/00_e.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/SIAE/00.jpg",
           "description": ""
         },
         {
@@ -2051,10 +2051,6 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/SIAE/03.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/SIAE/05.jpg",
           "description": ""
         }
       ]
