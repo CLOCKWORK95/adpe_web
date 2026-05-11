@@ -171,8 +171,8 @@
       "committente": "Privato",
       "layoutSequence": [
         "PROJECT_PAIR_VERT-HOR",
-        "PROJECT_PAIR_VERTICAL",
-        "PROJECT_SINGLE_HORIZONTAL"
+        "PROJECT_SINGLE_HORIZONTAL",
+        "PROJECT_PAIR_VERTICAL"
       ],
       "images": [
         {
