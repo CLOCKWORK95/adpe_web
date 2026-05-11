@@ -1058,12 +1058,15 @@
       "stato": "Completato",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_SINGLE",
-        "PROJECT_PAIR"
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_TRIPLE",
+        "PROJECT_TRIPLE",
+        "PROJECT_PAIR_HORIZONTAL",
+        "PROJECT_PAIR_VERTICAL"
       ],
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/NOMENTANA/01.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/NOMENTANA/00.jpg",
           "description": ""
         },
         {
