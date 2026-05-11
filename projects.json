@@ -5,7 +5,7 @@
       "title": "Agata",
       "layoutSequence": [
         "PROJECT_SINGLE_HORIZONTAL",
-        "PROJECT_PAIR_HOR-VERT"
+        "PROJECT_SINGLE_HORIZONTAL"
       ],
       "images": [
         {
@@ -14,14 +14,6 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/AGATA/01.png",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/AGATA/01_b.png",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/AGATA/TAVOLO_A.png",
           "description": ""
         }
       ]
