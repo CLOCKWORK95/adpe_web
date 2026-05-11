@@ -106,6 +106,10 @@
       "title": "Clavetta",
       "images": [
         {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/CLAVETTA/00.jpg",
+          "description": ""
+        },
+        {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/CLAVETTA/01.jpg",
           "description": ""
         },
@@ -119,10 +123,6 @@
         },
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/CLAVETTA/12.des.03.jpg",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/CLAVETTA/12.des.05.jpg",
           "description": ""
         }
       ]
