@@ -1283,17 +1283,17 @@
       "stato": "In corso",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_SINGLE_VERTICAL",
         "PROJECT_SINGLE_HORIZONTAL",
+        "PROJECT_SINGLE_VERTICAL",
         "PROJECT_PAIR_HORIZONTAL"
       ],
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/VIA-DELLA-CROCE/bagno_render_Pagina_1.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/VIA-DELLA-CROCE/01.jpg",
           "description": ""
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/VIA-DELLA-CROCE/bagno_render_Pagina_2.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/VIA-DELLA-CROCE/bagno_render_Pagina_1.jpg",
           "description": ""
         },
         {
