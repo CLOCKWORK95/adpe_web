@@ -1865,9 +1865,29 @@
     "IL-TORCHIO": {
       "id": 43,
       "title": "Il Torchio",
+      "luogo_data": "Frascati, 2025",
+      "posizione": "Frascati RM",
+      "stato": "In corso",
+      "committente": "Privato",
+      "layoutSequence": [
+        "PROJECT_TRIPLE_VERT",
+        "PROJECT_SINGLE_HORIZONTAL"
+      ],
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/IL-TORCHIO/01_Torchio.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/IL-TORCHIO/00_c.png",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/IL-TORCHIO/01_c.png",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/IL-TORCHIO/02_c.png",
+          "description": ""
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/uffici/IL-TORCHIO/03_c.jpg",
           "description": ""
         }
       ]
