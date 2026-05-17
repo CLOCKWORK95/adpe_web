@@ -55,7 +55,7 @@
         "row": "1 / span 7"
       }
     ],
-    "height": "65vh",
+    "height": "auto",
     "columns": 15,
     "rows": 8
   },

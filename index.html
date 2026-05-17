@@ -32,12 +32,10 @@
            1. VARIABLES & BASE STYLES
            ========================================================================== */
         :root {
-            /* Variabili di Default (sovrascrivibili da S3) */
             --primary-color: #ffffff;
             --autumn-blue: #2da6c4; 
             --main-font: 'Roboto Mono', monospace;
             
-            /* Altri Colori */
             --secondary-color: #f8f9fa;
             --text-color: rgb(8, 43, 46);
             --accent-orange: #d4693a;
@@ -62,7 +60,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: var(--main-font); /* Applicazione del font dinamico */
+            font-family: var(--main-font); 
             background: var(--primary-color);
             color: var(--text-color);
             line-height: 1.6;
@@ -226,30 +224,46 @@
         .lang-dropdown-content a:hover { background: transparent; color: var(--autumn-blue); }
 
         /* ==========================================================================
-           6. HERO & TITLES
+           6. HERO & TITLES (LOGO CENTRALE - SIMMETRIA PERFETTA)
            ========================================================================== */
         .hero { 
-            min-height: calc(50vh - 80px); display: flex; flex-direction: column; 
-            align-items: center; justify-content: center; text-align: center; 
-            position: relative; overflow: hidden; padding-top: 4rem; padding-bottom: 2rem; scroll-margin-top: 85px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            position: relative; 
+            overflow: hidden; 
+            margin-top: 7rem;    /* Spazio matematico preciso tra Menu superiore e Logo */
+            margin-bottom: 7rem; /* Spazio matematico identico tra Logo e inizio dei layout delle foto */
+            padding: 0;          /* Azzeriamo i vecchi padding per evitare somme sballate */
+            scroll-margin-top: 85px; 
         }
         .hero-content { position: relative; z-index: 1; animation: fadeInUp 0.6s ease-out; }
         
         .studio-logo { 
-            width: 110px; height: 110px; background: rgba(255, 255, 255, 0.9); border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; margin: 8rem auto; 
-            box-shadow: var(--shadow-medium); animation: logoFloat 6s ease-in-out infinite; 
-            overflow: hidden; transition: var(--transition); 
+            width: 75px; 
+            height: 75px; 
+            background: rgba(255, 255, 255, 0.9); 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin: 0 auto; 
+            box-shadow: var(--shadow-medium); 
+            animation: logoFloat 6s ease-in-out infinite; 
+            overflow: hidden; 
+            transition: var(--transition); 
         }
         body.dark-theme .studio-logo { background: rgba(44, 44, 44, 0.9); }
         .studio-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 
         .title-wrapper {
             display: flex; justify-content: center; align-items: center; width: 100%;
-            margin-top: 11rem; margin-bottom: 11rem; animation: fadeInOnly 1s ease-out forwards;
+            margin-top: 7rem; margin-bottom: 7rem; animation: fadeInOnly 1s ease-out forwards;
         }
         .title-logo-center {
-            width: clamp(80px, 12vw, 95px); height: clamp(80px, 12vw, 95px); 
+            width: clamp(65px, 10vw, 75px); height: clamp(65px, 10vw, 75px); 
             border-radius: 50%; object-fit: cover; box-shadow: var(--shadow-medium); 
             transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
@@ -258,13 +272,13 @@
         /* ==========================================================================
            7. GRIDS & LAYOUTS (Home, Splash, Details)
            ========================================================================== */
-        .home-projects { padding: 4rem 0; scroll-margin-top: 85px; }
+        .home-projects { padding: 0; scroll-margin-top: 85px; } 
+        .home-splash { width: 100%; margin-top: 0; } /* Rimosso l'interferente */
         
         .container, .home-grid, .projects-grid { max-width: 92vw; margin: 0 auto; padding: 0 10px; }
 
-        .home-splash { width: 100%; }
         .splash-section {
-            display: grid; gap: 2rem; padding: 3rem 4vw; margin-bottom: 8rem; grid-auto-rows: auto;
+            display: grid; gap: 1.5vw; padding: 0 4vw; margin-bottom: 4.0vw; grid-auto-rows: auto;
         }
 
         .splash-item {
@@ -273,15 +287,17 @@
             align-items: center; cursor: pointer;
         }
         
-        /* Optimization & Transitions for Images */
         .proj-img-wrap img, .splash-item img {
             content-visibility: auto; background: rgba(0,0,0,0.03); 
             transition: opacity 0.5s ease-in-out, transform 0.35s ease;
         }
         
         .splash-item img {
-            max-width: 100%; max-height: 100%; width: auto; height: auto;
-            object-fit: contain; display: block; opacity: 0; 
+            width: 100%; 
+            height: auto; 
+            object-fit: cover; 
+            display: block; 
+            opacity: 0; 
         }
         .splash-item:hover img { transform: scale(1.05); }
 
@@ -403,10 +419,10 @@
            10. RESPONSIVE DESIGN (Media Queries)
            ========================================================================== */
         @media (max-width: 1050px) {
-            .splash-section { display: flex !important; flex-direction: column; height: auto !important; gap: 2rem; padding: 2rem 5vw; margin-bottom: 2rem; }
+            .splash-section { display: flex !important; flex-direction: column; height: auto !important; gap: 4vw; padding: 0 5vw; margin-bottom: 3vw; }
             .splash-item { width: 100%; height: auto; min-height: 40vh; }
             .splash-item img { max-width: 100%; max-height: 65vh; }
-            .projects-grid .splash-caption { opacity: 1; visibility: visible; margin-bottom: 4rem; }
+            .projects-grid .splash-caption { opacity: 1; visibility: visible; margin-bottom: 4rem; align-self: center}
             .about-content, .contact-content { margin-top: 6rem; }
             .project-detail-grid { gap: 1rem; row-gap: 6rem; }
             .proj-text-block, .adpe-text-block, .contact-text-block { grid-column: 1 / span 8; padding: 0; }
@@ -419,8 +435,10 @@
             body::after { width: 160px; height: 200px; top: 45%; right: 7%; } 
             .geometric-square-background { width: 160px; height: 160px; top: 12%; left: 75%; } 
             .background-rectangle { width: 160px; height: 160px; bottom: 12%; left: 22%; }
-            .studio-logo { width: 110px; height: 110px; margin: 5rem auto; }
-            .title-logo-center { width: 80px; height: 80px; }
+            
+            .hero { margin-top: 4rem; margin-bottom: 4rem; }
+            .title-wrapper { margin-top: 4rem; margin-bottom: 4rem; }
+            .title-logo-center { width: 65px; height: 65px; }
             
             nav { justify-content: space-between !important; width: 100%; align-items: center; }
             .nav-menu {
@@ -440,7 +458,7 @@
             .hamburger.active span:nth-child(2) { opacity: 0; }
             .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
 
-            .splash-section { padding: 1rem 5vw; }
+            .splash-section { padding: 0 5vw; margin-bottom: 6vw; }            
             .projects-grid .splash-caption { align-self: center; width: 100%; }
             .about-content, .contact-content { margin-top: 3rem; }
             .project-sticky-header { top: 55px; padding: 1rem 0; }
@@ -471,7 +489,11 @@
             body::after { width: 90px; height: 120px; top: 55%; right: 4%; } 
             .geometric-square-background { width: 90px; height: 90px; top: 18%; left: 78%; } 
             .background-rectangle { width: 90px; height: 90px; bottom: 18%; left: 15%; }
-            .studio-logo { width: 90px; height: 90px; margin: 4rem auto; }
+            
+            .hero { margin-top: 3rem; margin-bottom: 3rem; }
+            .studio-logo { width: 65px; height: 65px; margin: 0 auto; }
+            .title-wrapper { margin-top: 3rem; margin-bottom: 3rem; }
+            
             .container { padding: 0 15px; }
             .projects-grid { padding: 0 1rem; }
         }
@@ -560,6 +582,30 @@
     </div>
 
     <script>
+        // --- FETCH DINAMICO DEL TEMA DA S3 ---
+        fetch('https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/theme.json')
+            .then(res => {
+                if (!res.ok) throw new Error("Tema personalizzato non presente");
+                return res.json();
+            })
+            .then(theme => {
+                if (!theme) return;
+                const root = document.documentElement;
+                
+                if (theme.backgroundColor) root.style.setProperty('--primary-color', theme.backgroundColor);
+                if (theme.hoverColor) root.style.setProperty('--autumn-blue', theme.hoverColor);
+                if (theme.fontFamily) root.style.setProperty('--main-font', theme.fontFamily);
+                
+                if (theme.fontUrl) {
+                    const fontLink = document.createElement('link');
+                    fontLink.href = theme.fontUrl;
+                    fontLink.rel = 'stylesheet';
+                    document.head.appendChild(fontLink);
+                }
+            })
+            .catch(err => console.log("Uso il tema di default (Nessun theme.json trovato)"));
+        // ------------------------------------
+
         // === CONFIGURAZIONE CDN INTELLIGENTE ===
         const CDN_STRATEGY = 'auto'; // 'auto', 's3', o 'cdn'
         // =======================================
@@ -620,14 +666,13 @@
          */
         document.addEventListener('DOMContentLoaded', async function() {
             try {
-                // Aggiunto fetch('theme.json') all'elenco delle chiamate iniziali
                 const [projectsRes, layoutsRes, homeProjectsRes, adpeRes, contattiRes, orderRes, themeRes] = await Promise.all([
                     fetch('projects.json'), fetch('layouts.json'),
                     fetch('home_projects.json').catch(() => ({ json: () => [] })),
                     fetch('adpe.json').catch(() => ({ json: () => ({ sections: [] }) })),
                     fetch('contatti.json').catch(() => ({ json: () => ({}) })),
                     fetch('ordine_progetti.json').catch(() => ({ json: () => [] })),
-                    fetch('theme.json').catch(() => ({ json: () => ({}) })) // <--- NUOVO
+                    fetch('theme.json').catch(() => ({ json: () => ({}) }))
                 ]);
 
                 // --- APPLICAZIONE DEL TEMA ---
@@ -993,7 +1038,7 @@
                 while (i < imageQueue.length) {
                     const section = document.createElement('div');
                     section.className = 'splash-section';
-                    section.style.height = layout.height;
+                    section.style.height = 'auto'; 
                     section.style.gridTemplateColumns = `repeat(${layout.columns},1fr)`;
 
                     layout.slots.forEach(slot => {
@@ -1201,6 +1246,7 @@
                     <div class="contact-item">
                         <span class="contact-item-label">${data.social.label || 'Social'}</span>
                         <div class="contact-social-icons">
+                            /** 2026/05 Update: Correct social links map mapping safely **/
                             ${data.social.instagram ? `<a href="${data.social.instagram}" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>` : ''}
                             ${data.social.facebook ? `<a href="${data.social.facebook}" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>` : ''}
                             ${data.social.linkedin ? `<a href="${data.social.linkedin}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>` : ''}
@@ -1317,7 +1363,7 @@
 
                     const sectionEl = document.createElement('div');
                     sectionEl.className = 'splash-section';
-                    sectionEl.style.height = layoutDef.height;
+                    sectionEl.style.height = 'auto'; 
                     sectionEl.style.gridTemplateColumns = `repeat(${layoutDef.columns}, 1fr)`;
 
                     layoutDef.slots.forEach((slot, index) => {
