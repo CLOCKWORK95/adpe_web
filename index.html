@@ -4,32 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO & Meta Tags -->
     <title data-lang-key="pageTitle">Studio Architettura & Design | ADPE</title>
     <meta name="description" content="Studio ADPE, fondato dall'architetto Adriano Pernazza. Realtà dinamica e innovativa nel panorama dell'architettura e del design. Progettazione di spazi unici, estetici e funzionali.">
     <meta name="keywords" content="architettura, design, studio architettura roma, adriano pernazza, progettazione, residenziale, uffici, interior design">
     <meta name="author" content="Studio ADPE">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph / Social Media -->
     <meta property="og:title" content="Studio Architettura & Design | ADPE">
     <meta property="og:description" content="Progettazione di spazi che combinano estetica, funzionalità e sostenibilità.">
     <meta property="og:image" content="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg">
     <meta property="og:type" content="website">
 
-    <!-- Favicon -->
     <link rel="icon" href="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" type="image/jpeg">
     
-    <!-- Google Fonts & FontAwesome -->
-    <!-- 1. Preconnect per Google Fonts (anticipa la connessione ai server di Google) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- 2. Caricamento Asincrono per FontAwesome (NON blocca il rendering!) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
     
-    <!-- Fallback di sicurezza se l'utente ha JavaScript disabilitato -->
     <noscript>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     </noscript>
@@ -39,10 +32,14 @@
            1. VARIABLES & BASE STYLES
            ========================================================================== */
         :root {
+            /* Variabili di Default (sovrascrivibili da S3) */
             --primary-color: #ffffff;
+            --autumn-blue: #2da6c4; 
+            --main-font: 'Roboto Mono', monospace;
+            
+            /* Altri Colori */
             --secondary-color: #f8f9fa;
             --text-color: rgb(8, 43, 46);
-            --autumn-blue: #2da6c4; 
             --accent-orange: #d4693a;
             --accent-brown: #8b4513;
             --accent-green: #7fb069;
@@ -65,7 +62,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Roboto Mono', monospace;
+            font-family: var(--main-font); /* Applicazione del font dinamico */
             background: var(--primary-color);
             color: var(--text-color);
             line-height: 1.6;
@@ -483,16 +480,13 @@
 
 <body class="bg-animations-off">
 
-    <!-- Global Preloader -->
     <div id="globalLoader" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--primary-color); z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease, visibility 0.6s ease;">
         <img src="https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="Loading" style="width: 80px; height: 80px; border-radius: 50%; animation: pulse 1.5s infinite ease-in-out;">
     </div>
 
-    <!-- Geometric Backgrounds -->
     <div class="geometric-square-background"></div>
     <div class="background-rectangle"></div>
 
-    <!-- Navigation Header -->
     <header>
         <nav class="container">
             <ul class="nav-menu">
@@ -520,16 +514,13 @@
                 </div>
             </div>
             
-            <!-- Mobile Menu Toggle -->
             <div class="hamburger">
                 <span></span><span></span><span></span>
             </div>
         </nav>
     </header>
 
-    <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
         <section class="hero" id="hero">
             <div class="hero-content">
                 <div class="studio-logo">
@@ -538,35 +529,29 @@
             </div>
         </section>
         
-        <!-- Splash Page -->
         <section id="homeSplash" class="home-splash"></section>
         
-        <!-- Legacy Home Projects (Kept structure for dynamic logic safety) -->
         <section class="home-projects" id="homeProjects">
             <div class="container">
                 <div class="projects-grid" id="homeProjectsGrid"></div>
             </div>
         </section>
 
-        <!-- Projects Grid & Detail Section -->
         <section class="container projects-section" id="projectsSection" style="display: none;">
             <div class="project-filters" id="projectFilters"></div>
             <div class="projects-grid" id="projectsGrid"></div>
             <div class="project-detail" id="singleProjectDetail" style="display: none;"></div>
         </section>
 
-        <!-- About Section -->
         <section class="about-section" id="aboutSection" style="display: none;">
             <div id="adpeDynamicContent" style="width: 100%;"></div>
         </section>
 
-        <!-- Contact Section -->
         <section class="contact-section" id="contactSection" style="display: none;">
             <div id="contactDynamicContent" style="width: 100%;"></div>
         </section>
     </main>
 
-    <!-- Image Modal -->
     <div id="imageModal" class="image-modal" onclick="closeImageModal(event)">
         <span class="modal-close" onclick="closeImageModal(event)">&times;</span>
         <span class="modal-prev" onclick="showPrevImage(event)">&lt;</span>
@@ -574,42 +559,23 @@
         <img class="image-modal-content" id="modalImage">
     </div>
 
-    <!-- Scripts -->
     <script>
         // === CONFIGURAZIONE CDN INTELLIGENTE ===
-        // 'auto' -> S3 su Desktop (massima velocità), Netlify CDN su Mobile (risparmio dati)
-        // 's3'   -> S3 Diretto per tutti (esclude Netlify)
-        // 'cdn'  -> Netlify CDN per tutti
-        const CDN_STRATEGY = 'auto';
+        const CDN_STRATEGY = 'auto'; // 'auto', 's3', o 'cdn'
         // =======================================
 
-        /**
-         * CDN Optimizer Ibrido
-         * Re-indirizza le immagini in base al dispositivo (Mobile vs Desktop) e all'ambiente.
-         */
         function getOptimizedUrl(originalUrl, width = 1280) {
-            // Se non è un'immagine di S3, non toccarla
-            if (!originalUrl.includes('amazonaws.com')) return originalUrl;
+            if (!originalUrl || !originalUrl.includes('amazonaws.com')) return originalUrl;
+            if (CDN_STRATEGY === 's3') return originalUrl;
             
-            // Capiamo se siamo su Netlify o sul dominio ufficiale (esclude il Live Server locale)
             const isNetlifyEnv = window.location.hostname.includes('netlify.app') || 
                                  window.location.hostname.includes('adpe.it');
 
-            // Se siamo in locale o forziamo lo spegnimento, usa sempre S3
-            if (!isNetlifyEnv || CDN_STRATEGY === 's3') {
-                return originalUrl;
-            }
+            if (!isNetlifyEnv) return originalUrl;
 
-            // --- LA MAGIA DELL'ADAPTIVE DELIVERY ---
-            // Consideriamo "Mobile/Tablet" tutto ciò che è sotto i 1024 pixel di larghezza
             const isMobile = window.innerWidth <= 1024;
+            if (CDN_STRATEGY === 'auto' && !isMobile) return originalUrl;
 
-            // Se la strategia è 'auto' e siamo su un computer Desktop, usa S3 diretto
-            if (CDN_STRATEGY === 'auto' && !isMobile) {
-                return originalUrl;
-            }
-
-            // Altrimenti (siamo su Mobile o abbiamo forzato 'cdn'), usa Netlify CDN
             return `/.netlify/images?url=${encodeURIComponent(originalUrl)}&w=${width}&q=80`;
         }
 
@@ -625,7 +591,6 @@
         let allProjectsFlattened = [];
         let currentLang = localStorage.getItem('lang') || 'it';
 
-        // Translations Object
         const translations = {
             it: {
                 pageTitle: "ADPE Architettura e Design", homeLink: "Home", projectsLink: "progetti", aboutLink: "adpe", contactLink: "contatti",
@@ -655,13 +620,20 @@
          */
         document.addEventListener('DOMContentLoaded', async function() {
             try {
-                const [projectsRes, layoutsRes, homeProjectsRes, adpeRes, contattiRes, orderRes] = await Promise.all([
+                // Aggiunto fetch('theme.json') all'elenco delle chiamate iniziali
+                const [projectsRes, layoutsRes, homeProjectsRes, adpeRes, contattiRes, orderRes, themeRes] = await Promise.all([
                     fetch('projects.json'), fetch('layouts.json'),
                     fetch('home_projects.json').catch(() => ({ json: () => [] })),
                     fetch('adpe.json').catch(() => ({ json: () => ({ sections: [] }) })),
                     fetch('contatti.json').catch(() => ({ json: () => ({}) })),
-                    fetch('ordine_progetti.json').catch(() => ({ json: () => [] }))
+                    fetch('ordine_progetti.json').catch(() => ({ json: () => [] })),
+                    fetch('theme.json').catch(() => ({ json: () => ({}) })) // <--- NUOVO
                 ]);
+
+                // --- APPLICAZIONE DEL TEMA ---
+                const themeData = await themeRes.json().catch(() => ({}));
+                applyTheme(themeData);
+                // -----------------------------
 
                 projects = await projectsRes.json();
                 globalLayouts = await layoutsRes.json();
@@ -676,15 +648,34 @@
                 setupEventListeners();
                 setLanguage(currentLang, true); 
 
-                // Reveal app after short delay for images parsing
+            } catch (error) {
+                console.error('Errore nel caricamento dei dati iniziali:', error);
+            } finally {
                 setTimeout(() => {
                     const loader = document.getElementById('globalLoader');
                     if (loader) { loader.style.opacity = '0'; loader.style.visibility = 'hidden'; }
-                }, 2000); 
-            } catch (error) {
-                console.error('Errore nel caricamento dei dati iniziali:', error);
+                }, 1000); 
             }
         });
+
+        /**
+         * Funzione per applicare le variabili CSS dal JSON
+         */
+        function applyTheme(theme) {
+            if (!theme || Object.keys(theme).length === 0) return;
+            const root = document.documentElement;
+            
+            if (theme.backgroundColor) root.style.setProperty('--primary-color', theme.backgroundColor);
+            if (theme.hoverColor) root.style.setProperty('--autumn-blue', theme.hoverColor);
+            if (theme.fontFamily) root.style.setProperty('--main-font', theme.fontFamily);
+            
+            if (theme.fontUrl) {
+                const fontLink = document.createElement('link');
+                fontLink.href = theme.fontUrl;
+                fontLink.rel = 'stylesheet';
+                document.head.appendChild(fontLink);
+            }
+        }
 
         /**
          * System Event Listeners & UI Toggles
@@ -692,14 +683,12 @@
         function setupEventListeners() {
             setupMobileMenu();
 
-            // Theme Toggle
             document.getElementById('themeToggle').addEventListener('click', (e) => {
                 e.preventDefault();
                 const newTheme = document.body.classList.toggle('dark-theme') ? 'dark' : 'light';
                 localStorage.setItem('theme', newTheme);
             });
 
-            // Language Selector
             document.querySelectorAll('.language-selector-item').forEach(item => {
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -709,7 +698,6 @@
                 });
             });
 
-            // Modal Keyboard Nav
             document.addEventListener('keydown', function(e) {
                 const imageModal = document.getElementById('imageModal');
                 if (imageModal.style.display !== 'flex') return;
@@ -718,7 +706,6 @@
                 if (e.key === 'ArrowRight') showNextImage(e);
             });
 
-            // Modal Touch Nav (Swipe)
             const imageModal = document.getElementById('imageModal');
             let touchStartX = 0, touchEndX = 0;
             imageModal.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
@@ -728,16 +715,12 @@
                 if (touchStartX - touchEndX < -50) showPrevImage(event);
             });
 
-            // Scroll Header Effect
             window.addEventListener('scroll', function() {
                 const isScrolled = window.pageYOffset > 50;
                 document.querySelector('header').classList.toggle('scrolled', isScrolled);
             });
         }
 
-        /**
-         * Internationalization (i18n)
-         */
         function setLanguage(lang, isInitialLoad = false) {
             currentLang = lang;
             localStorage.setItem('lang', lang);
@@ -772,9 +755,6 @@
             }
         }
 
-        /**
-         * General View Navigation Logic
-         */
         function showSection(sectionId, shouldScroll = true) {
             document.body.setAttribute('data-view', currentView);
             ['hero', 'homeSplash', 'homeProjects', 'projectsSection', 'aboutSection', 'contactSection'].forEach(id => {
@@ -837,9 +817,6 @@
             if (container && container.innerHTML.trim() === '') renderContactSection();
         }
 
-        /**
-         * Single Project Render Logic
-         */
         function showProject(projectId, shouldScroll = true, addToHistory = true) {
             const project = findProjectById(projectId);
             if (!project) return;
@@ -922,9 +899,6 @@
             if (shouldScroll) window.scrollTo({ top: 0, behavior: 'instant' });
         }
 
-        /**
-         * Project Data Flattening & Utilities
-         */
         function flattenProjects(node, path = '', projects = []) {
             for (const key in node) {
                 if (Object.prototype.hasOwnProperty.call(node, key)) {
@@ -950,9 +924,6 @@
             return pathParts.map(part => translations[currentLang][`category_${part}`] || formatFolderNameForDisplay(part)).join(' ') || translations[currentLang].unknownCategory;
         }
 
-        /**
-         * Dynamic Filtering & Masonry Render Logic
-         */
         async function filterProjects(filter, fadeOutDuration = 0.2, delayBeforeRender = 250, fadeInDuration = 0.8, staggerDelay = 0, addToHistory = true) {
             lastActiveFilter = filter;
             if (addToHistory) saveState('projects', null, filter);
@@ -991,7 +962,6 @@
                     filteredProjects = allProjectsFlattened.filter(p => p.categoryPath.startsWith(filter));
                 }
                 
-                // Alpha/Config Custom Sorting
                 if (filter !== 'home_custom') {
                     const normalizeStr = (str) => str.toLowerCase().replace(/[\s\-_]/g, '');
                     filteredProjects.sort((a, b) => {
@@ -1019,7 +989,7 @@
                     }
                 });
 
-                let i = 0, staggerIndex = 0; 
+                let i = 0; 
                 while (i < imageQueue.length) {
                     const section = document.createElement('div');
                     section.className = 'splash-section';
@@ -1038,7 +1008,7 @@
                         const img = document.createElement('img');
                         img.src = getOptimizedUrl(imgData.src, 800);
                         img.loading = i <= 4 ? 'eager' : 'lazy';
-                        img.alt = imgText = '';
+                        img.alt = '';
                         img.onload = function() { this.style.opacity = '1'; };
 
                         item.appendChild(img);
@@ -1066,7 +1036,6 @@
             }, delayBeforeRender); 
         }
 
-        // Overlay hover effects mapping
         document.addEventListener('DOMContentLoaded', () => {
             const projectsGrid = document.getElementById('projectsGrid');
             projectsGrid.addEventListener('mouseover', e => {
@@ -1077,9 +1046,6 @@
             });
         });
         
-        /**
-         * Collect logic for filter dropdown menus
-         */
         function collectCategoryPaths(node, path, pathsSet) {
             for (const key in node) {
                 if (Object.prototype.hasOwnProperty.call(node, key)) {
@@ -1110,9 +1076,6 @@
             filtersContainer.innerHTML = filtersHtml;
         }
 
-        /**
-         * Render About/Adpe content injected via JSON
-         */
         function renderAdpeSection() {
             const container = document.getElementById('adpeDynamicContent');
             if (!container || !window.adpeData || !window.adpeData.sections) return;
@@ -1182,9 +1145,6 @@
             return html;
         }
 
-        /**
-         * Render Contact info via JSON payload
-         */
         function renderContactSection() {
             const container = document.getElementById('contactDynamicContent');
             if (!container || !window.contattiData) return;
@@ -1253,16 +1213,10 @@
             container.innerHTML = htmlContent;
         }
 
-        /**
-         * Format & Utilities
-         */
         function formatFolderNameForDisplay(name) {
             return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
         }
 
-        /**
-         * Mobile Dropdown Handlers
-         */
         function setupMobileMenu() {
             const hamburger = document.querySelector('.hamburger');
             const navMenu = document.querySelector('.nav-menu');
@@ -1310,12 +1264,8 @@
             });
         }
 
-        /**
-         * Lightbox Modals 
-         */
         function openImageModal(projectId, imageSrc) {
             let images = [];
-            // If projectId is null, it's called from About/Contact, bypass array finding.
             if(projectId){
                const project = findProjectById(projectId);
                if(project) images = project.images;
@@ -1352,9 +1302,6 @@
             document.getElementById('modalImage').src = getOptimizedUrl(currentProjectImages[currentImageIndex].src, 1600);
         }
 
-        /**
-         * Splashpage Initializer
-         */
         async function renderHomeSplash() {
             try {
                 const layouts = await fetch('layouts.json').then(r => r.json());
@@ -1419,9 +1366,6 @@
             return project ? project.id : null;
         }
 
-        /**
-         * State & History API Management
-         */
         function saveState(view, projectId = null, filter = null) {
             const currentState = history.state;
             if (currentState && currentState.view === view && currentState.projectId === projectId && currentState.filter === filter) return;
