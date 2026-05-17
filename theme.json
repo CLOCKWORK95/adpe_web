@@ -1,6 +1,6 @@
 {
   "backgroundColor": "#fafafa",
-  "hoverColor": "#ff5733",
-  "fontFamily": "'Inter', sans-serif",
-  "fontUrl": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+  "hoverColor": "#2e8b57",
+  "fontFamily": "'Finlandica Headline', sans-serif",
+  "fontUrl": "https://fonts.googleapis.com/css2?family=Finlandica+Headline:ital,wght@0,100..900;1,100..900&display=swap"
 }
