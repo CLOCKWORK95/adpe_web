@@ -39,110 +39,37 @@
   "C": {
     "slots": [
       {
-        "col": "1 / span 3",
+        "col": "1 / span 4",
         "row": "1 / span 7"
       },
       {
-        "col": "5 / span 3",
+        "col": "5 / span 4",
         "row": "1 / span 7"
       },
       {
-        "col": "9 / span 3",
-        "row": "1 / span 7"
-      },
-      {
-        "col": "13 / span 3",
+        "col": "9 / span 4",
         "row": "1 / span 7"
       }
     ],
-    "height": "65vh",
-    "columns": 15,
+    "height": "auto",
+    "columns": 12,
     "rows": 8
   },
-  "PROJECT_SINGLE_VERTICAL": {
+  "PROJECT_PAIR": {
+    "slots": [
+      {
+        "col": "2 / span 3"
+      },
+      {
+        "col": "8 / span 3"
+      }
+    ],
+    "columns": 12
+  },
+  "PROJECT_SINGLE": {
     "slots": [
       {
         "col": "5 / span 4"
-      }
-    ],
-    "columns": 12
-  },
-  "PROJECT_SINGLE_HORIZONTAL": {
-    "slots": [
-      {
-        "col": "3 / span 8"
-      }
-    ],
-    "columns": 12
-  },
-  "PROJECT_PAIR_VERTICAL": {
-    "slots": [
-      {
-        "col": "3 / span 3"
-      },
-      {
-        "col": "8 / span 3"
-      }
-    ],
-    "columns": 12
-  },
-  "PROJECT_PAIR_HORIZONTAL": {
-    "slots": [
-      {
-        "col": "2 / span 5"
-      },
-      {
-        "col": "8 / span 5"
-      }
-    ],
-    "columns": 12
-  },
-  "PROJECT_PAIR_HOR-VERT": {
-    "slots": [
-      {
-        "col": "2 / span 5"
-      },
-      {
-        "col": "8 / span 3"
-      }
-    ],
-    "columns": 12
-  },
-  "PROJECT_PAIR_VERT-HOR": {
-    "slots": [
-      {
-        "col": "3 / span 3"
-      },
-      {
-        "col": "7 / span 5"
-      }
-    ],
-    "columns": 12
-  },
-  "PROJECT_TRIPLE": {
-    "slots": [
-      {
-        "col": "1 / span 4"
-      },
-      {
-        "col": "6 / span 3"
-      },
-      {
-        "col": "10 / span 3"
-      }
-    ],
-    "columns": 12
-  },
-  "PROJECT_TRIPLE_VERT": {
-    "slots": [
-      {
-        "col": "1 / span 3"
-      },
-      {
-        "col": "5 / span 3"
-      },
-      {
-        "col": "9 / span 3"
       }
     ],
     "columns": 12
