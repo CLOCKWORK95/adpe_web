@@ -289,7 +289,7 @@
         }
         
         .proj-img-wrap img, .splash-item img {
-            content-visibility: auto; background: rgba(0,0,0,0.03); 
+            content-visibility: auto; background: transparent; 
             transition: opacity 0.5s ease-in-out, transform 0.35s ease;
         }
         
@@ -327,7 +327,8 @@
         }
         .proj-img-wrap img {
             max-width: 100%; max-height: 85vh; width: auto; height: auto; display: block;
-            box-shadow: var(--shadow-light); cursor: pointer; transition: transform 0.4s ease;
+            /*box-shadow: var(--shadow-light); */
+            cursor: pointer; transition: transform 0.4s ease;
         }
         .proj-img-wrap img:hover { transform: scale(1.02); }
 
