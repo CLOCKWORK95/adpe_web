@@ -234,9 +234,9 @@
             text-align: center; 
             position: relative; 
             overflow: hidden; 
-            margin-top: 7rem;    /* Spazio matematico preciso tra Menu superiore e Logo */
-            margin-bottom: 7rem; /* Spazio matematico identico tra Logo e inizio dei layout delle foto */
-            padding: 0;          /* Azzeriamo i vecchi padding per evitare somme sballate */
+            margin-top: 7rem;    
+            margin-bottom: 7rem; 
+            padding: 0;          
             scroll-margin-top: 85px; 
         }
         .hero-content { position: relative; z-index: 1; animation: fadeInUp 0.6s ease-out; }
@@ -274,7 +274,7 @@
            7. GRIDS & LAYOUTS (Home, Splash, Details)
            ========================================================================== */
         .home-projects { padding: 0; scroll-margin-top: 85px; } 
-        .home-splash { width: 100%; margin-top: 0; } /* Rimosso l'interferente */
+        .home-splash { width: 100%; margin-top: 0; } 
         
         .container, .home-grid, .projects-grid { max-width: 92vw; margin: 0 auto; padding: 0 10px; }
 
@@ -316,7 +316,8 @@
         .project-detail { width: 100%; padding-top: 2rem; padding-bottom: 6rem; }
         .project-detail-grid {
             display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem; 
-            row-gap: 14rem; max-width: 92vw; margin: 0 auto; align-items: start;
+            row-gap: 7rem; 
+            max-width: 92vw; margin: 0 auto; align-items: start;
         }
 
         .proj-img-wrap {
@@ -370,30 +371,57 @@
         .btn-back-minimal:hover { color: var(--autumn-blue); }
 
         /* ==========================================================================
-           8. ABOUT & CONTACT SECTIONS
+           8. ABOUT & CONTACT SECTIONS (STILE COERENTE A BLOCCHI)
            ========================================================================== */
+        /* Annulla l'animazione di Hover (Zoom) solo per le sezioni Chi Siamo e Contatti */
+        .adpe-block .proj-img-wrap img, 
+        .contact-dynamic-block .proj-img-wrap img {
+            transform: none !important;
+            transition: opacity 0.8s ease !important;
+            cursor: default; /* Cursore standard se l'immagine non ha un link */
+        }
+        
+        /* Se l'immagine ha un link valido (es. la mappa), attiva il cursore a manina (senza zoom) */
+        .adpe-block .dynamic-img-link img,
+        .contact-dynamic-block .dynamic-img-link img {
+            cursor: pointer !important;
+        }
+
+        /* Contenitore per i link delle immagini */
+        .dynamic-img-link { 
+            display: block; 
+            width: 100%; 
+            height: 100%; 
+            text-decoration: none; 
+        }
         .projects-section, .about-section, .contact-section { 
             padding: 4rem 0; min-height: calc(100vh - 80px); display: flex; 
             flex-direction: column; align-items: center; text-align: center; scroll-margin-top: 85px; 
         }
-        .adpe-block { position: relative; width: 100%; padding-bottom: 6rem; }
-        .adpe-block .project-detail-grid { row-gap: 4rem; }
-        .adpe-text-block { grid-column: 2 / span 5; font-size: 0.75rem; line-height: 1.6; color: var(--text-color); padding-top: 2rem; text-align: left; }
-        .adpe-main-item { margin-bottom: 0.4rem; line-height: 1.6; }
-        .adpe-sub-item { margin-left: 2.5rem; margin-bottom: 0.3rem; line-height: 1.5; font-size: 0.95em; opacity: 0.85; }
+        .adpe-block, .contact-dynamic-block { position: relative; width: 100%; padding-bottom: 6rem; }
+        .adpe-block .project-detail-grid, .contact-dynamic-block .project-detail-grid { row-gap: 4rem; }
+        
+        .adpe-text-block, .contact-dynamic-text-block { 
+            grid-column: 2 / span 5; font-size: 0.75rem; line-height: 1.6; color: var(--text-color); padding-top: 2rem; text-align: left; 
+        }
+        .adpe-main-item, .contact-main-item { margin-bottom: 0.4rem; line-height: 1.6; }
+        .adpe-sub-item, .contact-sub-item { margin-left: 2.5rem; margin-bottom: 0.3rem; line-height: 1.5; font-size: 0.95em; opacity: 0.85; }
 
-        .contact-block { position: relative; width: 100%; padding-bottom: 6rem; padding-top: 2rem; }
-        .contact-block .project-detail-grid { row-gap: 8rem; }
-        .contact-text-block {
-            grid-column: 2 / span 5; text-align: left; color: var(--text-color);
-            display: flex; flex-direction: column; gap: 3rem; padding-bottom: 2rem;
+        /* Link Immagini (Mappa) */
+        .dynamic-img-link { display: block; width: 100%; height: 100%; text-decoration: none; cursor: pointer; }
+
+        /* Footer Statico dei Contatti */
+        .contact-footer-block { position: relative; width: 100%; padding-top: 2rem; padding-bottom: 6rem; }
+        .contact-footer-grid {
+            display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem; max-width: 92vw; margin: 0 auto; text-align: left;
+        }
+        .contact-footer-content {
+            grid-column: 2 / span 10; display: flex; flex-direction: column; gap: 2.5rem; color: var(--text-color);
         }
         .contact-item { display: flex; flex-direction: column; gap: 0.3rem; }
-        .contact-item-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .contact-item-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; }
         .contact-item-value, .contact-item-value a { font-size: 0.75rem; color: var(--text-color); text-decoration: none; transition: color var(--transition); line-height: 1.5; }
         .contact-item-value a:hover { color: var(--autumn-blue); }
-        .contact-map-sketch { width: 100%; max-width: 250px; height: auto; margin-top: 0.5rem; cursor: pointer; transition: transform 0.4s ease; box-shadow: var(--shadow-light); }
-        .contact-map-sketch:hover { transform: scale(1.03); }
         
         .contact-social-icons { display: flex; gap: 1.2rem; margin-top: 0.2rem; }
         .contact-social-icons a { font-size: 1.0rem; color: var(--text-color); transition: var(--transition); }
@@ -426,8 +454,8 @@
             .projects-grid .splash-caption { opacity: 1; visibility: visible; margin-bottom: 4rem; align-self: center}
             .about-content, .contact-content { margin-top: 6rem; }
             .project-detail-grid { gap: 1rem; row-gap: 6rem; }
-            .proj-text-block, .adpe-text-block, .contact-text-block { grid-column: 1 / span 8; padding: 0; }
-            .adpe-block .proj-img-wrap, .contact-block .proj-img-wrap { grid-column: 2 / span 10 !important; }
+            .proj-text-block, .adpe-text-block, .contact-dynamic-text-block, .contact-footer-content { grid-column: 1 / span 12; padding: 0; }
+            .adpe-block .proj-img-wrap, .contact-dynamic-block .proj-img-wrap { grid-column: 1 / span 12 !important; }
             .nav-menu { gap: 2.5rem; }
         }
 
@@ -453,7 +481,7 @@
             .nav-menu.active { left: 0; }
             .nav-menu li { width: 100%; display: flex; justify-content: flex-end; margin-right: 1.5rem !important; margin-left: 0 !important; }
             .nav-menu li:nth-child(1), .nav-menu li:nth-child(2), .nav-menu li:nth-child(3) { justify-self: auto; }
-            .nav-link { font-size: 1.5rem; text-align: right; margin-bottom: 2rem; }
+            .nav-link { font-size: 1.0rem; text-align: right; margin-bottom: 2rem; }
             .hamburger { display: flex; }
             .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
             .hamburger.active span:nth-child(2) { opacity: 0; }
@@ -464,10 +492,9 @@
             .about-content, .contact-content { margin-top: 3rem; }
             .project-sticky-header { top: 55px; padding: 1rem 0; }
             .proj-head-wrapper { grid-column: 1 / span 12; flex-direction: column; gap: 0.2rem; }
-            .proj-img-wrap, .proj-text-block, .adpe-text-block, .contact-text-block { grid-column: 1 / span 12 !important; padding: 0 15px; }
+            .proj-img-wrap, .proj-text-block, .adpe-text-block, .contact-dynamic-text-block { grid-column: 1 / span 12 !important; padding: 0 15px; }
             .project-detail-grid { row-gap: 4rem; }
-            .adpe-block .project-detail-grid { row-gap: 2rem; }
-            .contact-block .project-detail-grid { row-gap: 5rem; }
+            .adpe-block .project-detail-grid, .contact-dynamic-block .project-detail-grid { row-gap: 2rem; }
             .btn-back-minimal { margin-top: 3rem; }
             
             .header-right-icons { position: relative !important; flex-wrap: wrap; justify-content: flex-end; gap: 1rem; }
@@ -504,7 +531,7 @@
 <body class="bg-animations-off">
 
     <div id="globalLoader" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--primary-color); z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease, visibility 0.6s ease;">
-        <img src="https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="Loading" style="width: 80px; height: 80px; border-radius: 50%; animation: pulse 1.5s infinite ease-in-out;">
+        <img src="https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="Loading" style="width: 120px; height: 120px; border-radius: 50%; animation: pulse 1.5s infinite ease-in-out;">
     </div>
 
     <div class="geometric-square-background"></div>
@@ -1122,24 +1149,25 @@
             filtersContainer.innerHTML = filtersHtml;
         }
 
+        /**
+         * RENDER DINAMICO SEZIONE ADPE (CHI SIAMO) - BLOCCO DELLO SLIDESHOW MODALE
+         */
         function renderAdpeSection() {
             const container = document.getElementById('adpeDynamicContent');
             if (!container || !window.adpeData || !window.adpeData.sections) return;
 
             let htmlContent = '';
             window.adpeData.sections.forEach(section => {
-                htmlContent += `<div class="adpe-block">`;
-                htmlContent += `
-                    <div class="project-sticky-header">
-                        <div class="project-sticky-grid">
-                            <div class="proj-head-wrapper">
-                                <div class="proj-head-title">${section.title}</div>
-                                <div class="proj-head-date">${section.subtitle || ''}</div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                htmlContent += `<div class="project-detail-grid">`;
+                htmlContent += '<div class="adpe-block">';
+                htmlContent += '  <div class="project-sticky-header">';
+                htmlContent += '    <div class="project-sticky-grid">';
+                htmlContent += '      <div class="proj-head-wrapper">';
+                htmlContent += '        <div class="proj-head-title">' + section.title + '</div>';
+                htmlContent += '        <div class="proj-head-date">' + (section.subtitle || '') + '</div>';
+                htmlContent += '      </div>';
+                htmlContent += '    </div>';
+                htmlContent += '  </div>';
+                htmlContent += '  <div class="project-detail-grid">';
                 
                 const imgs = section.images || [];
                 const layoutName = section.layout || "PROJECT_SINGLE";
@@ -1149,26 +1177,31 @@
                 layoutDef.slots.forEach(slot => {
                     if (imgIndex < imgs.length) {
                         let imgData = imgs[imgIndex];
-                        let rowStyle = slot.row ? `grid-row: ${slot.row};` : '';
+                        let rowStyle = slot.row ? 'grid-row: ' + slot.row + ';' : '';
                         
-                        htmlContent += `
-                            <div class="proj-img-wrap" style="grid-column: ${slot.col}; ${rowStyle}">
-                                <img src="${getOptimizedUrl(imgData.src, 1600)}" 
-                                     alt="${imgData.description || ''}" 
-                                     onclick="openImageModal(null, '${imgData.src}')" 
-                                     loading="lazy"
-                                     style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;"
-                                     onload="this.style.opacity=1">
-                            </div>
-                        `;
+                        htmlContent += '    <div class="proj-img-wrap" style="grid-column: ' + slot.col + '; ' + rowStyle + '">';
+                        
+                        // Gestione Link Custom (se inserito su S3)
+                        if (imgData.link) {
+                            htmlContent += '      <a href="' + imgData.link + '" target="_blank" class="dynamic-img-link">';
+                        }
+                        
+                        htmlContent += '      <img src="' + getOptimizedUrl(imgData.src, 1600) + '" ';
+                        htmlContent += '           alt="' + (imgData.description || '') + '" ';
+                        htmlContent += '           loading="lazy"';
+                        htmlContent += '           style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;"';
+                        htmlContent += '           onload="this.style.opacity=1">';
+                        
+                        if (imgData.link) htmlContent += '      </a>';
+                        htmlContent += '    </div>';
                         imgIndex++;
                     }
                 });
 
                 if (section.text) {
-                    htmlContent += `<div class="adpe-text-block">${formatAdpeText(section.text)}</div>`;
+                    htmlContent += '    <div class="adpe-text-block">' + formatAdpeText(section.text) + '</div>';
                 }
-                htmlContent += `</div></div>`; 
+                htmlContent += '  </div></div>'; 
             });
             container.innerHTML = htmlContent;
         }
@@ -1191,72 +1224,101 @@
             return html;
         }
 
+        /**
+         * RENDER DINAMICO SEZIONE CONTATTI - APERTURA LINK INTERATTIVO ED ESCLUSIONE MODALE
+         */
         function renderContactSection() {
             const container = document.getElementById('contactDynamicContent');
             if (!container || !window.contattiData) return;
 
             const data = window.contattiData;
-            const layoutName = data.layout || "ADPE_CENTER"; 
-            let layoutDef = globalLayouts[layoutName] || { columns: 12, slots: [{ col: "4 / span 6" }] };
+            let htmlContent = '';
 
-            let htmlContent = `<div class="contact-block"><div class="project-detail-grid">`;
+            // 1. Renderizzazione dei Blocchi Dinamici a griglia (Uguale ad ADPE)
+            if (data.sections && data.sections.length > 0) {
+                data.sections.forEach(section => {
+                    htmlContent += '<div class="contact-dynamic-block">';
+                    htmlContent += '  <div class="project-sticky-header">';
+                    htmlContent += '    <div class="project-sticky-grid">';
+                    htmlContent += '      <div class="proj-head-wrapper">';
+                    htmlContent += '        <div class="proj-head-title">' + section.title + '</div>';
+                    htmlContent += '        <div class="proj-head-date">' + (section.subtitle || '') + '</div>';
+                    htmlContent += '      </div>';
+                    htmlContent += '    </div>';
+                    htmlContent += '  </div>';
+                    htmlContent += '  <div class="project-detail-grid">';
+                    
+                    const imgs = section.images || [];
+                    const layoutName = section.layout || "PROJECT_SINGLE_HORIZONTAL";
+                    let layoutDef = globalLayouts[layoutName] || { columns: 12, slots: [{ col: "3 / span 8" }] };
 
-            if (data.main_image) {
-                let slot = layoutDef.slots[0];
-                htmlContent += `
-                    <div class="proj-img-wrap" style="grid-column: ${slot.col};">
-                        <img src="${getOptimizedUrl(data.main_image, 1200)}" alt="Studio ADPE" 
-                             style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;" 
-                             onload="this.style.opacity=1">
-                    </div>
-                `;
+                    let imgIndex = 0;
+                    layoutDef.slots.forEach(slot => {
+                        if (imgIndex < imgs.length) {
+                            let imgData = imgs[imgIndex];
+                            let rowStyle = slot.row ? 'grid-row: ' + slot.row + ';' : '';
+                            
+                            htmlContent += '    <div class="proj-img-wrap" style="grid-column: ' + slot.col + '; ' + rowStyle + '">';
+                            
+                            // SE C'È UN LINK (Es: Google Maps), creiamo l'ancora cliccabile, altrimenti no!
+                            if (imgData.link) {
+                                htmlContent += '      <a href="' + imgData.link + '" target="_blank" class="dynamic-img-link">';
+                            }
+                            
+                            htmlContent += '      <img src="' + getOptimizedUrl(imgData.src, 1600) + '" ';
+                            htmlContent += '           alt="' + (imgData.description || '') + '" ';
+                            // Rimosso l'attributo onclick="..." per escludere totalmente lo slideshow!
+                            htmlContent += '           loading="lazy"';
+                            htmlContent += '           style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;"';
+                            htmlContent += '           onload="this.style.opacity=1">';
+                            
+                            if (imgData.link) htmlContent += '      </a>';
+                            htmlContent += '    </div>';
+                            imgIndex++;
+                        }
+                    });
+
+                    if (section.text) {
+                        htmlContent += '    <div class="contact-dynamic-text-block">' + formatAdpeText(section.text) + '</div>';
+                    }
+                    htmlContent += '  </div></div>'; 
+                });
             }
 
-            htmlContent += `<div class="contact-text-block">`;
-            if (data.address) {
-                htmlContent += `
-                    <div class="contact-item">
-                        <span class="contact-item-label">${data.address.label || 'Indirizzo'}</span>
-                        <span class="contact-item-value">${data.address.text}</span>
-                        ${data.address.map_image ? `
-                            <a href="${data.address.map_link}" target="_blank" aria-label="Apri su Google Maps">
-                                <img src="${getOptimizedUrl(data.address.map_image, 500)}" alt="Mappa dello studio" class="contact-map-sketch">
-                            </a>
-                        ` : ''}
-                    </div>
-                `;
+            // 2. Aggancio del Blocco Footer dei Recapiti Statici (Telefono, Email, Social)
+            htmlContent += '<div class="contact-footer-block">';
+            htmlContent += '  <div class="contact-footer-grid">';
+            htmlContent += '    <div class="contact-footer-content">';
+
+            if (data.phone && data.phone.text) {
+                htmlContent += '      <div class="contact-item">';
+                htmlContent += '        <span class="contact-item-label">' + (data.phone.label || 'Telefono') + '</span>';
+                htmlContent += '        <span class="contact-item-value"><a href="tel:' + data.phone.text.replace(/\s+/g, '') + '">' + data.phone.text + '</a></span>';
+                htmlContent += '      </div>';
             }
-            if (data.phone) {
-                htmlContent += `
-                    <div class="contact-item">
-                        <span class="contact-item-label">${data.phone.label || 'Telefono'}</span>
-                        <span class="contact-item-value"><a href="tel:${data.phone.text.replace(/\s+/g, '')}">${data.phone.text}</a></span>
-                    </div>
-                `;
+
+            if (data.email && data.email.text) {
+                htmlContent += '      <div class="contact-item">';
+                htmlContent += '        <span class="contact-item-label">' + (data.email.label || 'Email') + '</span>';
+                htmlContent += '        <span class="contact-item-value"><a href="mailto:' + data.email.text + '">' + data.email.text + '</a></span>';
+                htmlContent += '      </div>';
             }
-            if (data.email) {
-                htmlContent += `
-                    <div class="contact-item">
-                        <span class="contact-item-label">${data.email.label || 'Email'}</span>
-                        <span class="contact-item-value"><a href="mailto:${data.email.text}">${data.email.text}</a></span>
-                    </div>
-                `;
-            }
+
             if (data.social) {
-                htmlContent += `
-                    <div class="contact-item">
-                        <span class="contact-item-label">${data.social.label || 'Social'}</span>
-                        <div class="contact-social-icons">
-                            /** 2026/05 Update: Correct social links map mapping safely **/
-                            ${data.social.instagram ? `<a href="${data.social.instagram}" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>` : ''}
-                            ${data.social.facebook ? `<a href="${data.social.facebook}" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>` : ''}
-                            ${data.social.linkedin ? `<a href="${data.social.linkedin}" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>` : ''}
-                        </div>
-                    </div>
-                `;
+                htmlContent += '      <div class="contact-item">';
+                htmlContent += '        <span class="contact-item-label">' + (data.social.label || 'Social') + '</span>';
+                htmlContent += '        <div class="contact-social-icons">';
+                if (data.social.instagram) htmlContent += '          <a href="' + data.social.instagram + '" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>';
+                if (data.social.facebook) htmlContent += '          <a href="' + data.social.facebook + '" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>';
+                if (data.social.linkedin) htmlContent += '          <a href="' + data.social.linkedin + '" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>';
+                htmlContent += '        </div>';
+                htmlContent += '      </div>';
             }
 
-            htmlContent += `</div></div></div>`; 
+            htmlContent += '    </div>';
+            htmlContent += '  </div>';
+            htmlContent += '</div>';
+
             container.innerHTML = htmlContent;
         }
 
