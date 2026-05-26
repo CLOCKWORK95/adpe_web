@@ -1,1510 +1,1680 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title data-lang-key="pageTitle">Studio Architettura & Design | ADPE</title>
-    <meta name="description" content="Studio ADPE, fondato dall'architetto Adriano Pernazza. Realtà dinamica e innovativa nel panorama dell'architettura e del design. Progettazione di spazi unici, estetici e funzionali.">
-    <meta name="keywords" content="architettura, design, studio architettura roma, adriano pernazza, progettazione, residenziale, uffici, interior design">
-    <meta name="author" content="Studio ADPE">
-    <meta name="robots" content="index, follow">
-    
-    <meta property="og:title" content="Studio Architettura & Design | ADPE">
-    <meta property="og:description" content="Progettazione di spazi che combinano estetica, funzionalità e sostenibilità.">
-    <meta property="og:image" content="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg">
-    <meta property="og:type" content="website">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="icon" href="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" type="image/jpeg">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title data-lang-key="pageTitle">Studio Architettura &amp; Design | ADPE</title>
+  <meta name="description" content="Studio ADPE, fondato dall'architetto Adriano Pernazza. Realtà dinamica e innovativa nel panorama dell'architettura e del design. Progettazione di spazi unici, estetici e funzionali.">
+  <meta name="keywords" content="architettura, design, studio architettura roma, adriano pernazza, progettazione, residenziale, uffici, interior design">
+  <meta name="author" content="Studio ADPE">
+  <meta name="robots" content="index, follow">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
-    
-    <noscript>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    </noscript>
+  <meta property="og:title" content="Studio Architettura &amp; Design | ADPE">
+  <meta property="og:description" content="Progettazione di spazi che combinano estetica, funzionalità e sostenibilità.">
+  <meta property="og:image" content="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg">
+  <meta property="og:type" content="website">
 
-    <style>
-        /* ==========================================================================
-           1. VARIABLES & BASE STYLES
-           ========================================================================== */
-        :root {
-            --primary-color: #ffffff;
-            --autumn-blue: #2da6c4; 
-            --main-font: 'Roboto Mono', monospace;
-            
-            --secondary-color: #f8f9fa;
-            --text-color: rgb(8, 43, 46);
-            --accent-orange: #d4693a;
-            --accent-brown: #8b4513;
-            --accent-green: #7fb069;
-            --accent-gold: #efb34b;
-            --border-color: rgb(45, 166, 196);
-            --shadow-light: 0 4px 20px rgba(0,0,0,0.05);
-            --shadow-medium: 0 8px 30px rgba(0,0,0,0.1);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+  <link rel="icon" href="https://adpe-web-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" type="image/jpeg">
 
-        body.dark-theme {
-            --primary-color: #1a1a1a;
-            --secondary-color: #2c2c2c;
-            --text-color: #f0f0f0;
-            --border-color: #444;
-            --shadow-light: 0 4px 20px rgba(0,0,0,0.3);
-            --shadow-medium: 0 8px 30px rgba(0,0,0,0.5);
-        }
+  <!-- [OPT] Preload JSON critici: il browser li scarica in parallelo prima che il JS li richieda -->
+  <link rel="preload" href="projects.json" as="fetch" crossorigin>
+  <link rel="preload" href="layouts.json" as="fetch" crossorigin>
+  <link rel="preload" href="theme.json" as="fetch" crossorigin>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  <!-- [OPT] fetchpriority=high sul logo: è la prima immagine above-the-fold (loader) -->
+  <link rel="preload" as="image" href="https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" fetchpriority="high">
 
-        body {
-            font-family: var(--main-font); 
-            background: var(--primary-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-            padding-top: 80px;
-            padding-bottom: 60px;
-            transition: background var(--transition), color var(--transition);
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        .container { max-width: 1800px; margin: 0 auto; padding: 0 20px; }
+  <!-- [OPT] Font Awesome caricato in modo non bloccante (tecnica print swap) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </noscript>
 
-        /* ==========================================================================
-           2. ANIMATIONS
-           ========================================================================== */
-        @keyframes pulse {
-            0%, 100% { transform: scale(0.95); opacity: 0.7; }
-            50% { transform: scale(1.05); opacity: 1; }
-        }
-        @keyframes floatTriangle { 
-            0%, 100% { transform: rotate(0deg) translateY(0px); } 
-            33% { transform: rotate(120deg) translateY(-20px); } 
-            66% { transform: rotate(240deg) translateY(10px); } 
-        }
-        @keyframes floatCircle { 
-            0%, 100% { transform: translate(0px, 0px) scale(1); } 
-            40% { transform: translate(-30px, 50px) scale(1.02); } 
-            70% { transform: translate(20px, -40px) scale(0.98); } 
-        }
-        @keyframes floatGeometry { 
-            0%, 100% { transform: rotate(0deg) translateX(20px); } 
-            33% { transform: rotate(120deg) translateY(-20px); } 
-            66% { transform: rotate(240deg) translateY(10px); } 
-        }
-        @keyframes floatRectangle { 
-            0%, 100% { transform: rotate(0deg) translateX(-100px); } 
-            33% { transform: rotate(120deg) translateY(-20px); } 
-            66% { transform: rotate(240deg) translateY(10px); } 
-        }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInOnly { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes logoFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+  <style>
+    /* ==========================================================================
+       1. VARIABLES & BASE STYLES
+       ========================================================================== */
+    :root {
+      --primary-color: #ffffff;
+      --autumn-blue: #2da6c4;
+      --main-font: 'Roboto Mono', monospace;
+      --secondary-color: #f8f9fa;
+      --text-color: rgb(8, 43, 46);
+      --accent-orange: #d4693a;
+      --accent-brown: #8b4513;
+      --accent-green: #7fb069;
+      --accent-gold: #efb34b;
+      --border-color: rgb(45, 166, 196);
+      --shadow-light: 0 4px 20px rgba(0,0,0,0.05);
+      --shadow-medium: 0 8px 30px rgba(0,0,0,0.1);
+      /* [OPT] transition esplicita solo sulle proprietà animate, non "all" */
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-        .fade-in { animation: fadeInUp 0.6s ease-out forwards; }
+    body.dark-theme {
+      --primary-color: #1a1a1a;
+      --secondary-color: #2c2c2c;
+      --text-color: #f0f0f0;
+      --border-color: #444;
+      --shadow-light: 0 4px 20px rgba(0,0,0,0.3);
+      --shadow-medium: 0 8px 30px rgba(0,0,0,0.5);
+    }
 
-        /* ==========================================================================
-           3. BACKGROUND GEOMETRY
-           ========================================================================== */
-        body::before, body::after, .geometric-square-background, .background-rectangle {
-            content: ''; position: fixed; z-index: -1; pointer-events: none;
-            transition: opacity var(--transition); opacity: 0.25;
-        }
-        body::before { top: 5%; left: 5%; width: 400px; height: 400px; background-color: var(--accent-brown); border-radius: 50%; animation: floatCircle 85s ease-in-out infinite; }
-        body::after { top: 40%; right: 10%; width: 300px; height: 400px; background-color: var(--autumn-blue); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); animation: floatTriangle 250s ease-in-out infinite; }
-        .geometric-square-background { top: 10%; left: 80%; width: 305px; height: 305px; background: var(--accent-green); animation: floatGeometry 250s ease-in-out infinite reverse; border-radius: 2%; }
-        .background-rectangle { bottom: 10%; left: 25%; width: 305px; height: 305px; background: var(--accent-gold); animation: floatRectangle 250s ease-in-out infinite reverse; border-radius: 2%; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body.bg-animations-off::before,
-        body.bg-animations-off::after,
-        body.bg-animations-off .geometric-square-background,
-        body.bg-animations-off .background-rectangle {
-            animation: none !important; opacity: 0 !important;
-        }
+    body {
+      font-family: var(--main-font);
+      background: var(--primary-color);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+      padding-top: 80px;
+      padding-bottom: 60px;
+      /* [OPT] transition esplicita, non "all" */
+      transition: background var(--transition), color var(--transition);
+    }
 
-        /* ==========================================================================
-           4. HEADER & NAVIGATION
-           ========================================================================== */
-        header {
-            background: transparent; padding: 1rem 0; position: fixed;
-            top: 0; width: 100%; z-index: 1000; transition: background 0.3s ease;
-        }
-        header:hover, header.scrolled { background: var(--primary-color); }
+    .container { max-width: 1800px; margin: 0 auto; padding: 0 20px; }
 
-        nav { position: relative; width: 100%; display: flex; align-items: flex-start; }
+    /* ==========================================================================
+       2. ANIMATIONS
+       ========================================================================== */
+    @keyframes pulse {
+      0%, 100% { transform: scale(0.95); opacity: 0.7; }
+      50%       { transform: scale(1.05); opacity: 1; }
+    }
+    @keyframes floatTriangle {
+      0%, 100% { transform: rotate(0deg) translateY(0px); }
+      33%       { transform: rotate(120deg) translateY(-20px); }
+      66%       { transform: rotate(240deg) translateY(10px); }
+    }
+    @keyframes floatCircle {
+      0%, 100% { transform: translate(0px, 0px) scale(1); }
+      40%       { transform: translate(-30px, 50px) scale(1.02); }
+      70%       { transform: translate(20px, -40px) scale(0.98); }
+    }
+    @keyframes floatGeometry {
+      0%, 100% { transform: rotate(0deg) translateX(20px); }
+      33%       { transform: rotate(120deg) translateY(-20px); }
+      66%       { transform: rotate(240deg) translateY(10px); }
+    }
+    @keyframes floatRectangle {
+      0%, 100% { transform: rotate(0deg) translateX(-100px); }
+      33%       { transform: rotate(120deg) translateY(-20px); }
+      66%       { transform: rotate(240deg) translateY(10px); }
+    }
+    @keyframes fadeIn    { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeInUp  { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInOnly { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes logoFloat { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
 
-        .nav-menu { 
-            position: relative; width: 100%; display: grid; 
-            grid-template-columns: 1fr auto 1fr; align-items: flex-start; 
-            list-style: none; pointer-events: auto; 
-        }
-        .nav-menu li { pointer-events: auto; }
-        .nav-menu li:nth-child(1) { justify-self: end; margin-right: 6rem; }
-        .nav-menu li:nth-child(2) { justify-self: center; }
-        .nav-menu li:nth-child(3) { justify-self: start; margin-left: 6rem; }
+    .fade-in { animation: fadeInUp 0.6s ease-out forwards; }
 
-        .nav-link {
-            color: var(--text-color); text-decoration: none; font-weight: 400; 
-            font-size: 1.0rem; transition: var(--transition); position: relative; 
-            cursor: pointer; letter-spacing: 1px;
-        }
-        .nav-link:hover { color: var(--autumn-blue); transform: translateY(-2px) scale(1.02); }
-        .nav-link::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px; background: var(--autumn-blue); transition: var(--transition); }
-        .nav-link:hover::after { width: 100%; }
+    /* ==========================================================================
+       3. BACKGROUND GEOMETRY
+       ========================================================================== */
+    body::before, body::after, .geometric-square-background, .background-rectangle {
+      content: ''; position: fixed; z-index: -1; pointer-events: none;
+      /* [OPT] transition esplicita */
+      transition: opacity var(--transition); opacity: 0.25;
+    }
+    body::before {
+      top: 5%; left: 5%; width: 400px; height: 400px;
+      background-color: var(--accent-brown); border-radius: 50%;
+      animation: floatCircle 85s ease-in-out infinite;
+    }
+    body::after {
+      top: 40%; right: 10%; width: 300px; height: 400px;
+      background-color: var(--autumn-blue);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      animation: floatTriangle 250s ease-in-out infinite;
+    }
+    .geometric-square-background {
+      top: 10%; left: 80%; width: 305px; height: 305px;
+      background: var(--accent-green); border-radius: 2%;
+      animation: floatGeometry 250s ease-in-out infinite reverse;
+    }
+    .background-rectangle {
+      bottom: 10%; left: 25%; width: 305px; height: 305px;
+      background: var(--accent-gold); border-radius: 2%;
+      animation: floatRectangle 250s ease-in-out infinite reverse;
+    }
 
-        .header-right-icons { 
-            position: absolute; right: 0; top: 0.3rem; display: flex; 
-            align-items: flex-start; gap: 1.5rem; z-index: 100;
-        }
-        .language-group, .theme-group { display: none !important; align-items: center; }
-        .language-group { gap: 0.8rem; margin-right: 0.5rem; }
+    body.bg-animations-off::before,
+    body.bg-animations-off::after,
+    body.bg-animations-off .geometric-square-background,
+    body.bg-animations-off .background-rectangle {
+      animation: none !important; opacity: 0 !important;
+    }
 
-        .header-social-link, .language-selector-item { color: var(--text-color); font-size: 1rem; transition: var(--transition); text-decoration: none; cursor: pointer; }
-        .header-social-link:hover, .language-selector-item:hover { color: var(--autumn-blue); transform: scale(1.2); }
-        
-        #themeToggle i { font-size: 1.4rem; color: var(--text-color); transition: color var(--transition); }
-        body.dark-theme #themeToggle i { color: var(--accent-gold); }
-        
-        .language-selector-item { font-size: 1.0rem; font-weight: bold; text-transform: uppercase; }
-        .language-selector-item.active { color: var(--autumn-blue); text-decoration: underline; }
+    /* ==========================================================================
+       4. HEADER & NAVIGATION
+       ========================================================================== */
+    header {
+      background: transparent; padding: 1rem 0; position: fixed;
+      top: 0; width: 100%; z-index: 1000; transition: background 0.3s ease;
+    }
+    header:hover, header.scrolled { background: var(--primary-color); }
 
-        .hamburger { display: none; flex-direction: column; cursor: pointer; transition: var(--transition); }
-        .hamburger span { width: 25px; height: 2px; background: var(--text-color); margin: 3px 0; transition: var(--transition); }
+    nav { position: relative; width: 100%; display: flex; align-items: flex-start; }
 
-        /* ==========================================================================
-           5. DROPDOWNS (Filters & Language)
-           ========================================================================== */
-        .nav-item-dropdown, .lang-dropdown { 
-            display: flex; flex-direction: column; align-items: flex-end; 
-        }
-        .nav-item-dropdown .dropdown-content, .lang-dropdown-content {
-            max-height: 0; opacity: 0; visibility: hidden; pointer-events: none;
-            display: flex; flex-direction: column; align-items: flex-end; 
-            transition: max-height 0.6s ease, opacity 0.4s ease, margin-top 0.4s ease, visibility 0.6s;
-            background: transparent !important; padding: 0 !important; 
-            border-radius: 0 !important; box-shadow: none !important; 
-        }
+    .nav-menu {
+      position: relative; width: 100%; display: grid;
+      grid-template-columns: 1fr auto 1fr; align-items: flex-start;
+      list-style: none; pointer-events: auto;
+    }
+    .nav-menu li { pointer-events: auto; }
+    .nav-menu li:nth-child(1) { justify-self: end; margin-right: 6rem; }
+    .nav-menu li:nth-child(2) { justify-self: center; }
+    .nav-menu li:nth-child(3) { justify-self: start; margin-left: 6rem; }
 
-        body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
-        body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content {
-            max-height: 600px; opacity: 1; visibility: visible; pointer-events: auto; margin-top: 2rem; 
-        }
-        .lang-dropdown:hover .lang-dropdown-content {
-            max-height: 200px; opacity: 1; visibility: visible; pointer-events: auto; margin-top: 1rem;
-        }
+    .nav-link {
+      color: var(--text-color); text-decoration: none; font-weight: 400;
+      font-size: 1.0rem; position: relative; cursor: pointer; letter-spacing: 1px;
+      /* [OPT] transition esplicita */
+      transition: color var(--transition), transform var(--transition);
+    }
+    .nav-link:hover { color: var(--autumn-blue); transform: translateY(-2px) scale(1.02); }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -5px; left: 0;
+      width: 0; height: 2px; background: var(--autumn-blue);
+      transition: width var(--transition);
+    }
+    .nav-link:hover::after { width: 100%; }
 
-        .dropdown-content .filter-btn {
-            font-family: inherit; font-weight: 400; background: transparent; border: none;
-            color: var(--text-color); padding: 0.4rem 0; margin: 0; font-size: 0.65rem; 
-            letter-spacing: 0.05rem; text-transform: uppercase; 
-            transition: color 0.3s ease, transform 0.3s ease; cursor: pointer; 
-            text-align: right; width: 100%; transform-origin: right center; 
-        }
-        .dropdown-content .filter-btn:hover, .dropdown-content .filter-btn.active {
-            background: transparent; color: var(--autumn-blue); transform: scale(1.1); 
-            text-shadow: 0.3px 0 0 var(--autumn-blue);
-        }
+    .header-right-icons {
+      position: absolute; right: 0; top: 0.3rem; display: flex;
+      align-items: flex-start; gap: 1.5rem; z-index: 100;
+    }
+    .language-group, .theme-group { display: none !important; align-items: center; }
+    .language-group { gap: 0.8rem; margin-right: 0.5rem; }
 
-        .current-lang {
-            font-family: inherit; font-size: 0.75rem; font-weight: 400; color: var(--text-color);
-            transition: color var(--transition); text-transform: uppercase; 
-            letter-spacing: 0.1rem; display: flex; align-items: center; gap: 6px; cursor: pointer;
-        }
-        .current-lang:hover { color: var(--autumn-blue); }
+    .header-social-link, .language-selector-item {
+      color: var(--text-color); font-size: 1rem;
+      transition: color var(--transition), transform var(--transition);
+      text-decoration: none; cursor: pointer;
+    }
+    .header-social-link:hover, .language-selector-item:hover {
+      color: var(--autumn-blue); transform: scale(1.2);
+    }
 
-        .lang-dropdown-content a {
-            font-family: inherit; font-weight: 400; letter-spacing: 0.05rem; padding: 0.4rem 0; 
-            color: var(--text-color); text-decoration: none; font-size: 0.75rem; 
-            text-align: right; width: 100%; transition: color 0.3s ease;
-        }
-        .lang-dropdown-content a:hover { background: transparent; color: var(--autumn-blue); }
+    #themeToggle i { font-size: 1.4rem; color: var(--text-color); transition: color var(--transition); }
+    body.dark-theme #themeToggle i { color: var(--accent-gold); }
 
-        /* ==========================================================================
-           6. HERO & TITLES (LOGO CENTRALE - SIMMETRIA PERFETTA)
-           ========================================================================== */
-        .hero { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center; 
-            position: relative; 
-            overflow: hidden; 
-            margin-top: 7rem;    
-            margin-bottom: 7rem; 
-            padding: 0;          
-            scroll-margin-top: 85px; 
-        }
-        .hero-content { position: relative; z-index: 1; animation: fadeInUp 0.6s ease-out; }
-        
-        .studio-logo { 
-            width: 75px; 
-            height: 75px; 
-            background: rgba(255, 255, 255, 0.9); 
-            margin-bottom: 20rem;
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            margin: 0 auto; 
-            box-shadow: var(--shadow-medium); 
-            animation: logoFloat 6s ease-in-out infinite; 
-            overflow: hidden; 
-            transition: var(--transition); 
-        }
-        body.dark-theme .studio-logo { background: rgba(44, 44, 44, 0.9); }
-        .studio-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .language-selector-item { font-size: 1.0rem; font-weight: bold; text-transform: uppercase; }
+    .language-selector-item.active { color: var(--autumn-blue); text-decoration: underline; }
 
-        .title-wrapper {
-            display: flex; justify-content: center; align-items: center; width: 100%;
-            margin-top: 4rem; margin-bottom: 10rem; animation: fadeInOnly 1s ease-out forwards;
-        }
-        .title-logo-center {
-            width: clamp(65px, 10vw, 75px); height: clamp(65px, 10vw, 75px); 
-            border-radius: 50%; object-fit: cover; box-shadow: var(--shadow-medium); 
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-        .title-logo-center:hover { transform: scale(1.03); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+    .hamburger { display: none; flex-direction: column; cursor: pointer; transition: opacity var(--transition); }
+    .hamburger span { width: 25px; height: 2px; background: var(--text-color); margin: 3px 0; transition: transform var(--transition), opacity var(--transition); }
 
-        /* ==========================================================================
-           7. GRIDS & LAYOUTS (Home, Splash, Details)
-           ========================================================================== */
-        .home-projects { padding: 0; scroll-margin-top: 85px; } 
-        .home-splash { width: 100%; margin-top: 0; } 
-        
-        .container, .home-grid, .projects-grid { max-width: 92vw; margin: 0 auto; padding: 0 10px; }
+    /* ==========================================================================
+       5. DROPDOWNS (Filters & Language)
+       ========================================================================== */
+    .nav-item-dropdown, .lang-dropdown {
+      display: flex; flex-direction: column; align-items: flex-end;
+    }
+    .nav-item-dropdown .dropdown-content, .lang-dropdown-content {
+      max-height: 0; opacity: 0; visibility: hidden; pointer-events: none;
+      display: flex; flex-direction: column; align-items: flex-end;
+      transition: max-height 0.6s ease, opacity 0.4s ease, margin-top 0.4s ease, visibility 0.6s;
+      background: transparent !important; padding: 0 !important;
+      border-radius: 0 !important; box-shadow: none !important;
+    }
 
-        .splash-section {
-            display: grid; gap: 1.5vw; padding: 0 4vw; margin-bottom: 4.0vw; grid-auto-rows: auto;
-        }
+    body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
+    body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content {
+      max-height: 600px; opacity: 1; visibility: visible; pointer-events: auto; margin-top: 2rem;
+    }
+    .lang-dropdown:hover .lang-dropdown-content {
+      max-height: 200px; opacity: 1; visibility: visible; pointer-events: auto; margin-top: 1rem;
+    }
 
-        .splash-item {
-            position: relative; overflow: hidden; background: transparent;
-            display: flex; flex-direction: column; justify-content: flex-end; 
-            align-items: center; cursor: pointer;
-        }
-        
-        .proj-img-wrap img, .splash-item img {
-            content-visibility: auto; background: transparent; 
-            transition: opacity 0.5s ease-in-out, transform 0.35s ease;
-        }
-        
-        .splash-item img {
-            width: 100%; 
-            height: auto; 
-            object-fit: cover; 
-            display: block; 
-            opacity: 0; 
-        }
-        .splash-item:hover img { transform: scale(1.05); }
+    .dropdown-content .filter-btn {
+      font-family: inherit; font-weight: 400; background: transparent; border: none;
+      color: var(--text-color); padding: 0.4rem 0; margin: 0; font-size: 0.65rem;
+      letter-spacing: 0.05rem; text-transform: uppercase;
+      transition: color 0.3s ease, transform 0.3s ease;
+      cursor: pointer; text-align: right; width: 100%; transform-origin: right center;
+    }
+    .dropdown-content .filter-btn:hover, .dropdown-content .filter-btn.active {
+      background: transparent; color: var(--autumn-blue); transform: scale(1.1);
+      text-shadow: 0.3px 0 0 var(--autumn-blue);
+    }
 
-        .projects-grid .splash-caption {
-            opacity: 0; visibility: hidden; transition: opacity 0.4s ease, visibility 0.4s ease; 
-            text-align: center; padding: 0.5rem 0; color: var(--text-color); align-self: start; 
-        }
-        body.dark-theme .projects-grid .splash-caption { color: #ccc; }
-        .projects-grid .splash-item:hover + .splash-caption { opacity: 1; visibility: visible; }
+    .current-lang {
+      font-family: inherit; font-size: 0.75rem; font-weight: 400; color: var(--text-color);
+      transition: color var(--transition); text-transform: uppercase;
+      letter-spacing: 0.1rem; display: flex; align-items: center; gap: 6px; cursor: pointer;
+    }
+    .current-lang:hover { color: var(--autumn-blue); }
 
-        .splash-title { font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
-        .splash-date { font-size: 0.75rem; opacity: 0.7; margin-top: 0.2rem; }
+    .lang-dropdown-content a {
+      font-family: inherit; font-weight: 400; letter-spacing: 0.05rem; padding: 0.4rem 0;
+      color: var(--text-color); text-decoration: none; font-size: 0.75rem;
+      text-align: right; width: 100%; transition: color 0.3s ease;
+    }
+    .lang-dropdown-content a:hover { background: transparent; color: var(--autumn-blue); }
 
-        /* Single Project Grid */
-        .project-detail { width: 100%; padding-top: 2rem; padding-bottom: 6rem; }
-        .project-detail-grid {
-            display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem; 
-            row-gap: 7rem; 
-            max-width: 92vw; margin: 0 auto; align-items: start;
-        }
+    /* ==========================================================================
+       6. HERO & TITLES
+       ========================================================================== */
+    .hero {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; text-align: center; position: relative;
+      overflow: hidden; margin-top: 7rem; margin-bottom: 7rem;
+      padding: 0; scroll-margin-top: 85px;
+    }
+    .hero-content { position: relative; z-index: 1; animation: fadeInUp 0.6s ease-out; }
 
-        .proj-img-wrap {
-            position: relative; width: 100%; height: 100%; display: flex; 
-            justify-content: center; align-items: center; background: transparent;
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-        .proj-img-wrap img {
-            max-width: 100%; max-height: 85vh; width: auto; height: auto; display: block;
-            /*box-shadow: var(--shadow-light); */
-            cursor: pointer; transition: transform 0.4s ease;
-        }
-        .proj-img-wrap img:hover { transform: scale(1.02); }
+    .studio-logo {
+      width: 75px; height: 75px; background: rgba(255,255,255,0.9);
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; margin: 0 auto; box-shadow: var(--shadow-medium);
+      animation: logoFloat 6s ease-in-out infinite;
+      overflow: hidden;
+      /* [OPT] transition esplicita */
+      transition: box-shadow var(--transition);
+    }
+    body.dark-theme .studio-logo { background: rgba(44,44,44,0.9); }
+    .studio-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 
-        .pos-pair-left { grid-column: 2 / span 4; }
-        .pos-pair-right { grid-column: 8 / span 4; }
-        .pos-single { grid-column: 3 / span 8; }
+    .title-wrapper {
+      display: flex; justify-content: center; align-items: center; width: 100%;
+      margin-top: 4rem; margin-bottom: 10rem; animation: fadeInOnly 1s ease-out forwards;
+    }
+    .title-logo-center {
+      width: clamp(65px, 10vw, 75px); height: clamp(65px, 10vw, 75px);
+      border-radius: 50%; object-fit: cover; box-shadow: var(--shadow-medium);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      /* [OPT] hint al browser per allocare un layer composito all'hover */
+      will-change: transform;
+    }
+    .title-logo-center:hover { transform: scale(1.03); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
 
-        /* Sticky Header inside Projects/About */
-        .project-sticky-header {
-            position: sticky; top: 50px; width: 100vw; margin-left: calc(50% - 50vw);
-            background: var(--primary-color); z-index: 900; padding: 0.8rem 0;
-            margin-bottom: 4rem; transition: background var(--transition);
-        }
-        .project-sticky-grid {
-            display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem; 
-            max-width: 92vw; margin: 0 auto;
-        }
-        .proj-head-wrapper {
-            grid-column: 2 / span 10; display: flex; align-items: baseline; gap: 4rem; 
-        }
-        .proj-head-title { font-size: 0.8rem; font-weight: bold; color: var(--text-color); text-transform: uppercase; }
-        .proj-head-date { font-size: 0.75rem; color: var(--text-color); opacity: 0.8; }
+    /* ==========================================================================
+       7. GRIDS & LAYOUTS
+       ========================================================================== */
+    .home-projects { padding: 0; scroll-margin-top: 85px; }
+    .home-splash { width: 100%; margin-top: 0; }
+    .container, .home-grid, .projects-grid { max-width: 92vw; margin: 0 auto; padding: 0 10px; }
 
-        /* Typography & Details inside Projects */
-        .proj-text-block {
-            grid-column: 2 / span 4; font-size: 0.75rem; line-height: 1.6; color: var(--text-color);
-            padding-top: 2rem; animation: fadeInUp 0.8s ease-out forwards; text-align: left; 
-        }
-        .proj-main-desc { margin-bottom: 3rem; }
-        .proj-metadata { display: flex; flex-direction: column; gap: 1.5rem; }
-        .meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
-        .meta-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; }
-        .meta-value { font-size: 0.75rem; font-weight: 400; }
+    .splash-section {
+      display: grid; gap: 1.5vw; padding: 0 4vw; margin-bottom: 4.0vw; grid-auto-rows: auto;
+    }
 
-        /* Back Button */
-        .btn-back-minimal {
-            background: transparent; border: none; color: var(--text-color); font-family: inherit;
-            font-size: 0.75rem; font-weight: bold; cursor: pointer; padding: 0;
-            margin-top: 5rem; text-decoration: underline; transition: color 0.3s ease; text-transform: uppercase;
-        }
-        .btn-back-minimal:hover { color: var(--autumn-blue); }
+    .splash-item {
+      position: relative; overflow: hidden; background: transparent;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      align-items: center; cursor: pointer;
+    }
 
-        /* ==========================================================================
-           8. ABOUT & CONTACT SECTIONS (STILE COERENTE A BLOCCHI)
-           ========================================================================== */
-        /* Annulla l'animazione di Hover (Zoom) solo per le sezioni Chi Siamo e Contatti */
-        .adpe-block .proj-img-wrap img, 
-        .contact-dynamic-block .proj-img-wrap img {
-            transform: none !important;
-            transition: opacity 0.8s ease !important;
-            cursor: default; /* Cursore standard se l'immagine non ha un link */
-        }
-        
-        /* Se l'immagine ha un link valido (es. la mappa), attiva il cursore a manina (senza zoom) */
-        .adpe-block .dynamic-img-link img,
-        .contact-dynamic-block .dynamic-img-link img {
-            cursor: pointer !important;
-        }
+    /* [OPT] content-visibility applicato al wrapper, non all'img */
+    .splash-item {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 300px;
+    }
 
-        /* Contenitore per i link delle immagini */
-        .dynamic-img-link { 
-            display: block; 
-            width: 100%; 
-            height: 100%; 
-            text-decoration: none; 
-        }
-        .projects-section, .about-section, .contact-section { 
-            padding: 4rem 0; min-height: calc(100vh - 80px); display: flex; 
-            flex-direction: column; align-items: center; text-align: center; scroll-margin-top: 85px; 
-        }
-        .adpe-block, .contact-dynamic-block { position: relative; width: 100%; padding-bottom: 6rem; }
-        .adpe-block .project-detail-grid, .contact-dynamic-block .project-detail-grid { row-gap: 4rem; }
-        
-        .adpe-text-block, .contact-dynamic-text-block { 
-            grid-column: 2 / span 5; font-size: 0.75rem; line-height: 1.6; color: var(--text-color); padding-top: 2rem; text-align: left; 
-        }
-        .adpe-main-item, .contact-main-item { margin-bottom: 0.4rem; line-height: 1.6; }
-        .adpe-sub-item, .contact-sub-item { margin-left: 2.5rem; margin-bottom: 0.3rem; line-height: 1.5; font-size: 0.95em; opacity: 0.85; }
+    .splash-item img {
+      width: 100%; height: auto; object-fit: cover; display: block; opacity: 0;
+      background: transparent;
+      transition: opacity 0.5s ease-in-out, transform 0.35s ease;
+      /* [OPT] will-change solo su transform (hover scale) */
+      will-change: transform;
+    }
+    .splash-item:hover img { transform: scale(1.05); }
 
-        /* Link Immagini (Mappa) */
-        .dynamic-img-link { display: block; width: 100%; height: 100%; text-decoration: none; cursor: pointer; }
+    /* [OPT] Immagini nel proj-img-wrap: will-change sul wrapper, non sull'img */
+    .proj-img-wrap {
+      position: relative; width: 100%; height: 100%; display: flex;
+      justify-content: center; align-items: center; background: transparent;
+      animation: fadeIn 0.8s ease-out forwards;
+      will-change: opacity;
+    }
+    .proj-img-wrap img {
+      max-width: 100%; max-height: 85vh; width: auto; height: auto; display: block;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+      will-change: transform;
+    }
+    .proj-img-wrap img:hover { transform: scale(1.02); }
 
-        /* Footer Statico dei Contatti */
-        .contact-footer-block { position: relative; width: 100%; padding-top: 2rem; padding-bottom: 6rem; }
-        .contact-footer-grid {
-            display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem; max-width: 92vw; margin: 0 auto; text-align: left;
-        }
-        .contact-footer-content {
-            grid-column: 2 / span 10; display: flex; flex-direction: column; gap: 2.5rem; color: var(--text-color);
-        }
-        .contact-item { display: flex; flex-direction: column; gap: 0.3rem; }
-        .contact-item-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; }
-        .contact-item-value, .contact-item-value a { font-size: 0.75rem; color: var(--text-color); text-decoration: none; transition: color var(--transition); line-height: 1.5; }
-        .contact-item-value a:hover { color: var(--autumn-blue); }
-        
-        .contact-social-icons { display: flex; gap: 1.2rem; margin-top: 0.2rem; }
-        .contact-social-icons a { font-size: 1.0rem; color: var(--text-color); transition: var(--transition); }
-        .contact-social-icons a:hover { color: var(--autumn-blue); transform: scale(1.1); }
+    .projects-grid .splash-caption {
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      text-align: center; padding: 0.5rem 0; color: var(--text-color); align-self: start;
+    }
+    body.dark-theme .projects-grid .splash-caption { color: #ccc; }
+    .projects-grid .splash-item:hover + .splash-caption { opacity: 1; visibility: visible; }
 
-        /* ==========================================================================
-           9. MODALS & FOOTER
-           ========================================================================== */
-        .image-modal { 
-            display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; 
-            overflow: hidden; background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); 
-            align-items: center; justify-content: center; animation: fadeIn 0.3s ease-out; 
-        }
-        .image-modal-content { margin: auto; display: block; max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; box-shadow: var(--shadow-medium); transition: transform 0.3s ease; }
-        .image-modal-content:hover { transform: scale(1.01); }
-        .modal-close { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; z-index: 10000; }
-        .modal-close:hover { color: var(--autumn-blue); text-decoration: none; }
-        .modal-prev, .modal-next { cursor: pointer; position: absolute; top: 50%; width: auto; padding: 16px; margin-top: -50px; color: white; font-weight: bold; font-size: 20px; transition: 0.6s ease; background-color: rgba(0,0,0,0.5); z-index: 10000; user-select: none; }
-        .modal-next { right: 0; border-radius: 3px 0 0 3px; }
-        .modal-prev { left: 0; border-radius: 0 3px 3px 0; }
-        .modal-prev:hover, .modal-next:hover { background-color: rgba(0,0,0,0.8); }
+    .splash-title { font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
+    .splash-date { font-size: 0.75rem; opacity: 0.7; margin-top: 0.2rem; }
 
-        /* ==========================================================================
-           10. RESPONSIVE DESIGN (Media Queries)
-           ========================================================================== */
-        @media (max-width: 1050px) {
-            .splash-section { display: flex !important; flex-direction: column; height: auto !important; gap: 4vw; padding: 0 5vw; margin-bottom: 3vw; }
-            .splash-item { width: 100%; height: auto; min-height: 40vh; }
-            .splash-item img { max-width: 100%; max-height: 65vh; }
-            .projects-grid .splash-caption { opacity: 1; visibility: visible; margin-bottom: 4rem; align-self: center}
-            .about-content, .contact-content { margin-top: 6rem; }
-            .project-detail-grid { gap: 1rem; row-gap: 6rem; }
-            .proj-text-block, .adpe-text-block, .contact-dynamic-text-block, .contact-footer-content { grid-column: 1 / span 12; padding: 0; }
-            .adpe-block .proj-img-wrap, .contact-dynamic-block .proj-img-wrap { grid-column: 1 / span 12 !important; }
-            .nav-menu { gap: 2.5rem; }
-        }
+    /* Single Project Grid */
+    .project-detail { width: 100%; padding-top: 2rem; padding-bottom: 6rem; }
+    .project-detail-grid {
+      display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem;
+      row-gap: 7rem; max-width: 92vw; margin: 0 auto; align-items: start;
+    }
 
-        @media (max-width: 768px) {
-            body::before { width: 200px; height: 200px; top: 8%; left: 8%; } 
-            body::after { width: 160px; height: 200px; top: 45%; right: 7%; } 
-            .geometric-square-background { width: 160px; height: 160px; top: 12%; left: 75%; } 
-            .background-rectangle { width: 160px; height: 160px; bottom: 12%; left: 22%; }
-            
-            .hero { margin-top: 4rem; margin-bottom: 4rem; }
-            .title-wrapper { margin-top: 4rem; margin-bottom: 4rem; }
-            .title-logo-center { width: 65px; height: 65px; }
-            
-            nav { justify-content: space-between !important; width: 100%; align-items: center; }
-            .nav-menu {
-                position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
-                background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px);
-                z-index: -1; display: flex !important; flex-direction: column;
-                justify-content: flex-start; align-items: flex-end;
-                padding-top: 7rem; padding-right: 2rem; transition: var(--transition);
-            }
-            body.dark-theme .nav-menu { background: rgba(26, 26, 26, 0.98); }
-            .nav-menu.active { left: 0; }
-            .nav-menu li { width: 100%; display: flex; justify-content: flex-end; margin-right: 1.5rem !important; margin-left: 0 !important; }
-            .nav-menu li:nth-child(1), .nav-menu li:nth-child(2), .nav-menu li:nth-child(3) { justify-self: auto; }
-            .nav-link { font-size: 1.0rem; text-align: right; margin-bottom: 2rem; }
-            .hamburger { display: flex; }
-            .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-            .hamburger.active span:nth-child(2) { opacity: 0; }
-            .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+    .pos-pair-left  { grid-column: 2 / span 4; }
+    .pos-pair-right { grid-column: 8 / span 4; }
+    .pos-single     { grid-column: 3 / span 8; }
 
-            .splash-section { padding: 0 5vw; margin-bottom: 6vw; }            
-            .projects-grid .splash-caption { align-self: center; width: 100%; }
-            .about-content, .contact-content { margin-top: 3rem; }
-            .project-sticky-header { top: 55px; padding: 1rem 0; }
-            .proj-head-wrapper { grid-column: 1 / span 12; flex-direction: column; gap: 0.2rem; }
-            .proj-img-wrap, .proj-text-block, .adpe-text-block, .contact-dynamic-text-block { grid-column: 1 / span 12 !important; padding: 0 15px; }
-            .project-detail-grid { row-gap: 4rem; }
-            .adpe-block .project-detail-grid, .contact-dynamic-block .project-detail-grid { row-gap: 2rem; }
-            .btn-back-minimal { margin-top: 3rem; }
-            
-            .header-right-icons { position: relative !important; flex-wrap: wrap; justify-content: flex-end; gap: 1rem; }
-            .nav-item-dropdown { align-items: flex-end; width: 100%; }
-            .nav-item-dropdown .dropdown-content { position: static; transform: none; background: transparent; text-align: center; width: 100%; margin-top: 1rem; }
-            .dropdown-content .filter-btn { text-align: center; margin: 0.5rem auto; width: auto; margin-right: 0; }
-            header.mobile-menu-open { background: var(--primary-color) !important; backdrop-filter: blur(20px); }
+    /* Sticky Header inside Projects/About */
+    .project-sticky-header {
+      position: sticky; top: 50px; width: 100vw; margin-left: calc(50% - 50vw);
+      background: var(--primary-color); z-index: 900; padding: 0.8rem 0;
+      margin-bottom: 4rem; transition: background var(--transition);
+    }
+    .project-sticky-grid {
+      display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem;
+      max-width: 92vw; margin: 0 auto;
+    }
+    .proj-head-wrapper {
+      grid-column: 2 / span 10; display: flex; align-items: baseline; gap: 4rem;
+    }
+    .proj-head-title { font-size: 0.8rem; font-weight: bold; color: var(--text-color); text-transform: uppercase; }
+    .proj-head-date  { font-size: 0.75rem; color: var(--text-color); opacity: 0.8; }
 
-            /* Gestione Touch Menu */
-            body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
-            body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content,
-            .lang-dropdown:hover .lang-dropdown-content { max-height: 0 !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; margin-top: 0 !important; }
-            body[data-view="projects"] .nav-item-dropdown.touch-open .dropdown-content,
-            body[data-view="projectDetail"] .nav-item-dropdown.touch-open .dropdown-content { max-height: 600px !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; margin-top: 2rem !important; }
-            .lang-dropdown.touch-open .lang-dropdown-content { max-height: 200px !important; opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; margin-top: 1rem !important; }
-        }
+    .proj-text-block {
+      grid-column: 2 / span 4; font-size: 0.75rem; line-height: 1.6; color: var(--text-color);
+      padding-top: 2rem; animation: fadeInUp 0.8s ease-out forwards; text-align: left;
+    }
+    .proj-main-desc { margin-bottom: 3rem; }
+    .proj-metadata  { display: flex; flex-direction: column; gap: 1.5rem; }
+    .meta-item      { display: flex; flex-direction: column; gap: 0.2rem; }
+    .meta-label     { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.8; }
+    .meta-value     { font-size: 0.75rem; font-weight: 400; }
 
-        @media (max-width: 480px) {
-            body::before { width: 120px; height: 120px; top: 12%; left: 7%; } 
-            body::after { width: 90px; height: 120px; top: 55%; right: 4%; } 
-            .geometric-square-background { width: 90px; height: 90px; top: 18%; left: 78%; } 
-            .background-rectangle { width: 90px; height: 90px; bottom: 18%; left: 15%; }
-            
-            .hero { margin-top: 3rem; margin-bottom: 3rem; }
-            .studio-logo { width: 65px; height: 65px; margin: 0 auto; }
-            .title-wrapper { margin-top: 3rem; margin-bottom: 3rem; }
-            
-            .container { padding: 0 15px; }
-            .projects-grid { padding: 0 1rem; }
-        }
-    </style>
+    .btn-back-minimal {
+      background: transparent; border: none; color: var(--text-color); font-family: inherit;
+      font-size: 0.75rem; font-weight: bold; cursor: pointer; padding: 0;
+      margin-top: 5rem; text-decoration: underline; transition: color 0.3s ease; text-transform: uppercase;
+    }
+    .btn-back-minimal:hover { color: var(--autumn-blue); }
+
+    /* ==========================================================================
+       8. ABOUT & CONTACT SECTIONS
+       ========================================================================== */
+    .adpe-block .proj-img-wrap img,
+    .contact-dynamic-block .proj-img-wrap img {
+      transform: none !important;
+      transition: opacity 0.8s ease !important;
+      cursor: default;
+      will-change: opacity;
+    }
+    .adpe-block .dynamic-img-link img,
+    .contact-dynamic-block .dynamic-img-link img { cursor: pointer !important; }
+
+    .dynamic-img-link { display: block; width: 100%; height: 100%; text-decoration: none; }
+
+    .projects-section, .about-section, .contact-section {
+      padding: 4rem 0; min-height: calc(100vh - 80px); display: flex;
+      flex-direction: column; align-items: center; text-align: center; scroll-margin-top: 85px;
+    }
+    .adpe-block, .contact-dynamic-block { position: relative; width: 100%; padding-bottom: 6rem; }
+    .adpe-block .project-detail-grid, .contact-dynamic-block .project-detail-grid { row-gap: 4rem; }
+
+    .adpe-text-block, .contact-dynamic-text-block {
+      grid-column: 2 / span 5; font-size: 0.75rem; line-height: 1.6;
+      color: var(--text-color); padding-top: 2rem; text-align: left;
+    }
+    .adpe-main-item, .contact-main-item { margin-bottom: 0.4rem; line-height: 1.6; }
+    .adpe-sub-item, .contact-sub-item { margin-left: 2.5rem; margin-bottom: 0.3rem; line-height: 1.5; font-size: 0.95em; opacity: 0.85; }
+
+    .contact-footer-block { position: relative; width: 100%; padding-top: 2rem; padding-bottom: 6rem; }
+    .contact-footer-grid {
+      display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem;
+      max-width: 92vw; margin: 0 auto; text-align: left;
+    }
+    .contact-footer-content {
+      grid-column: 2 / span 10; display: flex; flex-direction: column; gap: 2.5rem; color: var(--text-color);
+    }
+    .contact-item { display: flex; flex-direction: column; gap: 0.3rem; }
+    .contact-item-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; }
+    .contact-item-value, .contact-item-value a {
+      font-size: 0.75rem; color: var(--text-color); text-decoration: none;
+      transition: color var(--transition); line-height: 1.5;
+    }
+    .contact-item-value a:hover { color: var(--autumn-blue); }
+    .contact-social-icons { display: flex; gap: 1.2rem; margin-top: 0.2rem; }
+    .contact-social-icons a {
+      font-size: 1.0rem; color: var(--text-color);
+      transition: color var(--transition), transform var(--transition);
+    }
+    .contact-social-icons a:hover { color: var(--autumn-blue); transform: scale(1.1); }
+
+    /* ==========================================================================
+       9. MODALS
+       ========================================================================== */
+    .image-modal {
+      display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%;
+      overflow: hidden; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+      align-items: center; justify-content: center; animation: fadeIn 0.3s ease-out;
+    }
+    .image-modal-content {
+      margin: auto; display: block; max-width: 90vw; max-height: 90vh;
+      object-fit: contain; border-radius: 8px; box-shadow: var(--shadow-medium);
+      transition: transform 0.3s ease;
+    }
+    .image-modal-content:hover { transform: scale(1.01); }
+    .modal-close {
+      position: absolute; top: 20px; right: 35px; color: #f1f1f1;
+      font-size: 40px; font-weight: bold; transition: color 0.3s; cursor: pointer; z-index: 10000;
+    }
+    .modal-close:hover { color: var(--autumn-blue); }
+    .modal-prev, .modal-next {
+      cursor: pointer; position: absolute; top: 50%; width: auto; padding: 16px;
+      margin-top: -50px; color: white; font-weight: bold; font-size: 20px;
+      transition: background-color 0.6s ease; background-color: rgba(0,0,0,0.5);
+      z-index: 10000; user-select: none;
+    }
+    .modal-next { right: 0; border-radius: 3px 0 0 3px; }
+    .modal-prev { left:  0; border-radius: 0 3px 3px 0; }
+    .modal-prev:hover, .modal-next:hover { background-color: rgba(0,0,0,0.8); }
+
+    /* ==========================================================================
+       10. RESPONSIVE
+       ========================================================================== */
+    @media (max-width: 1050px) {
+      .splash-section { display: flex !important; flex-direction: column; height: auto !important; gap: 4vw; padding: 0 5vw; margin-bottom: 3vw; }
+      .splash-item { width: 100%; height: auto; min-height: 40vh; content-visibility: visible; }
+      .splash-item img { max-width: 100%; max-height: 65vh; }
+      .projects-grid .splash-caption { opacity: 1; visibility: visible; margin-bottom: 4rem; align-self: center; }
+      .about-content, .contact-content { margin-top: 6rem; }
+      .project-detail-grid { gap: 1rem; row-gap: 6rem; }
+      .proj-text-block, .adpe-text-block, .contact-dynamic-text-block, .contact-footer-content { grid-column: 1 / span 12; padding: 0; }
+      .adpe-block .proj-img-wrap, .contact-dynamic-block .proj-img-wrap { grid-column: 1 / span 12 !important; }
+      .nav-menu { gap: 2.5rem; }
+    }
+
+    @media (max-width: 768px) {
+      body::before { width: 200px; height: 200px; top: 8%; left: 8%; }
+      body::after  { width: 160px; height: 200px; top: 45%; right: 7%; }
+      .geometric-square-background { width: 160px; height: 160px; top: 12%; left: 75%; }
+      .background-rectangle        { width: 160px; height: 160px; bottom: 12%; left: 22%; }
+
+      .hero         { margin-top: 4rem; margin-bottom: 4rem; }
+      .title-wrapper { margin-top: 4rem; margin-bottom: 4rem; }
+      .title-logo-center { width: 65px; height: 65px; }
+
+      nav { justify-content: space-between !important; width: 100%; align-items: center; }
+      .nav-menu {
+        position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
+        background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
+        z-index: -1; display: flex !important; flex-direction: column;
+        justify-content: flex-start; align-items: flex-end;
+        padding-top: 7rem; padding-right: 2rem; transition: left var(--transition);
+      }
+      body.dark-theme .nav-menu { background: rgba(26,26,26,0.98); }
+      .nav-menu.active { left: 0; }
+      .nav-menu li { width: 100%; display: flex; justify-content: flex-end; margin-right: 1.5rem !important; margin-left: 0 !important; }
+      .nav-menu li:nth-child(1), .nav-menu li:nth-child(2), .nav-menu li:nth-child(3) { justify-self: auto; }
+      .nav-link { font-size: 1.0rem; text-align: right; margin-bottom: 2rem; }
+      .hamburger { display: flex; }
+      .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      .hamburger.active span:nth-child(2) { opacity: 0; }
+      .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+      .splash-section { padding: 0 5vw; margin-bottom: 6vw; }
+      .projects-grid .splash-caption { align-self: center; width: 100%; }
+      .about-content, .contact-content { margin-top: 3rem; }
+      .project-sticky-header { top: 55px; padding: 1rem 0; }
+      .proj-head-wrapper { grid-column: 1 / span 12; flex-direction: column; gap: 0.2rem; }
+      .proj-img-wrap, .proj-text-block, .adpe-text-block, .contact-dynamic-text-block { grid-column: 1 / span 12 !important; padding: 0 15px; }
+      .project-detail-grid { row-gap: 4rem; }
+      .adpe-block .project-detail-grid, .contact-dynamic-block .project-detail-grid { row-gap: 2rem; }
+      .btn-back-minimal { margin-top: 3rem; }
+
+      .header-right-icons { position: relative !important; flex-wrap: wrap; justify-content: flex-end; gap: 1rem; }
+      .nav-item-dropdown { align-items: flex-end; width: 100%; }
+      .nav-item-dropdown .dropdown-content { position: static; transform: none; background: transparent; text-align: center; width: 100%; margin-top: 1rem; }
+      .dropdown-content .filter-btn { text-align: center; margin: 0.5rem auto; width: auto; margin-right: 0; }
+      header.mobile-menu-open { background: var(--primary-color) !important; backdrop-filter: blur(20px); }
+
+      body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
+      body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content,
+      .lang-dropdown:hover .lang-dropdown-content {
+        max-height: 0 !important; opacity: 0 !important;
+        visibility: hidden !important; pointer-events: none !important; margin-top: 0 !important;
+      }
+      body[data-view="projects"] .nav-item-dropdown.touch-open .dropdown-content,
+      body[data-view="projectDetail"] .nav-item-dropdown.touch-open .dropdown-content {
+        max-height: 600px !important; opacity: 1 !important;
+        visibility: visible !important; pointer-events: auto !important; margin-top: 2rem !important;
+      }
+      .lang-dropdown.touch-open .lang-dropdown-content {
+        max-height: 200px !important; opacity: 1 !important;
+        visibility: visible !important; pointer-events: auto !important; margin-top: 1rem !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body::before { width: 120px; height: 120px; top: 12%; left: 7%; }
+      body::after  { width: 90px;  height: 120px; top: 55%; right: 4%; }
+      .geometric-square-background { width: 90px; height: 90px; top: 18%; left: 78%; }
+      .background-rectangle        { width: 90px; height: 90px; bottom: 18%; left: 15%; }
+      .hero { margin-top: 3rem; margin-bottom: 3rem; }
+      .studio-logo { width: 65px; height: 65px; margin: 0 auto; }
+      .title-wrapper { margin-top: 3rem; margin-bottom: 3rem; }
+      .container { padding: 0 15px; }
+      .projects-grid { padding: 0 1rem; }
+    }
+
+    /* [OPT] Rispetta le preferenze utente per il movimento ridotto */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 
 <body class="bg-animations-off">
 
-    <div id="globalLoader" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--primary-color); z-index: 99999; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease, visibility 0.6s ease;">
-        <img src="https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="Loading" style="width: 120px; height: 120px; border-radius: 50%; animation: pulse 1.5s infinite ease-in-out;">
-    </div>
+  <div id="globalLoader" style="
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: var(--primary-color); z-index: 99999;
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  ">
+    <img
+      src="https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg"
+      alt="Caricamento"
+      fetchpriority="high"
+      style="width: 120px; height: 120px; border-radius: 50%; animation: pulse 1.5s infinite ease-in-out;"
+    >
+  </div>
 
-    <div class="geometric-square-background"></div>
-    <div class="background-rectangle"></div>
+  <div class="geometric-square-background"></div>
+  <div class="background-rectangle"></div>
 
-    <header>
-        <nav class="container">
-            <ul class="nav-menu">
-                <li class="nav-item-dropdown">
-                    <a href="?view=projects" class="nav-link" data-lang-key="projectsLink" onclick="event.preventDefault(); showProjectsSection();">Progetti</a>
-                    <div class="dropdown-content" id="projectFilters"></div>
-                </li>
-                <li><a href="?view=about" class="nav-link" data-lang-key="aboutLink" onclick="event.preventDefault(); showAbout();">Chi Siamo</a></li>
-                <li><a href="?view=contact" class="nav-link" data-lang-key="contactLink" onclick="event.preventDefault(); showContact();">Contatti</a></li>
-            </ul>
+  <header>
+    <nav class="container">
+      <ul class="nav-menu">
+        <li class="nav-item-dropdown">
+          <a href="?view=projects" class="nav-link" data-lang-key="projectsLink"
+             onclick="event.preventDefault(); showProjectsSection();">Progetti</a>
+          <!-- [FIX] ID univoco: nel HTML originale c'erano due #projectFilters.
+               Quello nella nav viene rinominato #navProjectFilters. -->
+          <div class="dropdown-content" id="navProjectFilters"></div>
+        </li>
+        <li><a href="?view=about"   class="nav-link" data-lang-key="aboutLink"   onclick="event.preventDefault(); showAbout();">Chi Siamo</a></li>
+        <li><a href="?view=contact" class="nav-link" data-lang-key="contactLink" onclick="event.preventDefault(); showContact();">Contatti</a></li>
+      </ul>
 
-            <div class="header-right-icons">
-                <div class="lang-dropdown">
-                    <span class="current-lang" id="currentLangDisplay">IT <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></span>
-                    <div class="lang-dropdown-content">
-                        <a href="#" class="language-selector-item" data-lang="it">IT</a>
-                        <a href="#" class="language-selector-item" data-lang="en">EN</a>
-                        <a href="#" class="language-selector-item" data-lang="fr">FR</a>
-                    </div>
-                </div>
-                <div class="theme-group">
-                    <a href="#" class="header-social-link" id="themeToggle" aria-label="Toggle dark/light theme">
-                        <i class="fas fa-lightbulb"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="hamburger">
-                <span></span><span></span><span></span>
-            </div>
-        </nav>
-    </header>
+      <div class="header-right-icons">
+        <div class="lang-dropdown">
+          <span class="current-lang" id="currentLangDisplay">
+            IT <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
+          </span>
+          <div class="lang-dropdown-content">
+            <a href="#" class="language-selector-item" data-lang="it">IT</a>
+            <a href="#" class="language-selector-item" data-lang="en">EN</a>
+            <a href="#" class="language-selector-item" data-lang="fr">FR</a>
+          </div>
+        </div>
+        <div class="theme-group">
+          <a href="#" class="header-social-link" id="themeToggle" aria-label="Toggle dark/light theme">
+            <i class="fas fa-lightbulb"></i>
+          </a>
+        </div>
+      </div>
 
-    <main>
-        <section class="hero" id="hero">
-            <div class="hero-content">
-                <div class="studio-logo">
-                    <img src="https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg" alt="Studio Logo">
-                </div>
-            </div>
-        </section>
-        
-        <section id="homeSplash" class="home-splash"></section>
-        
-        <section class="home-projects" id="homeProjects">
-            <div class="container">
-                <div class="projects-grid" id="homeProjectsGrid"></div>
-            </div>
-        </section>
+      <div class="hamburger" aria-label="Menu" role="button" tabindex="0">
+        <span></span><span></span><span></span>
+      </div>
+    </nav>
+  </header>
 
-        <section class="container projects-section" id="projectsSection" style="display: none;">
-            <div class="project-filters" id="projectFilters"></div>
-            <div class="projects-grid" id="projectsGrid"></div>
-            <div class="project-detail" id="singleProjectDetail" style="display: none;"></div>
-        </section>
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <div class="studio-logo">
+          <img
+            src="https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg"
+            alt="Studio Logo"
+            fetchpriority="high"
+          >
+        </div>
+      </div>
+    </section>
 
-        <section class="about-section" id="aboutSection" style="display: none;">
-            <div id="adpeDynamicContent" style="width: 100%;"></div>
-        </section>
+    <section id="homeSplash" class="home-splash"></section>
 
-        <section class="contact-section" id="contactSection" style="display: none;">
-            <div id="contactDynamicContent" style="width: 100%;"></div>
-        </section>
-    </main>
+    <section class="home-projects" id="homeProjects">
+      <div class="container">
+        <div class="projects-grid" id="homeProjectsGrid"></div>
+      </div>
+    </section>
 
-    <div id="imageModal" class="image-modal" onclick="closeImageModal(event)">
-        <span class="modal-close" onclick="closeImageModal(event)">&times;</span>
-        <span class="modal-prev" onclick="showPrevImage(event)">&lt;</span>
-        <span class="modal-next" onclick="showNextImage(event)">&gt;</span>
-        <img class="image-modal-content" id="modalImage">
-    </div>
+    <section class="container projects-section" id="projectsSection" style="display: none;">
+      <!-- [FIX] ID rinominato in #sectionProjectFilters (era duplicato con #navProjectFilters) -->
+      <div class="project-filters" id="sectionProjectFilters"></div>
+      <div class="projects-grid" id="projectsGrid"></div>
+      <div class="project-detail" id="singleProjectDetail" style="display: none;"></div>
+    </section>
 
-    <script>
-        // --- FETCH DINAMICO DEL TEMA DA S3 ---
-        fetch('https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/theme.json')
-            .then(res => {
-                if (!res.ok) throw new Error("Tema personalizzato non presente");
-                return res.json();
-            })
-            .then(theme => {
-                if (!theme) return;
-                const root = document.documentElement;
-                
-                if (theme.backgroundColor) root.style.setProperty('--primary-color', theme.backgroundColor);
-                if (theme.hoverColor) root.style.setProperty('--autumn-blue', theme.hoverColor);
-                if (theme.fontFamily) root.style.setProperty('--main-font', theme.fontFamily);
-                
-                if (theme.fontUrl) {
-                    const fontLink = document.createElement('link');
-                    fontLink.href = theme.fontUrl;
-                    fontLink.rel = 'stylesheet';
-                    document.head.appendChild(fontLink);
-                }
-            })
-            .catch(err => console.log("Uso il tema di default (Nessun theme.json trovato)"));
-        // ------------------------------------
+    <section class="about-section" id="aboutSection" style="display: none;">
+      <div id="adpeDynamicContent" style="width: 100%;"></div>
+    </section>
 
-        // === CONFIGURAZIONE CDN INTELLIGENTE ===
-        const CDN_STRATEGY = 'auto'; // 'auto', 's3', o 'cdn'
-        // =======================================
+    <section class="contact-section" id="contactSection" style="display: none;">
+      <div id="contactDynamicContent" style="width: 100%;"></div>
+    </section>
+  </main>
 
-        function getOptimizedUrl(originalUrl, width = 1280) {
-            if (!originalUrl || !originalUrl.includes('amazonaws.com')) return originalUrl;
-            if (CDN_STRATEGY === 's3') return originalUrl;
-            
-            const isNetlifyEnv = window.location.hostname.includes('netlify.app') || 
-                                 window.location.hostname.includes('adpe.it');
+  <div id="imageModal" class="image-modal" onclick="closeImageModal(event)">
+    <span class="modal-close" onclick="closeImageModal(event)">&times;</span>
+    <span class="modal-prev" onclick="showPrevImage(event)">&lt;</span>
+    <span class="modal-next" onclick="showNextImage(event)">&gt;</span>
+    <img class="image-modal-content" id="modalImage" alt="">
+  </div>
 
-            if (!isNetlifyEnv) return originalUrl;
+  <script>
+    // =========================================================================
+    // CDN / IMAGE OPTIMIZATION
+    // =========================================================================
+    const CDN_STRATEGY = 'auto'; // 'auto' | 's3' | 'cdn'
 
-            const isMobile = window.innerWidth <= 1024;
-            if (CDN_STRATEGY === 'auto' && !isMobile) return originalUrl;
+    // [OPT] Calcola una volta sola al caricamento, non ad ogni chiamata
+    const _isNetlifyEnv = window.location.hostname.includes('netlify.app') ||
+                          window.location.hostname.includes('adpe.it');
 
-            return `/.netlify/images?url=${encodeURIComponent(originalUrl)}&w=${width}&q=80`;
+    function getOptimizedUrl(originalUrl, width = 1280) {
+      if (!originalUrl || !originalUrl.includes('amazonaws.com')) return originalUrl;
+      if (CDN_STRATEGY === 's3' || !_isNetlifyEnv) return originalUrl;
+      // [OPT] Attivato su tutti i breakpoint (non solo mobile) con width adattiva
+      const w = width || Math.min(window.innerWidth * window.devicePixelRatio, 1920);
+      return `/.netlify/images?url=${encodeURIComponent(originalUrl)}&w=${w}&q=80`;
+    }
+
+    // =========================================================================
+    // GLOBAL STATE
+    // =========================================================================
+    let projects          = {};
+    let globalLayouts     = {};
+    let homeProjectNames  = [];
+    let globalProjectOrder = [];
+    let currentProjectImages = [];
+    let currentImageIndex  = 0;
+    let lastActiveFilter   = 'home_custom';
+    let currentView        = 'home';
+    let allProjectsFlattened = [];
+    let currentLang        = localStorage.getItem('lang') || 'it';
+
+    // [OPT] IntersectionObserver riutilizzabile per il fade-in delle immagini
+    const imgObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          // Se l'immagine ha un data-src (lazy manual), spostalo in src
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            delete img.dataset.src;
+          }
+          imgObserver.unobserve(img);
+        }
+      });
+    }, { rootMargin: '200px 0px' }); // Anticipa il caricamento di 200px
+
+    const translations = {
+      it: {
+        pageTitle: "ADPE Architettura e Design", homeLink: "Home", projectsLink: "progetti",
+        aboutLink: "adpe", contactLink: "contatti", heroTitle: "ADPE",
+        heroSubtitle: "Architettura e Design by Adriano Pernazza", portfolioTitle: "",
+        category_architettura: "Architettura", category_design: "Design",
+        category_residenziale: "Residenziale", category_pubblica: "Pubblica",
+        category_uffici: "Uffici", unknownCategory: "Categoria Sconosciuta",
+        aboutTitle: "adpe", category_illuminazione: "Illuminazione",
+        filterAll: "Tutti", backToProjects: "← Indietro", filterSelection: "Selezione"
+      },
+      en: {
+        pageTitle: "Architecture & Design Studio", homeLink: "Home", projectsLink: "projects",
+        aboutLink: "adpe", contactLink: "contact", heroTitle: "ADPE",
+        heroSubtitle: "Architecture and Design by Adriano Pernazza", portfolioTitle: "",
+        category_architettura: "Architecture", category_design: "Design",
+        category_residenziale: "Residential", category_pubblica: "Public",
+        category_uffici: "Offices", unknownCategory: "Unknown Category",
+        aboutTitle: "About Us", category_illuminazione: "Illumination",
+        filterAll: "All", backToProjects: "← Back", filterSelection: "Selection"
+      },
+      fr: {
+        pageTitle: "Studio Architecture & Design", homeLink: "Accueil", projectsLink: "projets",
+        aboutLink: "adpe", contactLink: "contact", heroTitle: "ADPE",
+        heroSubtitle: "Architecture et Design par Adriano Pernazza", portfolioTitle: "",
+        category_architettura: "Architecture", category_design: "Design",
+        category_residenziale: "Résidentiel", category_pubblica: "Publique",
+        category_uffici: "Bureaux", unknownCategory: "Catégorie Inconnue",
+        aboutTitle: "À Propos de Nous", category_illuminazione: "Éclairage",
+        filterAll: "Tous", backToProjects: "← Retour", filterSelection: "Sélection"
+      }
+    };
+
+    // =========================================================================
+    // BOOTSTRAP — unico fetch del tema, dentro il Promise.all
+    // [OPT] rimosso il fetch S3 precoce duplicato che causava FOUC
+    // =========================================================================
+    document.addEventListener('DOMContentLoaded', async function () {
+      let dataReady = false;
+
+      try {
+        const [projectsRes, layoutsRes, homeProjectsRes, adpeRes, contattiRes, orderRes, themeRes] = await Promise.all([
+          fetch('projects.json'),
+          fetch('layouts.json'),
+          fetch('home_projects.json').catch(() => ({ json: () => [] })),
+          fetch('adpe.json').catch(() => ({ json: () => ({ sections: [] }) })),
+          fetch('contatti.json').catch(() => ({ json: () => ({}) })),
+          fetch('ordine_progetti.json').catch(() => ({ json: () => [] })),
+          fetch('theme.json').catch(() => ({ json: () => ({}) }))
+        ]);
+
+        // Tema applicato subito dopo il fetch, prima del rendering
+        const themeData = await themeRes.json().catch(() => ({}));
+        applyTheme(themeData);
+
+        projects          = await projectsRes.json();
+        globalLayouts     = await layoutsRes.json();
+        homeProjectNames  = await homeProjectsRes.json().catch(() => []);
+        window.adpeData   = await adpeRes.json().catch(() => ({ sections: [] }));
+        window.contattiData = await contattiRes.json().catch(() => ({}));
+        globalProjectOrder = await orderRes.json().catch(() => []);
+
+        allProjectsFlattened = flattenProjects(projects);
+        allProjectsFlattened.forEach((p, i) => p.id = i + 1);
+
+        setupEventListeners();
+        setLanguage(currentLang, true);
+        dataReady = true;
+
+      } catch (err) {
+        console.error('Errore nel caricamento dei dati iniziali:', err);
+      } finally {
+        // [OPT] Il loader sparisce appena i dati sono pronti,
+        // con un minimo di 400ms per evitare flash su connessioni veloci
+        // e un massimo di 3s come safety net.
+        const minDelay = dataReady ? 400 : 3000;
+        setTimeout(hideLoader, minDelay);
+      }
+    });
+
+    function hideLoader() {
+      const loader = document.getElementById('globalLoader');
+      if (loader) { loader.style.opacity = '0'; loader.style.visibility = 'hidden'; }
+    }
+
+    // =========================================================================
+    // THEME
+    // =========================================================================
+    function applyTheme(theme) {
+      if (!theme || !Object.keys(theme).length) return;
+      const root = document.documentElement;
+      if (theme.backgroundColor) root.style.setProperty('--primary-color', theme.backgroundColor);
+      if (theme.hoverColor)      root.style.setProperty('--autumn-blue', theme.hoverColor);
+      if (theme.fontFamily)      root.style.setProperty('--main-font', theme.fontFamily);
+      if (theme.fontUrl) {
+        const link = document.createElement('link');
+        link.href = theme.fontUrl; link.rel = 'stylesheet';
+        document.head.appendChild(link);
+      }
+    }
+
+    // =========================================================================
+    // EVENT LISTENERS
+    // =========================================================================
+    function setupEventListeners() {
+      setupMobileMenu();
+
+      document.getElementById('themeToggle').addEventListener('click', e => {
+        e.preventDefault();
+        document.body.classList.toggle('dark-theme');
+        localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+      });
+
+      document.querySelectorAll('.language-selector-item').forEach(item => {
+        item.addEventListener('click', function (e) {
+          e.preventDefault();
+          setLanguage(this.dataset.lang);
+          document.querySelector('.lang-dropdown')?.classList.remove('touch-open');
+        });
+      });
+
+      document.addEventListener('keydown', e => {
+        const modal = document.getElementById('imageModal');
+        if (modal.style.display !== 'flex') return;
+        if (e.key === 'Escape')     closeImageModal();
+        if (e.key === 'ArrowLeft')  showPrevImage(e);
+        if (e.key === 'ArrowRight') showNextImage(e);
+      });
+
+      // Touch swipe nel modal
+      const imageModal = document.getElementById('imageModal');
+      let touchStartX = 0, touchEndX = 0;
+      imageModal.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      imageModal.addEventListener('touchmove',  e => { touchEndX   = e.touches[0].clientX; }, { passive: true });
+      imageModal.addEventListener('touchend',   () => {
+        const delta = touchStartX - touchEndX;
+        if (delta >  50) showNextImage({ stopPropagation: () => {} });
+        if (delta < -50) showPrevImage({ stopPropagation: () => {} });
+      });
+
+      // [OPT] Scroll handler con requestAnimationFrame throttle
+      let scrollTicking = false;
+      const header = document.querySelector('header');
+      window.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+          requestAnimationFrame(() => {
+            header.classList.toggle('scrolled', window.pageYOffset > 50);
+            scrollTicking = false;
+          });
+          scrollTicking = true;
+        }
+      }, { passive: true });
+    }
+
+    // =========================================================================
+    // LANGUAGE
+    // =========================================================================
+    function setLanguage(lang, isInitialLoad = false) {
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+
+      document.querySelectorAll('[data-lang-key]').forEach(el => {
+        const key = el.dataset.langKey;
+        if (translations[lang]?.[key]) el.textContent = translations[lang][key];
+      });
+
+      const display = document.getElementById('currentLangDisplay');
+      if (display) display.innerHTML = `${lang.toUpperCase()} <i class="fas fa-chevron-down" style="font-size:0.7rem;"></i>`;
+
+      document.querySelectorAll('.language-selector-item').forEach(item =>
+        item.classList.toggle('active', item.dataset.lang === lang)
+      );
+
+      if (isInitialLoad) {
+        document.body.classList.remove('dark-theme');
+        localStorage.setItem('theme', 'light');
+        showProjectsSection(false);
+      } else {
+        switch (currentView) {
+          case 'home':          showHome(false, false); break;
+          case 'projects':      showProjectsSection(false, false); break;
+          case 'projectDetail': {
+            const pid = document.getElementById('singleProjectDetail').dataset.projectId;
+            if (pid) showProject(parseInt(pid), false, false);
+            break;
+          }
+          case 'about':   showAbout(false, false); break;
+          case 'contact': showContact(false, false); break;
+        }
+      }
+    }
+
+    // =========================================================================
+    // SECTION ROUTING
+    // =========================================================================
+    const ALL_SECTIONS = ['hero', 'homeSplash', 'homeProjects', 'projectsSection', 'aboutSection', 'contactSection'];
+
+    function showSection(sectionId, shouldScroll = true) {
+      document.body.setAttribute('data-view', currentView);
+      ALL_SECTIONS.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = 'none';
+      });
+      const target = document.getElementById(sectionId);
+      if (target) {
+        target.style.display = 'block';
+        if (shouldScroll) requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      }
+    }
+
+    function showHome(shouldScroll = false, addToHistory = true) {
+      currentView = 'home';
+      if (addToHistory) saveState('home');
+      showSection('hero', shouldScroll);
+      document.getElementById('homeSplash').style.display    = 'block';
+      document.getElementById('homeProjects').style.display  = 'block';
+      document.getElementById('singleProjectDetail').style.display = 'none';
+      renderHomeSplash();
+    }
+
+    function showProjectsSection(shouldScroll = true, addToHistory = true) {
+      currentView = 'projects';
+      if (addToHistory) saveState('projects', null, lastActiveFilter);
+
+      showSection('projectsSection', shouldScroll);
+      document.getElementById('singleProjectDetail').style.display = 'none';
+      document.getElementById('projectsGrid').style.display = 'block';
+
+      const sec = document.getElementById('projectsSection');
+      let titleWrapper = sec.querySelector('.title-wrapper');
+      if (!titleWrapper) {
+        titleWrapper = document.createElement('div');
+        titleWrapper.className = 'title-wrapper';
+        titleWrapper.innerHTML = `<img
+          src="${getOptimizedUrl('https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg', 200)}"
+          alt="ADPE Logo" class="title-logo-center"
+          style="cursor:pointer;"
+          onclick="filterProjects('home_custom')">`;
+        sec.prepend(titleWrapper);
+      }
+      titleWrapper.style.display = 'flex';
+
+      generateFilters();
+      filterProjects(lastActiveFilter, 0.2, 250, 0.8, 0, false);
+    }
+
+    function showAbout(shouldScroll = true, addToHistory = true) {
+      currentView = 'about';
+      if (addToHistory) saveState('about');
+      showSection('aboutSection', shouldScroll);
+      const c = document.getElementById('adpeDynamicContent');
+      if (c && !c.innerHTML.trim()) renderAdpeSection();
+    }
+
+    function showContact(shouldScroll = true, addToHistory = true) {
+      currentView = 'contact';
+      if (addToHistory) saveState('contact');
+      showSection('contactSection', shouldScroll);
+      const c = document.getElementById('contactDynamicContent');
+      if (c && !c.innerHTML.trim()) renderContactSection();
+    }
+
+    function showProject(projectId, shouldScroll = true, addToHistory = true) {
+      const project = findProjectById(projectId);
+      if (!project) return;
+
+      currentView = 'projectDetail';
+      if (addToHistory) saveState('projectDetail', projectId, null);
+
+      showSection('projectsSection', shouldScroll);
+      document.getElementById('projectsGrid').style.display = 'none';
+      const titleWrapper = document.querySelector('.title-wrapper');
+      if (titleWrapper) titleWrapper.style.display = 'none';
+
+      const detailContainer = document.getElementById('singleProjectDetail');
+      detailContainer.style.display = 'block';
+      detailContainer.dataset.projectId = projectId;
+
+      const luogoData = project.luogo_data || '';
+
+      // [OPT] Costruiamo il DOM programmaticamente invece di innerHTML massivo,
+      // così il browser non deve parsare una stringa enorme in una sola volta.
+      const fragment = document.createDocumentFragment();
+
+      // Sticky header
+      const stickyHeader = document.createElement('div');
+      stickyHeader.className = 'project-sticky-header';
+      stickyHeader.innerHTML = `
+        <div class="project-sticky-grid">
+          <div class="proj-head-wrapper">
+            <div class="proj-head-title">${escHtml(project.title)}</div>
+            <div class="proj-head-date">${escHtml(luogoData)}</div>
+          </div>
+        </div>`;
+      fragment.appendChild(stickyHeader);
+
+      // Grid immagini
+      const grid = document.createElement('div');
+      grid.className = 'project-detail-grid';
+
+      const imgs = project.images;
+      if (project.layoutSequence && project.layoutSequence.length > 0) {
+        let imgIndex = 0, seqIndex = 0, failsafe = 0;
+        while (imgIndex < imgs.length && failsafe < 1000) {
+          failsafe++;
+          const layoutName = project.layoutSequence[seqIndex % project.layoutSequence.length];
+          const layoutDef  = globalLayouts[layoutName] || { columns: 12, slots: [{ col: '3 / span 8' }] };
+
+          layoutDef.slots.forEach(slot => {
+            if (imgIndex >= imgs.length) return;
+            const imgData = imgs[imgIndex];
+
+            const wrap = document.createElement('div');
+            wrap.className = 'proj-img-wrap';
+            wrap.style.gridColumn = slot.col;
+            if (slot.row) wrap.style.gridRow = slot.row;
+
+            const img = document.createElement('img');
+            img.src     = getOptimizedUrl(imgData.src, 1600);
+            img.alt     = imgData.description || '';
+            img.loading = 'lazy';
+            img.style.cssText = 'opacity:0; transition: opacity 0.8s ease, transform 0.4s ease;';
+            img.onload  = function () { this.style.opacity = '1'; };
+            img.onclick = () => openImageModal(project.id, imgData.src);
+
+            wrap.appendChild(img);
+            grid.appendChild(wrap);
+            // [OPT] Osserva ogni immagine con l'IntersectionObserver
+            imgObserver.observe(img);
+            imgIndex++;
+          });
+          seqIndex++;
+        }
+      }
+
+      // Blocco testo + metadati
+      const tipo  = project.tipologia || getProjectCategoryLabel(project);
+      const pos   = project.posizione   || '';
+      const stato = project.stato       || '';
+      const comm  = project.committente || '';
+
+      const textBlock = document.createElement('div');
+      textBlock.className = 'proj-text-block';
+
+      let metaHtml = '<div class="proj-metadata">';
+      if (tipo)  metaHtml += `<div class="meta-item"><span class="meta-label">TIPOLOGIA</span><span class="meta-value">${escHtml(tipo)}</span></div>`;
+      if (pos)   metaHtml += `<div class="meta-item"><span class="meta-label">POSIZIONE</span><span class="meta-value">${escHtml(pos)}</span></div>`;
+      if (stato) metaHtml += `<div class="meta-item"><span class="meta-label">STATO</span><span class="meta-value">${escHtml(stato)}</span></div>`;
+      if (comm)  metaHtml += `<div class="meta-item"><span class="meta-label">COMMITTENTE</span><span class="meta-value">${escHtml(comm)}</span></div>`;
+      metaHtml += '</div>';
+
+      textBlock.innerHTML = `
+        <p class="proj-main-desc">${project.description || ''}</p>
+        ${metaHtml}
+        <button class="btn-back-minimal" onclick="history.back()">${translations[currentLang].backToProjects}</button>`;
+
+      grid.appendChild(textBlock);
+      fragment.appendChild(grid);
+
+      detailContainer.innerHTML = '';
+      detailContainer.appendChild(fragment);
+
+      if (shouldScroll) window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    // =========================================================================
+    // PROJECT UTILITIES
+    // =========================================================================
+    function flattenProjects(node, path = '', result = []) {
+      for (const key of Object.keys(node)) {
+        const child = node[key];
+        const currentPath = path ? `${path}.${key}` : key;
+        if (child && typeof child === 'object') {
+          if (Array.isArray(child.images)) {
+            result.push({ ...child, categoryPath: currentPath });
+          } else {
+            flattenProjects(child, currentPath, result);
+          }
+        }
+      }
+      return result;
+    }
+
+    function findProjectById(id)     { return allProjectsFlattened.find(p => p.id === id); }
+    function findProjectIdByName(n)  { const p = allProjectsFlattened.find(p => p.categoryPath.split('.').pop() === n); return p ? p.id : null; }
+
+    function getProjectCategoryLabel(project) {
+      if (!project?.categoryPath) return translations[currentLang].unknownCategory;
+      const parts = project.categoryPath.split('.').slice(0, -1);
+      return parts.map(p => translations[currentLang][`category_${p}`] || formatFolderNameForDisplay(p)).join(' ')
+             || translations[currentLang].unknownCategory;
+    }
+
+    function formatFolderNameForDisplay(name) {
+      return name.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+    }
+
+    // Escape HTML semplice per prevenire XSS nei titoli/metadati
+    function escHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // =========================================================================
+    // FILTER PROJECTS
+    // =========================================================================
+    function filterProjects(filter, fadeOutDuration = 0.2, delayBeforeRender = 250, fadeInDuration = 0.8, staggerDelay = 0, addToHistory = true) {
+      lastActiveFilter = filter;
+      if (addToHistory) saveState('projects', null, filter);
+
+      const grid = document.getElementById('projectsGrid');
+      grid.style.transition = `opacity ${fadeOutDuration}s ease`;
+      grid.style.opacity    = '0';
+
+      setTimeout(() => {
+        if (currentView === 'projectDetail') {
+          document.getElementById('singleProjectDetail').style.display = 'none';
+          grid.style.display = 'block';
+          const tw = document.querySelector('.title-wrapper');
+          if (tw) tw.style.display = 'flex';
+          currentView = 'projects';
         }
 
-        // Global Variables
-        let projects = {};
-        let globalLayouts = {}; 
-        let homeProjectNames = []; 
-        let globalProjectOrder = [];
-        let currentProjectImages = [];
-        let currentImageIndex = 0;
-        let lastActiveFilter = 'home_custom';
-        let currentView = 'home';
-        let allProjectsFlattened = [];
-        let currentLang = localStorage.getItem('lang') || 'it';
+        const layout = globalLayouts['C'];
+        if (!layout) { grid.style.opacity = '1'; return; }
 
-        const translations = {
-            it: {
-                pageTitle: "ADPE Architettura e Design", homeLink: "Home", projectsLink: "progetti", aboutLink: "adpe", contactLink: "contatti",
-                heroTitle: "ADPE", heroSubtitle: "Architettura e Design by Adriano Pernazza", portfolioTitle: "",
-                category_architettura: "Architettura", category_design: "Design", category_residenziale: "Residenziale", category_pubblica: "Pubblica", category_uffici: "Uffici",
-                unknownCategory: "Categoria Sconosciuta", aboutTitle: "adpe", category_illuminazione: "Illuminazione",
-                filterAll: "Tutti", backToProjects: "← Indietro", filterSelection: "Selezione"
-            },
-            en: {
-                pageTitle: "Architecture & Design Studio", homeLink: "Home", projectsLink: "projects", aboutLink: "adpe", contactLink: "contact",
-                heroTitle: "ADPE", heroSubtitle: "Architecture and Design by Adriano Pernazza", portfolioTitle: "",
-                category_architettura: "Architecture", category_design: "Design", category_residenziale: "Residential", category_pubblica: "Public", category_uffici: "Offices",
-                unknownCategory: "Unknown Category", aboutTitle: "About Us", category_illuminazione: "Illumination",
-                filterAll: "All", backToProjects: "← Back", filterSelection: "Selection"
-            },
-            fr: {
-                pageTitle: "Studio Architecture & Design", homeLink: "Accueil", projectsLink: "projets", aboutLink: "adpe", contactLink: "contact",
-                heroTitle: "ADPE", heroSubtitle: "Architecture et Design par Adriano Pernazza", portfolioTitle: "",
-                category_architettura: "Architecture", category_design: "Design", category_residenziale: "Résidentiel", category_pubblica: "Publique", category_uffici: "Bureaux",
-                unknownCategory: "Catégorie Inconnue", aboutTitle: "À Propos de Nous", category_illuminazione: "Éclairage",
-                filterAll: "Tous", backToProjects: "← Retour", filterSelection: "Sélection"
-            }
-        };
-        
-        /**
-         * Bootstrap: Fetch Data & Initialize App
-         */
-        document.addEventListener('DOMContentLoaded', async function() {
-            try {
-                const [projectsRes, layoutsRes, homeProjectsRes, adpeRes, contattiRes, orderRes, themeRes] = await Promise.all([
-                    fetch('projects.json'), fetch('layouts.json'),
-                    fetch('home_projects.json').catch(() => ({ json: () => [] })),
-                    fetch('adpe.json').catch(() => ({ json: () => ({ sections: [] }) })),
-                    fetch('contatti.json').catch(() => ({ json: () => ({}) })),
-                    fetch('ordine_progetti.json').catch(() => ({ json: () => [] })),
-                    fetch('theme.json').catch(() => ({ json: () => ({}) }))
-                ]);
+        // [OPT] Svuotar il DOM prima di riempirlo riduce il reflow
+        grid.innerHTML = '';
 
-                // --- APPLICAZIONE DEL TEMA ---
-                const themeData = await themeRes.json().catch(() => ({}));
-                applyTheme(themeData);
-                // -----------------------------
+        let filteredProjects = [];
 
-                projects = await projectsRes.json();
-                globalLayouts = await layoutsRes.json();
-                homeProjectNames = await homeProjectsRes.json().catch(() => []);
-                window.adpeData = await adpeRes.json().catch(() => ({ sections: [] }));
-                window.contattiData = await contattiRes.json().catch(() => ({})); 
-                globalProjectOrder = await orderRes.json().catch(() => []);
+        if (filter === 'home_custom' && Array.isArray(homeProjectNames) && homeProjectNames.length > 0) {
+          filteredProjects = homeProjectNames.map(identifier =>
+            allProjectsFlattened.find(p => {
+              if (String(p.id) === String(identifier).trim()) return true;
+              const folderName  = p.categoryPath.split('.').pop().toLowerCase();
+              const searchName  = String(identifier).trim().toLowerCase().replace(/\s+/g, '-');
+              return folderName === searchName;
+            })
+          ).filter(Boolean);
+        } else if (filter === 'all' || (filter === 'home_custom' && !homeProjectNames.length)) {
+          filteredProjects = allProjectsFlattened;
+        } else {
+          filteredProjects = allProjectsFlattened.filter(p => p.categoryPath.startsWith(filter));
+        }
 
-                allProjectsFlattened = flattenProjects(projects);
-                allProjectsFlattened.forEach((p, index) => p.id = index + 1);
-                
-                setupEventListeners();
-                setLanguage(currentLang, true); 
+        if (filter !== 'home_custom') {
+          const norm = s => s.toLowerCase().replace(/[\s\-_]/g, '');
+          filteredProjects.sort((a, b) => {
+            const nA = norm(a.categoryPath.split('.').pop());
+            const nB = norm(b.categoryPath.split('.').pop());
+            const iA = globalProjectOrder.findIndex(n => norm(String(n)) === nA);
+            const iB = globalProjectOrder.findIndex(n => norm(String(n)) === nB);
+            if (iA !== -1 && iB !== -1) return iA - iB;
+            if (iA !== -1) return -1;
+            if (iB !== -1) return  1;
+            return a.categoryPath.split('.').pop().localeCompare(b.categoryPath.split('.').pop());
+          });
+        }
 
-            } catch (error) {
-                console.error('Errore nel caricamento dei dati iniziali:', error);
-            } finally {
-                setTimeout(() => {
-                    const loader = document.getElementById('globalLoader');
-                    if (loader) { loader.style.opacity = '0'; loader.style.visibility = 'hidden'; }
-                }, 1000); 
-            }
+        // Costruiamo le sezioni con DocumentFragment per un singolo reflow
+        const frag = document.createDocumentFragment();
+        let i = 0;
+        const queue = filteredProjects
+          .filter(p => p.images && p.images.length > 0)
+          .map(p => ({ src: p.images[0].src, title: p.title, luogo_data: p.luogo_data || '', projectId: p.id }));
+
+        while (i < queue.length) {
+          const section = document.createElement('div');
+          section.className = 'splash-section';
+          section.style.cssText = `height:auto; grid-template-columns: repeat(${layout.columns},1fr);`;
+
+          layout.slots.forEach(slot => {
+            if (i >= queue.length) return;
+            const imgData = queue[i++];
+
+            const item = document.createElement('div');
+            item.className    = 'splash-item';
+            item.style.gridColumn = slot.col;
+            if (slot.row) item.style.gridRow = slot.row;
+
+            const img = document.createElement('img');
+            img.src     = getOptimizedUrl(imgData.src, 800);
+            img.loading = i <= 4 ? 'eager' : 'lazy';
+            img.alt     = '';
+            img.onload  = function () { this.style.opacity = '1'; };
+            // [OPT] fetchpriority sulle prime immagini visibili
+            if (i <= 2) img.setAttribute('fetchpriority', 'high');
+
+            item.appendChild(img);
+            item.addEventListener('click', () => showProject(imgData.projectId));
+            imgObserver.observe(img);
+            section.appendChild(item);
+
+            const caption = document.createElement('div');
+            caption.className = 'splash-caption';
+            caption.style.cssText = `grid-column: ${slot.col}; grid-row: 8;`;
+            caption.innerHTML = `
+              <div class="splash-title">${escHtml(imgData.title)}</div>
+              ${imgData.luogo_data ? `<div class="splash-date">${escHtml(imgData.luogo_data)}</div>` : ''}`;
+            section.appendChild(caption);
+          });
+
+          frag.appendChild(section);
+        }
+
+        grid.appendChild(frag);
+
+        // Aggiorna stato pulsanti filtro
+        document.querySelectorAll('.filter-btn').forEach(btn =>
+          btn.classList.toggle('active', btn.dataset.filter === filter)
+        );
+
+        grid.style.opacity = '1';
+      }, delayBeforeRender);
+    }
+
+    // =========================================================================
+    // FILTERS GENERATION
+    // [FIX] Ora scrive su #navProjectFilters (ID unico nella nav)
+    // =========================================================================
+    function collectCategoryPaths(node, path, set) {
+      for (const key of Object.keys(node)) {
+        const child = node[key];
+        if (child && typeof child === 'object' && !Array.isArray(child.images)) {
+          const p = path ? `${path}.${key}` : key;
+          set.add(p);
+          collectCategoryPaths(child, p, set);
+        }
+      }
+    }
+
+    function generateFilters() {
+      const container = document.getElementById('navProjectFilters');
+      if (!container) return;
+      const categoryPaths = new Set();
+      collectCategoryPaths(projects, '', categoryPaths);
+
+      const frag = document.createDocumentFragment();
+
+      const mkBtn = (label, filter) => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.dataset.filter = filter;
+        btn.textContent = label;
+        btn.addEventListener('click', () => filterProjects(filter));
+        return btn;
+      };
+
+      frag.appendChild(mkBtn(translations[currentLang].filterAll, 'all'));
+      frag.appendChild(mkBtn(translations[currentLang].filterSelection, 'home_custom'));
+
+      Array.from(categoryPaths).sort((a, b) => a.localeCompare(b)).forEach(path => {
+        const label = path.split('.').map(p =>
+          translations[currentLang][`category_${p}`] || formatFolderNameForDisplay(p)
+        ).join(' ');
+        frag.appendChild(mkBtn(label, path));
+      });
+
+      container.innerHTML = '';
+      container.appendChild(frag);
+    }
+
+    // =========================================================================
+    // RENDER ADPE (CHI SIAMO)
+    // =========================================================================
+    function renderAdpeSection() {
+      const container = document.getElementById('adpeDynamicContent');
+      if (!container || !window.adpeData?.sections) return;
+
+      const frag = document.createDocumentFragment();
+
+      window.adpeData.sections.forEach(section => {
+        const block = document.createElement('div');
+        block.className = 'adpe-block';
+        block.innerHTML = `
+          <div class="project-sticky-header">
+            <div class="project-sticky-grid">
+              <div class="proj-head-wrapper">
+                <div class="proj-head-title">${escHtml(section.title)}</div>
+                <div class="proj-head-date">${escHtml(section.subtitle || '')}</div>
+              </div>
+            </div>
+          </div>`;
+
+        const grid = document.createElement('div');
+        grid.className = 'project-detail-grid';
+
+        const imgs      = section.images || [];
+        const layoutDef = globalLayouts[section.layout || 'PROJECT_SINGLE'] || { columns: 12, slots: [{ col: '3 / span 8' }] };
+
+        let imgIndex = 0;
+        layoutDef.slots.forEach(slot => {
+          if (imgIndex >= imgs.length) return;
+          const imgData = imgs[imgIndex++];
+
+          const wrap = document.createElement('div');
+          wrap.className = 'proj-img-wrap';
+          wrap.style.gridColumn = slot.col;
+          if (slot.row) wrap.style.gridRow = slot.row;
+
+          const img = document.createElement('img');
+          img.src     = getOptimizedUrl(imgData.src, 1600);
+          img.alt     = imgData.description || '';
+          img.loading = 'lazy';
+          img.style.cssText = 'opacity:0; transition: opacity 0.8s ease;';
+          img.onload  = function () { this.style.opacity = '1'; };
+          imgObserver.observe(img);
+
+          if (imgData.link) {
+            const a = document.createElement('a');
+            a.href = imgData.link; a.target = '_blank'; a.className = 'dynamic-img-link';
+            a.appendChild(img);
+            wrap.appendChild(a);
+          } else {
+            wrap.appendChild(img);
+          }
+          grid.appendChild(wrap);
         });
 
-        /**
-         * Funzione per applicare le variabili CSS dal JSON
-         */
-        function applyTheme(theme) {
-            if (!theme || Object.keys(theme).length === 0) return;
-            const root = document.documentElement;
-            
-            if (theme.backgroundColor) root.style.setProperty('--primary-color', theme.backgroundColor);
-            if (theme.hoverColor) root.style.setProperty('--autumn-blue', theme.hoverColor);
-            if (theme.fontFamily) root.style.setProperty('--main-font', theme.fontFamily);
-            
-            if (theme.fontUrl) {
-                const fontLink = document.createElement('link');
-                fontLink.href = theme.fontUrl;
-                fontLink.rel = 'stylesheet';
-                document.head.appendChild(fontLink);
-            }
+        if (section.text) {
+          const tb = document.createElement('div');
+          tb.className   = 'adpe-text-block';
+          tb.innerHTML   = formatAdpeText(section.text);
+          grid.appendChild(tb);
         }
 
-        /**
-         * System Event Listeners & UI Toggles
-         */
-        function setupEventListeners() {
-            setupMobileMenu();
+        block.appendChild(grid);
+        frag.appendChild(block);
+      });
 
-            document.getElementById('themeToggle').addEventListener('click', (e) => {
-                e.preventDefault();
-                const newTheme = document.body.classList.toggle('dark-theme') ? 'dark' : 'light';
-                localStorage.setItem('theme', newTheme);
-            });
+      container.innerHTML = '';
+      container.appendChild(frag);
+    }
 
-            document.querySelectorAll('.language-selector-item').forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    setLanguage(this.dataset.lang);
-                    const langDropdown = document.querySelector('.lang-dropdown');
-                    if (langDropdown) langDropdown.classList.remove('touch-open');
-                });
-            });
-
-            document.addEventListener('keydown', function(e) {
-                const imageModal = document.getElementById('imageModal');
-                if (imageModal.style.display !== 'flex') return;
-                if (e.key === 'Escape') closeImageModal();
-                if (e.key === 'ArrowLeft') showPrevImage(e);
-                if (e.key === 'ArrowRight') showNextImage(e);
-            });
-
-            const imageModal = document.getElementById('imageModal');
-            let touchStartX = 0, touchEndX = 0;
-            imageModal.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
-            imageModal.addEventListener('touchmove', (e) => { touchEndX = e.touches[0].clientX; });
-            imageModal.addEventListener('touchend', () => {
-                if (touchStartX - touchEndX > 50) showNextImage(event);
-                if (touchStartX - touchEndX < -50) showPrevImage(event);
-            });
-
-            window.addEventListener('scroll', function() {
-                const isScrolled = window.pageYOffset > 50;
-                document.querySelector('header').classList.toggle('scrolled', isScrolled);
-            });
+    function formatAdpeText(raw) {
+      if (!raw) return '';
+      return raw.split('\n').map(line => {
+        const hasIndent = /^[ \t]+/.test(line);
+        const t = line.trim();
+        if (!t) return '<div style="height:1.5rem;"></div>';
+        if (t.startsWith('-') || t.startsWith('*') || hasIndent) {
+          const clean = (t.startsWith('-') || t.startsWith('*')) ? t.slice(1).trim() : t;
+          return `<div class="adpe-sub-item">${clean}</div>`;
         }
+        return `<div class="adpe-main-item">${t}</div>`;
+      }).join('');
+    }
 
-        function setLanguage(lang, isInitialLoad = false) {
-            currentLang = lang;
-            localStorage.setItem('lang', lang);
+    // =========================================================================
+    // RENDER CONTATTI
+    // =========================================================================
+    function renderContactSection() {
+      const container = document.getElementById('contactDynamicContent');
+      if (!container || !window.contattiData) return;
 
-            document.querySelectorAll('[data-lang-key]').forEach(element => {
-                const key = element.dataset.langKey;
-                if (translations[lang]?.[key]) element.textContent = translations[lang][key];
-            });
+      const data = window.contattiData;
+      const frag = document.createDocumentFragment();
 
-            const currentLangDisplay = document.getElementById('currentLangDisplay');
-            if(currentLangDisplay) currentLangDisplay.innerHTML = `${lang.toUpperCase()} <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>`;
+      if (data.sections?.length) {
+        data.sections.forEach(section => {
+          const block = document.createElement('div');
+          block.className = 'contact-dynamic-block';
+          block.innerHTML = `
+            <div class="project-sticky-header">
+              <div class="project-sticky-grid">
+                <div class="proj-head-wrapper">
+                  <div class="proj-head-title">${escHtml(section.title)}</div>
+                  <div class="proj-head-date">${escHtml(section.subtitle || '')}</div>
+                </div>
+              </div>
+            </div>`;
 
-            document.querySelectorAll('.language-selector-item').forEach(item => {
-                item.classList.toggle('active', item.dataset.lang === lang);
-            });
+          const grid = document.createElement('div');
+          grid.className = 'project-detail-grid';
 
-            if (isInitialLoad) {
-                document.body.classList.remove('dark-theme'); 
-                localStorage.setItem('theme', 'light'); 
-                showProjectsSection(false); 
+          const imgs      = section.images || [];
+          const layoutDef = globalLayouts[section.layout || 'PROJECT_SINGLE_HORIZONTAL'] || { columns: 12, slots: [{ col: '3 / span 8' }] };
+
+          let imgIndex = 0;
+          layoutDef.slots.forEach(slot => {
+            if (imgIndex >= imgs.length) return;
+            const imgData = imgs[imgIndex++];
+
+            const wrap = document.createElement('div');
+            wrap.className = 'proj-img-wrap';
+            wrap.style.gridColumn = slot.col;
+            if (slot.row) wrap.style.gridRow = slot.row;
+
+            const img = document.createElement('img');
+            img.src     = getOptimizedUrl(imgData.src, 1600);
+            img.alt     = imgData.description || '';
+            img.loading = 'lazy';
+            img.style.cssText = 'opacity:0; transition: opacity 0.8s ease;';
+            img.onload  = function () { this.style.opacity = '1'; };
+            imgObserver.observe(img);
+
+            if (imgData.link) {
+              const a = document.createElement('a');
+              a.href = imgData.link; a.target = '_blank'; a.className = 'dynamic-img-link';
+              a.appendChild(img);
+              wrap.appendChild(a);
             } else {
-                switch (currentView) {
-                    case 'home': showHome(); break;
-                    case 'projects': showProjectsSection(false); break; 
-                    case 'projectDetail':
-                        const projectId = document.getElementById('singleProjectDetail').dataset.projectId;
-                        if (projectId) showProject(parseInt(projectId), false);
-                        break;
-                    case 'about': showAbout(false); break;
-                    case 'contact': showContact(false); break;
-                }
+              wrap.appendChild(img);
             }
-        }
+            grid.appendChild(wrap);
+          });
 
-        function showSection(sectionId, shouldScroll = true) {
-            document.body.setAttribute('data-view', currentView);
-            ['hero', 'homeSplash', 'homeProjects', 'projectsSection', 'aboutSection', 'contactSection'].forEach(id => {
-                document.getElementById(id).style.display = 'none';
-            });
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.style.display = 'block';
-                if (shouldScroll) {
-                    requestAnimationFrame(() => targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-                }
-            }
-        }
+          if (section.text) {
+            const tb = document.createElement('div');
+            tb.className = 'contact-dynamic-text-block';
+            tb.innerHTML = formatAdpeText(section.text);
+            grid.appendChild(tb);
+          }
 
-        function showHome(shouldScroll = false, addToHistory = true) {
-            currentView = 'home';
-            if (addToHistory) saveState('home');
-            showSection('hero', shouldScroll);
-            document.getElementById('homeSplash').style.display = 'block';
-            document.getElementById('homeProjects').style.display = 'block';
-            document.getElementById('singleProjectDetail').style.display = 'none';
-            renderHomeSplash();
-        }
-        
-        function showProjectsSection(shouldScroll = true, addToHistory = true) {
-            currentView = 'projects';
-            if (addToHistory) saveState('projects', null, lastActiveFilter);
-            
-            showSection('projectsSection', shouldScroll);
-            document.getElementById('singleProjectDetail').style.display = 'none';
-            document.getElementById('projectsGrid').style.display = 'block';
-
-            const projectsSection = document.getElementById('projectsSection');
-            let titleWrapper = projectsSection.querySelector('.title-wrapper'); 
-            if (!titleWrapper) { 
-                titleWrapper = document.createElement('div');
-                titleWrapper.className = 'title-wrapper';
-                titleWrapper.innerHTML = `<img src="${getOptimizedUrl('https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg', 200)}" alt="ADPE Logo" class="title-logo-center" style="cursor: pointer;" onclick="filterProjects('home_custom')">`;
-                projectsSection.prepend(titleWrapper);
-            }
-            titleWrapper.style.display = 'flex'; 
-
-            generateFilters();
-            filterProjects(lastActiveFilter, 0.2, 250, 0.8, 0, false); 
-        }
-
-        function showAbout(shouldScroll = true, addToHistory = true) {
-            currentView = 'about';
-            if (addToHistory) saveState('about'); 
-            showSection('aboutSection', shouldScroll);
-            const container = document.getElementById('adpeDynamicContent');
-            if (container && container.innerHTML.trim() === '') renderAdpeSection();
-        }
-
-        function showContact(shouldScroll = true, addToHistory = true) {
-            currentView = 'contact';
-            if (addToHistory) saveState('contact'); 
-            showSection('contactSection', shouldScroll);
-            const container = document.getElementById('contactDynamicContent');
-            if (container && container.innerHTML.trim() === '') renderContactSection();
-        }
-
-        function showProject(projectId, shouldScroll = true, addToHistory = true) {
-            const project = findProjectById(projectId);
-            if (!project) return;
-
-            currentView = 'projectDetail';
-            if (addToHistory) saveState('projectDetail', projectId, null);
-
-            showSection('projectsSection', shouldScroll);
-            document.getElementById('projectsGrid').style.display = 'none';
-            const titleWrapper = document.querySelector('.title-wrapper');
-            if (titleWrapper) titleWrapper.style.display = 'none';
-
-            const detailContainer = document.getElementById('singleProjectDetail');
-            detailContainer.style.display = 'block';
-            detailContainer.dataset.projectId = projectId;
-
-            const luogoData = project.luogo_data || '';
-            let htmlContent = `
-                <div class="project-sticky-header">
-                    <div class="project-sticky-grid">
-                        <div class="proj-head-wrapper">
-                            <div class="proj-head-title">${project.title}</div>
-                            <div class="proj-head-date">${luogoData}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-detail-grid">
-            `;
-            
-            const imgs = project.images;
-            if (project.layoutSequence && project.layoutSequence.length > 0) {
-                let imgIndex = 0, seqIndex = 0, failsafe = 0; 
-                while (imgIndex < imgs.length && failsafe < 1000) {
-                    failsafe++; 
-                    let layoutName = project.layoutSequence[seqIndex % project.layoutSequence.length];
-                    let layoutDef = globalLayouts[layoutName] || { columns: 12, slots: [{ col: "3 / span 8" }] };
-
-                    layoutDef.slots.forEach(slot => {
-                        if (imgIndex < imgs.length) {
-                            let imgData = imgs[imgIndex];
-                            let rowStyle = slot.row ? `grid-row: ${slot.row};` : '';
-                            htmlContent += `
-                                <div class="proj-img-wrap" style="grid-column: ${slot.col}; ${rowStyle}">
-                                    <img src="${getOptimizedUrl(imgData.src, 1600)}" 
-                                         alt="${imgData.description || ''}" 
-                                         onclick="openImageModal(${project.id}, '${imgData.src}')" 
-                                         loading="lazy"
-                                         style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;"
-                                         onload="this.style.opacity=1">
-                                </div>
-                            `;
-                            imgIndex++;
-                        }
-                    });
-                    seqIndex++; 
-                }
-            }
-
-            const tipo = project.tipologia || getProjectCategoryLabel(project);
-            const pos = project.posizione || '';
-            const stato = project.stato || '';
-            const comm = project.committente || '';
-
-            let metaHtml = '<div class="proj-metadata">';
-            if(tipo) metaHtml += `<div class="meta-item"><span class="meta-label">TIPOLOGIA</span><span class="meta-value">${tipo}</span></div>`;
-            if(pos) metaHtml += `<div class="meta-item"><span class="meta-label">POSIZIONE</span><span class="meta-value">${pos}</span></div>`;
-            if(stato) metaHtml += `<div class="meta-item"><span class="meta-label">STATO</span><span class="meta-value">${stato}</span></div>`;
-            if(comm) metaHtml += `<div class="meta-item"><span class="meta-label">COMMITTENTE</span><span class="meta-value">${comm}</span></div>`;
-            metaHtml += '</div>';
-
-            htmlContent += `
-                <div class="proj-text-block">
-                    <p class="proj-main-desc">${project.description || ''}</p>
-                    ${metaHtml} 
-                    <button class="btn-back-minimal" onclick="history.back()">${translations[currentLang].backToProjects}</button>
-                </div>
-            </div>`; 
-
-            detailContainer.innerHTML = htmlContent;
-            if (shouldScroll) window.scrollTo({ top: 0, behavior: 'instant' });
-        }
-
-        function flattenProjects(node, path = '', projects = []) {
-            for (const key in node) {
-                if (Object.prototype.hasOwnProperty.call(node, key)) {
-                    const childNode = node[key];
-                    const currentPath = path ? `${path}.${key}` : key;
-                    if (typeof childNode === 'object' && childNode !== null) {
-                        if (Array.isArray(childNode.images)) {
-                            projects.push({ ...childNode, categoryPath: currentPath });
-                        } else {
-                            flattenProjects(childNode, currentPath, projects);
-                        }
-                    }
-                }
-            }
-            return projects;
-        }
-
-        function findProjectById(id) { return allProjectsFlattened.find(p => p.id === id); }
-
-        function getProjectCategoryLabel(project) {
-            if (!project?.categoryPath) return translations[currentLang].unknownCategory;
-            const pathParts = project.categoryPath.split('.').slice(0, -1);
-            return pathParts.map(part => translations[currentLang][`category_${part}`] || formatFolderNameForDisplay(part)).join(' ') || translations[currentLang].unknownCategory;
-        }
-
-        async function filterProjects(filter, fadeOutDuration = 0.2, delayBeforeRender = 250, fadeInDuration = 0.8, staggerDelay = 0, addToHistory = true) {
-            lastActiveFilter = filter;
-            if (addToHistory) saveState('projects', null, filter);
-
-            const grid = document.getElementById('projectsGrid');
-            grid.style.transition = `opacity ${fadeOutDuration}s ease`;
-            grid.style.opacity = '0';
-
-            setTimeout(() => {
-                if (currentView === 'projectDetail') {
-                    document.getElementById('singleProjectDetail').style.display = 'none';
-                    grid.style.display = 'block';
-                    const titleWrapper = document.querySelector('.title-wrapper');
-                    if (titleWrapper) titleWrapper.style.display = 'flex';
-                    currentView = 'projects';
-                }
-
-                const layout = globalLayouts["C"];
-                if (!layout) { grid.style.opacity = '1'; return; }
-
-                grid.innerHTML = '';
-                let filteredProjects = [];
-
-                if (filter === 'home_custom' && Array.isArray(homeProjectNames) && homeProjectNames.length > 0) {
-                    filteredProjects = homeProjectNames.map(identifier => {
-                        return allProjectsFlattened.find(p => {
-                            if (String(p.id) === String(identifier).trim()) return true;
-                            const folderName = p.categoryPath.split('.').pop().toLowerCase(); 
-                            const searchName = String(identifier).trim().toLowerCase().replace(/\s+/g, '-');
-                            return folderName === searchName;
-                        });
-                    }).filter(p => p !== undefined); 
-                } else if (filter === 'all' || (filter === 'home_custom' && (!Array.isArray(homeProjectNames) || homeProjectNames.length === 0))) {
-                    filteredProjects = allProjectsFlattened;
-                } else {
-                    filteredProjects = allProjectsFlattened.filter(p => p.categoryPath.startsWith(filter));
-                }
-                
-                if (filter !== 'home_custom') {
-                    const normalizeStr = (str) => str.toLowerCase().replace(/[\s\-_]/g, '');
-                    filteredProjects.sort((a, b) => {
-                        const originalNameA = a.categoryPath.split('.').pop();
-                        const originalNameB = b.categoryPath.split('.').pop();
-                        const nameA = normalizeStr(originalNameA);
-                        const nameB = normalizeStr(originalNameB);
-                        const indexA = globalProjectOrder.findIndex(name => normalizeStr(String(name)) === nameA);
-                        const indexB = globalProjectOrder.findIndex(name => normalizeStr(String(name)) === nameB);
-
-                        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
-                        if (indexA !== -1) return -1;
-                        if (indexB !== -1) return 1;
-                        return originalNameA.localeCompare(originalNameB);
-                    });
-                }
-
-                let imageQueue = [];
-                filteredProjects.forEach(project => {
-                    if (project.images && project.images.length > 0) {
-                        imageQueue.push({
-                            src: project.images[0].src, title: project.title,
-                            luogo_data: project.luogo_data || '', projectId: project.id
-                        });
-                    }
-                });
-
-                let i = 0; 
-                while (i < imageQueue.length) {
-                    const section = document.createElement('div');
-                    section.className = 'splash-section';
-                    section.style.height = 'auto'; 
-                    section.style.gridTemplateColumns = `repeat(${layout.columns},1fr)`;
-
-                    layout.slots.forEach(slot => {
-                        if (i >= imageQueue.length) return;
-                        const imgData = imageQueue[i++];
-
-                        const item = document.createElement('div');
-                        item.className = 'splash-item';
-                        item.style.gridColumn = slot.col;
-                        if (slot.row) item.style.gridRow = slot.row;
-
-                        const img = document.createElement('img');
-                        img.src = getOptimizedUrl(imgData.src, 800);
-                        img.loading = i <= 4 ? 'eager' : 'lazy';
-                        img.alt = '';
-                        img.onload = function() { this.style.opacity = '1'; };
-
-                        item.appendChild(img);
-                        item.addEventListener('click', () => showProject(imgData.projectId));
-                        section.appendChild(item); 
-
-                        const caption = document.createElement('div');
-                        caption.className = 'splash-caption';
-                        caption.style.gridColumn = slot.col;
-                        caption.style.gridRow = "8"; 
-                        caption.innerHTML = `
-                            <div class="splash-title">${imgData.title}</div>
-                            ${imgData.luogo_data ? `<div class="splash-date">${imgData.luogo_data}</div>` : ''}
-                        `;
-                        section.appendChild(caption);
-                    }); 
-                    grid.appendChild(section);
-                }
-
-                document.querySelectorAll('.filter-btn').forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.filter === filter);
-                });
-
-                grid.style.opacity = '1';
-            }, delayBeforeRender); 
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const projectsGrid = document.getElementById('projectsGrid');
-            projectsGrid.addEventListener('mouseover', e => {
-                if (e.target.closest('.project-card')) e.target.closest('.project-card').querySelector('.project-overlay').style.opacity = '1';
-            });
-            projectsGrid.addEventListener('mouseout', e => {
-                if (e.target.closest('.project-card')) e.target.closest('.project-card').querySelector('.project-overlay').style.opacity = '0';
-            });
+          block.appendChild(grid);
+          frag.appendChild(block);
         });
-        
-        function collectCategoryPaths(node, path, pathsSet) {
-            for (const key in node) {
-                if (Object.prototype.hasOwnProperty.call(node, key)) {
-                    const childNode = node[key];
-                    if (typeof childNode === 'object' && childNode !== null && !Array.isArray(childNode.images)) {
-                        const currentPath = path ? `${path}.${key}` : key;
-                        pathsSet.add(currentPath);
-                        collectCategoryPaths(childNode, currentPath, pathsSet);
-                    }
-                }
-            }
-        }
+      }
 
-        function generateFilters() {
-            const filtersContainer = document.getElementById('projectFilters');
-            const categoryPaths = new Set();
-            collectCategoryPaths(projects, '', categoryPaths);
+      // Footer statico (telefono, email, social)
+      const footer = document.createElement('div');
+      footer.className = 'contact-footer-block';
 
-            let filtersHtml = `<button class="filter-btn" data-filter="all" onclick="filterProjects('all')">${translations[currentLang].filterAll}</button>`;
-            filtersHtml += `<button class="filter-btn" data-filter="home_custom" onclick="filterProjects('home_custom')">${translations[currentLang].filterSelection}</button>`;
-            
-            const sortedCategories = Array.from(categoryPaths).sort((a, b) => a.localeCompare(b));
-            sortedCategories.forEach(path => {
-                const label = path.split('.').map(part => translations[currentLang][`category_${part}`] || formatFolderNameForDisplay(part)).join(' ');
-                filtersHtml += `<button class="filter-btn" data-filter="${path}" onclick="filterProjects('${path}')">${label}</button>`;
-            });
-            
-            filtersContainer.innerHTML = filtersHtml;
-        }
+      let footerHtml = `
+        <div class="contact-footer-grid">
+          <div class="contact-footer-content">`;
 
-        /**
-         * RENDER DINAMICO SEZIONE ADPE (CHI SIAMO) - BLOCCO DELLO SLIDESHOW MODALE
-         */
-        function renderAdpeSection() {
-            const container = document.getElementById('adpeDynamicContent');
-            if (!container || !window.adpeData || !window.adpeData.sections) return;
+      if (data.phone?.text) footerHtml += `
+        <div class="contact-item">
+          <span class="contact-item-label">${escHtml(data.phone.label || 'Telefono')}</span>
+          <span class="contact-item-value">
+            <a href="tel:${data.phone.text.replace(/\s+/g,'')}">${escHtml(data.phone.text)}</a>
+          </span>
+        </div>`;
 
-            let htmlContent = '';
-            window.adpeData.sections.forEach(section => {
-                htmlContent += '<div class="adpe-block">';
-                htmlContent += '  <div class="project-sticky-header">';
-                htmlContent += '    <div class="project-sticky-grid">';
-                htmlContent += '      <div class="proj-head-wrapper">';
-                htmlContent += '        <div class="proj-head-title">' + section.title + '</div>';
-                htmlContent += '        <div class="proj-head-date">' + (section.subtitle || '') + '</div>';
-                htmlContent += '      </div>';
-                htmlContent += '    </div>';
-                htmlContent += '  </div>';
-                htmlContent += '  <div class="project-detail-grid">';
-                
-                const imgs = section.images || [];
-                const layoutName = section.layout || "PROJECT_SINGLE";
-                let layoutDef = globalLayouts[layoutName] || { columns: 12, slots: [{ col: "3 / span 8" }] };
+      if (data.email?.text) footerHtml += `
+        <div class="contact-item">
+          <span class="contact-item-label">${escHtml(data.email.label || 'Email')}</span>
+          <span class="contact-item-value">
+            <a href="mailto:${escHtml(data.email.text)}">${escHtml(data.email.text)}</a>
+          </span>
+        </div>`;
 
-                let imgIndex = 0;
-                layoutDef.slots.forEach(slot => {
-                    if (imgIndex < imgs.length) {
-                        let imgData = imgs[imgIndex];
-                        let rowStyle = slot.row ? 'grid-row: ' + slot.row + ';' : '';
-                        
-                        htmlContent += '    <div class="proj-img-wrap" style="grid-column: ' + slot.col + '; ' + rowStyle + '">';
-                        
-                        // Gestione Link Custom (se inserito su S3)
-                        if (imgData.link) {
-                            htmlContent += '      <a href="' + imgData.link + '" target="_blank" class="dynamic-img-link">';
-                        }
-                        
-                        htmlContent += '      <img src="' + getOptimizedUrl(imgData.src, 1600) + '" ';
-                        htmlContent += '           alt="' + (imgData.description || '') + '" ';
-                        htmlContent += '           loading="lazy"';
-                        htmlContent += '           style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;"';
-                        htmlContent += '           onload="this.style.opacity=1">';
-                        
-                        if (imgData.link) htmlContent += '      </a>';
-                        htmlContent += '    </div>';
-                        imgIndex++;
-                    }
-                });
+      if (data.social) {
+        let icons = '';
+        if (data.social.instagram) icons += `<a href="${escHtml(data.social.instagram)}" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>`;
+        if (data.social.facebook)  icons += `<a href="${escHtml(data.social.facebook)}"  target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>`;
+        if (data.social.linkedin)  icons += `<a href="${escHtml(data.social.linkedin)}"  target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>`;
+        if (icons) footerHtml += `
+        <div class="contact-item">
+          <span class="contact-item-label">${escHtml(data.social.label || 'Social')}</span>
+          <div class="contact-social-icons">${icons}</div>
+        </div>`;
+      }
 
-                if (section.text) {
-                    htmlContent += '    <div class="adpe-text-block">' + formatAdpeText(section.text) + '</div>';
-                }
-                htmlContent += '  </div></div>'; 
-            });
-            container.innerHTML = htmlContent;
-        }
+      footerHtml += '</div></div>';
+      footer.innerHTML = footerHtml;
+      frag.appendChild(footer);
 
-        function formatAdpeText(rawText) {
-            if (!rawText) return '';
-            let html = '';
-            rawText.split('\n').forEach(line => {
-                const hasLeadingSpace = /^[ \t]+/.test(line);
-                const trimmed = line.trim();
-                if (trimmed === '') html += `<div style="height: 1.5rem;"></div>`;
-                else if (trimmed.startsWith('-') || trimmed.startsWith('*') || hasLeadingSpace) {
-                    let cleanText = trimmed;
-                    if (cleanText.startsWith('-') || cleanText.startsWith('*')) cleanText = cleanText.substring(1).trim();
-                    html += `<div class="adpe-sub-item">${cleanText}</div>`;
-                } else {
-                    html += `<div class="adpe-main-item">${trimmed}</div>`;
-                }
-            });
-            return html;
-        }
+      container.innerHTML = '';
+      container.appendChild(frag);
+    }
 
-        /**
-         * RENDER DINAMICO SEZIONE CONTATTI - APERTURA LINK INTERATTIVO ED ESCLUSIONE MODALE
-         */
-        function renderContactSection() {
-            const container = document.getElementById('contactDynamicContent');
-            if (!container || !window.contattiData) return;
+    // =========================================================================
+    // HOME SPLASH
+    // =========================================================================
+    async function renderHomeSplash() {
+      try {
+        const [layouts, splash] = await Promise.all([
+          fetch('layouts.json').then(r => r.json()),
+          fetch('splashpage.json').then(r => r.json())
+        ]);
 
-            const data = window.contattiData;
-            let htmlContent = '';
+        const container = document.getElementById('homeSplash');
+        if (!container) return;
 
-            // 1. Renderizzazione dei Blocchi Dinamici a griglia (Uguale ad ADPE)
-            if (data.sections && data.sections.length > 0) {
-                data.sections.forEach(section => {
-                    htmlContent += '<div class="contact-dynamic-block">';
-                    htmlContent += '  <div class="project-sticky-header">';
-                    htmlContent += '    <div class="project-sticky-grid">';
-                    htmlContent += '      <div class="proj-head-wrapper">';
-                    htmlContent += '        <div class="proj-head-title">' + section.title + '</div>';
-                    htmlContent += '        <div class="proj-head-date">' + (section.subtitle || '') + '</div>';
-                    htmlContent += '      </div>';
-                    htmlContent += '    </div>';
-                    htmlContent += '  </div>';
-                    htmlContent += '  <div class="project-detail-grid">';
-                    
-                    const imgs = section.images || [];
-                    const layoutName = section.layout || "PROJECT_SINGLE_HORIZONTAL";
-                    let layoutDef = globalLayouts[layoutName] || { columns: 12, slots: [{ col: "3 / span 8" }] };
+        const frag = document.createDocumentFragment();
 
-                    let imgIndex = 0;
-                    layoutDef.slots.forEach(slot => {
-                        if (imgIndex < imgs.length) {
-                            let imgData = imgs[imgIndex];
-                            let rowStyle = slot.row ? 'grid-row: ' + slot.row + ';' : '';
-                            
-                            htmlContent += '    <div class="proj-img-wrap" style="grid-column: ' + slot.col + '; ' + rowStyle + '">';
-                            
-                            // SE C'È UN LINK (Es: Google Maps), creiamo l'ancora cliccabile, altrimenti no!
-                            if (imgData.link) {
-                                htmlContent += '      <a href="' + imgData.link + '" target="_blank" class="dynamic-img-link">';
-                            }
-                            
-                            htmlContent += '      <img src="' + getOptimizedUrl(imgData.src, 1600) + '" ';
-                            htmlContent += '           alt="' + (imgData.description || '') + '" ';
-                            // Rimosso l'attributo onclick="..." per escludere totalmente lo slideshow!
-                            htmlContent += '           loading="lazy"';
-                            htmlContent += '           style="opacity: 0; transition: opacity 0.8s ease, transform 0.4s ease;"';
-                            htmlContent += '           onload="this.style.opacity=1">';
-                            
-                            if (imgData.link) htmlContent += '      </a>';
-                            htmlContent += '    </div>';
-                            imgIndex++;
-                        }
-                    });
+        splash.sections.forEach(section => {
+          const layoutDef = layouts[section.layout];
+          if (!layoutDef) return;
 
-                    if (section.text) {
-                        htmlContent += '    <div class="contact-dynamic-text-block">' + formatAdpeText(section.text) + '</div>';
-                    }
-                    htmlContent += '  </div></div>'; 
-                });
+          const sectionEl = document.createElement('div');
+          sectionEl.className = 'splash-section';
+          sectionEl.style.cssText = `height:auto; grid-template-columns: repeat(${layoutDef.columns},1fr);`;
+
+          layoutDef.slots.forEach((slot, index) => {
+            const imgData = section.images[index];
+            if (!imgData) return;
+
+            const imgSrc     = typeof imgData === 'string' ? imgData : imgData.src;
+            const imgText    = typeof imgData === 'object' && imgData.text ? imgData.text : null;
+            const projName   = typeof imgData === 'object' && imgData.project_name ? imgData.project_name : null;
+
+            const item = document.createElement('div');
+            item.className    = 'splash-item';
+            item.style.gridColumn = slot.col;
+            if (slot.row) item.style.gridRow = slot.row;
+
+            const img = document.createElement('img');
+            img.src     = getOptimizedUrl(imgSrc, 800);
+            img.loading = index <= 4 ? 'eager' : 'lazy';
+            img.alt     = imgText || '';
+            img.onload  = function () { this.style.opacity = '1'; };
+            if (index <= 1) img.setAttribute('fetchpriority', 'high');
+
+            item.appendChild(img);
+            imgObserver.observe(img);
+
+            if (projName) {
+              const pid = findProjectIdByName(projName);
+              if (pid) {
+                item.style.cursor = 'pointer';
+                item.addEventListener('click', () => { showProjectsSection(false); showProject(pid); });
+              }
             }
 
-            // 2. Aggancio del Blocco Footer dei Recapiti Statici (Telefono, Email, Social)
-            htmlContent += '<div class="contact-footer-block">';
-            htmlContent += '  <div class="contact-footer-grid">';
-            htmlContent += '    <div class="contact-footer-content">';
+            sectionEl.appendChild(item);
+          });
 
-            if (data.phone && data.phone.text) {
-                htmlContent += '      <div class="contact-item">';
-                htmlContent += '        <span class="contact-item-label">' + (data.phone.label || 'Telefono') + '</span>';
-                htmlContent += '        <span class="contact-item-value"><a href="tel:' + data.phone.text.replace(/\s+/g, '') + '">' + data.phone.text + '</a></span>';
-                htmlContent += '      </div>';
-            }
-
-            if (data.email && data.email.text) {
-                htmlContent += '      <div class="contact-item">';
-                htmlContent += '        <span class="contact-item-label">' + (data.email.label || 'Email') + '</span>';
-                htmlContent += '        <span class="contact-item-value"><a href="mailto:' + data.email.text + '">' + data.email.text + '</a></span>';
-                htmlContent += '      </div>';
-            }
-
-            if (data.social) {
-                htmlContent += '      <div class="contact-item">';
-                htmlContent += '        <span class="contact-item-label">' + (data.social.label || 'Social') + '</span>';
-                htmlContent += '        <div class="contact-social-icons">';
-                if (data.social.instagram) htmlContent += '          <a href="' + data.social.instagram + '" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>';
-                if (data.social.facebook) htmlContent += '          <a href="' + data.social.facebook + '" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>';
-                if (data.social.linkedin) htmlContent += '          <a href="' + data.social.linkedin + '" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>';
-                htmlContent += '        </div>';
-                htmlContent += '      </div>';
-            }
-
-            htmlContent += '    </div>';
-            htmlContent += '  </div>';
-            htmlContent += '</div>';
-
-            container.innerHTML = htmlContent;
-        }
-
-        function formatFolderNameForDisplay(name) {
-            return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-        }
-
-        function setupMobileMenu() {
-            const hamburger = document.querySelector('.hamburger');
-            const navMenu = document.querySelector('.nav-menu');
-            const header = document.querySelector('header');
-
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('active');
-                header.classList.toggle('mobile-menu-open');
-            });
-
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    if (window.innerWidth <= 768 && link.closest('.nav-item-dropdown')) {
-                        link.closest('.nav-item-dropdown').classList.toggle('touch-open');
-                        document.querySelector('.lang-dropdown').classList.remove('touch-open');
-                        return; 
-                    }
-                    hamburger.classList.remove('active');
-                    navMenu.classList.remove('active');
-                    header.classList.remove('mobile-menu-open');
-                });
-            });
-
-            document.querySelector('.current-lang').addEventListener('click', (e) => {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault(); 
-                    document.querySelector('.lang-dropdown').classList.toggle('touch-open');
-                    document.querySelector('.nav-item-dropdown').classList.remove('touch-open');
-                }
-            });
-
-            document.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768) {
-                    if (e.target.classList.contains('filter-btn')) {
-                        document.querySelector('.nav-item-dropdown').classList.remove('touch-open');
-                        hamburger.classList.remove('active');
-                        navMenu.classList.remove('active');
-                        header.classList.remove('mobile-menu-open');
-                    }
-                    if (e.target.classList.contains('language-selector-item')) {
-                        document.querySelector('.lang-dropdown').classList.remove('touch-open');
-                    }
-                }
-            });
-        }
-
-        function openImageModal(projectId, imageSrc) {
-            let images = [];
-            if(projectId){
-               const project = findProjectById(projectId);
-               if(project) images = project.images;
-            }
-
-            if (images.length > 0) {
-               currentProjectImages = images;
-               currentImageIndex = currentProjectImages.findIndex(img => img.src === imageSrc);
-            }
-            
-            const modal = document.getElementById('imageModal');
-            document.getElementById('modalImage').src = imageSrc;
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeImageModal(event) {
-            if (event && event.target.id === 'modalImage') return;
-            document.getElementById('imageModal').style.display = 'none';
-            document.body.style.overflow = '';
-        }
-
-        function showNextImage(event) {
-            event.stopPropagation();
-            if(!currentProjectImages.length) return;
-            currentImageIndex = (currentImageIndex + 1) % currentProjectImages.length;
-            document.getElementById('modalImage').src = getOptimizedUrl(currentProjectImages[currentImageIndex].src, 1600);
-        }
-
-        function showPrevImage(event) {
-            event.stopPropagation();
-            if(!currentProjectImages.length) return;
-            currentImageIndex = (currentImageIndex - 1 + currentProjectImages.length) % currentProjectImages.length;
-            document.getElementById('modalImage').src = getOptimizedUrl(currentProjectImages[currentImageIndex].src, 1600);
-        }
-
-        async function renderHomeSplash() {
-            try {
-                const layouts = await fetch('layouts.json').then(r => r.json());
-                const splash = await fetch('splashpage.json').then(r => r.json());
-
-                const container = document.getElementById('homeSplash');
-                if (!container) return;
-                container.innerHTML = '';
-
-                splash.sections.forEach(section => {
-                    const layoutDef = layouts[section.layout];
-                    if (!layoutDef) return;
-
-                    const sectionEl = document.createElement('div');
-                    sectionEl.className = 'splash-section';
-                    sectionEl.style.height = 'auto'; 
-                    sectionEl.style.gridTemplateColumns = `repeat(${layoutDef.columns}, 1fr)`;
-
-                    layoutDef.slots.forEach((slot, index) => {
-                        const imgData = section.images[index];
-                        if (!imgData) return;
-
-                        const imgSrc = typeof imgData === 'string' ? imgData : imgData.src;
-                        const imgText = typeof imgData === 'object' && imgData.text ? imgData.text : null;
-                        const projectName = typeof imgData === 'object' && imgData.project_name ? imgData.project_name : null;
-
-                        const item = document.createElement('div');
-                        item.className = 'splash-item';
-                        item.style.gridColumn = slot.col;
-                        if (slot.row) item.style.gridRow = slot.row;
-
-                        const img = document.createElement('img');
-                        img.src = getOptimizedUrl(imgSrc, 800);
-                        img.loading = index <= 4 ? 'eager' : 'lazy';
-                        img.alt = imgText || '';
-                        img.onload = function() { this.style.opacity = '1'; };
-
-                        item.appendChild(img);
-
-                        if (projectName) {
-                            const projectId = findProjectIdByName(projectName);
-                            if (projectId) {
-                                item.style.cursor = 'pointer';
-                                item.addEventListener('click', () => {
-                                    showProjectsSection(false);
-                                    showProject(projectId);
-                                });
-                            }
-                        }
-
-                        sectionEl.appendChild(item);
-                    });
-                    container.appendChild(sectionEl);
-                });
-            } catch (err) {
-                console.error('Errore in renderHomeSplash:', err);
-            }
-        }
-        
-        function findProjectIdByName(projectName) {
-            const project = allProjectsFlattened.find(p => p.categoryPath.split('.').pop() === projectName);
-            return project ? project.id : null;
-        }
-
-        function saveState(view, projectId = null, filter = null) {
-            const currentState = history.state;
-            if (currentState && currentState.view === view && currentState.projectId === projectId && currentState.filter === filter) return;
-
-            const stateObj = { view: view, projectId: projectId, filter: filter };
-            let url = `?view=${view}`;
-            if (projectId) url += `&id=${projectId}`;
-            if (filter) url += `&filter=${filter}`;
-
-            history.pushState(stateObj, '', url);
-        }
-
-        window.addEventListener('popstate', function(event) {
-            const state = event.state;
-            if (!state) { showProjectsSection(false, false); return; }
-
-            switch (state.view) {
-                case 'home': showHome(false, false); break;
-                case 'about': showAbout(false, false); break;
-                case 'contact': showContact(false, false); break;
-                case 'projects': 
-                    showProjectsSection(false, false);
-                    if (state.filter) filterProjects(state.filter, 0.2, 250, 0.8, 0, false); 
-                    break;
-                case 'projectDetail': 
-                    if (state.projectId) showProject(state.projectId, false, false);
-                    break;
-            }
+          frag.appendChild(sectionEl);
         });
-    </script>
+
+        container.innerHTML = '';
+        container.appendChild(frag);
+      } catch (err) {
+        console.error('Errore in renderHomeSplash:', err);
+      }
+    }
+
+    // =========================================================================
+    // IMAGE MODAL
+    // =========================================================================
+    function openImageModal(projectId, imageSrc) {
+      const project = projectId ? findProjectById(projectId) : null;
+      if (project) {
+        currentProjectImages = project.images;
+        currentImageIndex    = currentProjectImages.findIndex(img => img.src === imageSrc);
+      }
+      const modal   = document.getElementById('imageModal');
+      const imgEl   = document.getElementById('modalImage');
+      imgEl.src     = getOptimizedUrl(imageSrc, 1600);
+      modal.style.display   = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageModal(event) {
+      if (event && event.target.id === 'modalImage') return;
+      document.getElementById('imageModal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    function showNextImage(event) {
+      event.stopPropagation();
+      if (!currentProjectImages.length) return;
+      currentImageIndex = (currentImageIndex + 1) % currentProjectImages.length;
+      document.getElementById('modalImage').src = getOptimizedUrl(currentProjectImages[currentImageIndex].src, 1600);
+    }
+
+    function showPrevImage(event) {
+      event.stopPropagation();
+      if (!currentProjectImages.length) return;
+      currentImageIndex = (currentImageIndex - 1 + currentProjectImages.length) % currentProjectImages.length;
+      document.getElementById('modalImage').src = getOptimizedUrl(currentProjectImages[currentImageIndex].src, 1600);
+    }
+
+    // =========================================================================
+    // MOBILE MENU
+    // =========================================================================
+    function setupMobileMenu() {
+      const hamburger = document.querySelector('.hamburger');
+      const navMenu   = document.querySelector('.nav-menu');
+      const header    = document.querySelector('header');
+
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        header.classList.toggle('mobile-menu-open');
+      });
+
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 768 && link.closest('.nav-item-dropdown')) {
+            link.closest('.nav-item-dropdown').classList.toggle('touch-open');
+            document.querySelector('.lang-dropdown')?.classList.remove('touch-open');
+            return;
+          }
+          hamburger.classList.remove('active');
+          navMenu.classList.remove('active');
+          header.classList.remove('mobile-menu-open');
+        });
+      });
+
+      document.querySelector('.current-lang').addEventListener('click', e => {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          document.querySelector('.lang-dropdown').classList.toggle('touch-open');
+          document.querySelector('.nav-item-dropdown')?.classList.remove('touch-open');
+        }
+      });
+
+      document.addEventListener('click', e => {
+        if (window.innerWidth > 768) return;
+        if (e.target.classList.contains('filter-btn')) {
+          document.querySelector('.nav-item-dropdown')?.classList.remove('touch-open');
+          hamburger.classList.remove('active');
+          navMenu.classList.remove('active');
+          header.classList.remove('mobile-menu-open');
+        }
+        if (e.target.classList.contains('language-selector-item')) {
+          document.querySelector('.lang-dropdown')?.classList.remove('touch-open');
+        }
+      });
+    }
+
+    // =========================================================================
+    // HISTORY (pushState / popstate)
+    // =========================================================================
+    function saveState(view, projectId = null, filter = null) {
+      const cur = history.state;
+      if (cur && cur.view === view && cur.projectId === projectId && cur.filter === filter) return;
+      const stateObj = { view, projectId, filter };
+      let url = `?view=${view}`;
+      if (projectId) url += `&id=${projectId}`;
+      if (filter)    url += `&filter=${filter}`;
+      history.pushState(stateObj, '', url);
+    }
+
+    window.addEventListener('popstate', e => {
+      const state = e.state;
+      if (!state) { showProjectsSection(false, false); return; }
+      switch (state.view) {
+        case 'home':          showHome(false, false); break;
+        case 'about':         showAbout(false, false); break;
+        case 'contact':       showContact(false, false); break;
+        case 'projects':
+          showProjectsSection(false, false);
+          if (state.filter) filterProjects(state.filter, 0.2, 250, 0.8, 0, false);
+          break;
+        case 'projectDetail':
+          if (state.projectId) showProject(state.projectId, false, false);
+          break;
+      }
+    });
+  </script>
 </body>
 </html>
