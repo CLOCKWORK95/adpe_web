@@ -146,5 +146,28 @@
       }
     ],
     "columns": 12
+  },
+  "STRANGE_LAYOUT": {
+    "slots": [
+      {
+        "col": "6 / span 2",
+        "row": "5 / span 3"
+      },
+      {
+        "col": "9 / span 3",
+        "row": "5 / span 3"
+      },
+      {
+        "col": "2 / span 3",
+        "row": "2 / span 6"
+      },
+      {
+        "col": "6 / span 6",
+        "row": "2 / span 2"
+      }
+    ],
+    "columns": 12,
+    "height": "auto",
+    "rows": 8
   }
 }
