@@ -9,7 +9,10 @@
       "images": [
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/contatti/01-studio/main.jpg",
-          "description": ""
+          "description": "",
+          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/contatti/01-studio/main.2ff00b5d5808029394c6a99df84f137c.w720.webp",
+          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/contatti/01-studio/main.2ff00b5d5808029394c6a99df84f137c.w1200.webp",
+          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/contatti/01-studio/main.2ff00b5d5808029394c6a99df84f137c.w1800.webp"
         }
       ]
     },
@@ -23,6 +26,9 @@
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/contatti/02-mappa/map.jpg",
           "description": "",
+          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/contatti/02-mappa/map.4f28602d01c9334506bafebd5c09e64c.w720.webp",
+          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/contatti/02-mappa/map.4f28602d01c9334506bafebd5c09e64c.w1200.webp",
+          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/contatti/02-mappa/map.4f28602d01c9334506bafebd5c09e64c.w1800.webp",
           "link": "https://www.google.com/maps/place/Via+di+Monte+Savello,+29A,+00186+Roma+RM/@41.8915627,12.4763953,17z/data=!3m1!4b1!4m6!3m5!1s0x132f604bcdeeb44b:0x93cb92a6f6519889!8m2!3d41.8915627!4d12.4789702!16s%2Fg%2F11rg62196w?entry=ttu&g_ep=EgoyMDI2MDUwMi4wIKXMDSoASAFQAw%3D%3D"
         }
       ]
