@@ -20,6 +20,7 @@ senza modificare codice.
 - [Gestione pagine ADPE e Contatti](#gestione-pagine-adpe-e-contatti)
 - [Gestione tema grafico](#gestione-tema-grafico)
 - [Pipeline tecnica S3 -> GitHub -> Netlify](#pipeline-tecnica-s3---github---netlify)
+- [Ottimizzazione immagini](#ottimizzazione-immagini)
 - [Deploy e ambienti](#deploy-e-ambienti)
 - [Regole operative per gli architetti](#regole-operative-per-gli-architetti)
 - [Manutenzione tecnica](#manutenzione-tecnica)
@@ -526,6 +527,15 @@ GITHUB_REPO_NAME
 GITHUB_TOKEN
 ```
 
+Variabili opzionali per generare immagini derivate ottimizzate:
+
+```text
+ENABLE_IMAGE_DERIVATIVES=true
+DERIVATIVES_BUCKET_NAME
+DERIVATIVES_REGION
+DERIVATIVES_PREFIX=_generated
+```
+
 La Lambda:
 
 1. legge i contenuti dal bucket S3;
@@ -551,6 +561,141 @@ La Lambda pusha sul branch:
 ```text
 master
 ```
+
+## Ottimizzazione immagini
+
+Il sito puo' usare immagini derivate leggere generate automaticamente dalla
+Lambda. Questa funzione serve a velocizzare home, griglie, pagine ADPE,
+contatti e dettagli progetto senza cambiare il modo in cui gli architetti
+lavorano sul bucket editoriale.
+
+### Obiettivo
+
+Gli architetti continuano a caricare solo le immagini originali nel bucket
+principale.
+
+La Lambda, in modo trasparente, crea versioni WebP in un bucket tecnico separato:
+
+```text
+adpe-derivatives-bucket/
+`-- _generated/
+    `-- projects/
+        `-- uffici/
+            `-- Q8-NA/
+                |-- 01.<etag>.w720.webp
+                |-- 01.<etag>.w1200.webp
+                `-- 01.<etag>.w1800.webp
+```
+
+Il bucket editoriale rimane pulito. Gli architetti non devono vedere, modificare
+o cancellare questi file.
+
+### Versioni generate
+
+Per ogni immagine compatibile vengono generate tre versioni:
+
+| Campo JSON | Larghezza | Uso frontend |
+| --- | ---: | --- |
+| `thumb` | 720px | griglie e anteprime |
+| `medium` | 1200px | contenuti ADPE/contatti/dettaglio |
+| `large` | 1800px | modal immagini |
+
+Il campo `src` originale resta sempre presente. Se una derivata non esiste, il
+frontend usa automaticamente il fallback successivo.
+
+### Formati supportati
+
+La Lambda genera derivate per:
+
+```text
+.jpg, .jpeg, .png, .jfif, .webp
+```
+
+Le GIF vengono lasciate originali per evitare di perdere eventuali animazioni.
+
+### Requisiti AWS
+
+1. Creare un bucket tecnico separato per le derivate, per esempio:
+
+```text
+adpe-architettura-galleries-derived
+```
+
+2. Rendere pubblicamente leggibili gli oggetti generati, come gia' avviene per
+   il bucket immagini pubblico. Esempio di bucket policy:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGeneratedImages",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::adpe-architettura-galleries-derived/*"
+    }
+  ]
+}
+```
+
+3. Aggiungere alla Lambda un layer o container con Pillow installato.
+
+La Lambda importa:
+
+```python
+from PIL import Image, ImageOps
+```
+
+Senza Pillow la funzione resta compatibile, ma non genera derivate e continua a
+usare le immagini originali.
+
+4. Aggiungere variabili ambiente Lambda:
+
+```text
+ENABLE_IMAGE_DERIVATIVES=true
+DERIVATIVES_BUCKET_NAME=adpe-architettura-galleries-derived
+DERIVATIVES_REGION=eu-north-1
+DERIVATIVES_PREFIX=_generated
+```
+
+5. Aggiungere permessi IAM alla Lambda:
+
+```text
+s3:GetObject      sul bucket editoriale
+s3:HeadObject     sul bucket derivati
+s3:PutObject      sul bucket derivati
+```
+
+Esempio risorsa:
+
+```text
+arn:aws:s3:::adpe-architettura-galleries-derived/*
+```
+
+### Cache
+
+Le derivate hanno nomi versionati con ETag dell'originale:
+
+```text
+01.<etag>.w720.webp
+```
+
+Se un architetto sovrascrive `01.jpg`, l'ETag cambia, quindi cambia anche il
+nome della derivata. Questo evita cache stale aggressive.
+
+Le derivate usano:
+
+```text
+Cache-Control: public, max-age=31536000, immutable
+```
+
+### Pulizia vecchie derivate
+
+Poiche' i nomi sono versionati, vecchie derivate possono restare nel bucket
+tecnico quando un'immagine viene sostituita. Per tenerlo pulito, configurare una
+Lifecycle Rule sul bucket derivati, per esempio cancellazione oggetti sotto
+`_generated/` dopo 90 o 180 giorni.
 
 ## Deploy e ambienti
 

@@ -56,6 +56,18 @@ function truncate(value, maxLength) {
   return `${text.slice(0, maxLength - 1).trim()}...`;
 }
 
+function imageVariant(image, preferred = 'src') {
+  if (!image) return '';
+  const fallbacks = {
+    large: ['large', 'medium', 'src', 'thumb'],
+    src: ['src', 'large', 'medium', 'thumb']
+  };
+  for (const key of (fallbacks[preferred] || fallbacks.src)) {
+    if (image[key]) return image[key];
+  }
+  return '';
+}
+
 function escapeAttr(value) {
   return String(value || '')
     .replace(/&/g, '&amp;')
@@ -85,7 +97,7 @@ function replaceOrInsertMeta(html, selector, replacement) {
 function buildProjectPage(indexHtml, project) {
   const title = `${stripHtml(project.title)} | ADPE`;
   const description = truncate(project.description || project.luogo_data || 'Progetto ADPE Studio di Architettura.', 155);
-  const image = project.images && project.images[0] ? project.images[0].src : '';
+  const image = project.images && project.images[0] ? imageVariant(project.images[0], 'large') : '';
   const canonical = `${SITE_URL}/progetti/${project.slug}/`;
   const jsonLd = {
     '@context': 'https://schema.org',

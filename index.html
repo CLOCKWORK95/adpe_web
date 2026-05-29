@@ -706,10 +706,28 @@
 
     function getOptimizedUrl(originalUrl, width = 1280) {
       if (!originalUrl || !originalUrl.includes('amazonaws.com')) return originalUrl;
+      if (originalUrl.includes('/_generated/')) return originalUrl;
       if (CDN_STRATEGY === 's3' || !_isNetlifyEnv) return originalUrl;
       // [OPT] Attivato su tutti i breakpoint (non solo mobile) con width adattiva
       const w = width || Math.min(window.innerWidth * window.devicePixelRatio, 1920);
       return `/.netlify/images?url=${encodeURIComponent(originalUrl)}&w=${w}&q=80`;
+    }
+
+    function getImageVariant(imageData, preferred = 'src') {
+      if (!imageData) return '';
+      if (typeof imageData === 'string') return imageData;
+
+      const fallbacks = {
+        thumb:  ['thumb', 'medium', 'large', 'src'],
+        medium: ['medium', 'large', 'thumb', 'src'],
+        large:  ['large', 'medium', 'src', 'thumb'],
+        src:    ['src', 'large', 'medium', 'thumb']
+      };
+
+      for (const key of (fallbacks[preferred] || fallbacks.src)) {
+        if (imageData[key]) return imageData[key];
+      }
+      return '';
     }
 
     function prepareImage(img, originalUrl, width, options = {}) {
@@ -1091,7 +1109,7 @@
             img.alt     = imgData.description || '';
             img.style.cssText = 'opacity:0; transition: opacity 0.8s ease, transform 0.4s ease;';
             img.onclick = () => openImageModal(project.id, imgData.src);
-            prepareImage(img, imgData.src, IMAGE_WIDTHS.detail, {
+            prepareImage(img, getImageVariant(imgData, 'medium'), IMAGE_WIDTHS.detail, {
               eager: imgIndex < 2,
               highPriority: imgIndex === 0
             });
@@ -1265,7 +1283,7 @@
         let i = 0;
         const queue = filteredProjects
           .filter(p => p.images && p.images.length > 0)
-          .map(p => ({ src: p.images[0].src, title: p.title, luogo_data: p.luogo_data || '', projectId: p.id }));
+          .map(p => ({ image: p.images[0], title: p.title, luogo_data: p.luogo_data || '', projectId: p.id }));
 
         while (i < queue.length) {
           const section = document.createElement('div');
@@ -1283,7 +1301,7 @@
 
             const img = document.createElement('img');
             img.alt     = '';
-            prepareImage(img, imgData.src, IMAGE_WIDTHS.grid, {
+            prepareImage(img, getImageVariant(imgData.image, 'thumb'), IMAGE_WIDTHS.grid, {
               eager: i <= 4,
               highPriority: i <= 2
             });
@@ -1402,7 +1420,7 @@
           const img = document.createElement('img');
           img.alt     = imgData.description || '';
           img.style.cssText = 'opacity:0; transition: opacity 0.8s ease;';
-          prepareImage(img, imgData.src, IMAGE_WIDTHS.content, {
+          prepareImage(img, getImageVariant(imgData, 'medium'), IMAGE_WIDTHS.content, {
             eager: sectionIndex === 0 && imgIndex === 1,
             highPriority: sectionIndex === 0 && imgIndex === 1
           });
@@ -1490,7 +1508,7 @@
             const img = document.createElement('img');
             img.alt     = imgData.description || '';
             img.style.cssText = 'opacity:0; transition: opacity 0.8s ease;';
-            prepareImage(img, imgData.src, IMAGE_WIDTHS.content, {
+            prepareImage(img, getImageVariant(imgData, 'medium'), IMAGE_WIDTHS.content, {
               eager: sectionIndex === 0 && imgIndex === 1,
               highPriority: sectionIndex === 0 && imgIndex === 1
             });
@@ -1593,7 +1611,7 @@
             const imgData = section.images[index];
             if (!imgData) return;
 
-            const imgSrc     = typeof imgData === 'string' ? imgData : imgData.src;
+            const imgSrc     = typeof imgData === 'string' ? imgData : getImageVariant(imgData, 'thumb');
             const imgText    = typeof imgData === 'object' && imgData.text ? imgData.text : null;
             const projName   = typeof imgData === 'object' && imgData.project_name ? imgData.project_name : null;
 
@@ -1644,7 +1662,8 @@
       }
       const modal   = document.getElementById('imageModal');
       const imgEl   = document.getElementById('modalImage');
-      imgEl.src     = getOptimizedUrl(imageSrc, IMAGE_WIDTHS.modal);
+      const modalImageData = currentProjectImages[currentImageIndex] || imageSrc;
+      imgEl.src     = getOptimizedUrl(getImageVariant(modalImageData, 'large'), IMAGE_WIDTHS.modal);
       modal.style.display   = 'flex';
       document.body.style.overflow = 'hidden';
     }
@@ -1659,14 +1678,14 @@
       event.stopPropagation();
       if (!currentProjectImages.length) return;
       currentImageIndex = (currentImageIndex + 1) % currentProjectImages.length;
-      document.getElementById('modalImage').src = getOptimizedUrl(currentProjectImages[currentImageIndex].src, IMAGE_WIDTHS.modal);
+      document.getElementById('modalImage').src = getOptimizedUrl(getImageVariant(currentProjectImages[currentImageIndex], 'large'), IMAGE_WIDTHS.modal);
     }
 
     function showPrevImage(event) {
       event.stopPropagation();
       if (!currentProjectImages.length) return;
       currentImageIndex = (currentImageIndex - 1 + currentProjectImages.length) % currentProjectImages.length;
-      document.getElementById('modalImage').src = getOptimizedUrl(currentProjectImages[currentImageIndex].src, IMAGE_WIDTHS.modal);
+      document.getElementById('modalImage').src = getOptimizedUrl(getImageVariant(currentProjectImages[currentImageIndex], 'large'), IMAGE_WIDTHS.modal);
     }
 
     // =========================================================================
