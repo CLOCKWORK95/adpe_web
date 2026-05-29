@@ -789,10 +789,14 @@
         globalProjectOrder = await orderRes.json().catch(() => []);
 
         allProjectsFlattened = flattenProjects(projects);
-        allProjectsFlattened.forEach((p, i) => p.id = i + 1);
+        allProjectsFlattened.forEach((p, i) => {
+          p.id = i + 1;
+          p.slug = buildProjectSlug(p.categoryPath);
+        });
 
         setupEventListeners();
         setLanguage(currentLang, true);
+        routeInitialView();
         dataReady = true;
 
       } catch (err) {
@@ -902,7 +906,6 @@
       if (isInitialLoad) {
         document.body.classList.remove('dark-theme');
         localStorage.setItem('theme', 'light');
-        showProjectsSection(false);
       } else {
         switch (currentView) {
           case 'home':          showHome(false, false); break;
@@ -993,7 +996,7 @@
       if (!project) return;
 
       currentView = 'projectDetail';
-      if (addToHistory) saveState('projectDetail', projectId, null);
+      if (addToHistory) saveState('projectDetail', projectId, null, project.slug);
 
       showSection('projectsSection', shouldScroll);
       document.getElementById('projectsGrid').style.display = 'none';
@@ -1110,7 +1113,34 @@
     }
 
     function findProjectById(id)     { return allProjectsFlattened.find(p => p.id === id); }
+    function findProjectBySlug(slug) { const s = normalizeProjectSlug(slug); return allProjectsFlattened.find(p => p.slug === s); }
     function findProjectIdByName(n)  { const p = allProjectsFlattened.find(p => p.categoryPath.split('.').pop() === n); return p ? p.id : null; }
+
+    function slugifySegment(str) {
+      return String(str || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+    }
+
+    function buildProjectSlug(categoryPath) {
+      return String(categoryPath || '').split('.').map(slugifySegment).filter(Boolean).join('/');
+    }
+
+    function normalizeProjectSlug(slug) {
+      return String(slug || '')
+        .replace(/^https?:\/\/[^/]+/i, '')
+        .replace(/[?#].*$/, '')
+        .replace(/^\/+/, '')
+        .replace(/^progetti\/?/, '')
+        .replace(/\/+$/, '')
+        .split('/')
+        .map(slugifySegment)
+        .filter(Boolean)
+        .join('/');
+    }
 
     function getProjectCategoryLabel(project) {
       if (!project?.categoryPath) return translations[currentLang].unknownCategory;
@@ -1649,14 +1679,63 @@
     // =========================================================================
     // HISTORY (pushState / popstate)
     // =========================================================================
-    function saveState(view, projectId = null, filter = null) {
+    function saveState(view, projectId = null, filter = null, slug = null) {
       const cur = history.state;
-      if (cur && cur.view === view && cur.projectId === projectId && cur.filter === filter) return;
-      const stateObj = { view, projectId, filter };
-      let url = `?view=${view}`;
-      if (projectId) url += `&id=${projectId}`;
-      if (filter)    url += `&filter=${filter}`;
+      const normalizedSlug = slug ? normalizeProjectSlug(slug) : null;
+      if (cur && cur.view === view && cur.projectId === projectId && cur.filter === filter && cur.slug === normalizedSlug) return;
+
+      const stateObj = { view, projectId, filter, slug: normalizedSlug };
+      let url;
+
+      if (view === 'projectDetail' && normalizedSlug) {
+        url = `/progetti/${normalizedSlug}/`;
+      } else {
+        url = `?view=${view}`;
+        if (projectId) url += `&id=${projectId}`;
+        if (filter)    url += `&filter=${encodeURIComponent(filter)}`;
+      }
       history.pushState(stateObj, '', url);
+    }
+
+    function routeInitialView() {
+      const params = new URLSearchParams(window.location.search);
+      const pathProject = window.location.pathname.match(/^\/progetti\/(.+?)\/?$/);
+      const requestedSlug = window.__ADPE_INITIAL_PROJECT_SLUG__ ||
+                            (pathProject ? pathProject[1] : '') ||
+                            params.get('project') ||
+                            params.get('slug');
+
+      if (requestedSlug) {
+        const project = findProjectBySlug(requestedSlug);
+        if (project) {
+          showProject(project.id, false, false);
+          history.replaceState(
+            { view: 'projectDetail', projectId: project.id, filter: null, slug: project.slug },
+            '',
+            `/progetti/${project.slug}/`
+          );
+          return;
+        }
+      }
+
+      const view = params.get('view');
+      const filter = params.get('filter');
+
+      if (view === 'home') {
+        showHome(false, false);
+      } else if (view === 'about') {
+        showAbout(false, false);
+      } else if (view === 'contact') {
+        showContact(false, false);
+      } else if (view === 'projectDetail' && params.get('id')) {
+        const project = findProjectById(parseInt(params.get('id'), 10));
+        if (project) showProject(project.id, false, false);
+        else showProjectsSection(false, false);
+      } else {
+        if (filter) lastActiveFilter = filter;
+        showProjectsSection(false, false);
+        if (filter) filterProjects(filter, 0.2, 250, 0.8, 0, false);
+      }
     }
 
     window.addEventListener('popstate', e => {
@@ -1671,7 +1750,12 @@
           if (state.filter) filterProjects(state.filter, 0.2, 250, 0.8, 0, false);
           break;
         case 'projectDetail':
-          if (state.projectId) showProject(state.projectId, false, false);
+          if (state.slug) {
+            const project = findProjectBySlug(state.slug);
+            if (project) showProject(project.id, false, false);
+          } else if (state.projectId) {
+            showProject(state.projectId, false, false);
+          }
           break;
       }
     });

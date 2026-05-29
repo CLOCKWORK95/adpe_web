@@ -1,4 +1,5 @@
 [build]
+  command = "node scripts/generate-static-pages.js"
   ignore = 'test "$SITE_NAME" = "adpeprod" && test -z "$INCOMING_HOOK_TITLE"'
 
 [images]
