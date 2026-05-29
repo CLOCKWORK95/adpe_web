@@ -327,6 +327,9 @@
       /* [OPT] will-change solo su transform (hover scale) */
       will-change: transform;
     }
+    .splash-item img.lazy-pending {
+      min-height: min(42vh, 320px);
+    }
     .splash-item:hover img { transform: scale(1.05); }
 
     /* [OPT] Immagini nel proj-img-wrap: will-change sul wrapper, non sull'img */
@@ -341,6 +344,10 @@
       cursor: pointer;
       transition: transform 0.4s ease;
       will-change: transform;
+    }
+    .proj-img-wrap img.lazy-pending {
+      width: 100%;
+      min-height: min(45vh, 360px);
     }
     .proj-img-wrap img:hover { transform: scale(1.02); }
 
@@ -684,6 +691,14 @@
     // CDN / IMAGE OPTIMIZATION
     // =========================================================================
     const CDN_STRATEGY = 'auto'; // 'auto' | 's3' | 'cdn'
+    const IMAGE_WIDTHS = {
+      logo: 200,
+      grid: 720,
+      home: 960,
+      content: 1200,
+      detail: 1400,
+      modal: 1800
+    };
 
     // [OPT] Calcola una volta sola al caricamento, non ad ogni chiamata
     const _isNetlifyEnv = window.location.hostname.includes('netlify.app') ||
@@ -695,6 +710,31 @@
       // [OPT] Attivato su tutti i breakpoint (non solo mobile) con width adattiva
       const w = width || Math.min(window.innerWidth * window.devicePixelRatio, 1920);
       return `/.netlify/images?url=${encodeURIComponent(originalUrl)}&w=${w}&q=80`;
+    }
+
+    function prepareImage(img, originalUrl, width, options = {}) {
+      const { eager = false, highPriority = false } = options;
+      const optimizedUrl = getOptimizedUrl(originalUrl, width);
+
+      img.decoding = 'async';
+      img.onload = function () {
+        this.classList.remove('lazy-pending');
+        this.style.opacity = '1';
+      };
+
+      if (highPriority) img.setAttribute('fetchpriority', 'high');
+
+      if (eager || !imgObserver) {
+        img.src = optimizedUrl;
+        img.loading = eager ? 'eager' : 'lazy';
+      } else {
+        img.dataset.src = optimizedUrl;
+        img.loading = 'lazy';
+        img.classList.add('lazy-pending');
+        imgObserver.observe(img);
+      }
+
+      return img;
     }
 
     // =========================================================================
@@ -709,10 +749,11 @@
     let lastActiveFilter   = 'home_custom';
     let currentView        = 'home';
     let allProjectsFlattened = [];
+    let homeSplashData = null;
     let currentLang        = localStorage.getItem('lang') || 'it';
 
     // [OPT] IntersectionObserver riutilizzabile per il fade-in delle immagini
-    const imgObserver = new IntersectionObserver((entries) => {
+    const imgObserver = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const img = entry.target;
@@ -724,7 +765,7 @@
           imgObserver.unobserve(img);
         }
       });
-    }, { rootMargin: '200px 0px' }); // Anticipa il caricamento di 200px
+    }, { rootMargin: '300px 0px' }) : null; // Anticipa il caricamento solo delle immagini vicine
 
     const translations = {
       it: {
@@ -963,7 +1004,7 @@
         titleWrapper = document.createElement('div');
         titleWrapper.className = 'title-wrapper';
         titleWrapper.innerHTML = `<img
-          src="${getOptimizedUrl('https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg', 200)}"
+          src="${getOptimizedUrl('https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg', IMAGE_WIDTHS.logo)}"
           alt="ADPE Logo" class="title-logo-center"
           style="cursor:pointer;"
           onclick="filterProjects('home_custom')">`;
@@ -1047,17 +1088,16 @@
             if (slot.row) wrap.style.gridRow = slot.row;
 
             const img = document.createElement('img');
-            img.src     = getOptimizedUrl(imgData.src, 1600);
             img.alt     = imgData.description || '';
-            img.loading = 'lazy';
             img.style.cssText = 'opacity:0; transition: opacity 0.8s ease, transform 0.4s ease;';
-            img.onload  = function () { this.style.opacity = '1'; };
             img.onclick = () => openImageModal(project.id, imgData.src);
+            prepareImage(img, imgData.src, IMAGE_WIDTHS.detail, {
+              eager: imgIndex < 2,
+              highPriority: imgIndex === 0
+            });
 
             wrap.appendChild(img);
             grid.appendChild(wrap);
-            // [OPT] Osserva ogni immagine con l'IntersectionObserver
-            imgObserver.observe(img);
             imgIndex++;
           });
           seqIndex++;
@@ -1242,16 +1282,14 @@
             if (slot.row) item.style.gridRow = slot.row;
 
             const img = document.createElement('img');
-            img.src     = getOptimizedUrl(imgData.src, 800);
-            img.loading = i <= 4 ? 'eager' : 'lazy';
             img.alt     = '';
-            img.onload  = function () { this.style.opacity = '1'; };
-            // [OPT] fetchpriority sulle prime immagini visibili
-            if (i <= 2) img.setAttribute('fetchpriority', 'high');
+            prepareImage(img, imgData.src, IMAGE_WIDTHS.grid, {
+              eager: i <= 4,
+              highPriority: i <= 2
+            });
 
             item.appendChild(img);
             item.addEventListener('click', () => showProject(imgData.projectId));
-            imgObserver.observe(img);
             section.appendChild(item);
 
             const caption = document.createElement('div');
@@ -1332,7 +1370,7 @@
 
       const frag = document.createDocumentFragment();
 
-      window.adpeData.sections.forEach(section => {
+      window.adpeData.sections.forEach((section, sectionIndex) => {
         const block = document.createElement('div');
         block.className = 'adpe-block';
         block.innerHTML = `
@@ -1362,12 +1400,12 @@
           if (slot.row) wrap.style.gridRow = slot.row;
 
           const img = document.createElement('img');
-          img.src     = getOptimizedUrl(imgData.src, 1600);
           img.alt     = imgData.description || '';
-          img.loading = 'lazy';
           img.style.cssText = 'opacity:0; transition: opacity 0.8s ease;';
-          img.onload  = function () { this.style.opacity = '1'; };
-          imgObserver.observe(img);
+          prepareImage(img, imgData.src, IMAGE_WIDTHS.content, {
+            eager: sectionIndex === 0 && imgIndex === 1,
+            highPriority: sectionIndex === 0 && imgIndex === 1
+          });
 
           if (imgData.link) {
             const a = document.createElement('a');
@@ -1420,7 +1458,7 @@
       const frag = document.createDocumentFragment();
 
       if (data.sections?.length) {
-        data.sections.forEach(section => {
+        data.sections.forEach((section, sectionIndex) => {
           const block = document.createElement('div');
           block.className = 'contact-dynamic-block';
           block.innerHTML = `
@@ -1450,12 +1488,12 @@
             if (slot.row) wrap.style.gridRow = slot.row;
 
             const img = document.createElement('img');
-            img.src     = getOptimizedUrl(imgData.src, 1600);
             img.alt     = imgData.description || '';
-            img.loading = 'lazy';
             img.style.cssText = 'opacity:0; transition: opacity 0.8s ease;';
-            img.onload  = function () { this.style.opacity = '1'; };
-            imgObserver.observe(img);
+            prepareImage(img, imgData.src, IMAGE_WIDTHS.content, {
+              eager: sectionIndex === 0 && imgIndex === 1,
+              highPriority: sectionIndex === 0 && imgIndex === 1
+            });
 
             if (imgData.link) {
               const a = document.createElement('a');
@@ -1529,15 +1567,19 @@
     // =========================================================================
     async function renderHomeSplash() {
       try {
-        const [layouts, splash] = await Promise.all([
-          fetch('layouts.json').then(r => r.json()),
-          fetch('splashpage.json').then(r => r.json())
-        ]);
+        if (!homeSplashData) {
+          homeSplashData = await fetch('splashpage.json').then(r => r.json());
+        }
+
+        const layouts = globalLayouts;
+        const splash  = homeSplashData;
 
         const container = document.getElementById('homeSplash');
         if (!container) return;
 
         const frag = document.createDocumentFragment();
+
+        let splashImageIndex = 0;
 
         splash.sections.forEach(section => {
           const layoutDef = layouts[section.layout];
@@ -1561,14 +1603,14 @@
             if (slot.row) item.style.gridRow = slot.row;
 
             const img = document.createElement('img');
-            img.src     = getOptimizedUrl(imgSrc, 800);
-            img.loading = index <= 4 ? 'eager' : 'lazy';
             img.alt     = imgText || '';
-            img.onload  = function () { this.style.opacity = '1'; };
-            if (index <= 1) img.setAttribute('fetchpriority', 'high');
+            prepareImage(img, imgSrc, IMAGE_WIDTHS.home, {
+              eager: splashImageIndex < 3,
+              highPriority: splashImageIndex < 2
+            });
+            splashImageIndex++;
 
             item.appendChild(img);
-            imgObserver.observe(img);
 
             if (projName) {
               const pid = findProjectIdByName(projName);
@@ -1602,7 +1644,7 @@
       }
       const modal   = document.getElementById('imageModal');
       const imgEl   = document.getElementById('modalImage');
-      imgEl.src     = getOptimizedUrl(imageSrc, 1600);
+      imgEl.src     = getOptimizedUrl(imageSrc, IMAGE_WIDTHS.modal);
       modal.style.display   = 'flex';
       document.body.style.overflow = 'hidden';
     }
@@ -1617,14 +1659,14 @@
       event.stopPropagation();
       if (!currentProjectImages.length) return;
       currentImageIndex = (currentImageIndex + 1) % currentProjectImages.length;
-      document.getElementById('modalImage').src = getOptimizedUrl(currentProjectImages[currentImageIndex].src, 1600);
+      document.getElementById('modalImage').src = getOptimizedUrl(currentProjectImages[currentImageIndex].src, IMAGE_WIDTHS.modal);
     }
 
     function showPrevImage(event) {
       event.stopPropagation();
       if (!currentProjectImages.length) return;
       currentImageIndex = (currentImageIndex - 1 + currentProjectImages.length) % currentProjectImages.length;
-      document.getElementById('modalImage').src = getOptimizedUrl(currentProjectImages[currentImageIndex].src, 1600);
+      document.getElementById('modalImage').src = getOptimizedUrl(currentProjectImages[currentImageIndex].src, IMAGE_WIDTHS.modal);
     }
 
     // =========================================================================
