@@ -102,9 +102,9 @@ def list_project_images(prefix: str) -> List[Dict[str, str]]:
     return [{"key": key, "src": s3_url(key), "name": os.path.basename(key)} for _, key in images]
 
 
-def project_has_content(prefix: str) -> bool:
+def project_has_direct_content(prefix: str) -> bool:
     paginator = s3_client.get_paginator("list_objects_v2")
-    pages = paginator.paginate(Bucket=S3_BUCKET_NAME, Prefix=prefix)
+    pages = paginator.paginate(Bucket=S3_BUCKET_NAME, Prefix=prefix, Delimiter="/")
     for page in pages:
         for obj in page.get("Contents", []):
             file_name = os.path.basename(obj["Key"]).lower()
@@ -120,15 +120,14 @@ def collect_projects(prefix: str = "projects/") -> List[Dict[str, str]]:
         for child in list_folders(folder):
             name = basename_from_prefix(child)
             next_parts = [*path_parts, name]
-            if project_has_content(child):
+            if project_has_direct_content(child):
                 projects.append({
                     "path": child,
                     "name": name,
                     "title": title_from_folder(name),
                     "categoryPath": ".".join(next_parts),
                 })
-            else:
-                walk(child, next_parts)
+            walk(child, next_parts)
 
     walk(prefix, [])
     return projects

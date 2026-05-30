@@ -192,8 +192,10 @@
   </main>
 
   <script>
+    const DEFAULT_API_BASE = 'https://a6iyfupq52deqgwthdv7mlqnfa0nonit.lambda-url.eu-north-1.on.aws';
+
     const state = {
-      apiBase: localStorage.getItem('adpeLayoutApiBase') || '',
+      apiBase: localStorage.getItem('adpeLayoutApiBase') || DEFAULT_API_BASE,
       token: localStorage.getItem('adpeLayoutToken') || '',
       projects: [],
       layouts: {},
@@ -249,11 +251,19 @@
     }
 
     async function api(path, options = {}) {
-      const headers = { 'content-type': 'application/json', ...(options.headers || {}) };
+      const method = (options.method || 'GET').toUpperCase();
+      const headers = { ...(options.headers || {}) };
+      if (method !== 'GET') headers['content-type'] = 'application/json';
       if (state.token) headers.authorization = `Bearer ${state.token}`;
-      const res = await fetch(apiPath(path), { ...options, headers });
+      const url = apiPath(path);
+      let res;
+      try {
+        res = await fetch(url, { ...options, headers });
+      } catch (error) {
+        throw new Error(`${path}: ${error.message}. URL: ${url}`);
+      }
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+      if (!res.ok) throw new Error(`${path}: ${data.error || `HTTP ${res.status}`}`);
       return data;
     }
 
@@ -644,7 +654,10 @@
       state.token = els.adminToken.value.trim();
       localStorage.setItem('adpeLayoutApiBase', state.apiBase);
       localStorage.setItem('adpeLayoutToken', state.token);
-      const [projectsData, layoutsData] = await Promise.all([api('/projects'), api('/layouts')]);
+      setStatus(els.apiStatus, 'Carico layouts...');
+      const layoutsData = await api('/layouts');
+      setStatus(els.apiStatus, 'Carico progetti...');
+      const projectsData = await api('/projects');
       state.projects = projectsData.projects || [];
       state.layoutsRaw = layoutsData.raw || '';
       state.layouts = layoutsData.layouts || parseLayouts(state.layoutsRaw);
