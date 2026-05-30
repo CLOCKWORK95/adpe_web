@@ -253,7 +253,10 @@
       width: 100%;
       margin-bottom: 0.45rem;
       padding-bottom: 0.45rem;
-      border-bottom: 1px solid rgba(45,166,196,0.18);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.55rem;
     }
     .project-search-input {
       width: min(190px, 100%);
@@ -273,6 +276,14 @@
     }
     .project-search-input::placeholder { color: rgba(8,43,46,0.48); }
     .project-search-input:focus { border-color: var(--autumn-blue); color: var(--autumn-blue); }
+    .project-search-icon {
+      color: var(--text-color);
+      font-size: 0.68rem;
+      line-height: 1;
+      opacity: 0.34;
+      pointer-events: none;
+      transform: translateY(-1px);
+    }
     body.dark-theme .project-search-input { border-bottom-color: rgba(240,240,240,0.3); }
     body.dark-theme .project-search-input::placeholder { color: rgba(240,240,240,0.45); }
 
@@ -606,8 +617,8 @@
       .nav-item-dropdown { align-items: flex-end; width: 100%; }
       .nav-item-dropdown .dropdown-content { position: static; transform: none; background: transparent; text-align: center; width: 100%; margin-top: 1rem; }
       .dropdown-content .filter-btn { text-align: center; margin: 0.5rem auto; width: auto; margin-right: 0; }
-      .project-search-wrap { display: flex; justify-content: center; border-bottom: none; }
-      .project-search-input { text-align: center; width: min(240px, 80vw); }
+      .project-search-wrap { justify-content: flex-end; border-bottom: none; }
+      .project-search-input { text-align: right; width: min(240px, 80vw); }
       header.mobile-menu-open { background: var(--primary-color) !important; backdrop-filter: blur(20px); }
 
       body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
@@ -1485,7 +1496,9 @@
           btn.classList.toggle('active', btn.dataset.filter === filter)
         );
         const searchInput = document.getElementById('projectSearchInput');
-        if (searchInput && !isProjectSearchFilter(filter)) searchInput.value = '';
+        if (searchInput && !isProjectSearchFilter(filter)) {
+          searchInput.value = '';
+        }
 
         grid.style.opacity = '1';
       }, delayBeforeRender);
@@ -1519,10 +1532,13 @@
       const searchInput = document.createElement('input');
       searchInput.id = 'projectSearchInput';
       searchInput.className = 'project-search-input';
-      searchInput.type = 'search';
+      searchInput.type = 'text';
       searchInput.autocomplete = 'off';
       searchInput.placeholder = translations[currentLang].projectSearchPlaceholder || 'cerca progetto';
       searchInput.value = projectSearchQueryFromFilter(lastActiveFilter);
+      const searchIcon = document.createElement('i');
+      searchIcon.className = 'fas fa-search project-search-icon';
+      searchIcon.setAttribute('aria-hidden', 'true');
       searchInput.addEventListener('click', event => event.stopPropagation());
       searchInput.addEventListener('keydown', event => event.stopPropagation());
       searchInput.addEventListener('input', event => {
@@ -1530,6 +1546,7 @@
         filterProjects(query ? `search:${encodeURIComponent(query)}` : 'all', 0.12, 80, 0.35, 0, false);
       });
       searchWrap.appendChild(searchInput);
+      searchWrap.appendChild(searchIcon);
       frag.appendChild(searchWrap);
 
       const mkBtn = (label, filter) => {
