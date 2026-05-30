@@ -188,6 +188,26 @@
     }
     .nav-link:hover::after { width: 100%; }
 
+    .header-project-logo {
+      position: absolute;
+      left: -2.2rem;
+      top: -0.25rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 0.85s ease, transform 0.85s ease, visibility 0.85s;
+      pointer-events: none;
+    }
+    header.project-logo-visible .header-project-logo {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
     .header-right-icons {
       position: absolute; right: 0; top: 0.3rem; display: flex;
       align-items: flex-start; gap: 1.5rem; z-index: 100;
@@ -228,9 +248,7 @@
     }
 
     body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
-    body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content,
-    body[data-view="projects"] .nav-item-dropdown:focus-within .dropdown-content,
-    body[data-view="projectDetail"] .nav-item-dropdown:focus-within .dropdown-content {
+    body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content {
       max-height: 600px; opacity: 1; visibility: visible; pointer-events: auto; margin-top: 2rem;
     }
     .lang-dropdown:hover .lang-dropdown-content {
@@ -284,6 +302,7 @@
       pointer-events: none;
       transform: translateY(-1px);
     }
+    .mobile-project-search { display: none; }
     body.dark-theme .project-search-input { border-bottom-color: rgba(240,240,240,0.3); }
     body.dark-theme .project-search-input::placeholder { color: rgba(240,240,240,0.45); }
 
@@ -578,23 +597,84 @@
       .title-wrapper { margin-top: 4rem; margin-bottom: 4rem; }
       .title-logo-center { width: 65px; height: 65px; }
 
-      nav { justify-content: space-between !important; width: 100%; align-items: center; }
+      nav { justify-content: center !important; width: 100%; align-items: center; min-height: 34px; }
       .nav-menu {
-        position: fixed; top: 0; left: -100%; width: 100%; height: 100vh;
+        position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
         background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
         z-index: -1; display: flex !important; flex-direction: column;
         justify-content: flex-start; align-items: flex-end;
-        padding-top: 7rem; padding-right: 2rem; transition: left var(--transition);
+        padding-top: 7rem; padding-right: 2rem; transition: right var(--transition);
       }
       body.dark-theme .nav-menu { background: rgba(26,26,26,0.98); }
-      .nav-menu.active { left: 0; }
+      .nav-menu.active { right: 0; }
       .nav-menu li { width: 100%; display: flex; justify-content: flex-end; margin-right: 1.5rem !important; margin-left: 0 !important; }
       .nav-menu li:nth-child(1), .nav-menu li:nth-child(2), .nav-menu li:nth-child(3) { justify-self: auto; }
       .nav-link { font-size: 1.0rem; text-align: right; margin-bottom: 2rem; }
-      .hamburger { display: flex; }
-      .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-      .hamburger.active span:nth-child(2) { opacity: 0; }
-      .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+      .hamburger {
+        position: fixed;
+        top: 50vh;
+        right: 0;
+        z-index: 1100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 74px;
+        padding: 0;
+        border: 1px solid rgba(8,43,46,0.16);
+        border-right: none;
+        border-radius: 16px 0 0 16px;
+        background: rgba(255,255,255,0.82);
+        box-shadow: 0 4px 16px rgba(8,43,46,0.08);
+        backdrop-filter: blur(10px);
+        color: var(--text-color);
+        transform: translateY(-50%);
+      }
+      body.dark-theme .hamburger {
+        background: rgba(26,26,26,0.78);
+        border-color: rgba(240,240,240,0.18);
+      }
+      .hamburger::after { content: ''; }
+      .hamburger.active {
+        right: auto;
+        left: 0;
+        top: 50vh;
+        border-right: 1px solid rgba(8,43,46,0.16);
+        border-left: none;
+        border-radius: 0 16px 16px 0;
+        background: var(--primary-color);
+        transform: translateY(-50%);
+      }
+      body.dark-theme .hamburger.active { border-right-color: rgba(240,240,240,0.18); }
+      .hamburger span { display: none; }
+      .header-project-logo {
+        left: 1rem;
+        top: 50%;
+        width: 28px;
+        height: 28px;
+        transform: translateY(-58%);
+      }
+      header.project-logo-visible .header-project-logo { transform: translateY(-50%); }
+      .header-right-icons { display: none !important; }
+      .mobile-project-search {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        align-items: center;
+        gap: 0.55rem;
+        max-width: 56vw;
+      }
+      body[data-view="projects"] .mobile-project-search,
+      body[data-view="projectDetail"] .mobile-project-search {
+        display: flex;
+      }
+      .mobile-project-search .project-search-input {
+        width: min(185px, 46vw);
+        text-align: center;
+        font-size: 0.68rem;
+      }
 
       .splash-section { padding: 0 5vw; margin-bottom: 6vw; }
       .projects-grid .splash-caption { align-self: center; width: 100%; }
@@ -613,10 +693,10 @@
       .adpe-block .project-detail-grid, .contact-dynamic-block .project-detail-grid { row-gap: 2rem; }
       .btn-back-minimal { margin-top: 3rem; }
 
-      .header-right-icons { position: relative !important; flex-wrap: wrap; justify-content: flex-end; gap: 1rem; }
       .nav-item-dropdown { align-items: flex-end; width: 100%; }
       .nav-item-dropdown .dropdown-content { position: static; transform: none; background: transparent; text-align: center; width: 100%; margin-top: 1rem; }
       .dropdown-content .filter-btn { text-align: center; margin: 0.5rem auto; width: auto; margin-right: 0; }
+      .nav-item-dropdown .project-search-wrap { display: none; }
       .project-search-wrap { justify-content: flex-end; border-bottom: none; }
       .project-search-input { text-align: right; width: min(240px, 80vw); }
       header.mobile-menu-open { background: var(--primary-color) !important; backdrop-filter: blur(20px); }
@@ -648,6 +728,8 @@
       .title-wrapper { margin-top: 3rem; margin-bottom: 3rem; }
       .container { padding: 0 15px; }
       .projects-grid { padding: 0 1rem; }
+      .mobile-project-search { max-width: 62vw; }
+      .mobile-project-search .project-search-input { width: min(170px, 50vw); text-align: center; }
     }
 
     /* [OPT] Rispetta le preferenze utente per il movimento ridotto */
@@ -682,6 +764,25 @@
 
   <header>
     <nav class="container">
+      <img
+        id="headerProjectLogo"
+        class="header-project-logo"
+        src="https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/static/adpelogo.jpg"
+        alt="ADPE"
+        aria-hidden="true"
+      >
+
+      <div class="mobile-project-search" aria-label="Ricerca progetto">
+        <input
+          id="mobileProjectSearchInput"
+          class="project-search-input"
+          type="text"
+          autocomplete="off"
+          placeholder="cerca progetto"
+        >
+        <i class="fas fa-search project-search-icon" aria-hidden="true"></i>
+      </div>
+
       <ul class="nav-menu">
         <li class="nav-item-dropdown">
           <a href="?view=projects" class="nav-link" data-lang-key="projectsLink"
@@ -992,6 +1093,11 @@
         });
       });
 
+      const mobileProjectSearchInput = document.getElementById('mobileProjectSearchInput');
+      if (mobileProjectSearchInput) {
+        mobileProjectSearchInput.addEventListener('input', event => runProjectSearch(event.target.value));
+      }
+
       document.addEventListener('keydown', e => {
         const modal = document.getElementById('imageModal');
         if (modal.style.display !== 'flex') return;
@@ -1018,11 +1124,23 @@
         if (!scrollTicking) {
           requestAnimationFrame(() => {
             header.classList.toggle('scrolled', window.pageYOffset > 50);
+            updateHeaderProjectLogoVisibility();
             scrollTicking = false;
           });
           scrollTicking = true;
         }
       }, { passive: true });
+      window.addEventListener('resize', updateHeaderProjectLogoVisibility, { passive: true });
+      updateHeaderProjectLogoVisibility();
+    }
+
+    function updateHeaderProjectLogoVisibility() {
+      const header = document.querySelector('header');
+      if (!header) return;
+      const isProjectsView = currentView === 'projects';
+      const pageLogo = document.querySelector('#projectsSection .title-logo-center');
+      const pageLogoHidden = pageLogo ? pageLogo.getBoundingClientRect().bottom <= 72 : false;
+      header.classList.toggle('project-logo-visible', isProjectsView && pageLogoHidden);
     }
 
     // =========================================================================
@@ -1036,6 +1154,7 @@
         const key = el.dataset.langKey;
         if (translations[lang]?.[key]) el.textContent = translations[lang][key];
       });
+      syncProjectSearchPlaceholders();
 
       const display = document.getElementById('currentLangDisplay');
       if (display) display.innerHTML = `${lang.toUpperCase()} <i class="fas fa-chevron-down" style="font-size:0.7rem;"></i>`;
@@ -1069,6 +1188,7 @@
 
     function showSection(sectionId, shouldScroll = true) {
       document.body.setAttribute('data-view', currentView);
+      updateHeaderProjectLogoVisibility();
       ALL_SECTIONS.forEach(id => {
         const el = document.getElementById(id);
         if (el) el.style.display = 'none';
@@ -1114,6 +1234,7 @@
 
       generateFilters();
       filterProjects(lastActiveFilter, 0.2, 250, 0.8, 0, false);
+      updateHeaderProjectLogoVisibility();
     }
 
     function showAbout(shouldScroll = true, addToHistory = true) {
@@ -1361,6 +1482,26 @@
       return isProjectSearchFilter(filter) ? decodeURIComponent(String(filter).slice(7)) : '';
     }
 
+    function setProjectSearchInputs(value) {
+      document.querySelectorAll('.project-search-input').forEach(input => {
+        if (input.value !== value) input.value = value;
+      });
+    }
+
+    function syncProjectSearchPlaceholders() {
+      const placeholder = translations[currentLang].projectSearchPlaceholder || 'cerca progetto';
+      document.querySelectorAll('.project-search-input').forEach(input => {
+        input.placeholder = placeholder;
+      });
+    }
+
+    function runProjectSearch(value) {
+      const rawQuery = String(value || '');
+      const query = rawQuery.trim();
+      setProjectSearchInputs(rawQuery);
+      filterProjects(query ? `search:${encodeURIComponent(query)}` : 'all', 0.12, 80, 0.35, 0, false);
+    }
+
     // Escape HTML semplice per prevenire XSS nei titoli/metadati
     function escHtml(str) {
       if (!str) return '';
@@ -1377,6 +1518,7 @@
     function filterProjects(filter, fadeOutDuration = 0.2, delayBeforeRender = 250, fadeInDuration = 0.8, staggerDelay = 0, addToHistory = true) {
       lastActiveFilter = filter;
       if (addToHistory) saveState('projects', null, filter);
+      if (isProjectSearchFilter(filter)) setProjectSearchInputs(projectSearchQueryFromFilter(filter));
 
       const grid = document.getElementById('projectsGrid');
       grid.style.transition = `opacity ${fadeOutDuration}s ease`;
@@ -1497,7 +1639,7 @@
         );
         const searchInput = document.getElementById('projectSearchInput');
         if (searchInput && !isProjectSearchFilter(filter)) {
-          searchInput.value = '';
+          setProjectSearchInputs('');
         }
 
         grid.style.opacity = '1';
@@ -1542,8 +1684,7 @@
       searchInput.addEventListener('click', event => event.stopPropagation());
       searchInput.addEventListener('keydown', event => event.stopPropagation());
       searchInput.addEventListener('input', event => {
-        const query = event.target.value.trim();
-        filterProjects(query ? `search:${encodeURIComponent(query)}` : 'all', 0.12, 80, 0.35, 0, false);
+        runProjectSearch(event.target.value);
       });
       searchWrap.appendChild(searchInput);
       searchWrap.appendChild(searchIcon);
@@ -1892,11 +2033,40 @@
       const hamburger = document.querySelector('.hamburger');
       const navMenu   = document.querySelector('.nav-menu');
       const header    = document.querySelector('header');
+      let menuTouchStart = null;
+      let ignoreMenuClick = false;
+
+      const setMobileMenu = open => {
+        hamburger.classList.toggle('active', open);
+        navMenu.classList.toggle('active', open);
+        header.classList.toggle('mobile-menu-open', open);
+      };
 
       hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        header.classList.toggle('mobile-menu-open');
+        if (ignoreMenuClick) {
+          ignoreMenuClick = false;
+          return;
+        }
+        setMobileMenu(!navMenu.classList.contains('active'));
+      });
+      hamburger.addEventListener('pointerdown', event => {
+        if (window.innerWidth > 768) return;
+        menuTouchStart = { x: event.clientX, y: event.clientY };
+      });
+      hamburger.addEventListener('pointerup', event => {
+        if (!menuTouchStart || window.innerWidth > 768) return;
+        const dx = event.clientX - menuTouchStart.x;
+        const dy = Math.abs(event.clientY - menuTouchStart.y);
+        menuTouchStart = null;
+        if (dy > 45) return;
+        if (dx < -32) {
+          ignoreMenuClick = true;
+          setMobileMenu(true);
+        }
+        if (dx > 32) {
+          ignoreMenuClick = true;
+          setMobileMenu(false);
+        }
       });
 
       document.querySelectorAll('.nav-link').forEach(link => {
@@ -1906,9 +2076,7 @@
             document.querySelector('.lang-dropdown')?.classList.remove('touch-open');
             return;
           }
-          hamburger.classList.remove('active');
-          navMenu.classList.remove('active');
-          header.classList.remove('mobile-menu-open');
+          setMobileMenu(false);
         });
       });
 
@@ -1924,9 +2092,7 @@
         if (window.innerWidth > 768) return;
         if (e.target.classList.contains('filter-btn')) {
           document.querySelector('.nav-item-dropdown')?.classList.remove('touch-open');
-          hamburger.classList.remove('active');
-          navMenu.classList.remove('active');
-          header.classList.remove('mobile-menu-open');
+          setMobileMenu(false);
         }
         if (e.target.classList.contains('language-selector-item')) {
           document.querySelector('.lang-dropdown')?.classList.remove('touch-open');
