@@ -246,5 +246,45 @@
     "rows": 8,
     "height": "auto",
     "aspect": "12 / 8"
+  },
+  "SPREAD_LAYOUT": {
+    "slots": [
+      {
+        "col": "2 / span 4",
+        "row": "2 / span 4"
+      },
+      {
+        "col": "8 / span 7",
+        "row": "2 / span 2"
+      },
+      {
+        "col": "17 / span 4",
+        "row": "2 / span 8"
+      },
+      {
+        "col": "7 / span 8",
+        "row": "9 / span 5"
+      },
+      {
+        "col": "9 / span 5",
+        "row": "5 / span 3"
+      },
+      {
+        "col": "2 / span 3",
+        "row": "8 / span 7"
+      },
+      {
+        "col": "17 / span 3",
+        "row": "11 / span 4"
+      },
+      {
+        "col": "9 / span 5",
+        "row": "15 / span 2"
+      }
+    ],
+    "columns": 20,
+    "rows": 16,
+    "height": "auto",
+    "aspect": "12 / 8"
   }
 }
