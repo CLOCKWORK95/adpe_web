@@ -314,6 +314,9 @@
     "FROTTAGE": {
       "id": 8,
       "title": "Frottage",
+      "layoutSequence": [
+        "PROJECT_PAIR_HOR-VERT"
+      ],
       "images": [
         {
           "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/design/FROTTAGE/01.jpg",
