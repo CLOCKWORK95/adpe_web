@@ -1,6 +1,7 @@
 manual_deployment.html
 /external/*
 !/external/lambda.py
+!/external/layout_admin_lambda.py
 /progetti/
 /sitemap.xml
 /robots.txt

@@ -368,6 +368,23 @@
       display: grid; grid-template-columns: repeat(12, 1fr); gap: 2rem;
       row-gap: 7rem; max-width: 92vw; margin: 0 auto; align-items: start;
     }
+    .project-layout-stack {
+      display: flex; flex-direction: column; gap: 7rem;
+      max-width: 92vw; margin: 0 auto;
+    }
+    .project-layout-grid {
+      display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 2rem;
+      row-gap: 7rem; align-items: start; width: 100%;
+    }
+    .project-layout-grid.aspect-layout {
+      row-gap: 2rem;
+    }
+    .project-layout-grid.aspect-layout .proj-img-wrap {
+      min-height: 0; overflow: hidden;
+    }
+    .project-layout-grid.aspect-layout .proj-img-wrap img {
+      max-height: 100%;
+    }
 
     .pos-pair-left  { grid-column: 2 / span 4; }
     .pos-pair-right { grid-column: 8 / span 4; }
@@ -536,6 +553,13 @@
       .proj-head-wrapper { grid-column: 1 / span 12; flex-direction: column; gap: 0.2rem; }
       .proj-img-wrap, .proj-text-block, .adpe-text-block, .contact-dynamic-text-block { grid-column: 1 / span 12 !important; padding: 0 15px; }
       .project-detail-grid { row-gap: 4rem; }
+      .project-layout-stack { gap: 4rem; }
+      .project-layout-grid {
+        display: flex !important; flex-direction: column;
+        gap: 4rem; aspect-ratio: auto !important; min-height: 0 !important;
+      }
+      .project-layout-grid.aspect-layout .proj-img-wrap { overflow: visible; }
+      .project-layout-grid.aspect-layout .proj-img-wrap img { max-height: 65vh; }
       .adpe-block .project-detail-grid, .contact-dynamic-block .project-detail-grid { row-gap: 2rem; }
       .btn-back-minimal { margin-top: 3rem; }
 
@@ -1050,6 +1074,51 @@
       if (c && !c.innerHTML.trim()) renderContactSection();
     }
 
+    function parseLayoutTrack(value) {
+      const match = String(value || '').match(/^\s*(\d+)(?:\s*\/\s*span\s*(\d+))?/i);
+      return match ? { start: parseInt(match[1], 10), span: parseInt(match[2] || '1', 10) } : null;
+    }
+
+    function inferLayoutRows(layoutDef) {
+      const explicitRows = parseInt(layoutDef?.rows, 10);
+      if (Number.isFinite(explicitRows) && explicitRows > 0) {
+        return { rows: explicitRows, explicit: true };
+      }
+
+      const rows = (layoutDef?.slots || []).reduce((max, slot) => {
+        const parsed = parseLayoutTrack(slot.row);
+        return parsed ? Math.max(max, parsed.start + parsed.span - 1) : max;
+      }, 0);
+      return { rows: rows || 1, explicit: false };
+    }
+
+    function normalizeAspect(value) {
+      const aspect = String(value || '').trim();
+      if (!aspect || aspect.toLowerCase() === 'auto') return '';
+      const match = aspect.match(/^(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)$/);
+      return match ? `${match[1]} / ${match[2]}` : '';
+    }
+
+    function applyProjectLayoutGrid(grid, layoutDef) {
+      const columns = parseInt(layoutDef?.columns, 10) || 12;
+      const { rows, explicit } = inferLayoutRows(layoutDef);
+      const aspect = normalizeAspect(layoutDef?.aspect);
+
+      grid.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+      grid.style.gridTemplateRows = aspect
+        ? `repeat(${rows}, minmax(0, 1fr))`
+        : `repeat(${rows}, auto)`;
+
+      if (aspect) {
+        grid.classList.add('aspect-layout');
+        grid.style.aspectRatio = aspect;
+      }
+
+      if (explicit && layoutDef?.height && layoutDef.height !== 'auto') {
+        grid.style.minHeight = layoutDef.height;
+      }
+    }
+
     function showProject(projectId, shouldScroll = true, addToHistory = true) {
       const project = findProjectById(projectId);
       if (!project) return;
@@ -1084,10 +1153,8 @@
         </div>`;
       fragment.appendChild(stickyHeader);
 
-      // Grid immagini
-      const grid = document.createElement('div');
-      grid.className = 'project-detail-grid';
-
+      const imageStack = document.createElement('div');
+      imageStack.className = 'project-layout-stack';
       const imgs = project.images;
       if (project.layoutSequence && project.layoutSequence.length > 0) {
         let imgIndex = 0, seqIndex = 0, failsafe = 0;
@@ -1095,6 +1162,10 @@
           failsafe++;
           const layoutName = project.layoutSequence[seqIndex % project.layoutSequence.length];
           const layoutDef  = globalLayouts[layoutName] || { columns: 12, slots: [{ col: '3 / span 8' }] };
+          const layoutGrid = document.createElement('div');
+          layoutGrid.className = 'project-layout-grid';
+          applyProjectLayoutGrid(layoutGrid, layoutDef);
+          let addedInLayout = 0;
 
           layoutDef.slots.forEach(slot => {
             if (imgIndex >= imgs.length) return;
@@ -1115,12 +1186,15 @@
             });
 
             wrap.appendChild(img);
-            grid.appendChild(wrap);
+            layoutGrid.appendChild(wrap);
             imgIndex++;
+            addedInLayout++;
           });
+          if (addedInLayout > 0) imageStack.appendChild(layoutGrid);
           seqIndex++;
         }
       }
+      fragment.appendChild(imageStack);
 
       // Blocco testo + metadati
       const tipo  = project.tipologia || getProjectCategoryLabel(project);
@@ -1143,6 +1217,8 @@
         ${metaHtml}
         <button class="btn-back-minimal" onclick="history.back()">${translations[currentLang].backToProjects}</button>`;
 
+      const grid = document.createElement('div');
+      grid.className = 'project-detail-grid';
       grid.appendChild(textBlock);
       fragment.appendChild(grid);
 

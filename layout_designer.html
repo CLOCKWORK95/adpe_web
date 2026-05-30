@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>ADPE Layout Designer</title>
+  <style>
+    :root {
+      --bg: #f4f6f7;
+      --panel: #fff;
+      --text: #10292d;
+      --muted: #65777c;
+      --line: #d8e0e3;
+      --accent: #2da6c4;
+      --accent-dark: #1a7187;
+      --danger: #b94d4d;
+      --slot: rgba(45, 166, 196, 0.18);
+      --select: rgba(239, 179, 75, 0.34);
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; color: var(--text); background: var(--bg); }
+    header { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 16px 22px; background: var(--panel); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; }
+    h1 { margin: 0; font-size: 18px; letter-spacing: .05em; text-transform: uppercase; }
+    h2 { margin: 0 0 12px; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+    h3 { margin: 0 0 10px; font-size: 13px; }
+    main { display: grid; grid-template-columns: minmax(420px, 1fr) minmax(520px, 1.2fr); gap: 16px; padding: 16px; }
+    section, .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; min-width: 0; }
+    .column { display: grid; gap: 16px; align-content: start; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    label { display: grid; gap: 6px; margin-bottom: 10px; color: var(--muted); font-size: 12px; }
+    input, select, textarea { width: 100%; border: 1px solid var(--line); border-radius: 6px; padding: 9px 10px; font: inherit; background: #fff; color: var(--text); }
+    textarea { min-height: 210px; font: 12px/1.45 Consolas, "Roboto Mono", monospace; resize: vertical; }
+    button { border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--text); padding: 9px 11px; font: inherit; font-size: 13px; cursor: pointer; }
+    button:hover { border-color: var(--accent); color: var(--accent-dark); }
+    button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    button.primary:hover { background: var(--accent-dark); color: #fff; }
+    button.danger { color: var(--danger); border-color: rgba(185, 77, 77, .35); }
+    button:disabled { opacity: .45; cursor: not-allowed; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .status { min-height: 18px; color: var(--muted); font-size: 12px; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .sequence-list { display: grid; gap: 8px; max-height: 220px; overflow: auto; }
+    .sequence-item { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 6px; padding: 8px; cursor: pointer; }
+    .sequence-item.active { border-color: var(--accent); background: rgba(45, 166, 196, .08); }
+    .sequence-buttons { display: flex; gap: 5px; }
+    .sequence-buttons button { padding: 5px 7px; font-size: 11px; }
+
+    .preview-wrap, .designer-wrap { border: 1px solid var(--line); border-radius: 8px; padding: 12px; overflow: auto; background:
+      linear-gradient(45deg, #fafafa 25%, transparent 25%),
+      linear-gradient(-45deg, #fafafa 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #fafafa 75%),
+      linear-gradient(-45deg, transparent 75%, #fafafa 75%);
+      background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+    }
+    .preview-stack { display: flex; flex-direction: column; gap: 34px; min-width: 520px; }
+    .preview-layout-block { display: grid; gap: 8px; }
+    .preview-grid, .designer-grid { display: grid; gap: 6px; align-items: stretch; width: 100%; }
+    .preview-grid { min-height: 260px; }
+    .preview-img { display: flex; align-items: center; justify-content: center; min-height: 68px; border: 1px solid rgba(45, 166, 196, .38); border-radius: 6px; background: rgba(45,166,196,.08); overflow: hidden; }
+    .preview-img img { max-width: 100%; max-height: 220px; display: block; object-fit: contain; }
+    .preview-grid.aspect-layout .preview-img { min-height: 0; }
+    .preview-grid.aspect-layout .preview-img img { max-height: 100%; }
+    .preview-label { grid-column: 1 / -1; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+
+    .designer-grid { position: relative; min-width: 580px; min-height: 500px; user-select: none; touch-action: none; }
+    .cell { border: 1px dashed #cbd5da; border-radius: 4px; background: rgba(255,255,255,.82); cursor: crosshair; min-height: 42px; }
+    .cell.selecting { background: var(--select); border-color: #efb34b; }
+    .slot { position: relative; display: grid; place-items: center; min-height: 42px; border: 2px solid var(--accent); border-radius: 6px; background: var(--slot); color: var(--accent-dark); font-weight: 700; cursor: pointer; }
+    .slot.active { outline: 3px solid rgba(239,179,75,.8); outline-offset: 2px; }
+    .slot button { position: absolute; top: 5px; right: 5px; width: 24px; height: 24px; border-radius: 50%; padding: 0; color: var(--danger); background: #fff; }
+    .slot-list { display: grid; gap: 8px; max-height: 160px; overflow: auto; }
+    .slot-list-item { display: flex; justify-content: space-between; gap: 8px; border: 1px solid var(--line); border-radius: 6px; padding: 8px; font-size: 12px; cursor: pointer; }
+    .slot-list-item.active { border-color: var(--accent); background: rgba(45,166,196,.08); }
+
+    @media (max-width: 1240px) {
+      main, .split { grid-template-columns: 1fr; }
+      .preview-stack, .designer-grid { min-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ADPE Layout Designer</h1>
+    <div class="actions">
+      <button id="loadApiBtn" class="primary">Carica da S3</button>
+      <button id="saveAllBtn">Salva layout + sequence</button>
+      <button id="copyBtn">Copia output</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="column">
+      <section>
+        <h2>Connessione API</h2>
+        <div class="row">
+          <label>API base URL <input id="apiBase" placeholder="https://...lambda-url..."></label>
+          <label>Admin token <input id="adminToken" type="password" placeholder="Bearer token"></label>
+        </div>
+        <div class="status" id="apiStatus"></div>
+      </section>
+
+      <section>
+        <h2>Progetto e sequenza</h2>
+        <label>Progetto
+          <select id="projectSelect"><option value="">Nessun progetto caricato</option></select>
+        </label>
+        <div class="actions">
+          <button id="loadProjectBtn">Apri progetto</button>
+          <button id="saveSequenceBtn">Salva solo sequence</button>
+        </div>
+        <div class="sequence-list" id="sequenceList"></div>
+      </section>
+
+      <section>
+        <h2>Preview progetto</h2>
+        <div class="preview-wrap">
+          <div class="preview-stack" id="projectPreview"></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Codice layout selezionato</h2>
+        <textarea id="currentLayoutCode" readonly></textarea>
+      </section>
+    </div>
+
+    <div class="column">
+      <section>
+        <h2>Editor layout</h2>
+        <div class="split">
+          <div>
+            <div class="row">
+              <label>Importa layout esistente
+                <select id="layoutImportSelect"><option value="">Scegli layout</option></select>
+              </label>
+              <label>Nome layout
+                <input id="layoutName" value="PROJECT_CUSTOM" spellcheck="false">
+              </label>
+            </div>
+            <div class="row-3">
+              <label>Colonne <input id="columnsInput" type="number" min="1" max="24" value="12"></label>
+              <label>Righe <input id="rowsInput" type="number" min="1" max="16" value="8"></label>
+              <label>Altezza
+                <select id="heightInput">
+                  <option value="auto">auto</option>
+                  <option value="50vh">50vh</option>
+                  <option value="65vh">65vh</option>
+                  <option value="80vh">80vh</option>
+                  <option value="100vh">100vh</option>
+                </select>
+              </label>
+            </div>
+            <label>Aspect
+              <input id="aspectInput" value="12 / 8" spellcheck="false">
+            </label>
+            <div class="actions">
+              <button id="importLayoutBtn">Importa nell'editor</button>
+              <button id="applyGridBtn">Aggiorna griglia</button>
+              <button id="replaceSeqBtn">Sostituisci nella sequence</button>
+              <button id="appendSeqBtn">Aggiungi alla sequence</button>
+              <button id="clearBtn" class="danger">Svuota slot</button>
+            </div>
+          </div>
+          <div>
+            <h3>Slot editor</h3>
+            <div class="slot-list" id="slotList"></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="designer-wrap">
+          <div id="designerGrid" class="designer-grid"></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Output layouts.txt</h2>
+        <textarea id="output" spellcheck="false"></textarea>
+        <div class="actions">
+          <button id="saveLayoutBtn">Salva solo layout</button>
+          <button id="importOutputBtn">Importa output nell'editor</button>
+          <button id="downloadBtn">Scarica .txt</button>
+        </div>
+        <div class="status" id="editorStatus"></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const state = {
+      apiBase: localStorage.getItem('adpeLayoutApiBase') || '',
+      token: localStorage.getItem('adpeLayoutToken') || '',
+      projects: [],
+      layouts: {},
+      layoutsRaw: '',
+      project: null,
+      sequence: [],
+      selectedSequenceIndex: 0,
+      columns: 12,
+      rows: 8,
+      height: 'auto',
+      aspect: '12 / 8',
+      slots: [],
+      activeSlotId: null,
+      dragStart: null,
+      dragEnd: null
+    };
+
+    const els = {
+      apiBase: document.getElementById('apiBase'),
+      adminToken: document.getElementById('adminToken'),
+      apiStatus: document.getElementById('apiStatus'),
+      projectSelect: document.getElementById('projectSelect'),
+      sequenceList: document.getElementById('sequenceList'),
+      projectPreview: document.getElementById('projectPreview'),
+      currentLayoutCode: document.getElementById('currentLayoutCode'),
+      layoutImportSelect: document.getElementById('layoutImportSelect'),
+      layoutName: document.getElementById('layoutName'),
+      columns: document.getElementById('columnsInput'),
+      rows: document.getElementById('rowsInput'),
+      height: document.getElementById('heightInput'),
+      aspect: document.getElementById('aspectInput'),
+      grid: document.getElementById('designerGrid'),
+      output: document.getElementById('output'),
+      slotList: document.getElementById('slotList'),
+      editorStatus: document.getElementById('editorStatus')
+    };
+
+    els.apiBase.value = state.apiBase;
+    els.adminToken.value = state.token;
+
+    function setStatus(el, message) {
+      el.textContent = message;
+      clearTimeout(el._timer);
+      el._timer = setTimeout(() => { el.textContent = ''; }, 3500);
+    }
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, Number(value) || min));
+    }
+
+    function apiPath(path) {
+      return `${state.apiBase.replace(/\/+$/, '')}/${path.replace(/^\/+/, '')}`;
+    }
+
+    async function api(path, options = {}) {
+      const headers = { 'content-type': 'application/json', ...(options.headers || {}) };
+      if (state.token) headers.authorization = `Bearer ${state.token}`;
+      const res = await fetch(apiPath(path), { ...options, headers });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+      return data;
+    }
+
+    function parseLayouts(content) {
+      const layouts = {};
+      let current = null;
+      for (const raw of String(content || '').split(/\r?\n/)) {
+        const line = raw.trim();
+        if (!line || line.startsWith('#')) continue;
+        if (line.startsWith('[') && line.endsWith(']')) {
+          current = line.slice(1, -1).trim();
+          layouts[current] = { slots: [] };
+        } else if (current && line.includes('=')) {
+          const [keyRaw, ...rest] = line.split('=');
+          const key = keyRaw.trim().toLowerCase();
+          const value = rest.join('=').trim();
+          if (key === 'slot') {
+            const parts = value.split(',').map(part => part.trim());
+            const slot = { col: parts[0] };
+            if (parts[1]) slot.row = parts[1];
+            layouts[current].slots.push(slot);
+          } else if (key === 'columns' || key === 'rows') {
+            layouts[current][key] = /^\d+$/.test(value) ? Number(value) : value;
+          } else {
+            layouts[current][key] = value;
+          }
+        }
+      }
+      return layouts;
+    }
+
+    function layoutToText(name, layout) {
+      const lines = [`[${name}]`, `columns = ${layout.columns || 12}`];
+      if (layout.rows) lines.push(`rows = ${layout.rows}`);
+      if (layout.height) lines.push(`height = ${layout.height}`);
+      if (layout.aspect && layout.aspect !== 'auto') lines.push(`aspect = ${layout.aspect}`);
+      for (const slot of (layout.slots || [])) {
+        lines.push(`slot = ${slot.col}${slot.row ? `, ${slot.row}` : ''}`);
+      }
+      return `${lines.join('\n')}\n`;
+    }
+
+    function slotToCss(slot) {
+      return {
+        col: `${slot.colStart} / span ${slot.colSpan}`,
+        row: `${slot.rowStart} / span ${slot.rowSpan}`
+      };
+    }
+
+    function editorLayoutObject() {
+      return {
+        columns: state.columns,
+        rows: state.rows,
+        height: state.height,
+        aspect: state.aspect,
+        slots: state.slots.map(slotToCss)
+      };
+    }
+
+    function renderOutput() {
+      els.output.value = layoutToText((els.layoutName.value || 'PROJECT_CUSTOM').trim(), editorLayoutObject());
+    }
+
+    function applyEditorLayout(name, layout) {
+      els.layoutName.value = name || els.layoutName.value || 'PROJECT_CUSTOM';
+      state.columns = Number(layout.columns || 12);
+      state.rows = Number(layout.rows || 8);
+      state.height = layout.height || 'auto';
+      state.aspect = layout.aspect || 'auto';
+      els.columns.value = state.columns;
+      els.rows.value = state.rows;
+      els.height.value = state.height;
+      els.aspect.value = state.aspect;
+      state.slots = (layout.slots || []).map((slot, index) => {
+        const col = parseGridLine(slot.col);
+        const row = parseGridLine(slot.row || '1 / span 1');
+        return {
+          id: `${Date.now()}-${index}`,
+          colStart: col[0],
+          colSpan: col[1],
+          rowStart: row[0],
+          rowSpan: row[1]
+        };
+      });
+      state.activeSlotId = state.slots[0]?.id || null;
+      renderEditor();
+    }
+
+    function parseGridLine(value) {
+      const match = String(value || '').match(/^\s*(\d+)(?:\s*\/\s*span\s*(\d+))?/i);
+      return match ? [Number(match[1]), Number(match[2] || 1)] : [1, 1];
+    }
+
+    function inferLayoutRows(layout) {
+      const explicitRows = parseInt(layout.rows, 10);
+      if (Number.isFinite(explicitRows) && explicitRows > 0) return explicitRows;
+      return (layout.slots || []).reduce((max, slot) => {
+        const match = String(slot.row || '').match(/^\s*(\d+)(?:\s*\/\s*span\s*(\d+))?/i);
+        if (!match) return max;
+        const start = parseInt(match[1], 10);
+        const span = parseInt(match[2] || '1', 10);
+        return Math.max(max, start + span - 1);
+      }, 0);
+    }
+
+    function normalizeAspect(value) {
+      const aspect = String(value || '').trim();
+      if (!aspect || aspect.toLowerCase() === 'auto') return '';
+      const match = aspect.match(/^(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)$/);
+      return match ? `${match[1]} / ${match[2]}` : '';
+    }
+
+    function renderProjectSelect() {
+      els.projectSelect.innerHTML = '<option value="">Seleziona progetto</option>';
+      for (const project of state.projects) {
+        const option = document.createElement('option');
+        option.value = project.path;
+        option.textContent = `${project.categoryPath || project.path} - ${project.title}`;
+        els.projectSelect.appendChild(option);
+      }
+    }
+
+    function renderLayoutSelect() {
+      els.layoutImportSelect.innerHTML = '<option value="">Scegli layout</option>';
+      for (const name of Object.keys(state.layouts).sort()) {
+        const option = document.createElement('option');
+        option.value = name;
+        option.textContent = name;
+        els.layoutImportSelect.appendChild(option);
+      }
+    }
+
+    function renderSequence() {
+      els.sequenceList.innerHTML = '';
+      if (!state.sequence.length) {
+        els.sequenceList.innerHTML = '<div class="status">Nessuna layoutSequence nel progetto.</div>';
+        renderCurrentLayoutCode();
+        renderPreview();
+        return;
+      }
+      state.sequence.forEach((name, index) => {
+        const item = document.createElement('div');
+        item.className = `sequence-item${index === state.selectedSequenceIndex ? ' active' : ''}`;
+        item.innerHTML = `<span>${index + 1}. ${name}</span>`;
+        item.addEventListener('click', () => {
+          state.selectedSequenceIndex = index;
+          renderSequence();
+        });
+        const buttons = document.createElement('div');
+        buttons.className = 'sequence-buttons';
+        [['up','su'], ['down','giu'], ['import','mod'], ['remove','x']].forEach(([action, label]) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = label;
+          btn.addEventListener('click', event => {
+            event.stopPropagation();
+            sequenceAction(action, index);
+          });
+          buttons.appendChild(btn);
+        });
+        item.appendChild(buttons);
+        els.sequenceList.appendChild(item);
+      });
+      renderCurrentLayoutCode();
+      renderPreview();
+    }
+
+    function sequenceAction(action, index) {
+      if (action === 'up' && index > 0) {
+        [state.sequence[index - 1], state.sequence[index]] = [state.sequence[index], state.sequence[index - 1]];
+        state.selectedSequenceIndex = index - 1;
+      } else if (action === 'down' && index < state.sequence.length - 1) {
+        [state.sequence[index + 1], state.sequence[index]] = [state.sequence[index], state.sequence[index + 1]];
+        state.selectedSequenceIndex = index + 1;
+      } else if (action === 'remove') {
+        state.sequence.splice(index, 1);
+        state.selectedSequenceIndex = Math.max(0, Math.min(index, state.sequence.length - 1));
+      } else if (action === 'import') {
+        const name = state.sequence[index];
+        if (state.layouts[name]) applyEditorLayout(name, state.layouts[name]);
+      }
+      renderSequence();
+    }
+
+    function renderCurrentLayoutCode() {
+      const name = state.sequence[state.selectedSequenceIndex];
+      els.currentLayoutCode.value = name && state.layouts[name] ? layoutToText(name, state.layouts[name]) : '';
+    }
+
+    function renderPreview() {
+      els.projectPreview.innerHTML = '';
+      if (!state.project?.images?.length) {
+        els.projectPreview.innerHTML = '<div class="status">Carica un progetto per vedere la preview.</div>';
+        return;
+      }
+      const sequence = state.sequence.length ? state.sequence : Object.keys(state.layouts).slice(0, 1);
+      if (!sequence.length) return;
+
+      let imgIndex = 0;
+      let seqIndex = 0;
+      let guard = 0;
+      while (imgIndex < state.project.images.length && guard < 1000) {
+        guard++;
+        const name = sequence[seqIndex % sequence.length];
+        const layout = state.layouts[name] || { columns: 12, slots: [{ col: '3 / span 8' }] };
+        const block = document.createElement('div');
+        block.className = 'preview-layout-block';
+        const label = document.createElement('div');
+        label.className = 'preview-label';
+        label.textContent = name;
+        block.appendChild(label);
+
+        const grid = document.createElement('div');
+        grid.className = 'preview-grid';
+        const columns = layout.columns || 12;
+        const rows = inferLayoutRows(layout);
+        const aspect = normalizeAspect(layout.aspect);
+        grid.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+        if (rows) {
+          grid.style.gridTemplateRows = aspect ? `repeat(${rows}, minmax(0, 1fr))` : `repeat(${rows}, auto)`;
+          if (aspect) {
+            grid.classList.add('aspect-layout');
+            grid.style.aspectRatio = aspect;
+          }
+        }
+        if (layout.height && layout.height !== 'auto') grid.style.minHeight = layout.height;
+
+        let added = 0;
+        for (const slot of (layout.slots || [])) {
+          if (imgIndex >= state.project.images.length) break;
+          const wrap = document.createElement('div');
+          wrap.className = 'preview-img';
+          wrap.style.gridColumn = slot.col;
+          if (slot.row) wrap.style.gridRow = slot.row;
+          const img = document.createElement('img');
+          img.src = state.project.images[imgIndex].src;
+          img.alt = state.project.images[imgIndex].name || '';
+          wrap.appendChild(img);
+          grid.appendChild(wrap);
+          imgIndex++;
+          added++;
+        }
+        if (added) {
+          block.appendChild(grid);
+          els.projectPreview.appendChild(block);
+        }
+        seqIndex++;
+      }
+    }
+
+    function renderEditor() {
+      els.grid.innerHTML = '';
+      els.grid.style.gridTemplateColumns = `repeat(${state.columns}, minmax(34px, 1fr))`;
+      els.grid.style.gridTemplateRows = `repeat(${state.rows}, minmax(42px, 1fr))`;
+      els.grid.style.aspectRatio = normalizeAspect(state.aspect) || `${state.columns} / ${state.rows}`;
+      for (let row = 1; row <= state.rows; row++) {
+        for (let col = 1; col <= state.columns; col++) {
+          const cell = document.createElement('div');
+          cell.className = 'cell';
+          cell.dataset.col = col;
+          cell.dataset.row = row;
+          cell.style.gridColumn = col;
+          cell.style.gridRow = row;
+          cell.addEventListener('pointerdown', onCellPointerDown);
+          els.grid.appendChild(cell);
+        }
+      }
+      state.slots.forEach((slot, index) => {
+        const item = document.createElement('div');
+        item.className = `slot${slot.id === state.activeSlotId ? ' active' : ''}`;
+        item.style.gridColumn = `${slot.colStart} / span ${slot.colSpan}`;
+        item.style.gridRow = `${slot.rowStart} / span ${slot.rowSpan}`;
+        item.textContent = `Slot ${index + 1}`;
+        item.addEventListener('click', () => {
+          state.activeSlotId = slot.id;
+          renderEditor();
+        });
+        const remove = document.createElement('button');
+        remove.textContent = 'x';
+        remove.addEventListener('click', event => {
+          event.stopPropagation();
+          state.slots = state.slots.filter(s => s.id !== slot.id);
+          renderEditor();
+        });
+        item.appendChild(remove);
+        els.grid.appendChild(item);
+      });
+      renderSlotList();
+      renderOutput();
+    }
+
+    function renderSlotList() {
+      els.slotList.innerHTML = '';
+      if (!state.slots.length) {
+        els.slotList.innerHTML = '<div class="status">Disegna sulla griglia per creare slot.</div>';
+        return;
+      }
+      state.slots.forEach((slot, index) => {
+        const css = slotToCss(slot);
+        const item = document.createElement('div');
+        item.className = `slot-list-item${slot.id === state.activeSlotId ? ' active' : ''}`;
+        item.innerHTML = `<span>Slot ${index + 1}</span><span>${css.col}, ${css.row}</span>`;
+        item.addEventListener('click', () => {
+          state.activeSlotId = slot.id;
+          renderEditor();
+        });
+        els.slotList.appendChild(item);
+      });
+    }
+
+    function pointToCell(clientX, clientY) {
+      const rect = els.grid.getBoundingClientRect();
+      const x = Math.max(0, Math.min(rect.width - 1, clientX - rect.left));
+      const y = Math.max(0, Math.min(rect.height - 1, clientY - rect.top));
+      return {
+        col: clamp(Math.floor((x / rect.width) * state.columns) + 1, 1, state.columns),
+        row: clamp(Math.floor((y / rect.height) * state.rows) + 1, 1, state.rows)
+      };
+    }
+
+    function onCellPointerDown(event) {
+      event.preventDefault();
+      state.dragStart = { col: Number(event.currentTarget.dataset.col), row: Number(event.currentTarget.dataset.row) };
+      state.dragEnd = { ...state.dragStart };
+      event.currentTarget.setPointerCapture?.(event.pointerId);
+      updateSelection();
+    }
+
+    function onPointerMove(event) {
+      if (!state.dragStart) return;
+      state.dragEnd = pointToCell(event.clientX, event.clientY);
+      updateSelection();
+    }
+
+    function onPointerUp(event) {
+      if (!state.dragStart || !state.dragEnd) return;
+      event.preventDefault();
+      const colStart = Math.min(state.dragStart.col, state.dragEnd.col);
+      const colEnd = Math.max(state.dragStart.col, state.dragEnd.col);
+      const rowStart = Math.min(state.dragStart.row, state.dragEnd.row);
+      const rowEnd = Math.max(state.dragStart.row, state.dragEnd.row);
+      const slot = { id: `${Date.now()}-${Math.random()}`, colStart, rowStart, colSpan: colEnd - colStart + 1, rowSpan: rowEnd - rowStart + 1 };
+      state.slots.push(slot);
+      state.activeSlotId = slot.id;
+      state.dragStart = null;
+      state.dragEnd = null;
+      clearSelection();
+      renderEditor();
+    }
+
+    function updateSelection() {
+      clearSelection();
+      if (!state.dragStart || !state.dragEnd) return;
+      const colStart = Math.min(state.dragStart.col, state.dragEnd.col);
+      const colEnd = Math.max(state.dragStart.col, state.dragEnd.col);
+      const rowStart = Math.min(state.dragStart.row, state.dragEnd.row);
+      const rowEnd = Math.max(state.dragStart.row, state.dragEnd.row);
+      els.grid.querySelectorAll('.cell').forEach(cell => {
+        const col = Number(cell.dataset.col);
+        const row = Number(cell.dataset.row);
+        cell.classList.toggle('selecting', col >= colStart && col <= colEnd && row >= rowStart && row <= rowEnd);
+      });
+    }
+
+    function clearSelection() {
+      els.grid.querySelectorAll('.cell.selecting').forEach(cell => cell.classList.remove('selecting'));
+    }
+
+    function applyGridSettings() {
+      state.columns = clamp(els.columns.value, 1, 24);
+      state.rows = clamp(els.rows.value, 1, 16);
+      state.height = els.height.value || 'auto';
+      state.aspect = els.aspect.value.trim() || 'auto';
+      state.slots = state.slots
+        .filter(slot => slot.colStart <= state.columns && slot.rowStart <= state.rows)
+        .map(slot => ({ ...slot, colSpan: Math.min(slot.colSpan, state.columns - slot.colStart + 1), rowSpan: Math.min(slot.rowSpan, state.rows - slot.rowStart + 1) }));
+      renderEditor();
+    }
+
+    function importOutput() {
+      const parsed = parseLayouts(els.output.value);
+      const [name, layout] = Object.entries(parsed)[0] || [];
+      if (name && layout) applyEditorLayout(name, layout);
+    }
+
+    async function loadApiData() {
+      state.apiBase = els.apiBase.value.trim();
+      state.token = els.adminToken.value.trim();
+      localStorage.setItem('adpeLayoutApiBase', state.apiBase);
+      localStorage.setItem('adpeLayoutToken', state.token);
+      const [projectsData, layoutsData] = await Promise.all([api('/projects'), api('/layouts')]);
+      state.projects = projectsData.projects || [];
+      state.layoutsRaw = layoutsData.raw || '';
+      state.layouts = layoutsData.layouts || parseLayouts(state.layoutsRaw);
+      renderProjectSelect();
+      renderLayoutSelect();
+      setStatus(els.apiStatus, 'Dati caricati.');
+    }
+
+    async function loadProject() {
+      const path = els.projectSelect.value;
+      if (!path) return;
+      state.project = await api(`/project?path=${encodeURIComponent(path)}`);
+      state.sequence = [...(state.project.layoutSequence || [])];
+      state.selectedSequenceIndex = 0;
+      renderSequence();
+      setStatus(els.apiStatus, 'Progetto caricato.');
+    }
+
+    async function saveLayout() {
+      await api('/layout', { method: 'PUT', body: JSON.stringify({ name: els.layoutName.value.trim(), layoutText: els.output.value }) });
+      state.layouts[els.layoutName.value.trim()] = editorLayoutObject();
+      renderLayoutSelect();
+      renderPreview();
+      setStatus(els.editorStatus, 'Layout salvato su S3.');
+    }
+
+    async function saveSequence() {
+      if (!state.project) throw new Error('Carica prima un progetto');
+      await api('/project-layout-sequence', { method: 'PUT', body: JSON.stringify({ projectPath: state.project.path, sequence: state.sequence }) });
+      setStatus(els.apiStatus, 'layoutsequence.txt salvato su S3.');
+    }
+
+    async function saveAll() {
+      if (!state.project) throw new Error('Carica prima un progetto');
+      await api('/save', { method: 'POST', body: JSON.stringify({ projectPath: state.project.path, name: els.layoutName.value.trim(), layoutText: els.output.value, sequence: state.sequence }) });
+      state.layouts[els.layoutName.value.trim()] = editorLayoutObject();
+      renderLayoutSelect();
+      renderPreview();
+      setStatus(els.apiStatus, 'Layout e sequence salvati su S3.');
+    }
+
+    function replaceSequenceItem() {
+      const name = els.layoutName.value.trim();
+      if (!name) return;
+      if (!state.sequence.length) state.sequence.push(name);
+      else state.sequence[state.selectedSequenceIndex] = name;
+      renderSequence();
+    }
+
+    function appendSequenceItem() {
+      const name = els.layoutName.value.trim();
+      if (!name) return;
+      state.sequence.push(name);
+      state.selectedSequenceIndex = state.sequence.length - 1;
+      renderSequence();
+    }
+
+    function downloadOutput() {
+      const blob = new Blob([els.output.value], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${(els.layoutName.value || 'layout').trim()}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    document.addEventListener('pointermove', onPointerMove);
+    document.addEventListener('pointerup', onPointerUp);
+    document.getElementById('loadApiBtn').addEventListener('click', () => loadApiData().catch(err => setStatus(els.apiStatus, err.message)));
+    document.getElementById('loadProjectBtn').addEventListener('click', () => loadProject().catch(err => setStatus(els.apiStatus, err.message)));
+    document.getElementById('importLayoutBtn').addEventListener('click', () => {
+      const name = els.layoutImportSelect.value;
+      if (name && state.layouts[name]) applyEditorLayout(name, state.layouts[name]);
+    });
+    document.getElementById('applyGridBtn').addEventListener('click', applyGridSettings);
+    document.getElementById('clearBtn').addEventListener('click', () => { state.slots = []; renderEditor(); });
+    document.getElementById('replaceSeqBtn').addEventListener('click', replaceSequenceItem);
+    document.getElementById('appendSeqBtn').addEventListener('click', appendSequenceItem);
+    document.getElementById('copyBtn').addEventListener('click', async () => { await navigator.clipboard.writeText(els.output.value); setStatus(els.editorStatus, 'Output copiato.'); });
+    document.getElementById('downloadBtn').addEventListener('click', downloadOutput);
+    document.getElementById('importOutputBtn').addEventListener('click', importOutput);
+    document.getElementById('saveLayoutBtn').addEventListener('click', () => saveLayout().catch(err => setStatus(els.editorStatus, err.message)));
+    document.getElementById('saveSequenceBtn').addEventListener('click', () => saveSequence().catch(err => setStatus(els.apiStatus, err.message)));
+    document.getElementById('saveAllBtn').addEventListener('click', () => saveAll().catch(err => setStatus(els.apiStatus, err.message)));
+    [els.layoutName, els.height, els.aspect].forEach(el => el.addEventListener('input', () => {
+      state.height = els.height.value || 'auto';
+      state.aspect = els.aspect.value.trim() || 'auto';
+      renderOutput();
+    }));
+
+    renderEditor();
+    renderSequence();
+  </script>
+</body>
+</html>

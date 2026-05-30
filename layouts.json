@@ -1,28 +1,35 @@
 {
   "A": {
+    "columns": 12,
+    "rows": 1,
+    "height": "auto",
     "slots": [
       {
-        "col": "1 / span 4"
+        "col": "1 / span 4",
+        "row": "1 / span 1"
       },
       {
-        "col": "5 / span 3"
+        "col": "5 / span 3",
+        "row": "1 / span 1"
       },
       {
-        "col": "8 / span 5"
+        "col": "8 / span 5",
+        "row": "1 / span 1"
       }
-    ],
-    "height": "50vh",
-    "columns": 12
+    ]
   },
   "B": {
+    "columns": 12,
+    "rows": 2,
+    "height": "auto",
     "slots": [
       {
         "col": "1 / span 4",
-        "row": "1"
+        "row": "1 / span 1"
       },
       {
         "col": "1 / span 4",
-        "row": "2"
+        "row": "2 / span 1"
       },
       {
         "col": "5 / span 4",
@@ -32,11 +39,12 @@
         "col": "9 / span 4",
         "row": "1 / span 2"
       }
-    ],
-    "height": "80vh",
-    "columns": 12
+    ]
   },
   "C": {
+    "columns": 15,
+    "rows": 8,
+    "height": "auto",
     "slots": [
       {
         "col": "1 / span 3",
@@ -54,100 +62,133 @@
         "col": "13 / span 3",
         "row": "1 / span 7"
       }
-    ],
-    "height": "auto",
-    "columns": 15,
-    "rows": 8
+    ]
   },
   "PROJECT_SINGLE_VERTICAL": {
+    "columns": 12,
+    "rows": 1,
+    "height": "auto",
     "slots": [
       {
-        "col": "5 / span 4"
+        "col": "5 / span 4",
+        "row": "1 / span 1"
       }
-    ],
-    "columns": 12
+    ]
   },
   "PROJECT_SINGLE_HORIZONTAL": {
+    "columns": 12,
+    "rows": 1,
+    "height": "auto",
     "slots": [
       {
-        "col": "3 / span 8"
+        "col": "3 / span 8",
+        "row": "1 / span 1"
       }
-    ],
-    "columns": 12
+    ]
   },
   "PROJECT_PAIR_VERTICAL": {
+    "columns": 12,
+    "rows": 1,
+    "height": "auto",
     "slots": [
       {
-        "col": "3 / span 3"
+        "col": "3 / span 3",
+        "row": "1 / span 1"
       },
       {
-        "col": "8 / span 3"
+        "col": "8 / span 3",
+        "row": "1 / span 1"
       }
-    ],
-    "columns": 12
+    ]
   },
   "PROJECT_PAIR_HORIZONTAL": {
+    "columns": 12,
+    "rows": 1,
+    "height": "auto",
     "slots": [
       {
-        "col": "2 / span 5"
+        "col": "2 / span 5",
+        "row": "1 / span 1"
       },
       {
-        "col": "8 / span 5"
+        "col": "8 / span 5",
+        "row": "1 / span 1"
       }
-    ],
-    "columns": 12
+    ]
   },
   "PROJECT_PAIR_HOR-VERT": {
+    "columns": 12,
+    "rows": 1,
+    "height": "auto",
     "slots": [
       {
-        "col": "2 / span 5"
+        "col": "2 / span 5",
+        "row": "1 / span 1"
       },
       {
-        "col": "8 / span 3"
+        "col": "8 / span 3",
+        "row": "1 / span 1"
       }
-    ],
-    "columns": 12
+    ]
   },
   "PROJECT_PAIR_VERT-HOR": {
+    "columns": 12,
+    "rows": 1,
+    "height": "auto",
     "slots": [
       {
-        "col": "3 / span 3"
+        "col": "3 / span 3",
+        "row": "1 / span 1"
       },
       {
-        "col": "7 / span 5"
+        "col": "7 / span 5",
+        "row": "1 / span 1"
       }
-    ],
-    "columns": 12
+    ]
   },
   "PROJECT_TRIPLE": {
+    "columns": 12,
+    "rows": 1,
+    "height": "auto",
     "slots": [
       {
-        "col": "1 / span 4"
+        "col": "1 / span 4",
+        "row": "1 / span 1"
       },
       {
-        "col": "6 / span 3"
+        "col": "6 / span 3",
+        "row": "1 / span 1"
       },
       {
-        "col": "10 / span 3"
+        "col": "10 / span 3",
+        "row": "1 / span 1"
       }
-    ],
-    "columns": 12
+    ]
   },
   "PROJECT_TRIPLE_VERT": {
+    "columns": 12,
+    "rows": 1,
+    "height": "auto",
     "slots": [
       {
-        "col": "1 / span 3"
+        "col": "1 / span 3",
+        "row": "1 / span 1"
       },
       {
-        "col": "5 / span 3"
+        "col": "5 / span 3",
+        "row": "1 / span 1"
       },
       {
-        "col": "9 / span 3"
+        "col": "9 / span 3",
+        "row": "1 / span 1"
       }
-    ],
-    "columns": 12
+    ]
   },
   "STRANGE_LAYOUT": {
+    "columns": 12,
+    "rows": 8,
+    "height": "auto",
+    "aspect": "12 / 8",
     "slots": [
       {
         "col": "6 / span 2",
@@ -165,9 +206,6 @@
         "col": "6 / span 6",
         "row": "2 / span 2"
       }
-    ],
-    "columns": 12,
-    "height": "auto",
-    "rows": 8
+    ]
   }
 }
