@@ -1,8 +1,5 @@
 {
   "A": {
-    "columns": 12,
-    "rows": 1,
-    "height": "auto",
     "slots": [
       {
         "col": "1 / span 4",
@@ -16,12 +13,12 @@
         "col": "8 / span 5",
         "row": "1 / span 1"
       }
-    ]
+    ],
+    "columns": 12,
+    "rows": 1,
+    "height": "auto"
   },
   "B": {
-    "columns": 12,
-    "rows": 2,
-    "height": "auto",
     "slots": [
       {
         "col": "1 / span 4",
@@ -39,12 +36,12 @@
         "col": "9 / span 4",
         "row": "1 / span 2"
       }
-    ]
+    ],
+    "columns": 12,
+    "rows": 2,
+    "height": "auto"
   },
   "C": {
-    "columns": 15,
-    "rows": 8,
-    "height": "auto",
     "slots": [
       {
         "col": "1 / span 3",
@@ -62,34 +59,34 @@
         "col": "13 / span 3",
         "row": "1 / span 7"
       }
-    ]
+    ],
+    "columns": 15,
+    "rows": 8,
+    "height": "auto"
   },
   "PROJECT_SINGLE_VERTICAL": {
-    "columns": 12,
-    "rows": 1,
-    "height": "auto",
     "slots": [
       {
         "col": "5 / span 4",
         "row": "1 / span 1"
       }
-    ]
-  },
-  "PROJECT_SINGLE_HORIZONTAL": {
+    ],
     "columns": 12,
     "rows": 1,
-    "height": "auto",
+    "height": "auto"
+  },
+  "PROJECT_SINGLE_HORIZONTAL": {
     "slots": [
       {
         "col": "3 / span 8",
         "row": "1 / span 1"
       }
-    ]
-  },
-  "PROJECT_PAIR_VERTICAL": {
+    ],
     "columns": 12,
     "rows": 1,
-    "height": "auto",
+    "height": "auto"
+  },
+  "PROJECT_PAIR_VERTICAL": {
     "slots": [
       {
         "col": "3 / span 3",
@@ -99,12 +96,12 @@
         "col": "8 / span 3",
         "row": "1 / span 1"
       }
-    ]
-  },
-  "PROJECT_PAIR_HORIZONTAL": {
+    ],
     "columns": 12,
     "rows": 1,
-    "height": "auto",
+    "height": "auto"
+  },
+  "PROJECT_PAIR_HORIZONTAL": {
     "slots": [
       {
         "col": "2 / span 5",
@@ -114,12 +111,12 @@
         "col": "8 / span 5",
         "row": "1 / span 1"
       }
-    ]
-  },
-  "PROJECT_PAIR_HOR-VERT": {
+    ],
     "columns": 12,
     "rows": 1,
-    "height": "auto",
+    "height": "auto"
+  },
+  "PROJECT_PAIR_HOR-VERT": {
     "slots": [
       {
         "col": "2 / span 5",
@@ -129,12 +126,12 @@
         "col": "8 / span 3",
         "row": "1 / span 1"
       }
-    ]
-  },
-  "PROJECT_PAIR_VERT-HOR": {
+    ],
     "columns": 12,
     "rows": 1,
-    "height": "auto",
+    "height": "auto"
+  },
+  "PROJECT_PAIR_VERT-HOR": {
     "slots": [
       {
         "col": "3 / span 3",
@@ -144,12 +141,12 @@
         "col": "7 / span 5",
         "row": "1 / span 1"
       }
-    ]
-  },
-  "PROJECT_TRIPLE": {
+    ],
     "columns": 12,
     "rows": 1,
-    "height": "auto",
+    "height": "auto"
+  },
+  "PROJECT_TRIPLE": {
     "slots": [
       {
         "col": "1 / span 4",
@@ -163,12 +160,12 @@
         "col": "10 / span 3",
         "row": "1 / span 1"
       }
-    ]
-  },
-  "PROJECT_TRIPLE_VERT": {
+    ],
     "columns": 12,
     "rows": 1,
-    "height": "auto",
+    "height": "auto"
+  },
+  "PROJECT_TRIPLE_VERT": {
     "slots": [
       {
         "col": "1 / span 3",
@@ -182,13 +179,12 @@
         "col": "9 / span 3",
         "row": "1 / span 1"
       }
-    ]
+    ],
+    "columns": 12,
+    "rows": 1,
+    "height": "auto"
   },
   "STRANGE_LAYOUT": {
-    "columns": 12,
-    "rows": 8,
-    "height": "auto",
-    "aspect": "12 / 8",
     "slots": [
       {
         "col": "6 / span 2",
@@ -206,6 +202,29 @@
         "col": "6 / span 6",
         "row": "2 / span 2"
       }
-    ]
+    ],
+    "columns": 12,
+    "rows": 8,
+    "height": "auto",
+    "aspect": "12 / 8"
+  },
+  "STAIRS": {
+    "slots": [
+      {
+        "col": "3 / span 2",
+        "row": "2 / span 4"
+      },
+      {
+        "col": "6 / span 2",
+        "row": "3 / span 4"
+      },
+      {
+        "col": "9 / span 2",
+        "row": "4 / span 4"
+      }
+    ],
+    "columns": 12,
+    "rows": 8,
+    "height": "auto"
   }
 }
