@@ -207,5 +207,24 @@
     "rows": 8,
     "height": "auto",
     "aspect": "12 / 8"
+  },
+  "STAIRS": {
+    "slots": [
+      {
+        "col": "2 / span 2",
+        "row": "1 / span 3"
+      },
+      {
+        "col": "5 / span 2",
+        "row": "3 / span 3"
+      },
+      {
+        "col": "8 / span 2",
+        "row": "5 / span 3"
+      }
+    ],
+    "columns": 12,
+    "rows": 8,
+    "height": "auto"
   }
 }
