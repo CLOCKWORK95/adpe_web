@@ -226,5 +226,25 @@
     "columns": 12,
     "rows": 8,
     "height": "auto"
+  },
+  "LAYOUT_TEST": {
+    "slots": [
+      {
+        "col": "2 / span 4",
+        "row": "2 / span 3"
+      },
+      {
+        "col": "7 / span 5",
+        "row": "2 / span 3"
+      },
+      {
+        "col": "2 / span 10",
+        "row": "6 / span 2"
+      }
+    ],
+    "columns": 12,
+    "rows": 8,
+    "height": "auto",
+    "aspect": "12 / 8"
   }
 }
