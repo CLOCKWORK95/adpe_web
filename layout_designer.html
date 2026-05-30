@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>ADPE Layout Designer</title>
+  <title>ADPE Admin</title>
   <style>
     :root {
       --bg: #f4f6f7;
@@ -21,11 +21,11 @@
 
     * { box-sizing: border-box; }
     body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; color: var(--text); background: var(--bg); }
-    header { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 16px 22px; background: var(--panel); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; }
+    header { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 14px 22px; background: var(--panel); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 5; }
     h1 { margin: 0; font-size: 18px; letter-spacing: .05em; text-transform: uppercase; }
     h2 { margin: 0 0 12px; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
     h3 { margin: 0 0 10px; font-size: 13px; }
-    main { display: grid; grid-template-columns: minmax(420px, 1fr) minmax(520px, 1.2fr); gap: 16px; padding: 16px; }
+    main { display: grid; gap: 16px; padding: 16px; }
     section, .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; min-width: 0; }
     .column { display: grid; gap: 16px; align-content: start; }
     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -41,13 +41,20 @@
     button:disabled { opacity: .45; cursor: not-allowed; }
     .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
     .status { min-height: 18px; color: var(--muted); font-size: 12px; }
+    .tabs { display: flex; gap: 6px; align-items: center; }
+    .tab-btn { padding: 8px 12px; border-radius: 6px; border-color: transparent; background: transparent; color: var(--muted); }
+    .tab-btn.active { background: rgba(45,166,196,.12); color: var(--accent-dark); border-color: rgba(45,166,196,.25); font-weight: 600; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
     .split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .layout-shell { display: grid; grid-template-columns: minmax(420px, 1fr) minmax(520px, 1.2fr); gap: 16px; }
+    .workbench-shell { display: grid; grid-template-columns: minmax(300px, .75fr) minmax(480px, 1.15fr) minmax(420px, 1fr); gap: 16px; align-items: start; }
 
     .sequence-list { display: grid; gap: 8px; max-height: 220px; overflow: auto; }
-    .sequence-item { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 6px; padding: 8px; cursor: pointer; }
+    .sequence-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 6px; padding: 8px; cursor: pointer; }
     .sequence-item.active { border-color: var(--accent); background: rgba(45, 166, 196, .08); }
-    .sequence-buttons { display: flex; gap: 5px; }
-    .sequence-buttons button { padding: 5px 7px; font-size: 11px; }
+    .sequence-buttons { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 5px; }
+    .sequence-buttons button { padding: 5px 7px; font-size: 11px; white-space: nowrap; }
 
     .preview-wrap, .designer-wrap { border: 1px solid var(--line); border-radius: 8px; padding: 12px; overflow: auto; background:
       linear-gradient(45deg, #fafafa 25%, transparent 25%),
@@ -57,6 +64,7 @@
       background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0;
     }
     .preview-stack { display: flex; flex-direction: column; gap: 34px; min-width: 520px; }
+    .preview-stack.compact { min-width: 420px; }
     .preview-layout-block { display: grid; gap: 8px; }
     .preview-grid, .designer-grid { display: grid; gap: 6px; align-items: stretch; width: 100%; }
     .preview-grid { min-height: 260px; }
@@ -76,63 +84,104 @@
     .slot-list-item { display: flex; justify-content: space-between; gap: 8px; border: 1px solid var(--line); border-radius: 6px; padding: 8px; font-size: 12px; cursor: pointer; }
     .slot-list-item.active { border-color: var(--accent); background: rgba(45,166,196,.08); }
 
+    .publish-grid { display: grid; grid-template-columns: 320px 1fr; gap: 16px; }
+    .publish-card { display: grid; gap: 12px; align-content: start; }
+    .publish-preview { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .site-frame { display: grid; gap: 10px; min-width: 0; }
+    .site-frame-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+    .site-frame-head a { color: var(--accent-dark); text-decoration: none; font-size: 12px; font-weight: 600; }
+    .site-frame-head img { max-height: 20px; }
+    .browser-box { height: 62vh; min-height: 420px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; }
+    .browser-box iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .confirm-row { display: flex; gap: 10px; align-items: center; font-size: 13px; color: var(--text); }
+    .confirm-row input { width: auto; }
+    .deploy-btn { background: var(--text); border-color: var(--text); color: #fff; font-weight: 700; }
+    .deploy-btn:hover:not(:disabled) { background: #071417; color: #fff; }
+    .deploy-btn:disabled { opacity: .42; cursor: not-allowed; }
+    .loading-overlay {
+      position: fixed; inset: 0; z-index: 20; display: none; place-items: center;
+      background: rgba(16,41,45,.72); backdrop-filter: blur(8px); color: #fff;
+    }
+    .loading-overlay.active { display: grid; }
+    .overlay-box { display: grid; gap: 12px; justify-items: center; text-align: center; }
+    .spinner {
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 4px solid rgba(255,255,255,.28); border-top-color: #fff;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
     @media (max-width: 1240px) {
-      main, .split { grid-template-columns: 1fr; }
+      .layout-shell, .workbench-shell, .split, .publish-grid, .publish-preview { grid-template-columns: 1fr; }
       .preview-stack, .designer-grid { min-width: 100%; }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>ADPE Layout Designer</h1>
-    <div class="actions">
-      <button id="loadApiBtn" class="primary">Carica da S3</button>
-      <button id="saveAllBtn">Salva layout + sequence</button>
-      <button id="copyBtn">Copia output</button>
+    <h1>ADPE Admin</h1>
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="projectTab" type="button">Progetto</button>
+      <button class="tab-btn" data-tab="layoutTab" type="button">Layout</button>
+      <button class="tab-btn" data-tab="publishTab" type="button">Pubblicazione</button>
     </div>
   </header>
 
   <main>
-    <div class="column">
-      <section>
-        <h2>Connessione API</h2>
-        <div class="row">
-          <label>API base URL <input id="apiBase" placeholder="https://...lambda-url..."></label>
-          <label>Admin token <input id="adminToken" type="password" placeholder="Bearer token"></label>
-        </div>
-        <div class="status" id="apiStatus"></div>
-      </section>
+    <section>
+      <h2>Connessione API</h2>
+      <div class="row">
+        <label>API base URL <input id="apiBase" placeholder="https://...lambda-url..."></label>
+        <label>Admin token <input id="adminToken" type="password" placeholder="Bearer token"></label>
+      </div>
+      <div class="actions">
+        <button id="loadApiBtn" class="primary">Aggiorna dati da S3</button>
+      </div>
+      <div class="status" id="apiStatus"></div>
+    </section>
 
-      <section>
-        <h2>Progetto e sequenza</h2>
-        <label>Progetto
-          <select id="projectSelect"><option value="">Nessun progetto caricato</option></select>
-        </label>
-        <div class="actions">
-          <button id="loadProjectBtn">Apri progetto</button>
-          <button id="saveSequenceBtn">Salva solo sequence</button>
-        </div>
-        <div class="sequence-list" id="sequenceList"></div>
-      </section>
+    <div id="projectTab" class="tab-panel active">
+      <div class="layout-shell">
+        <div class="column">
+          <section>
+            <h2>Progetto</h2>
+            <label>Progetto
+              <select id="projectSelect"><option value="">Nessun progetto caricato</option></select>
+            </label>
+            <div class="actions">
+              <button id="loadProjectBtn" class="primary">Carica progetto</button>
+              <button id="saveSequenceBtn">Salva sequenza</button>
+              <button id="saveAllBtn">Salva layout e sequenza</button>
+            </div>
+          </section>
 
-      <section>
-        <h2>Preview progetto</h2>
-        <div class="preview-wrap">
-          <div class="preview-stack" id="projectPreview"></div>
-        </div>
-      </section>
+          <section>
+            <h2>Layout sequence</h2>
+            <div class="sequence-list" id="sequenceList"></div>
+          </section>
 
-      <section>
-        <h2>Codice layout selezionato</h2>
-        <textarea id="currentLayoutCode" readonly></textarea>
-      </section>
+          <section>
+            <h2>Codice layout selezionato</h2>
+            <textarea id="currentLayoutCode" readonly></textarea>
+          </section>
+        </div>
+
+        <div class="column">
+          <section>
+            <h2>Preview progetto</h2>
+            <div class="preview-wrap">
+              <div class="preview-stack" id="projectPreview"></div>
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
 
-    <div class="column">
-      <section>
-        <h2>Editor layout</h2>
-        <div class="split">
-          <div>
+    <div id="layoutTab" class="tab-panel">
+      <div class="workbench-shell">
+        <div class="column">
+          <section>
+            <h2>Editor layout</h2>
             <div class="row">
               <label>Importa layout esistente
                 <select id="layoutImportSelect"><option value="">Scegli layout</option></select>
@@ -158,41 +207,105 @@
               <input id="aspectInput" value="12 / 8" spellcheck="false">
             </label>
             <div class="actions">
-              <button id="importLayoutBtn">Importa nell'editor</button>
-              <button id="applyGridBtn">Aggiorna griglia</button>
-              <button id="replaceSeqBtn">Sostituisci nella sequence</button>
-              <button id="appendSeqBtn">Aggiungi alla sequence</button>
-              <button id="clearBtn" class="danger">Svuota slot</button>
+              <button id="importLayoutBtn">Importa nel designer</button>
+              <button id="applyGridBtn">Applica griglia</button>
+              <button id="replaceSeqBtn">Sostituisci layout selezionato</button>
+              <button id="appendSeqBtn">Aggiungi alla sequenza</button>
+              <button id="clearBtn" class="danger">Cancella griglia</button>
             </div>
-          </div>
-          <div>
-            <h3>Slot editor</h3>
+          </section>
+
+          <section>
+            <h2>Slot</h2>
             <div class="slot-list" id="slotList"></div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      <section>
-        <div class="designer-wrap">
-          <div id="designerGrid" class="designer-grid"></div>
+          <section>
+            <h2>Output layouts.txt</h2>
+            <textarea id="output" spellcheck="false"></textarea>
+            <div class="actions">
+              <button id="saveLayoutBtn">Salva layout in S3</button>
+              <button id="copyBtn">Copia codice</button>
+              <button id="importOutputBtn">Importa codice</button>
+              <button id="downloadBtn">Scarica txt</button>
+            </div>
+            <div class="status" id="editorStatus"></div>
+          </section>
         </div>
-      </section>
 
-      <section>
-        <h2>Output layouts.txt</h2>
-        <textarea id="output" spellcheck="false"></textarea>
-        <div class="actions">
-          <button id="saveLayoutBtn">Salva solo layout</button>
-          <button id="importOutputBtn">Importa output nell'editor</button>
-          <button id="downloadBtn">Scarica .txt</button>
+        <div class="column">
+          <section>
+            <h2>Designer layout</h2>
+            <div class="designer-wrap">
+              <div id="designerGrid" class="designer-grid"></div>
+            </div>
+          </section>
         </div>
-        <div class="status" id="editorStatus"></div>
-      </section>
+
+        <div class="column">
+          <section>
+            <h2>Anteprima progetto</h2>
+            <div class="preview-wrap">
+              <div class="preview-stack compact" id="projectPreviewWorkbench"></div>
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
+
+    <div id="publishTab" class="tab-panel">
+      <div class="publish-grid">
+        <section class="publish-card">
+          <h2>Pubblicazione</h2>
+          <label class="confirm-row">
+            <input type="checkbox" id="publishConfirm">
+            <span>Confermo la pubblicazione in produzione</span>
+          </label>
+          <label>Password pubblicazione
+            <input id="publishPassword" type="password" autocomplete="current-password">
+          </label>
+          <button id="deployBtn" class="deploy-btn" disabled>Pubblica in produzione</button>
+          <div class="status" id="publishStatus"></div>
+        </section>
+
+        <div class="publish-preview">
+          <section class="site-frame">
+            <div class="site-frame-head">
+              <h2>Area Test</h2>
+              <a href="https://adpe.netlify.app" target="_blank">Apri</a>
+              <img src="https://api.netlify.com/api/v1/badges/60cd9ee8-74ed-4d22-b352-3566b0014f50/deploy-status" alt="Stato Test">
+            </div>
+            <div class="browser-box">
+              <iframe src="https://adpe.netlify.app" title="Anteprima Test"></iframe>
+            </div>
+          </section>
+
+          <section class="site-frame">
+            <div class="site-frame-head">
+              <h2>Area Produzione</h2>
+              <a href="https://adpeprod.netlify.app" target="_blank">Apri</a>
+              <img src="https://api.netlify.com/api/v1/badges/42746bf6-8e5c-42a7-b361-f4f37ae5ffec/deploy-status" alt="Stato Produzione">
+            </div>
+            <div class="browser-box">
+              <iframe src="https://adpeprod.netlify.app" title="Anteprima Produzione"></iframe>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay">
+      <div class="overlay-box">
+        <div id="spinner" class="spinner"></div>
+        <div id="overlayText">Pubblicazione in corso...</div>
+      </div>
+    </div>
+
   </main>
 
   <script>
     const DEFAULT_API_BASE = 'https://a6iyfupq52deqgwthdv7mlqnfa0nonit.lambda-url.eu-north-1.on.aws';
+    const PUBLISH_PASSWORD_HASH = '95ef99f25a5660acab41df5d362646f1428144b69159fb928ac60900038a3da2';
 
     const state = {
       apiBase: localStorage.getItem('adpeLayoutApiBase') || DEFAULT_API_BASE,
@@ -220,6 +333,7 @@
       projectSelect: document.getElementById('projectSelect'),
       sequenceList: document.getElementById('sequenceList'),
       projectPreview: document.getElementById('projectPreview'),
+      projectPreviewWorkbench: document.getElementById('projectPreviewWorkbench'),
       currentLayoutCode: document.getElementById('currentLayoutCode'),
       layoutImportSelect: document.getElementById('layoutImportSelect'),
       layoutName: document.getElementById('layoutName'),
@@ -232,6 +346,13 @@
       slotList: document.getElementById('slotList'),
       editorStatus: document.getElementById('editorStatus')
     };
+    els.publishConfirm = document.getElementById('publishConfirm');
+    els.publishPassword = document.getElementById('publishPassword');
+    els.deployBtn = document.getElementById('deployBtn');
+    els.publishStatus = document.getElementById('publishStatus');
+    els.loadingOverlay = document.getElementById('loadingOverlay');
+    els.spinner = document.getElementById('spinner');
+    els.overlayText = document.getElementById('overlayText');
 
     els.apiBase.value = state.apiBase;
     els.adminToken.value = state.token;
@@ -242,12 +363,71 @@
       el._timer = setTimeout(() => { el.textContent = ''; }, 3500);
     }
 
+    function setActiveTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tabId);
+      });
+      document.querySelectorAll('.tab-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.id === tabId);
+      });
+    }
+
+    function toggleDeployButton() {
+      els.deployBtn.disabled = !els.publishConfirm.checked || !els.publishPassword.value.trim();
+    }
+
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function publishProduction() {
+      syncApiCredentials();
+      const passwordHash = await sha256(els.publishPassword.value);
+      if (passwordHash !== PUBLISH_PASSWORD_HASH) {
+        els.publishPassword.value = '';
+        els.publishConfirm.checked = false;
+        toggleDeployButton();
+        setStatus(els.publishStatus, 'Password errata. Pubblicazione annullata.');
+        return;
+      }
+      els.loadingOverlay.classList.add('active');
+      els.spinner.style.display = 'block';
+      els.overlayText.textContent = 'Pubblicazione in corso...';
+      try {
+        await api('/publish', { method: 'POST', body: JSON.stringify({ source: 'adpe-admin' }) });
+        els.spinner.style.display = 'none';
+        els.overlayText.textContent = 'Comando di pubblicazione inviato.';
+        els.publishConfirm.checked = false;
+        els.publishPassword.value = '';
+        toggleDeployButton();
+        setStatus(els.publishStatus, 'Pubblicazione avviata.');
+      } catch (error) {
+        els.spinner.style.display = 'none';
+        els.overlayText.textContent = error.message;
+        els.publishConfirm.checked = false;
+        els.publishPassword.value = '';
+        toggleDeployButton();
+        setStatus(els.publishStatus, error.message);
+      } finally {
+        setTimeout(() => els.loadingOverlay.classList.remove('active'), 3200);
+      }
+    }
+
     function clamp(value, min, max) {
       return Math.max(min, Math.min(max, Number(value) || min));
     }
 
     function apiPath(path) {
       return `${state.apiBase.replace(/\/+$/, '')}/${path.replace(/^\/+/, '')}`;
+    }
+
+    function syncApiCredentials() {
+      state.apiBase = els.apiBase.value.trim();
+      state.token = els.adminToken.value.trim();
+      localStorage.setItem('adpeLayoutApiBase', state.apiBase);
+      localStorage.setItem('adpeLayoutToken', state.token);
     }
 
     async function api(path, options = {}) {
@@ -414,10 +594,11 @@
         });
         const buttons = document.createElement('div');
         buttons.className = 'sequence-buttons';
-        [['up','su'], ['down','giu'], ['import','mod'], ['remove','x']].forEach(([action, label]) => {
+        [['up','Su'], ['down','Giu'], ['import','Modifica nel designer'], ['remove','Rimuovi']].forEach(([action, label]) => {
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.textContent = label;
+          btn.title = label;
           btn.addEventListener('click', event => {
             event.stopPropagation();
             sequenceAction(action, index);
@@ -443,7 +624,11 @@
         state.selectedSequenceIndex = Math.max(0, Math.min(index, state.sequence.length - 1));
       } else if (action === 'import') {
         const name = state.sequence[index];
-        if (state.layouts[name]) applyEditorLayout(name, state.layouts[name]);
+        if (state.layouts[name]) {
+          applyEditorLayout(name, state.layouts[name]);
+          setActiveTab('layoutTab');
+          setStatus(els.editorStatus, `${name} aperto nel designer.`);
+        }
       }
       renderSequence();
     }
@@ -453,10 +638,16 @@
       els.currentLayoutCode.value = name && state.layouts[name] ? layoutToText(name, state.layouts[name]) : '';
     }
 
-    function renderPreview() {
-      els.projectPreview.innerHTML = '';
+    function previewLayoutFor(name, useDraft) {
+      const draftName = (els.layoutName.value || '').trim();
+      if (useDraft && draftName && draftName === name) return editorLayoutObject();
+      return state.layouts[name] || { columns: 12, slots: [{ col: '3 / span 8' }] };
+    }
+
+    function renderPreviewInto(container, useDraft) {
+      container.innerHTML = '';
       if (!state.project?.images?.length) {
-        els.projectPreview.innerHTML = '<div class="status">Carica un progetto per vedere la preview.</div>';
+        container.innerHTML = '<div class="status">Carica un progetto per vedere la preview.</div>';
         return;
       }
       const sequence = state.sequence.length ? state.sequence : Object.keys(state.layouts).slice(0, 1);
@@ -468,7 +659,7 @@
       while (imgIndex < state.project.images.length && guard < 1000) {
         guard++;
         const name = sequence[seqIndex % sequence.length];
-        const layout = state.layouts[name] || { columns: 12, slots: [{ col: '3 / span 8' }] };
+        const layout = previewLayoutFor(name, useDraft);
         const block = document.createElement('div');
         block.className = 'preview-layout-block';
         const label = document.createElement('div');
@@ -508,10 +699,15 @@
         }
         if (added) {
           block.appendChild(grid);
-          els.projectPreview.appendChild(block);
+          container.appendChild(block);
         }
         seqIndex++;
       }
+    }
+
+    function renderPreview() {
+      renderPreviewInto(els.projectPreview, false);
+      renderPreviewInto(els.projectPreviewWorkbench, true);
     }
 
     function renderEditor() {
@@ -553,6 +749,7 @@
       });
       renderSlotList();
       renderOutput();
+      renderPreview();
     }
 
     function renderSlotList() {
@@ -650,10 +847,7 @@
     }
 
     async function loadApiData() {
-      state.apiBase = els.apiBase.value.trim();
-      state.token = els.adminToken.value.trim();
-      localStorage.setItem('adpeLayoutApiBase', state.apiBase);
-      localStorage.setItem('adpeLayoutToken', state.token);
+      syncApiCredentials();
       setStatus(els.apiStatus, 'Carico layouts...');
       const layoutsData = await api('/layouts');
       setStatus(els.apiStatus, 'Carico progetti...');
@@ -727,11 +921,17 @@
 
     document.addEventListener('pointermove', onPointerMove);
     document.addEventListener('pointerup', onPointerUp);
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => setActiveTab(btn.dataset.tab));
+    });
     document.getElementById('loadApiBtn').addEventListener('click', () => loadApiData().catch(err => setStatus(els.apiStatus, err.message)));
     document.getElementById('loadProjectBtn').addEventListener('click', () => loadProject().catch(err => setStatus(els.apiStatus, err.message)));
     document.getElementById('importLayoutBtn').addEventListener('click', () => {
       const name = els.layoutImportSelect.value;
-      if (name && state.layouts[name]) applyEditorLayout(name, state.layouts[name]);
+      if (name && state.layouts[name]) {
+        applyEditorLayout(name, state.layouts[name]);
+        setStatus(els.editorStatus, `${name} importato nel designer.`);
+      }
     });
     document.getElementById('applyGridBtn').addEventListener('click', applyGridSettings);
     document.getElementById('clearBtn').addEventListener('click', () => { state.slots = []; renderEditor(); });
@@ -743,6 +943,9 @@
     document.getElementById('saveLayoutBtn').addEventListener('click', () => saveLayout().catch(err => setStatus(els.editorStatus, err.message)));
     document.getElementById('saveSequenceBtn').addEventListener('click', () => saveSequence().catch(err => setStatus(els.apiStatus, err.message)));
     document.getElementById('saveAllBtn').addEventListener('click', () => saveAll().catch(err => setStatus(els.apiStatus, err.message)));
+    els.publishConfirm.addEventListener('change', toggleDeployButton);
+    els.publishPassword.addEventListener('input', toggleDeployButton);
+    els.deployBtn.addEventListener('click', () => publishProduction());
     [els.layoutName, els.height, els.aspect].forEach(el => el.addEventListener('input', () => {
       state.height = els.height.value || 'auto';
       state.aspect = els.aspect.value.trim() || 'auto';

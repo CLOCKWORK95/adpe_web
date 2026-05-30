@@ -1,9 +1,10 @@
 """
-Lambda REST amministrativa per ADPE Layout Designer.
+Lambda REST amministrativa per ADPE Admin.
 
 Espone piccole API per leggere progetti/layout dal bucket editoriale e scrivere:
 - layouts.txt
 - projects/.../layoutsequence.txt
+- avviare la build hook Netlify di produzione
 
 La Lambda principale S3 -> GitHub resta invariata: quando questa funzione scrive
 su S3, il trigger esistente aggiorna JSON, GitHub e Netlify.
@@ -13,6 +14,7 @@ import json
 import os
 from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import quote
+from urllib.request import Request, urlopen
 
 import boto3
 
@@ -22,6 +24,7 @@ S3_BUCKET_NAME = os.environ.get("S3_BUCKET_NAME", "")
 S3_REGION = os.environ.get("S3_REGION", "eu-north-1")
 ADMIN_TOKEN = os.environ.get("ADMIN_TOKEN", "")
 ALLOWED_ORIGIN = os.environ.get("ALLOWED_ORIGIN", "*")
+NETLIFY_BUILD_HOOK_URL = os.environ.get("NETLIFY_BUILD_HOOK_URL", "")
 
 IMAGE_EXTENSIONS = (".jpg", ".jpeg", ".png", ".gif", ".jfif", ".webp")
 
@@ -290,6 +293,19 @@ def handle_save(event: Dict[str, Any]) -> Dict[str, Any]:
     return response(200, {"ok": True})
 
 
+def handle_publish() -> Dict[str, Any]:
+    if not NETLIFY_BUILD_HOOK_URL:
+        return response(400, {"error": "Missing NETLIFY_BUILD_HOOK_URL"})
+
+    req = Request(NETLIFY_BUILD_HOOK_URL, data=b"{}", method="POST")
+    req.add_header("Content-Type", "application/json")
+    with urlopen(req, timeout=20) as res:
+        status = getattr(res, "status", 200)
+        if status < 200 or status >= 300:
+            return response(502, {"error": f"Netlify hook returned HTTP {status}"})
+    return response(200, {"ok": True})
+
+
 def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     if event.get("requestContext", {}).get("http"):
         method = event["requestContext"]["http"]["method"]
@@ -317,6 +333,8 @@ def lambda_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             return handle_put_project_sequence(event)
         if method in ("PUT", "POST") and path.endswith("/save"):
             return handle_save(event)
+        if method == "POST" and path.endswith("/publish"):
+            return handle_publish()
         return response(404, {"error": "Not found", "path": path, "method": method})
     except Exception as exc:
         print(f"Layout admin error: {exc}")
