@@ -228,7 +228,9 @@
     }
 
     body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
-    body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content {
+    body[data-view="projectDetail"] .nav-item-dropdown:hover .dropdown-content,
+    body[data-view="projects"] .nav-item-dropdown:focus-within .dropdown-content,
+    body[data-view="projectDetail"] .nav-item-dropdown:focus-within .dropdown-content {
       max-height: 600px; opacity: 1; visibility: visible; pointer-events: auto; margin-top: 2rem;
     }
     .lang-dropdown:hover .lang-dropdown-content {
@@ -246,6 +248,33 @@
       background: transparent; color: var(--autumn-blue); transform: scale(1.1);
       text-shadow: 0.3px 0 0 var(--autumn-blue);
     }
+
+    .project-search-wrap {
+      width: 100%;
+      margin-bottom: 0.45rem;
+      padding-bottom: 0.45rem;
+      border-bottom: 1px solid rgba(45,166,196,0.18);
+    }
+    .project-search-input {
+      width: min(190px, 100%);
+      border: none;
+      border-bottom: 1px solid rgba(8,43,46,0.28);
+      border-radius: 0;
+      background: transparent;
+      color: var(--text-color);
+      font-family: inherit;
+      font-size: 0.65rem;
+      letter-spacing: 0.05rem;
+      text-transform: uppercase;
+      text-align: right;
+      padding: 0.35rem 0;
+      outline: none;
+      transition: border-color var(--transition), color var(--transition);
+    }
+    .project-search-input::placeholder { color: rgba(8,43,46,0.48); }
+    .project-search-input:focus { border-color: var(--autumn-blue); color: var(--autumn-blue); }
+    body.dark-theme .project-search-input { border-bottom-color: rgba(240,240,240,0.3); }
+    body.dark-theme .project-search-input::placeholder { color: rgba(240,240,240,0.45); }
 
     .current-lang {
       font-family: inherit; font-size: 0.75rem; font-weight: 400; color: var(--text-color);
@@ -358,6 +387,16 @@
     }
     body.dark-theme .projects-grid .splash-caption { color: #ccc; }
     .projects-grid .splash-item:hover + .splash-caption { opacity: 1; visibility: visible; }
+    .projects-empty {
+      width: 100%;
+      padding: 5rem 0;
+      text-align: center;
+      color: var(--text-color);
+      font-size: 0.75rem;
+      letter-spacing: 0.08rem;
+      text-transform: uppercase;
+      opacity: 0.65;
+    }
 
     .splash-title { font-size: 0.8rem; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; }
     .splash-date { font-size: 0.75rem; opacity: 0.7; margin-top: 0.2rem; }
@@ -567,6 +606,8 @@
       .nav-item-dropdown { align-items: flex-end; width: 100%; }
       .nav-item-dropdown .dropdown-content { position: static; transform: none; background: transparent; text-align: center; width: 100%; margin-top: 1rem; }
       .dropdown-content .filter-btn { text-align: center; margin: 0.5rem auto; width: auto; margin-right: 0; }
+      .project-search-wrap { display: flex; justify-content: center; border-bottom: none; }
+      .project-search-input { text-align: center; width: min(240px, 80vw); }
       header.mobile-menu-open { background: var(--primary-color) !important; backdrop-filter: blur(20px); }
 
       body[data-view="projects"] .nav-item-dropdown:hover .dropdown-content,
@@ -818,6 +859,8 @@
         category_residenziale: "Residenziale", category_pubblica: "Pubblica",
         category_uffici: "Uffici", unknownCategory: "Categoria Sconosciuta",
         aboutTitle: "adpe", category_illuminazione: "Illuminazione",
+        projectSearchPlaceholder: "cerca progetto",
+        projectSearchEmpty: "Nessun progetto trovato",
         filterAll: "Tutti", backToProjects: "← Indietro", filterSelection: "Selezione"
       },
       en: {
@@ -828,6 +871,8 @@
         category_residenziale: "Residential", category_pubblica: "Public",
         category_uffici: "Offices", unknownCategory: "Unknown Category",
         aboutTitle: "About Us", category_illuminazione: "Illumination",
+        projectSearchPlaceholder: "search project",
+        projectSearchEmpty: "No projects found",
         filterAll: "All", backToProjects: "← Back", filterSelection: "Selection"
       },
       fr: {
@@ -838,6 +883,8 @@
         category_residenziale: "Résidentiel", category_pubblica: "Publique",
         category_uffici: "Bureaux", unknownCategory: "Catégorie Inconnue",
         aboutTitle: "À Propos de Nous", category_illuminazione: "Éclairage",
+        projectSearchPlaceholder: "chercher projet",
+        projectSearchEmpty: "Aucun projet trouvé",
         filterAll: "Tous", backToProjects: "← Retour", filterSelection: "Sélection"
       }
     };
@@ -1287,6 +1334,22 @@
       return name.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
     }
 
+    function normalizeProjectSearch(value) {
+      return String(value || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[\s\-_]+/g, '');
+    }
+
+    function isProjectSearchFilter(filter) {
+      return String(filter || '').startsWith('search:');
+    }
+
+    function projectSearchQueryFromFilter(filter) {
+      return isProjectSearchFilter(filter) ? decodeURIComponent(String(filter).slice(7)) : '';
+    }
+
     // Escape HTML semplice per prevenire XSS nei titoli/metadati
     function escHtml(str) {
       if (!str) return '';
@@ -1325,7 +1388,17 @@
 
         let filteredProjects = [];
 
-        if (filter === 'home_custom' && Array.isArray(homeProjectNames) && homeProjectNames.length > 0) {
+        if (isProjectSearchFilter(filter)) {
+          const searchTerm = normalizeProjectSearch(projectSearchQueryFromFilter(filter));
+          filteredProjects = searchTerm
+            ? allProjectsFlattened.filter(p => {
+                const folderName = p.categoryPath.split('.').pop();
+                const displayName = p.title || formatFolderNameForDisplay(folderName);
+                return normalizeProjectSearch(folderName).startsWith(searchTerm)
+                  || normalizeProjectSearch(displayName).startsWith(searchTerm);
+              })
+            : allProjectsFlattened;
+        } else if (filter === 'home_custom' && Array.isArray(homeProjectNames) && homeProjectNames.length > 0) {
           filteredProjects = homeProjectNames.map(identifier =>
             allProjectsFlattened.find(p => {
               if (String(p.id) === String(identifier).trim()) return true;
@@ -1398,12 +1471,21 @@
           frag.appendChild(section);
         }
 
+        if (!queue.length && isProjectSearchFilter(filter)) {
+          const empty = document.createElement('div');
+          empty.className = 'projects-empty';
+          empty.textContent = translations[currentLang].projectSearchEmpty || 'Nessun progetto trovato';
+          frag.appendChild(empty);
+        }
+
         grid.appendChild(frag);
 
         // Aggiorna stato pulsanti filtro
         document.querySelectorAll('.filter-btn').forEach(btn =>
           btn.classList.toggle('active', btn.dataset.filter === filter)
         );
+        const searchInput = document.getElementById('projectSearchInput');
+        if (searchInput && !isProjectSearchFilter(filter)) searchInput.value = '';
 
         grid.style.opacity = '1';
       }, delayBeforeRender);
@@ -1432,12 +1514,34 @@
 
       const frag = document.createDocumentFragment();
 
+      const searchWrap = document.createElement('div');
+      searchWrap.className = 'project-search-wrap';
+      const searchInput = document.createElement('input');
+      searchInput.id = 'projectSearchInput';
+      searchInput.className = 'project-search-input';
+      searchInput.type = 'search';
+      searchInput.autocomplete = 'off';
+      searchInput.placeholder = translations[currentLang].projectSearchPlaceholder || 'cerca progetto';
+      searchInput.value = projectSearchQueryFromFilter(lastActiveFilter);
+      searchInput.addEventListener('click', event => event.stopPropagation());
+      searchInput.addEventListener('keydown', event => event.stopPropagation());
+      searchInput.addEventListener('input', event => {
+        const query = event.target.value.trim();
+        filterProjects(query ? `search:${encodeURIComponent(query)}` : 'all', 0.12, 80, 0.35, 0, false);
+      });
+      searchWrap.appendChild(searchInput);
+      frag.appendChild(searchWrap);
+
       const mkBtn = (label, filter) => {
         const btn = document.createElement('button');
         btn.className = 'filter-btn';
         btn.dataset.filter = filter;
         btn.textContent = label;
-        btn.addEventListener('click', () => filterProjects(filter));
+        btn.addEventListener('click', () => {
+          const input = document.getElementById('projectSearchInput');
+          if (input) input.value = '';
+          filterProjects(filter);
+        });
         return btn;
       };
 
