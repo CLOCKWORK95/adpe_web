@@ -610,54 +610,51 @@
       }
       body.dark-theme .nav-menu { background: rgba(26,26,26,0.98); }
       .nav-menu.active { transform: translateX(0); }
-      .nav-menu.dragging { transition: none; }
       .nav-menu li { width: 100%; display: flex; justify-content: flex-end; margin-right: 1.5rem !important; margin-left: 0 !important; }
       .nav-menu li:nth-child(1), .nav-menu li:nth-child(2), .nav-menu li:nth-child(3) { justify-self: auto; }
       .nav-link { font-size: 1.0rem; text-align: right; margin-bottom: 2rem; }
       .hamburger {
         position: fixed;
-        top: 50vh;
-        right: 0;
+        top: 1.05rem;
+        right: 1rem;
         z-index: 1100;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 26px;
-        height: 74px;
+        gap: 5px;
+        width: 34px;
+        height: 34px;
         padding: 0;
-        border: 1px solid rgba(8,43,46,0.16);
-        border-right: none;
-        border-radius: 16px 0 0 16px;
-        background: rgba(255,255,255,0.82);
-        box-shadow: 0 4px 16px rgba(8,43,46,0.08);
-        backdrop-filter: blur(10px);
+        border: 0;
+        border-radius: 50%;
+        background: transparent;
         color: var(--text-color);
-        transform: translateY(-50%);
+        transform: none;
         user-select: none;
         -webkit-user-select: none;
         -webkit-tap-highlight-color: transparent;
         -webkit-touch-callout: none;
         appearance: none;
-        touch-action: none;
+        touch-action: manipulation;
       }
       .hamburger:focus, .hamburger:active { outline: none; }
       body.dark-theme .hamburger {
-        background: rgba(26,26,26,0.78);
-        border-color: rgba(240,240,240,0.18);
+        background: transparent;
       }
-      .hamburger::after { content: ''; }
-      .hamburger.active {
-        right: auto;
-        left: 0;
-        top: 50vh;
-        border-right: 1px solid rgba(8,43,46,0.16);
-        border-left: none;
-        border-radius: 0 16px 16px 0;
-        background: var(--primary-color);
-        transform: translateY(-50%);
+      .hamburger span {
+        display: block;
+        width: 20px;
+        height: 1px;
+        margin: 0;
+        background: rgba(8,43,46,0.52);
+        border-radius: 999px;
+        transition: transform 0.24s ease, opacity 0.2s ease, background 0.2s ease;
       }
-      body.dark-theme .hamburger.active { border-right-color: rgba(240,240,240,0.18); }
-      .hamburger span { display: none; }
+      body.dark-theme .hamburger span { background: rgba(240,240,240,0.62); }
+      .hamburger.active span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+      .hamburger.active span:nth-child(2) { opacity: 0; }
+      .hamburger.active span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
       .header-project-logo {
         left: 1rem;
         top: 50%;
@@ -2044,72 +2041,16 @@
       const hamburger = document.querySelector('.hamburger');
       const navMenu   = document.querySelector('.nav-menu');
       const header    = document.querySelector('header');
-      let menuDrag = null;
 
       const setMobileMenu = open => {
-        navMenu.classList.remove('dragging');
-        navMenu.style.transform = '';
         hamburger.classList.toggle('active', open);
         navMenu.classList.toggle('active', open);
         header.classList.toggle('mobile-menu-open', open);
       };
 
-      const clampDrag = (value, min, max) => Math.max(min, Math.min(max, value));
-
       hamburger.addEventListener('click', event => {
-        if (window.innerWidth <= 768) {
-          event.preventDefault();
-          return;
-        }
+        event.preventDefault();
         setMobileMenu(!navMenu.classList.contains('active'));
-      });
-      hamburger.addEventListener('pointerdown', event => {
-        if (window.innerWidth > 768) return;
-        event.preventDefault();
-        menuDrag = {
-          startX: event.clientX,
-          startY: event.clientY,
-          open: navMenu.classList.contains('active')
-        };
-        navMenu.classList.add('dragging');
-        hamburger.setPointerCapture?.(event.pointerId);
-      });
-
-      hamburger.addEventListener('pointermove', event => {
-        if (!menuDrag || window.innerWidth > 768) return;
-        event.preventDefault();
-        const width = window.innerWidth || document.documentElement.clientWidth;
-        const dx = event.clientX - menuDrag.startX;
-        const translate = menuDrag.open
-          ? clampDrag(dx, 0, width)
-          : clampDrag(width + dx, 0, width);
-        navMenu.style.transform = `translateX(${translate}px)`;
-      });
-
-      const finishMenuDrag = event => {
-        if (!menuDrag || window.innerWidth > 768) return;
-        const width = window.innerWidth || document.documentElement.clientWidth;
-        const dx = event.clientX - menuDrag.startX;
-        const dy = Math.abs(event.clientY - menuDrag.startY);
-        const translate = menuDrag.open
-          ? clampDrag(dx, 0, width)
-          : clampDrag(width + dx, 0, width);
-        const shouldOpen = dy > 70
-          ? menuDrag.open
-          : menuDrag.open
-            ? translate < width * 0.22
-            : translate < width * 0.78;
-        menuDrag = null;
-        setMobileMenu(shouldOpen);
-      };
-
-      hamburger.addEventListener('pointerup', finishMenuDrag);
-      hamburger.addEventListener('pointercancel', () => {
-        if (menuDrag) {
-          const wasOpen = menuDrag.open;
-          menuDrag = null;
-          setMobileMenu(wasOpen);
-        }
       });
 
       document.querySelectorAll('.nav-link').forEach(link => {
