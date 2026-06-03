@@ -305,11 +305,12 @@
 
   <script>
     const DEFAULT_API_BASE = 'https://a6iyfupq52deqgwthdv7mlqnfa0nonit.lambda-url.eu-north-1.on.aws';
+    const DEFAULT_ADMIN_TOKEN = 'adpe-web-layout-token-2026';
     const PUBLISH_PASSWORD_HASH = '95ef99f25a5660acab41df5d362646f1428144b69159fb928ac60900038a3da2';
 
     const state = {
-      apiBase: localStorage.getItem('adpeLayoutApiBase') || DEFAULT_API_BASE,
-      token: localStorage.getItem('adpeLayoutToken') || '',
+      apiBase: DEFAULT_API_BASE,
+      token: DEFAULT_ADMIN_TOKEN,
       projects: [],
       layouts: {},
       layoutsRaw: '',
@@ -424,10 +425,10 @@
     }
 
     function syncApiCredentials() {
-      state.apiBase = els.apiBase.value.trim();
-      state.token = els.adminToken.value.trim();
-      localStorage.setItem('adpeLayoutApiBase', state.apiBase);
-      localStorage.setItem('adpeLayoutToken', state.token);
+      state.apiBase = els.apiBase.value.trim() || DEFAULT_API_BASE;
+      state.token = els.adminToken.value.trim() || DEFAULT_ADMIN_TOKEN;
+      els.apiBase.value = state.apiBase;
+      els.adminToken.value = state.token;
     }
 
     async function api(path, options = {}) {
