@@ -32,6 +32,7 @@ DERIVATIVES_PREFIX: str = os.environ.get("DERIVATIVES_PREFIX", "_generated").str
 ENABLE_IMAGE_DERIVATIVES: bool = os.environ.get("ENABLE_IMAGE_DERIVATIVES", "true").lower() in ("1", "true", "yes", "on")
 
 IMAGE_EXTENSIONS = ('.png', '.jpg', '.jpeg', '.gif', '.webp', '.jfif')
+HIDE_MARKER_FILENAMES = ("HIDE.txt", "hide.txt", "Hide.txt")
 DERIVATIVE_WIDTHS = {
     "thumb": 720,
     "medium": 1200,
@@ -288,17 +289,29 @@ def has_files(prefix: str) -> bool:
                     return True
     return False
 
+def is_project_hidden(prefix: str) -> bool:
+    """Un file HIDE.txt nella root del progetto esclude il progetto dal sito."""
+    return any(
+        object_exists(S3_BUCKET_NAME, f"{prefix}{marker_name}")
+        for marker_name in HIDE_MARKER_FILENAMES
+    )
+
 def build_json(prefix: str, project_id: int) -> Tuple[Dict[str, Any], int]:
     data: Dict[str, Any] = {}
     for folder in sorted(list_folders(prefix)):
         name = os.path.basename(folder.strip("/"))
         if has_files(folder):
+            if is_project_hidden(folder):
+                print(f"Progetto nascosto da marker HIDE.txt: {folder}")
+                project_id += 1
+                continue
             project = process_project(folder, project_id)
             data[name] = project
             project_id += 1
         else:
             sub_json, project_id = build_json(folder, project_id)
-            data[name] = sub_json
+            if sub_json:
+                data[name] = sub_json
     return data, project_id
 
 def process_project(prefix: str, project_id: int) -> Dict[str, Any]:
