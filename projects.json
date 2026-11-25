@@ -861,7 +861,6 @@
     "AVENTINO": {
       "id": 17,
       "title": "Aventino",
-      "description": "prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova prova",
       "luogo_data": "Roma, 2022-2023",
       "posizione": "Via di S. Alessio, Roma",
       "stato": "Completato",
@@ -1026,6 +1025,69 @@
           "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/00.7cb4a26b8776ef4166eab844ca366b46.w720.webp",
           "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/00.7cb4a26b8776ef4166eab844ca366b46.w1200.webp",
           "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/00.7cb4a26b8776ef4166eab844ca366b46.w1800.webp"
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/BERTOLONI/01.png",
+          "description": "",
+          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/01.6de5ec733084d04a338873edf0693fdf.w720.webp",
+          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/01.6de5ec733084d04a338873edf0693fdf.w1200.webp",
+          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/01.6de5ec733084d04a338873edf0693fdf.w1800.webp"
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/BERTOLONI/02.png",
+          "description": "",
+          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/02.fe34f09c25bb11d9823d4220a543bac8.w720.webp",
+          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/02.fe34f09c25bb11d9823d4220a543bac8.w1200.webp",
+          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/02.fe34f09c25bb11d9823d4220a543bac8.w1800.webp"
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/BERTOLONI/03.png",
+          "description": "",
+          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/03.56a8fec33ea07a49b07eb433641ebd76.w720.webp",
+          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/03.56a8fec33ea07a49b07eb433641ebd76.w1200.webp",
+          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/03.56a8fec33ea07a49b07eb433641ebd76.w1800.webp"
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/BERTOLONI/04.png",
+          "description": "",
+          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/04.03bb77b46a7bede5a4041c6d87f07fdc.w720.webp",
+          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/04.03bb77b46a7bede5a4041c6d87f07fdc.w1200.webp",
+          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/04.03bb77b46a7bede5a4041c6d87f07fdc.w1800.webp"
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/BERTOLONI/08.jpg",
+          "description": "",
+          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/08.e8623f67a17c3f39ab382adf442ce4ff.w720.webp",
+          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/08.e8623f67a17c3f39ab382adf442ce4ff.w1200.webp",
+          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/08.e8623f67a17c3f39ab382adf442ce4ff.w1800.webp"
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/BERTOLONI/09.jpg",
+          "description": "",
+          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/09.135fbc2078c43eb0357464152e2ce173.w720.webp",
+          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/09.135fbc2078c43eb0357464152e2ce173.w1200.webp",
+          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/09.135fbc2078c43eb0357464152e2ce173.w1800.webp"
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/BERTOLONI/11.jpg",
+          "description": "",
+          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/11.dd3a552f7201b3ea7aac3b9068fdbb02.w720.webp",
+          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/11.dd3a552f7201b3ea7aac3b9068fdbb02.w1200.webp",
+          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/11.dd3a552f7201b3ea7aac3b9068fdbb02.w1800.webp"
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/BERTOLONI/12.jpg",
+          "description": "",
+          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/12.48824c77ede16ec6972d0cf9ed946b82.w720.webp",
+          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/12.48824c77ede16ec6972d0cf9ed946b82.w1200.webp",
+          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/12.48824c77ede16ec6972d0cf9ed946b82.w1800.webp"
+        },
+        {
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/BERTOLONI/13.jpg",
+          "description": "",
+          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/13.9a20e84e8a2eba7e18e3fbbfe8c065c7.w720.webp",
+          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/13.9a20e84e8a2eba7e18e3fbbfe8c065c7.w1200.webp",
+          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/BERTOLONI/13.9a20e84e8a2eba7e18e3fbbfe8c065c7.w1800.webp"
         }
       ]
     },
