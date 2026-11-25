@@ -866,66 +866,42 @@
       "stato": "Completato",
       "committente": "Privato",
       "layoutSequence": [
-        "PROJECT_PAIR_VERT-HOR",
-        "PROJECT_PAIR_HORIZONTAL",
+        "PROJECT_PAIR_VERTICAL",
+        "PROJECT_PAIR_HOR-VERT",
+        "PROJECT_PAIR_VERTICAL",
         "PROJECT_TRIPLE_VERT",
-        "PROJECT_TRIPLE_VERT"
+        "PROJECT_TRIPLE_VERT",
+        "PROJECT_TRIPLE_VERT",
+        "PROJECT_PAIR_VERTICAL"
       ],
       "images": [
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/01 (2).jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/01 (3).jpg",
           "description": "",
-          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/01%20%282%29.de4994197c93b9d433ca2d2ae506dc25.w720.webp",
-          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/01%20%282%29.de4994197c93b9d433ca2d2ae506dc25.w1200.webp",
-          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/01%20%282%29.de4994197c93b9d433ca2d2ae506dc25.w1800.webp"
+          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/01%20%283%29.a59679ba7a117bedd1522cfe74906e4b2.w720.webp",
+          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/01%20%283%29.a59679ba7a117bedd1522cfe74906e4b2.w1200.webp",
+          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/01%20%283%29.a59679ba7a117bedd1522cfe74906e4b2.w1800.webp"
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/02.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/02 (2).png",
           "description": "",
-          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/02.5643c718310bb840969e7ecd9a37c5fd.w720.webp",
-          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/02.5643c718310bb840969e7ecd9a37c5fd.w1200.webp",
-          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/02.5643c718310bb840969e7ecd9a37c5fd.w1800.webp"
+          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/02%20%282%29.942c48e4a2d91051b4046fe09d6e94b4.w720.webp",
+          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/02%20%282%29.942c48e4a2d91051b4046fe09d6e94b4.w1200.webp",
+          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/02%20%282%29.942c48e4a2d91051b4046fe09d6e94b4.w1800.webp"
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/03.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/03.png",
           "description": "",
-          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/03.b0a813dfae551a029bc84a4c375dbe38.w720.webp",
-          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/03.b0a813dfae551a029bc84a4c375dbe38.w1200.webp",
-          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/03.b0a813dfae551a029bc84a4c375dbe38.w1800.webp"
+          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/03.797d6e2a7d328d1114cae82e0604f551.w720.webp",
+          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/03.797d6e2a7d328d1114cae82e0604f551.w1200.webp",
+          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/03.797d6e2a7d328d1114cae82e0604f551.w1800.webp"
         },
         {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/05.jpg",
+          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/12.jpg",
           "description": "",
-          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/05.ad5cbe4c2f3837b5fa21d3249a0d3108.w720.webp",
-          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/05.ad5cbe4c2f3837b5fa21d3249a0d3108.w1200.webp",
-          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/05.ad5cbe4c2f3837b5fa21d3249a0d3108.w1800.webp"
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/06.JPG",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/07.JPG",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/08.JPG",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/09.jpg",
-          "description": "",
-          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/09.c76f7010837d88d437f2a8e81908df7b.w720.webp",
-          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/09.c76f7010837d88d437f2a8e81908df7b.w1200.webp",
-          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/09.c76f7010837d88d437f2a8e81908df7b.w1800.webp"
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/10.JPG",
-          "description": ""
-        },
-        {
-          "src": "https://adpe-architettura-galleries.s3.eu-north-1.amazonaws.com/projects/residenziale/AVENTINO/11.JPG",
-          "description": ""
+          "thumb": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/12.dd6daa4b063557470244a4e452ce633c2.w720.webp",
+          "medium": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/12.dd6daa4b063557470244a4e452ce633c2.w1200.webp",
+          "large": "https://adpe-architettura-galleries-derived.s3.eu-north-1.amazonaws.com/_generated/projects/residenziale/AVENTINO/12.dd6daa4b063557470244a4e452ce633c2.w1800.webp"
         }
       ]
     },
