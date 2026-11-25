@@ -286,5 +286,12 @@
     "rows": 16,
     "height": "auto",
     "aspect": "12 / 8"
+  },
+  "PROJECT_CUSTOM": {
+    "slots": [],
+    "columns": 12,
+    "rows": 8,
+    "height": "auto",
+    "aspect": "12 / 8"
   }
 }
