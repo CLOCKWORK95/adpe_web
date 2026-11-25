@@ -1018,6 +1018,10 @@
     "BERTOLONI": {
       "id": 19,
       "title": "Bertoloni",
+      "luogo_data": "Roma, 2022",
+      "posizione": "Via Bertoloni, Roma",
+      "stato": "Completato",
+      "committente": "Privato",
       "layoutSequence": [
         "PROJECT_PAIR_HORIZONTAL"
       ],
